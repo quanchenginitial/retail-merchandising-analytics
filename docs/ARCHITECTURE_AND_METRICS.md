@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains a design. As of 27 October 2026, the learner has implemented and validated raw.m5_calendar and raw.m5_sales_wide. The learner has also imported raw.m5_prices and passed its 12 basic structure/key checks; detailed price validation remains pending. Typed staging, core dimensions, marts and analytical measures remain planned.
+The analytical model below remains a design. As of 27 October 2026, the learner has implemented and fully validated raw.m5_calendar, raw.m5_sales_wide and raw.m5_prices. The next object, stg.m5_calendar, preserves the 14 source fields while converting date and numeric types; it is independently preflighted but awaits learner execution. Other staging tables, core dimensions, marts and analytical measures remain planned. The staging calendar is not the final core calendar dimension.
 
 ## Independent modules
 
@@ -11,6 +11,7 @@ The analytical model below remains a design. As of 27 October 2026, the learner 
 | `raw.m5_calendar` | One source day | Preserve source values; audited day/date mapping |
 | `raw.m5_sales_wide` | One source item/store series | Only evaluation training file; do not append overlapping validation history |
 | `raw.m5_prices` | One source item × store × week | Preserve four source VARCHAR fields; validate keys before typed joins |
+| `stg.m5_calendar` | One source day | DATE plus seven INTEGER and six VARCHAR fields; retain all dates and event NULLs; lossless round-trip validation |
 | `stg.m5_sales_daily` | One item × store × source day | UNPIVOT d_1...d_1941; preserve zero units; reject invalid numeric conversion |
 | `core.m5_product` | One item | Verify each item maps consistently to department/category |
 | `core.m5_store` | One store | Verify each store maps consistently to state |

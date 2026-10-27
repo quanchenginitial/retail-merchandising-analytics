@@ -1,6 +1,6 @@
 # Price raw import acceptance and preflight
 
-27 October 2026. The learner has completed calendar and sales raw validation. The learner has now supplied a screenshot showing all 12 price import checks with status PASS. The [screenshot transcription](../data/price_import_learner_acceptance.json) records those displayed values. This accepts the raw import structure and keys; detailed price validation remains pending.
+27 October 2026. The learner has completed calendar and sales raw validation. The learner has now supplied a screenshot showing all 12 price import checks with status PASS. The [screenshot transcription](../data/price_import_learner_acceptance.json) records those displayed values. This accepts the raw import structure and keys; the subsequent [detailed price audit](PRICE_AUDIT_VALIDATION.md) has now also passed all 15 learner checks.
 
 ## Import and basic acceptance
 
@@ -22,4 +22,4 @@ To reproduce from the repository root:
 python validation/preflight_price_import.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/price_import_preflight.json"
 ```
 
-The SQL and runner reference the current local M5 source directory; adjust both when reproducing elsewhere. The learner has now executed the script and passed all 12 checks. The next action is the [detailed price audit](PRICE_AUDIT_VALIDATION.md), following [the current step](FIRST_STEP_ZH.md). Assistant preflight remains separate from learner evidence.
+The SQL and runner reference the current local M5 source directory; adjust both when reproducing elsewhere. The learner has now executed the script and passed all 12 checks. The subsequent [detailed price audit](PRICE_AUDIT_VALIDATION.md) is also accepted; follow [the current step](FIRST_STEP_ZH.md) for typed calendar staging. Assistant preflight remains separate from learner evidence.

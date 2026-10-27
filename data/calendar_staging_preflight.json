@@ -1,0 +1,107 @@
+{
+  "checked_at_utc": "2026-10-27T09:55:08.365729+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": ":memory:",
+  "script": "sql/08_stage_calendar.sql",
+  "script_sha256": "615f193ca97e6d125fdd16d5f7435bbb293318cfabc30576550240075200ee92",
+  "source_file": "calendar.csv",
+  "source_sha256": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+  "source_hash_unchanged": true,
+  "elapsed_raw_setup_staging_and_checks_seconds": 0.659,
+  "checks_passed": 13,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "14",
+      "expected": "14",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_dates",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "distinct_day_ids",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "first_date",
+      "actual": "2011-01-29",
+      "expected": "2011-01-29",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "last_date",
+      "actual": "2016-06-19",
+      "expected": "2016-06-19",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "invalid_snap_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "event_1_nulls",
+      "actual": "1807",
+      "expected": "1807",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "event_2_nulls",
+      "actual": "1964",
+      "expected": "1964",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "raw_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "staging_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Assistant calendar staging preflight only. Round-trip comparison uses the imported raw calendar, not a second CSV read. Learner staging remains pending; no core dimension or sales-price coverage is built."
+}

@@ -20,4 +20,4 @@ To reproduce from the repository root:
 python validation/preflight_sales_import.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/sales_import_preflight.json"
 ```
 
-The SQL and runner currently reference the learner's local M5 source directory; adjust both when reproducing elsewhere. The learner import is accepted, and the subsequent [detailed sales audit](SALES_AUDIT_VALIDATION.md) has also passed all 15 checks. The price raw import has also passed its basic checks; the next learner instructions for detailed price validation are in [the current step](FIRST_STEP_ZH.md).
+The SQL and runner currently reference the learner's local M5 source directory; adjust both when reproducing elsewhere. The learner import is accepted, and the subsequent [detailed sales audit](SALES_AUDIT_VALIDATION.md) has also passed all 15 checks. Price raw import and detailed validation have also passed; the next learner instructions for typed calendar staging are in [the current step](FIRST_STEP_ZH.md).

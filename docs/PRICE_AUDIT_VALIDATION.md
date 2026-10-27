@@ -1,6 +1,6 @@
 # Price-value audit and source reconciliation
 
-27 October 2026. The learner has completed price raw import and supplied all 12 basic checks with status PASS. The [acceptance transcription](../data/price_import_learner_acceptance.json) records that screenshot. Learner execution of the detailed 15-check audit is pending.
+27 October 2026. The learner has completed price raw import and supplied all 12 basic checks with status PASS. The [acceptance transcription](../data/price_import_learner_acceptance.json) records that screenshot. The subsequent learner screenshot shows all 15 detailed audit checks with status PASS, including both exact source differences at zero. The [detailed acceptance transcription](../data/price_audit_learner_acceptance.json) records these displayed results. This is learner-provided evidence, not a new direct database read.
 
 ## Read-only audit contract
 
@@ -32,4 +32,4 @@ To reproduce from the repository root:
 python validation/test_price_audit.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/price_audit_preflight.json"
 ```
 
-The SQL and runner contain the current local source paths; adjust them when reproducing elsewhere. The learner must execute the audit and send all 15 result rows, following [the current step](FIRST_STEP_ZH.md). Daily price coverage, typed staging and downstream modelling remain pending.
+The SQL and runner contain the current local source paths; adjust them when reproducing elsewhere. The learner has now supplied and passed all 15 audit rows, completing the [raw-layer checkpoint](RAW_LAYER_CHECKPOINT.md). The next step is [typed calendar staging](CALENDAR_STAGING_VALIDATION.md), following [the current step](FIRST_STEP_ZH.md). Daily price coverage and downstream modelling remain pending.
