@@ -1,0 +1,373 @@
+{
+  "checked_at_utc": "2026-10-27T14:43:25.186385+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 19148800,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/22_abc_threshold_sensitivity.sql",
+  "script_sha256": "067d1cc404c15fc2a023ebdd45cb7dd74c3312c6930aa8400539569c86371913",
+  "baseline_script": "sql/21_build_product_abc_units.sql",
+  "baseline_script_sha256": "e024e3ccf71f047181c16b00fde033442ce62cae030f2058c14fd007a5427c05",
+  "preflight_strategy": "Read only sales/calendar CSVs. Persist six source identifiers plus d_1824..d_1913 in a private raw projection; construct a 2,744,100-row, five-column window-only daily fact and small dimensions. Execute actual SQL21 build/validation, then SQL22. The private daily table is not a full SQL17 rebuild or a schema replica of the learner fact.",
+  "independent_reference": "Sum original wide 90-day arrays per SKU, without using the private daily fact. Python finds minimal crossing prefix endpoints independently of SQL prior-cumulative comparisons.",
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "source_scope": "Sales and calendar only; price is irrelevant to these unit-based scenarios and was neither read nor hashed.",
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "Global units across all 10 stores, including zero-sales products."
+  },
+  "scenarios": [
+    {
+      "scenario": "BASE_80_95",
+      "a_target": 80,
+      "ab_target": 95,
+      "allowed_change": null
+    },
+    {
+      "scenario": "A75_95",
+      "a_target": 75,
+      "ab_target": 95,
+      "allowed_change": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "scenario": "A85_95",
+      "a_target": 85,
+      "ab_target": 95,
+      "allowed_change": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "scenario": "AB80_92",
+      "a_target": 80,
+      "ab_target": 92,
+      "allowed_change": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "scenario": "AB80_98",
+      "a_target": 80,
+      "ab_target": 98,
+      "allowed_change": [
+        "C",
+        "B"
+      ]
+    }
+  ],
+  "source_controls": {
+    "source_series": 30490,
+    "source_products": 3049,
+    "source_stores": 10,
+    "calendar_rows": 1969,
+    "calendar_day_keys": 1969,
+    "calendar_dates": 1969,
+    "window_calendar_days": 90,
+    "calendar_mapping_errors": 0,
+    "private_window_daily_rows": 2744100
+  },
+  "window_setup_seconds": 6.131,
+  "baseline_build_seconds": 0.34,
+  "baseline_validation_seconds": 0.373,
+  "independent_wide_reference_seconds": 0.337,
+  "sensitivity_seconds": 0.147,
+  "scenario_membership_comparison_seconds": 0.162,
+  "baseline_sku_rows_compared": 3049,
+  "baseline_columns_compared": 9,
+  "baseline_row_mismatches": 0,
+  "scenario_sku_rows_compared": 15245,
+  "scenario_membership_mismatches": 0,
+  "source_reference_matched": true,
+  "accepted_baseline_matched": true,
+  "accepted_baseline_evidence": "data/product_abc_units_learner_acceptance.json",
+  "accepted_baseline_evidence_sha256": "754c58be7fe9c4b28b4df851c4757a70383a0b79da5d2210251d304faa95237b",
+  "baseline_unchanged": true,
+  "baseline_rows_sha256_before": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+  "baseline_rows_sha256_after": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+  "baseline_results": [
+    {
+      "abc_class": "A",
+      "sku_count": 1135,
+      "sku_share_pct": "37.2253",
+      "units": "3013899",
+      "unit_share_pct": "80.0038",
+      "first_rank": 1,
+      "last_rank": 1135,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "B",
+      "sku_count": 968,
+      "sku_share_pct": "31.7481",
+      "units": "565178",
+      "unit_share_pct": "15.0026",
+      "first_rank": 1136,
+      "last_rank": 2103,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "C",
+      "sku_count": 942,
+      "sku_share_pct": "30.8954",
+      "units": "188119",
+      "unit_share_pct": "4.9936",
+      "first_rank": 2104,
+      "last_rank": 3045,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "sku_count": 4,
+      "sku_share_pct": "0.1312",
+      "units": "0",
+      "unit_share_pct": "0.0000",
+      "first_rank": null,
+      "last_rank": null,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "TOTAL",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "first_rank": 1,
+      "last_rank": 3045,
+      "check_status": "PASS"
+    }
+  ],
+  "result_rows": 5,
+  "results": [
+    {
+      "scenario": "BASE_80_95",
+      "a_skus": 1135,
+      "b_skus": 968,
+      "c_skus": 942,
+      "zero_skus": 4,
+      "changed_skus": 0,
+      "changed_sku_pct": "0.0000",
+      "changed_unit_share_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "A75_95",
+      "a_skus": 941,
+      "b_skus": 1162,
+      "c_skus": 942,
+      "zero_skus": 4,
+      "changed_skus": 194,
+      "changed_sku_pct": "6.3627",
+      "changed_unit_share_pct": "4.9878",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "A85_95",
+      "a_skus": 1375,
+      "b_skus": 728,
+      "c_skus": 942,
+      "zero_skus": 4,
+      "changed_skus": 240,
+      "changed_sku_pct": "7.8714",
+      "changed_unit_share_pct": "5.0062",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "AB80_92",
+      "a_skus": 1135,
+      "b_skus": 695,
+      "c_skus": 1215,
+      "zero_skus": 4,
+      "changed_skus": 273,
+      "changed_sku_pct": "8.9538",
+      "changed_unit_share_pct": "2.9960",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "AB80_98",
+      "a_skus": 1135,
+      "b_skus": 1360,
+      "c_skus": 550,
+      "zero_skus": 4,
+      "changed_skus": 392,
+      "changed_sku_pct": "12.8567",
+      "changed_unit_share_pct": "2.9961",
+      "check_status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 26,
+  "fixture_cases": [
+    {
+      "case": "all_six_exact_threshold_boundaries",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "crossing_items_remain_in_earlier_band",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "dominant_sku_can_make_every_scenario_unchanged",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "equal_units_use_item_id_ties",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "all_zero_volume_share_is_null",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "one_positive_sku",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "no_zero_sales_products",
+      "passed": true,
+      "guard_rejected": false,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "empty_baseline",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "duplicate_baseline_item",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "missing_baseline_item",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "null_units",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "negative_units",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_start_date",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_end_date",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_rank",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_cumulative_units",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_baseline_class",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "zero_rank_and_cumulative_must_be_null",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_product_mapping",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "duplicate_core_product",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "missing_core_product",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "wrong_units_type",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "unexpected_column",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "empty_item_identifier",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "same_total_redistribution_invalidates_saved_cumulative",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case": "null_scenario_threshold_rejected",
+      "passed": true,
+      "guard_rejected": true,
+      "baseline_unchanged": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner sensitivity execution pending. Fixed one-boundary-at-a-time scenarios are illustrative, not optimized thresholds. Changed unit share means historical units carried by relabelled products, not a sales change. The learner query checks snapshot consistency and relies on accepted SQL21 source equality; this private preflight independently checks original source totals. No SKU-level extract published and no learner database opened."
+}

@@ -1,6 +1,6 @@
 # Product ABC by units: baseline table and validation
 
-28 October 2026. [21_build_product_abc_units.sql](../sql/21_build_product_abc_units.sql) turns the accepted concentration ranking into mutually exclusive product labels. Assistant preflight is separate from learner execution, which remains pending. This step creates an 80%/95% baseline; threshold sensitivity is subsequent work.
+28 October 2026. The learner's DBeaver screenshot confirms all five summary rows from [21_build_product_abc_units.sql](../sql/21_build_product_abc_units.sql) have `check_status=PASS` and numerically match the independent assistant preflight. The 80%/95% units-based ABC baseline is accepted; threshold sensitivity remains subsequent work. The [learner acceptance record](../data/product_abc_units_learner_acceptance.json) transcribes the screenshot separately from assistant preflight evidence. No direct read of the learner database was performed.
 
 ## Business purpose and frozen scope
 
@@ -37,9 +37,11 @@ An independent reference aggregates staging sales using staging calendar and raw
 
 Twenty-one targeted cases cover exact thresholds, overshoot, one SKU crossing both thresholds, equal-unit ties, all-zero and one-positive cases, date boundaries, wrong labels/ranks/cumulative values/NULL handling/windows/hierarchy, duplicate/missing rows, same-total redistribution and altered schema types. Invalid-input cases include empty source, negative units, duplicate/missing dates and duplicate product mappings; each build rejection also confirms that no ABC table was created.
 
-## Assistant baseline observations — awaiting learner confirmation
+## Accepted learner baseline and independent preflight
 
-All 3,049 stored product rows matched all nine independently derived fields. The five summary rows passed; A matched the accepted 80% prefix, A+B the 95% prefix, and positive/zero/all-product totals matched SQL20. Twenty-one targeted cases passed. Creation took 1.465 seconds and validation 1.040 seconds after rebuilding prerequisites in this environment. Source hashes were unchanged and temporary databases were removed.
+The learner screenshot reproduces all five rows below, including all PASS statuses, contiguous positive rank ranges and intentional NULL rank bounds for ZERO_SALES. Thousands separators are omitted and percentage values are padded to four decimal places in the machine-readable acceptance record; this normalization preserves the displayed numeric values.
+
+Separately, the assistant preflight compared all 3,049 stored product rows with all nine independently derived fields and found no differences. Its five summary rows passed; A matched the accepted 80% prefix, A+B the 95% prefix, and positive/zero/all-product totals matched SQL20. Twenty-one targeted cases passed. Creation took 1.465 seconds and validation 1.040 seconds after rebuilding prerequisites in the assistant's environment. Source hashes were unchanged and temporary databases were removed. These independent checks and timings are assistant evidence, not measurements established by the learner screenshot.
 
 | Class | SKUs | SKU share % | Units | Unit share % | First rank | Last rank | Status |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -49,8 +51,14 @@ All 3,049 stored product rows matched all nine independently derived fields. The
 | ZERO_SALES | 4 | 0.1312 | 0 | 0.0000 | NULL | NULL | PASS |
 | TOTAL | 3049 | 100.0000 | 3767196 | 100.0000 | 1 | 3045 | PASS |
 
-These are assistant baseline observations, not learner acceptance or evidence that 80/95 is the best operating policy. A contains 37.2253% of source products and 80.0038% of units. B and C are the non-overlapping remainder of positive products; zero-sales items stay separate.
+## Business reading of the accepted baseline
+
+The following interpretation is supplied by the assistant. A contains 1,135 products, or 37.2253% of source SKUs, and accounts for 80.0038% of recorded units. B adds 968 products and 15.0026% of units; C contains the remaining 942 positive-sales products and 4.9936% of units. Unlike the overlapping concentration rows in SQL20, these classes are mutually exclusive. Adding A and B reproduces the 2,103-product prefix that reaches 95.0064% of units.
+
+The four zero-sales products remain a separate class with no positive-sales rank. TOTAL's ranks 1 through 3,045 therefore cover positive-sales products, while its count of 3,049 includes the four zero-sales products. Zero recorded units alone do not establish delisting or stockout.
+
+These labels express global unit contribution across all 10 stores and categories in the fixed window. Pieces of different products are not economically equivalent, so A does not mean the most profitable products, nor does C imply low service importance or an assortment-removal decision. The accepted 80/95 baseline is a documented classification convention, not evidence that these thresholds are optimal. Threshold sensitivity and membership stability still need examination before the ABC module is complete.
 
 After the full-source run, one non-executable comment was clarified from “exact percentages” to “rounded displayed percentages.” The preflight record retains the original execution hash and delivered-script hash, verifies unchanged executable SQL, and records a successful rerun of all 21 fixtures on the delivered script.
 
-See [machine-readable preflight](../data/product_abc_units_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md). After baseline acceptance, compare reasonable alternative thresholds and boundary memberships before considering the ABC module complete. XYZ, forecasts, profit and inventory policy remain outside this step.
+See the [learner acceptance record](../data/product_abc_units_learner_acceptance.json), [machine-readable preflight](../data/product_abc_units_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md). Baseline execution and displayed validation results are accepted; comparison of alternative thresholds and boundary memberships remains pending. XYZ, forecasts, profit and inventory policy remain outside this step.

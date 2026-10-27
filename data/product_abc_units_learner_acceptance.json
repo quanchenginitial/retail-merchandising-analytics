@@ -1,0 +1,74 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/21_build_product_abc_units.sql",
+  "table": "mart.m5_product_abc_90d",
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "Global product unit totals across all 10 source stores and all categories, including all 3,049 source products and zero-sales products; the interval is defined by SQL21."
+  },
+  "display_normalization": "Thousands separators are omitted. Percentage values are represented with four decimal places. Padding trailing zeros preserves displayed numeric values. ZERO_SALES rank bounds remain JSON null and are not replaced with zero. TOTAL rank bounds cover only positive-sales products.",
+  "classification_rule": "ZERO_SALES first; positives sorted units DESC,item_id ASC. Prior cumulative units*100 < total*80 => A; else <total*95 => B; else C. Crossing SKU remains in the earlier class. Threshold membership uses exact integers.",
+  "result_rows": 5,
+  "rows_with_pass_status": 5,
+  "matches_assistant_preflight_numerically": true,
+  "baseline_accepted": true,
+  "threshold_sensitivity_status": "pending",
+  "results": [
+    {
+      "abc_class": "A",
+      "sku_count": 1135,
+      "sku_share_pct": "37.2253",
+      "units": "3013899",
+      "unit_share_pct": "80.0038",
+      "first_rank": 1,
+      "last_rank": 1135,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "B",
+      "sku_count": 968,
+      "sku_share_pct": "31.7481",
+      "units": "565178",
+      "unit_share_pct": "15.0026",
+      "first_rank": 1136,
+      "last_rank": 2103,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "C",
+      "sku_count": 942,
+      "sku_share_pct": "30.8954",
+      "units": "188119",
+      "unit_share_pct": "4.9936",
+      "first_rank": 2104,
+      "last_rank": 3045,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "sku_count": 4,
+      "sku_share_pct": "0.1312",
+      "units": "0",
+      "unit_share_pct": "0.0000",
+      "first_rank": null,
+      "last_rank": null,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "TOTAL",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "first_rank": 1,
+      "last_rank": 3045,
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and the five displayed ABC validation rows are accepted for the fixed pre-holdout 90-day window. A, B, C and ZERO_SALES are mutually exclusive and partition TOTAL. A matches the accepted SQL20 80% prefix; A+B matches its 95% prefix. PASS concerns the documented data, persisted-table and classification checks, not business performance. The screenshot does not independently recompute original source hashes or compare every SKU against staging/raw inputs; those are separate assistant preflight evidence. The accompanying business interpretation is explicitly attributed to the assistant. This is a global units-based 80/95 baseline, not monetary, profit, store-level or volatility classification. Threshold sensitivity remains pending, and no optimal threshold, forecasting, inventory, assortment-removal or causal result is claimed."
+}
