@@ -13,6 +13,8 @@ Forecast recorded unit sales for 28 days. Begin with one documented department/s
 | d_1885, 2016-03-27 | d_1886–d_1913, 2016-03-28–2016-04-24 | Development fold 3 |
 | d_1913, 2016-04-24 | d_1914–d_1941, 2016-04-25–2016-05-22 | Final holdout, evaluate once after freezing |
 
+The first merchandising analysis uses a fixed 90-day window ending at d_1913: 2016-01-26–2016-04-24 (d_1824–d_1913). Keep the final 28-day holdout out of category/ABC decisions that may affect forecast scope or model selection. Full-snapshot ingestion and engineering reconciliation have already included all observed days and overall totals; these are not forecast evaluations, and no holdout forecast errors have been inspected. Do not describe the final period as wholly unseen data.
+
 Dates are derived from d_1 = 2011-01-29 and must be checked against calendar.csv. Do not train with test outcomes or use actual earlier days of the 28-day horizon as if they were known at its start. Lag/rolling features must be shifted and generated separately at each origin. Fit imputers, encoders and model choices using training/development data only. Historical future weekly prices are excluded unless an explicit forecast-time pricing assumption is justified; calendar events may be known in advance.
 
 Baselines: repeat the last observed seven-day pattern across the horizon; compare the mean of the previous four observations of the same weekday. Add a tree model only after those baselines are reproducible. Evaluate MAE, mean signed error (forecast minus actual), and RMSSE with its training-only scale. Distinguish macro versus sales-weighted averages. Intermittent series make MAPE unsuitable as the primary score.

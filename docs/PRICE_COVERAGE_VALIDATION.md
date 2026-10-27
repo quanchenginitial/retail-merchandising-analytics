@@ -12,15 +12,15 @@ Independent base/join aggregates check rows, units, zero-sales rows and store-le
 
 ## Reading the 23 result rows
 
-- Rows 1â€“12: mechanical checks, expected PASS. These establish valid inputs and unchanged rows/units/zeros at overall and store levels.
-- Rows 13â€“14: positive-sales price-coverage gates. Zero unpriced positive-sales rows and zero unpriced units are required before claiming a complete estimated sales-value proxy. A nonzero result blocks that completeness claim; it does not automatically prove the source is wrong or prevent unit-based analysis.
-- Rows 15â€“23: observed counts and percentages, marked INFO. A zero denominator gives NULL with status N/A, never a fabricated 100%.
+- Rows 1–12: mechanical checks, expected PASS. These establish valid inputs and unchanged rows/units/zeros at overall and store levels.
+- Rows 13–14: positive-sales price-coverage gates. Zero unpriced positive-sales rows and zero unpriced units are required before claiming a complete estimated sales-value proxy. A nonzero result blocks that completeness claim; it does not automatically prove the source is wrong or prevent unit-based analysis.
+- Rows 15–23: observed counts and percentages, marked INFO. A zero denominator gives NULL with status N/A, never a fabricated 100%.
 
-If any of rows 1â€“12 fails, rows 13â€“23 show INCOMPLETE. In particular, a missing calendar match must not be interpreted as confirmed missing price coverage for a valid week. An invalid price/calendar guard stops the query instead of returning the grid.
+If any of rows 1–12 fails, rows 13–23 show INCOMPLETE. In particular, a missing calendar match must not be interpreted as confirmed missing price coverage for a valid week. An invalid price/calendar guard stops the query instead of returning the grid.
 
 Daily row coverage counts all observed item/store/day cells, including zeros. Positive-row coverage counts only rows with units greater than zero. Unit coverage weights by the number of units sold. These denominators answer different questions and are reported separately.
 
-## Full-source observations â€” confirmed by learner screenshot
+## Full-source observations — confirmed by learner screenshot
 
 All 12 mechanical checks and both positive-sales coverage gates passed. Base and joined totals remain 59,181,090 rows, 66,927,173 units and 40,241,819 zero-sales rows. Calendar misses, invalid sales and store-control differences are zero.
 

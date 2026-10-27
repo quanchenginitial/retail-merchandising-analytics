@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw/staging tables, exact daily value reconciliation, all three core dimensions, full sales-dimension joins and daily price coverage. All positive sales have matching weekly prices; missing prices occur only on zero-sales rows. The current step builds the daily fact under the value policy below. Assistant-only temporary-database verification is documented separately from pending learner fact acceptance. Analytical marts, forecasting and Power BI remain later work.
+The M5 raw/staging tables, core dimensions, daily joins, price coverage and daily sales fact have all been accepted from learner screenshots as of 28 October 2026. The [model checkpoint](ANALYTICAL_MODEL_CHECKPOINT.md) records their scope. Category contribution is now the first business-analysis step; analytical summaries, ABC/XYZ, forecasts and Power BI are not yet accepted. Planned objects and methods below remain explicitly prospective where not covered by that checkpoint.
 
 ## Independent modules
 
@@ -25,11 +25,11 @@ The analytical model below remains partly a design. As of 27 October 2026, the l
 | `mart.rr_basket_items` | One audited basket key × distinct item | Candidate key visitorid + transactionid, subject to reuse/collision audit; binary item presence |
 | `mart.rr_cart_episodes` | One defined visitor/item cart episode | Event order, repeat-cart handling and complete purchase horizon required |
 
-## Planned M5 metrics
+## M5 metric contract and planned extensions
 
 - **Recorded units:** sum of observed nonnegative integer units. This measures realized recorded sales, not latent demand.
 - **Estimated sales value (USD proxy):** when units=0, value=0.00 whether or not a price is present; when units>0, multiply by the matching published weekly average sell_price. Positive sales without a price abort this fact build. Preserve the absent price as NULL and has_price=false; never substitute a zero price. The zero-quantity convention describes recorded sales value only, not lost sales or demand. Expose daily-row, positive-row and unit-weighted coverage separately. Use DECIMAL(20,0) for the units operand so DuckDB evaluates the product as DECIMAL(38,2), then store DECIMAL(28,2); no floating-point multiplication or rounding of source cents. Do not call it verified transaction revenue, net revenue, margin or customer spend.
-- **Product share:** units (or covered value proxy) divided by the total under exactly the same date/store/category filters. State which measure is used.
+- **Category/product share:** units or estimated value divided by the all-category total under the same date/store scope. SQL18 fixes all 10 stores and 2016-01-26–2016-04-24 inclusive (90 days), before the final forecast holdout. Aggregate exact amounts before dividing; display percentages to four decimals. Zero denominator produces NULL, not zero or 100%. Rounded category shares may sum to 99.9999 or 100.0001. The SKU count includes all distinct source item IDs in the window, even with zero units; it is not an active-availability count. This window/cutoff also anchors the planned 90-day ABC exercise, but category contribution itself is not ABC classification.
 - **ABC:** initial proposed bands A through 80% cumulative units, B through 95%, C remainder, over a fixed trailing 90-day window ending at the analysis cutoff. Sort deterministically by units then item ID. Report boundary-crossing convention and sensitivity; thresholds are project choices, not industry laws. Display non-selling SKUs separately.
 - **XYZ:** variability classification using weekly units from a documented comparable observation window. CV is undefined at mean zero; keep that group separate. A provisional X ≤ 0.5, Y ≤ 1, Z > 1 classification needs sensitivity review. Also show zero-sales share and mean nonzero gap so CV does not hide intermittent sales. Availability is not known from zero units.
 - **Price association:** compare within item/store over time and account for calendar patterns; no causal elasticity claim from raw correlations. Do not relabel all price reductions as documented promotions.

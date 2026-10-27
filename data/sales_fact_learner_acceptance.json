@@ -1,0 +1,161 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/17_build_sales_fact.sql",
+  "result_row_count": 21,
+  "check_count": 20,
+  "checks_passed": 20,
+  "observation_rows": 1,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "fact_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "9",
+      "expected": "9",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "total_units",
+      "actual": "66927173",
+      "expected": "66927173",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "zero_sales_rows",
+      "actual": "40241819",
+      "expected": "40241819",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "priced_daily_rows",
+      "actual": "46881677",
+      "expected": "46881677",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_price_zero_rows",
+      "actual": "12299413",
+      "expected": "12299413",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "missing_price_positive_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "invalid_fact_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "fact_series_count",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "fact_key_coverage_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "source_key_coverage_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "series_set_difference_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "units_mismatch_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "dimension_key_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "calendar_field_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "price_field_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "coverage_flag_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "amount_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "total_estimated_sales_value",
+      "actual": "191577546.04",
+      "expected": "observed",
+      "status": "INFO"
+    }
+  ],
+  "scope": "Learner screenshot accepted for all 21 daily sales-fact result rows: 20 PASS and one INFO. The nine-column mart.m5_sales_daily contains 59,181,090 item/store/day rows across 30,490 complete series, preserving 66,927,173 units and 40,241,819 zero-sales rows. All key-coverage, source-unit, dimension, calendar, price, flag and amount checks show zero discrepancies. The estimated sales-value total is USD 191,577,546.04; this is a published-weekly-price proxy, not verified transaction revenue, net sales, margin or profit. Missing prices remain NULL and zero units have zero estimated value. Fact construction and validation are accepted at this checkpoint; aggregate merchandising analysis is subsequent work. The separate assistant preflight record remains unchanged."
+}

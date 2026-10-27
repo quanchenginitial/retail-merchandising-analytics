@@ -1,0 +1,199 @@
+{
+  "checked_at_utc": "2026-10-27T13:13:37.415407+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 958148608,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/18_category_contribution.sql",
+  "script_sha256": "283be38ed56774c6673b02543bada125ac5423f1dfe735c69e1d9945eddb1d38",
+  "prerequisite_script_sha256": {
+    "sql/02_import_calendar.sql": "de92ffacd22389c80ba5cdbccdd3ce88590164df48d32e093630b1bd0d6c1fbf",
+    "sql/04_import_sales.sql": "80741e8c8a93636b03b339ce23e0700e65ca08900580c17ec5be4c06a4f8d9cf",
+    "sql/06_import_prices.sql": "18cbb428fe5681d17ee2d9ab6a0750ff3fdc56a264bd75b5500bfb00ca74496f",
+    "sql/08_stage_calendar.sql": "615f193ca97e6d125fdd16d5f7435bbb293318cfabc30576550240075200ee92",
+    "sql/09_stage_prices.sql": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+    "sql/10_stage_sales_daily.sql": "141b2671c323be2a92387bad3cfb36033f4871051668cc82894802a79b8227fc",
+    "sql/12_build_product_dimension.sql": "30506a8faf3141dfc1b8b0575a0ee2d725fa40903142e8c216cd5ef690e43a90",
+    "sql/13_build_store_dimension.sql": "d15fc515f5813914d46056bf6450d8e2275126439b9e77b2f7163c30bfc6b630",
+    "sql/14_build_calendar_dimension.sql": "7d3541ca678ece969b57a57645c22a3651fc17c69690ede8b39131e9fad27ff9",
+    "sql/17_build_sales_fact.sql": "0b66a00657e705928b486f751296b53b137f8f034133da3acc8a30903c33dc9f"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+  },
+  "source_hashes_unchanged": true,
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "daily_rows": 2744100,
+    "scope": "All 3049 source products and 10 source stores, including zero sales."
+  },
+  "setup_seconds": 149.117,
+  "category_query_seconds": 4.349,
+  "independent_reference_seconds": 2.723,
+  "result_rows": 4,
+  "independent_reference_matched": true,
+  "results": [
+    {
+      "category": "FOODS",
+      "sku_count": 1437,
+      "units": "2511345",
+      "unit_share_pct": "66.6635",
+      "estimated_sales_value_usd": "6694817.06",
+      "value_share_pct": "56.5109",
+      "price_row_coverage_pct": "99.9969",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOUSEHOLD",
+      "sku_count": 1047,
+      "units": "905325",
+      "unit_share_pct": "24.0318",
+      "estimated_sales_value_usd": "3607297.50",
+      "value_share_pct": "30.4492",
+      "price_row_coverage_pct": "99.9877",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOBBIES",
+      "sku_count": 565,
+      "units": "350526",
+      "unit_share_pct": "9.3047",
+      "estimated_sales_value_usd": "1544831.42",
+      "value_share_pct": "13.0399",
+      "price_row_coverage_pct": "100.0000",
+      "check_status": "PASS"
+    },
+    {
+      "category": "TOTAL",
+      "sku_count": 3049,
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "estimated_sales_value_usd": "11846945.98",
+      "value_share_pct": "100.0000",
+      "price_row_coverage_pct": "99.9943",
+      "check_status": "PASS"
+    }
+  ],
+  "independent_reference_results": [
+    {
+      "category": "FOODS",
+      "sku_count": 1437,
+      "daily_rows": 1293300,
+      "units": "2511345",
+      "value_cents": "669481706",
+      "priced_daily_rows": 1293260,
+      "missing_price_positive_rows": 0
+    },
+    {
+      "category": "HOBBIES",
+      "sku_count": 565,
+      "daily_rows": 508500,
+      "units": "350526",
+      "value_cents": "154483142",
+      "priced_daily_rows": 508500,
+      "missing_price_positive_rows": 0
+    },
+    {
+      "category": "HOUSEHOLD",
+      "sku_count": 1047,
+      "daily_rows": 942300,
+      "units": "905325",
+      "value_cents": "360729750",
+      "priced_daily_rows": 942184,
+      "missing_price_positive_rows": 0
+    }
+  ],
+  "fixture_cases_passed": 16,
+  "fixture_cases": [
+    {
+      "case": "manual_category_totals_cross_store_sku_dedup_and_missing_price_zero",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "inclusive_window_excludes_both_adjacent_days",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "zero_denominators_are_null",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "duplicate_product_mapping",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "missing_product_mapping",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "unknown_category",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "duplicate_store_mapping",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "orphan_store_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "missing_observed_day",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "same_count_duplicate_missing_day",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "positive_sales_without_price",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "wrong_coverage_flag",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "nonpositive_price",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "null_units",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "null_value",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "incorrect_zero_units_value",
+      "passed": true,
+      "guard_rejected": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner category report pending. Independent source-category totals use staging values and integer cents. Final 28-day forecast holdout excluded. Descriptive category contribution, not ABC classification, forecast evaluation, causality, profit or an availability estimate."
+}
