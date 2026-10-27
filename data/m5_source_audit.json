@@ -1,0 +1,187 @@
+{
+  "audit_timestamp_utc": "2026-10-27T07:45:07.185996+00:00",
+  "python_version": "3.12.14",
+  "scope": "Assistant read-only source-file audit; no persistent project database, SQL mart or learner execution.",
+  "acquisition": "User supplied files and reported completing the M5 download on 2026-10-27; exact retrieval time, download URL and archive hash were not captured.",
+  "source_page": "https://www.kaggle.com/competitions/m5-forecasting-accuracy/data",
+  "files": {
+    "calendar.csv": {
+      "rows": 1969,
+      "columns": 14,
+      "column_names": [
+        "date",
+        "wm_yr_wk",
+        "weekday",
+        "wday",
+        "month",
+        "year",
+        "d",
+        "event_name_1",
+        "event_type_1",
+        "event_name_2",
+        "event_type_2",
+        "snap_CA",
+        "snap_TX",
+        "snap_WI"
+      ],
+      "date_min": "2011-01-29",
+      "date_max": "2016-06-19",
+      "unique_weeks": 282,
+      "empty_fields": {
+        "date": 0,
+        "wm_yr_wk": 0,
+        "weekday": 0,
+        "wday": 0,
+        "month": 0,
+        "year": 0,
+        "d": 0,
+        "event_name_1": 1807,
+        "event_type_1": 1807,
+        "event_name_2": 1964,
+        "event_type_2": 1964,
+        "snap_CA": 0,
+        "snap_TX": 0,
+        "snap_WI": 0
+      },
+      "selected_dates": {
+        "d_1829": "2016-01-31",
+        "d_1857": "2016-02-28",
+        "d_1885": "2016-03-27",
+        "d_1913": "2016-04-24",
+        "d_1941": "2016-05-22",
+        "d_1969": "2016-06-19"
+      },
+      "checks": {
+        "expected_row_count": true,
+        "unique_dates": true,
+        "unique_day_ids": true,
+        "continuous_dates": true,
+        "continuous_day_labels": true,
+        "core_fields_present": true,
+        "calendar_attributes_match": true,
+        "snap_is_binary": true,
+        "event_missingness_paired": true,
+        "source_hash_unchanged_during_audit": true
+      },
+      "size_bytes": 103469,
+      "sha256": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+    },
+    "sales_train_evaluation.csv": {
+      "rows": 30490,
+      "missing_identifier_cells": 0,
+      "duplicate_ids": 0,
+      "duplicate_item_store_keys": 0,
+      "id_label_mismatches": 0,
+      "inconsistent_product_mapping_rows": 0,
+      "inconsistent_store_mapping_rows": 0,
+      "valid_integer_sales_cells": 59181090,
+      "negative_sales_cells": 0,
+      "zero_sales_cells": 40241819,
+      "total_units": 66927173,
+      "missing_sales_cells": 0,
+      "invalid_integer_sales_cells": 0,
+      "columns": 1947,
+      "identifier_columns": [
+        "id",
+        "item_id",
+        "dept_id",
+        "cat_id",
+        "store_id",
+        "state_id"
+      ],
+      "day_columns": {
+        "first": "d_1",
+        "last": "d_1941",
+        "count": 1941
+      },
+      "products": 3049,
+      "stores": 10,
+      "states": 3,
+      "departments": 7,
+      "categories": 3,
+      "max_daily_units": 763,
+      "control_units_by_store": {
+        "CA_1": 7832248,
+        "CA_2": 5818395,
+        "CA_3": 11363540,
+        "CA_4": 4182534,
+        "TX_1": 5692823,
+        "TX_2": 7329642,
+        "TX_3": 6205940,
+        "WI_1": 5261506,
+        "WI_2": 6697988,
+        "WI_3": 6542557
+      },
+      "checks": {
+        "missing_identifier_cells_zero": true,
+        "duplicate_ids_zero": true,
+        "duplicate_item_store_keys_zero": true,
+        "id_label_mismatches_zero": true,
+        "inconsistent_product_mapping_rows_zero": true,
+        "inconsistent_store_mapping_rows_zero": true,
+        "negative_sales_cells_zero": true,
+        "missing_sales_cells_zero": true,
+        "invalid_integer_sales_cells_zero": true,
+        "expected_rows": true,
+        "expected_products": true,
+        "expected_stores": true,
+        "expected_states": true,
+        "expected_sales_cells": true,
+        "source_hash_unchanged_during_audit": true
+      },
+      "size_bytes": 121736518,
+      "sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0"
+    },
+    "sell_prices.csv": {
+      "rows": 6841121,
+      "orphan_item_store_rows": 0,
+      "duplicate_composite_keys": 0,
+      "nonpositive_price_rows": 0,
+      "unknown_calendar_week_rows": 0,
+      "invalid_numeric_price_rows": 0,
+      "columns": 4,
+      "column_names": [
+        "store_id",
+        "item_id",
+        "wm_yr_wk",
+        "sell_price"
+      ],
+      "empty_fields": {
+        "store_id": 0,
+        "item_id": 0,
+        "wm_yr_wk": 0,
+        "sell_price": 0
+      },
+      "item_store_pairs": 30490,
+      "weeks": 282,
+      "week_min": "11101",
+      "week_max": "11621",
+      "price_min": "0.01",
+      "price_max": "107.32",
+      "checks": {
+        "orphan_item_store_rows_zero": true,
+        "duplicate_composite_keys_zero": true,
+        "nonpositive_price_rows_zero": true,
+        "unknown_calendar_week_rows_zero": true,
+        "invalid_numeric_price_rows_zero": true,
+        "all_fields_present": true,
+        "all_sales_pairs_have_some_price": true,
+        "source_hash_unchanged_during_audit": true
+      },
+      "not_checked": [
+        "day-level price coverage for positive sales",
+        "financial meaning or realised transaction prices"
+      ],
+      "size_bytes": 203395785,
+      "sha256": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+    }
+  },
+  "checks_passed": 33,
+  "checks_total": 33,
+  "all_checks_passed": true,
+  "limits": [
+    "Local hashes identify this snapshot; no publisher checksum was available for comparison.",
+    "Full source-to-database reconciliation and day-level price coverage remain pending.",
+    "Zero unit sales do not establish stockouts or zero demand."
+  ]
+}

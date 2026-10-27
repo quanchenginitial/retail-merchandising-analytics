@@ -13,8 +13,12 @@
       "alternate_publisher_folder": "https://drive.google.com/drive/folders/1D6EWdVSaOtrP1LEFh1REjI3vej6iUS_4?usp=sharing",
       "terms_page": "https://www.kaggle.com/competitions/m5-forecasting-accuracy/rules",
       "licence_label": "Subject to Competition Rules",
-      "terms_status": "Label verified; current full rule text and download access pending",
-      "planned_files": ["sales_train_evaluation.csv", "calendar.csv", "sell_prices.csv"],
+      "terms_status": "Competition-rules label verified during research; current full rule text not independently reviewed. User supplied extracted files on 2026-10-27.",
+      "planned_files": [
+        "sales_train_evaluation.csv",
+        "calendar.csv",
+        "sell_prices.csv"
+      ],
       "expected_training_series": 30490,
       "expected_training_days": 1941,
       "derived_training_daily_cells": 59181090,
@@ -23,9 +27,16 @@
       "expected_states": 3,
       "expected_training_start": "2011-01-29",
       "derived_training_end": "2016-05-22",
-      "local_download_status": "not_downloaded",
-      "local_hashes": null,
-      "local_audit_status": "not_started"
+      "local_download_status": "user_supplied_extracted_files_verified",
+      "local_hashes": {
+        "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+        "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+        "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+      },
+      "local_audit_status": "source_file_audit_passed_33_checks",
+      "local_audit_report": "data/m5_source_audit.json",
+      "retrieval_timestamp": null,
+      "archive_sha256": null
     },
     {
       "id": "retailrocket_v2",

@@ -2,7 +2,7 @@
 
 A guided SQL, Python and Power BI portfolio project investigating product assortment, sales predictability and shopping behaviour using public datasets.
 
-**Status: stage 0 research and project design prepared on 27 October 2026.** No full dataset has been downloaded or audited, no analytical model has run, and no commercial improvement has been measured. Completion evidence is recorded in [PROJECT_CHECKLIST.md](PROJECT_CHECKLIST.md).
+**Status: M5 source-file audit completed on 27 October 2026.** The learner supplied all three core CSVs. The assistant verified 30,490 sales series, 1,969 calendar rows and 6,841,121 price rows; all 33 recorded source checks passed. Persistent database import, analytical models and Power BI remain pending. See the [audit results](docs/M5_SOURCE_AUDIT.md) and [progress record](PROJECT_CHECKLIST.md).
 
 ## Business purpose
 
@@ -18,9 +18,9 @@ This project extends an existing banking SQL/Power BI portfolio into product ana
 | B: shopping behaviour | [Retailrocket, version 2](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset) | **2,756,101 events** and **20,275,902 item-property records** | Behavioural segments, cart-to-purchase proxy, co-purchase candidates and time-aware availability joins |
 | C: optional experiment extension | [Criteo corrected uplift release](https://ailab.criteo.com/criteo-uplift-prediction-dataset/) | **13,979,592 user rows** | Randomized advertising-treatment analysis and uplift evaluation |
 
-These are publisher/maintainer figures, not local row-count results. M5 daily cells are not individual transaction lines. Retailrocket transaction events are not necessarily distinct orders. The three modules describe different businesses and populations: their IDs and monetary measures will never be joined or pooled.
+M5 dimensions and daily-cell counts are now verified against the local files. Retailrocket and Criteo counts remain publisher figures. M5 daily cells are not individual transaction lines. Retailrocket transaction events are not necessarily distinct orders. The three modules describe different businesses and populations: their IDs and monetary measures will never be joined or pooled.
 
-M5 is selected for the core subject to successful source access and terms review. Retailrocket metadata and a four-byte ZIP range request were verified; its full archive remains undownloaded. Criteo's download could not be verified in this environment. [Dataset selection](docs/DATASET_SELECTION_ZH.md) records access, provenance, alternatives and limitations.
+The supplied M5 files passed the source-file audit; local hashes identify this snapshot without proving its download channel. Retailrocket metadata and a four-byte ZIP range request were verified; its full archive remains undownloaded. Criteo's download could not be verified in this environment. [Dataset selection](docs/DATASET_SELECTION_ZH.md) records access, provenance, alternatives and limitations.
 
 ## Intended questions
 

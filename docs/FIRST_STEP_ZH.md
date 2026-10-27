@@ -1,31 +1,33 @@
-# 第一小步：在官方页面识别 M5 的三份核心文件
+# 当前一步：建立商品项目的 DuckDB 连接
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-**前置条件已完成：** [quanchenginitial/retail-merchandising-analytics](https://github.com/quanchenginitial/retail-merchandising-analytics) Public 仓库已创建；阶段 0 的 12 份研究与路线文件已上传并逐份核对，研究提交为 [994cdb7](https://github.com/quanchenginitial/retail-merchandising-analytics/commit/994cdb794b2734ddd5951b5523dee669162e77e5)。完整数据下载、来源审计和你的学习验收尚未完成。
+三份核心 CSV 已由你下载并提供，助手已完成源文件扫描，33 项记录的检查通过。源文件保持在 `D:/database/m5-forecasting-accuracy/`，无需重新下载或搬动。实际结果见 [源文件审计](M5_SOURCE_AUDIT.md)。目前尚未建立或验收你的项目数据库连接。
 
 ## 这一步的目的
 
-先确认数据来自哪里，以及每份文件扮演什么角色，再开始下载和写 SQL。延续银行项目的节奏：完成一个动作，检查实际结果，再进入下一步。
+CSV 是输入文件，DuckDB 数据库用于保存后续的原始表、清洗表和分析模型，DBeaver 则是连接数据库并编写 SQL 的操作界面。这一步只建立连接并确认连接到正确的新数据库。
 
-## 本次只做一个动作
+## 本次操作
 
-打开 [M5 Forecasting Accuracy 官方数据页面](https://www.kaggle.com/competitions/m5-forecasting-accuracy/data)，阅读页面的数据说明和适用规则，在文件列表中找到以下三份文件：
+1. 打开 DBeaver，选择新建数据库连接，搜索并选择 **DuckDB**。
+2. 将数据库文件路径设为 `D:/database/retail_merchandising.duckdb`，连接名设为 `retail_merchandising`。此路径在本轮检查时不存在，用于新项目；不选择银行项目数据库，也不把 CSV 文件当作数据库路径。若界面提供创建数据库选项，使用该选项。
+3. 完成连接，在该连接下打开 SQL 编辑器，执行：
 
-| 文件 | 在本项目中的角色 |
-|---|---|
-| `sales_train_evaluation.csv` | 商品与门店组合的历史每日销量；当前计划采用的销量训练快照 |
-| `calendar.csv` | 日编号与日期、周编号及日历信息的对应关系 |
-| `sell_prices.csv` | 商品在门店与周层级的销售价格信息 |
+```sql
+SELECT
+    current_database() AS database_name,
+    version() AS duckdb_version;
+```
 
-本次完成标志是：你能确认这三份文件是否可见、是否需要登录或接受页面规则才能访问。告诉我实际看到的情况即可。如果页面要求接受规则，由你阅读并决定是否接受。
+也可打开仓库中的 [连接检查 SQL](../sql/01_connection_check.sql)。它只读取连接信息，不建表、不加载数据。
 
-`sales_train_validation.csv` 与 `sales_train_evaluation.csv` 是不同历史长度的训练快照。本项目准备采用后者，不将两者当作互补记录拼接，也不因文件名里的 evaluation 就把它当成我们已经完成的模型测试结果。
+## 我们怎样验收
 
-本次只识别来源和文件；本地环境、下载和加载 SQL 留到后续逐项完成。
+结果应只有一行，`database_name` 应为 `retail_merchandising`，另一个字段返回你的实际 DuckDB 版本。把结果发回来即可；如出现报错，提供报错内容，我们先解决连接问题。
 
-## 下一步预告
+助手在本机独立复核价格数据时使用的命令行版本是 v1.5.5；DBeaver 的驱动版本需以你实际查询结果为准，两者不提前视为相同。
 
-核对你的页面访问结果后，下一小步是确认本地项目路径与 Python/DuckDB 环境。随后按照来源规则获取三份文件，存入项目的 `data/raw/m5/`，记录来源、版本、获取日期、大小和 SHA-256；原始大文件排除出 Git。
+## 下一步
 
-文件实际到位后，再从一份文件的字段和行数检查开始。当前没有完整下载或 SQL 审计结果，也不提前把这些阶段标为完成。
+连接通过后，只导入最小的 `calendar.csv` 到原始层，检查 1,969 行、14 列与日期字段，再进入较大的销量和价格文件。不要一次导入全部文件或提前做宽转长。

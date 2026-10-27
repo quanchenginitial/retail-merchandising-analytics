@@ -1,0 +1,146 @@
+{
+  "scope": "Independent assistant checks; not learner DBeaver evidence. No persistent project database.",
+  "calendar": {
+    "checked_at_utc": "2026-10-27T07:41:07.188086+00:00",
+    "bytes": 103469,
+    "sha256": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "rows": 1969,
+    "columns": [
+      "date",
+      "wm_yr_wk",
+      "weekday",
+      "wday",
+      "month",
+      "year",
+      "d",
+      "event_name_1",
+      "event_type_1",
+      "event_name_2",
+      "event_type_2",
+      "snap_CA",
+      "snap_TX",
+      "snap_WI"
+    ],
+    "column_count": 14,
+    "date_min": "2011-01-29",
+    "date_max": "2016-06-19",
+    "duplicate_dates": 0,
+    "duplicate_d": 0,
+    "d_min": 1,
+    "d_max": 1969,
+    "d_sequence_exact": true,
+    "date_sequence_exact": true,
+    "d_date_mapping_exact": true,
+    "selected_dates": {
+      "d_1": "2011-01-29",
+      "d_1913": "2016-04-24",
+      "d_1941": "2016-05-22",
+      "d_1969": "2016-06-19"
+    },
+    "null_counts": {
+      "date": 0,
+      "wm_yr_wk": 0,
+      "weekday": 0,
+      "wday": 0,
+      "month": 0,
+      "year": 0,
+      "d": 0,
+      "event_name_1": 1807,
+      "event_type_1": 1807,
+      "event_name_2": 1964,
+      "event_type_2": 1964,
+      "snap_CA": 0,
+      "snap_TX": 0,
+      "snap_WI": 0
+    },
+    "snap_values": {
+      "snap_CA": {
+        "0": 1319,
+        "1": 650
+      },
+      "snap_TX": {
+        "0": 1319,
+        "1": 650
+      },
+      "snap_WI": {
+        "0": 1319,
+        "1": 650
+      }
+    },
+    "snap_invalid_rows": {
+      "snap_CA": 0,
+      "snap_TX": 0,
+      "snap_WI": 0
+    },
+    "weekday_mismatch_count": 0,
+    "wday_mismatch_count": 0,
+    "month_year_mismatch_count": 0,
+    "week_min": 11101,
+    "week_max": 11621,
+    "week_distinct": 282,
+    "event_pair_missing_mismatches": {
+      "1": 0,
+      "2": 0
+    },
+    "event_name_1_values": [
+      "",
+      "Chanukah End",
+      "Christmas",
+      "Cinco De Mayo",
+      "ColumbusDay",
+      "Easter",
+      "Eid al-Fitr",
+      "EidAlAdha",
+      "Father's day",
+      "Halloween",
+      "IndependenceDay",
+      "LaborDay",
+      "LentStart",
+      "LentWeek2",
+      "MartinLutherKingDay",
+      "MemorialDay",
+      "Mother's day",
+      "NBAFinalsEnd",
+      "NBAFinalsStart",
+      "NewYear",
+      "OrthodoxChristmas",
+      "OrthodoxEaster",
+      "Pesach End",
+      "PresidentsDay",
+      "Purim End",
+      "Ramadan starts",
+      "StPatricksDay",
+      "SuperBowl",
+      "Thanksgiving",
+      "ValentinesDay",
+      "VeteransDay"
+    ],
+    "event_type_1_values": [
+      "",
+      "Cultural",
+      "National",
+      "Religious",
+      "Sporting"
+    ],
+    "note": "Event-name/type missingness is expected on days without a recorded event; not imputed to a numeric zero. Calendar extends 28 days beyond evaluation training horizon."
+  },
+  "prices": {
+    "checked_at_utc": "2026-10-27T07:45:55.7133963Z",
+    "engine": "DuckDB v1.5.5",
+    "database": ":memory:",
+    "source_file": "sell_prices.csv",
+    "scope": "Independent full-file SQL count/key/price validation; source unmodified; no persistent database",
+    "results": {
+      "rows": 6841121,
+      "distinct_composite_keys": 6841121,
+      "duplicate_composite_rows": 0,
+      "null_key_rows": 0,
+      "min_price": "0.010000",
+      "max_price": "107.320000",
+      "null_price_rows": 0,
+      "invalid_price_rows": 0,
+      "zero_price_rows": 0,
+      "nonpositive_price_rows": 0
+    }
+  }
+}
