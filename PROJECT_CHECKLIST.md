@@ -49,7 +49,9 @@
 - [x] 3A3 用户截图确认 core.m5_calendar 的 17 项检查全部 PASS：1,969 个唯一日/日期、15 列、282 周、原 14 字段与新增日序检查通过；见 [截图转录记录](data/calendar_dimension_learner_acceptance.json)。
 - [x] 商品、门店、日历三张维度表完成单表验收，见 [阶段记录](docs/DIMENSIONS_CHECKPOINT.md)。
 - [x] 助手独立预验证完整销量维度关联：20/20 检查与 15 个针对性用例通过，59,181,090 行、66,927,173 件和 40,241,819 个零销量行均保留；见 [验证说明](docs/DIMENSION_JOINS_VALIDATION.md)。
-- [ ] 3B1 用户执行销量与三张维度表的完整关联审计，验收匹配覆盖和行数/销量保留。
+- [x] 3B1 用户截图确认完整销量维度关联 20/20 PASS：59,181,090 行、66,927,173 件、40,241,819 个零销量行均保留，三类未匹配与门店汇总差异为 0；见 [截图转录记录](data/dimension_joins_learner_acceptance.json)。
+- [x] 助手独立预查价格覆盖：12 项机械检查及 2 项正销量覆盖门槛通过，15 个针对性用例通过；观察到 12,299,413 个缺价日记录全部为零销量，销量件数覆盖率 100%。仅为助手预查，见 [验证说明](docs/PRICE_COVERAGE_VALIDATION.md)。
+- [ ] 3B2 用户执行价格覆盖审计，核对 14 项检查/门槛及 9 项 INFO 覆盖统计。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -63,6 +65,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行只读 sql/15_audit_sales_dimension_joins.sql，返回 20 行结果。目的是确认每条销量都能匹配商品、门店和日期，关联后不漏行、不增行、不改变销量，为分类汇总提供可信基础。每次新操作都先简述本步目的及其分析用途，再给执行内容。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行只读 sql/16_audit_price_coverage.sql，返回 23 行结果。目的是区分零销量缺价与正销量缺价，明确估算销售额的覆盖范围；预期前 14 行 PASS、后 9 行 INFO。每次新操作都先简述本步目的及其分析用途，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

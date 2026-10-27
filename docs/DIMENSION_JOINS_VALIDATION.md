@@ -1,6 +1,6 @@
 # Full daily-sales joins to product, store and calendar
 
-27 October 2026. All three dimensions have passed learner acceptance. The next action is [15_audit_sales_dimension_joins.sql](../sql/15_audit_sales_dimension_joins.sql), a single read-only query that executes the three joins over the complete sales table. Assistant preflight is complete; learner execution remains pending.
+27 October 2026. The learner screenshot confirms all 20 checks from [15_audit_sales_dimension_joins.sql](../sql/15_audit_sales_dimension_joins.sql) passed. All 59,181,090 rows, 66,927,173 units and 40,241,819 zero-sales rows are preserved; product, store and calendar unmatched counts and store-control differences are zero. Full sales-dimension joins are accepted. The [screenshot transcription](../data/dimension_joins_learner_acceptance.json) is separate from the assistant preflight below; follow [the current step](FIRST_STEP_ZH.md) for subsequent work.
 
 ## Purpose and scope
 
@@ -34,4 +34,4 @@ To reproduce from the repository root:
 python validation/preflight_dimension_joins.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/dimension_joins_preflight.json"
 ```
 
-The reproduction setup uses current local CSV paths. The learner query reads existing named tables only and can be rerun safely. Follow [the current step](FIRST_STEP_ZH.md) and return all 20 rows for acceptance. Daily price coverage and fact-table creation remain subsequent steps.
+The reproduction setup uses current local CSV paths. The learner query reads existing named tables only and can be rerun safely. Learner acceptance is recorded above; follow [the current step](FIRST_STEP_ZH.md) for the next action. Price coverage and fact-table creation remain separate acceptance steps.

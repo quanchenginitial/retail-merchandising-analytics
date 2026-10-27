@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw and typed-staging tables, exact daily value reconciliation, and all three core dimensions. The current learner step executes the complete daily-sales joins to product, store and calendar and checks match coverage and preservation of rows/units/zeros. Its independent preflight passed; learner join acceptance remains pending. No joined fact table has been persisted, and price coverage, analytical marts and measures remain later work.
+The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw/staging tables, exact daily value reconciliation, all three core dimensions and full sales-dimension joins. The current step audits daily price coverage. Independent preflight observed 100% positive-row and unit coverage, with missing prices only on zero-sales rows; learner confirmation remains pending. No joined fact table or monetary total has been persisted, and analytical marts and measures remain later work.
 
 ## Independent modules
 
@@ -28,7 +28,7 @@ The analytical model below remains partly a design. As of 27 October 2026, the l
 ## Planned M5 metrics
 
 - **Recorded units:** sum of observed nonnegative integer units. This measures realized recorded sales, not latent demand.
-- **Estimated sales value (USD proxy):** sum of units × published weekly average sell_price for price-covered rows. Expose priced units and price coverage; if positive sales lack a price, headline complete-value totals stay unavailable instead of silently becoming partial totals. Do not call it net revenue, margin or customer spend.
+- **Estimated sales value (USD proxy):** sum of units × published weekly average sell_price for price-covered rows. Expose daily-row, positive-row and unit-weighted price coverage separately. If positive sales lack a price, headline complete-value totals stay unavailable instead of silently becoming partial totals. Keep missing prices as NULL; explicitly define zero-sales/missing-price value handling before implementation. Do not call it net revenue, margin or customer spend.
 - **Product share:** units (or covered value proxy) divided by the total under exactly the same date/store/category filters. State which measure is used.
 - **ABC:** initial proposed bands A through 80% cumulative units, B through 95%, C remainder, over a fixed trailing 90-day window ending at the analysis cutoff. Sort deterministically by units then item ID. Report boundary-crossing convention and sensitivity; thresholds are project choices, not industry laws. Display non-selling SKUs separately.
 - **XYZ:** variability classification using weekly units from a documented comparable observation window. CV is undefined at mean zero; keep that group separate. A provisional X ≤ 0.5, Y ≤ 1, Z > 1 classification needs sensitivity review. Also show zero-sales share and mean nonzero gap so CV does not hide intermittent sales. Availability is not known from zero units.
