@@ -1,6 +1,6 @@
 # Sales-value audit and source reconciliation
 
-27 October 2026. The learner's screenshot confirms all 14 sales raw import checks passed. The [acceptance transcription](../data/sales_import_learner_acceptance.json) records the observed values. The learner's detailed sales-value audit is the next step and remains pending.
+27 October 2026. The learner's screenshot confirms all 14 sales raw import checks passed. The [acceptance transcription](../data/sales_import_learner_acceptance.json) records the observed values. The subsequent learner screenshot shows all 15 detailed sales checks with status PASS. The [detailed acceptance transcription](../data/sales_audit_learner_acceptance.json) records the displayed totals, error counts and zero differences in both directions. This is learner-provided evidence, not a new direct read of the persistent database.
 
 ## Read-only audit contract
 
@@ -30,4 +30,4 @@ To reproduce from the repository root:
 python validation/test_sales_audit.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/sales_audit_preflight.json"
 ```
 
-Adjust the local source paths in both SQL and runner when reproducing elsewhere. The learner must now run the query and supply its 15 result rows, following [the current step](FIRST_STEP_ZH.md). Price import and downstream modelling remain pending. Zero recorded sales do not by themselves establish a stockout or unconstrained demand.
+Adjust the local source paths in both SQL and runner when reproducing elsewhere. The learner has now supplied and passed all 15 result rows. The next step is [price import and basic checks](PRICE_IMPORT_VALIDATION.md), following [the current step](FIRST_STEP_ZH.md). Price import and downstream modelling remain pending. Zero recorded sales do not by themselves establish a stockout or unconstrained demand.

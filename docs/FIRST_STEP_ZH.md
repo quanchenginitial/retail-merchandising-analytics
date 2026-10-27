@@ -1,46 +1,46 @@
-# 当前一步：核对销量值、总量与来源一致性
+# 当前一步：导入价格原始表
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-你的最新截图中，销量基础检查 14 项全部 PASS。raw.m5_sales_wide 已通过结构与标识验收，不需要重新导入。
+你的最新截图中，销量详细检查 15 项全部 PASS。59,181,090 个日销量单元格、累计 66,927,173 件和双向来源对账均符合预期；日历与销量原始表现已验收完成。
 
-## 为什么还要检查销量值
+## 先理解价格表的一行
 
-上一份结果证明行数、列结构、唯一编号和商品门店数量符合预期，但没有逐个检查销量。例如，一件商品少记 1 件，另一件商品多记 1 件，总销量仍可能正确。因此，这一步同时检查全部日销量值、汇总控制数和完整来源记录。
+sell_prices.csv 每行是一件商品在一家门店、某个来源周的价格记录。四个字段依次为 store_id、item_id、wm_yr_wk、sell_price。其中 wm_yr_wk 用于以后与日历中的同名字段对应。
 
-## 本次只执行一条只读查询
+价格表的粒度是“商品 × 门店 × 周”，不是每天一行。所以这次要核对三个字段组合后的唯一键；不能只按商品编号连接价格，否则以后可能把一条日销量匹配到多条价格，放大计算结果。
 
-1. 打开 [05_audit_sales.sql](../sql/05_audit_sales.sql)，复制全部内容。
-2. 在 DBeaver 当前 retail_merchandising 连接中，粘贴并执行完整查询一次。
-3. 等待最后的 15 行结果，再把结果截图发回。
+## 本次只执行这一份脚本
 
-查询会读取约 5,918 万个日销量单元格，并重新读取当前路径下的 CSV 进行对账，比上一份基础查询耗时更长。请等执行结束，不重复点击运行。查询中会临时展开日销量来统计，但不会创建长表、修改原表或重新导入数据。
+1. 打开 [06_import_prices.sql](../sql/06_import_prices.sql)，复制全部内容。
+2. 在 DBeaver 确认连接仍为 retail_merchandising，粘贴到 SQL 编辑器。
+3. 使用“执行 SQL 脚本”（默认 Alt+X）运行整份脚本一次，等待最后的 12 行结果。
+
+脚本会创建 raw.m5_prices，四列均先按 VARCHAR 保留原值，再检查结构、键和必要字段。当前不转换价格类型，也不连接销量表。源 CSV 约 203 MB，请等执行完成，不重复运行。
 
 ## 预期结果
 
-所有 15 行 status 均为 PASS。
+所有 12 行 status 均为 PASS。
 
 | check_name | 预期 |
 | --- | ---: |
-| source_rows、table_rows | 各 30490 |
-| daily_cells、valid_integer_sales_cells | 各 59181090 |
-| missing_sales_cells | 0 |
-| invalid_integer_sales_cells | 0 |
-| negative_sales_cells | 0 |
-| zero_sales_cells | 40241819 |
-| total_units | 66927173 |
-| max_daily_units | 763 |
-| id_label_mismatches | 0 |
-| inconsistent_product_mapping_keys | 0 |
-| inconsistent_store_mapping_keys | 0 |
-| source_only_rows、table_only_rows | 各 0 |
+| row_count | 6841121 |
+| column_count | 4 |
+| varchar_column_count | 4 |
+| expected_column_names | 4 |
+| column_sequence_errors | 0 |
+| distinct_item_store_week_keys | 6841121 |
+| duplicate_key_rows | 0 |
+| missing_required_rows | 0 |
+| distinct_item_store_pairs | 30490 |
+| distinct_items | 3049 |
+| distinct_stores | 10 |
+| distinct_weeks | 282 |
 
-valid_integer_sales_cells 包括语法与范围均有效的整数，负数另由 negative_sales_cells 检查；两项一起通过，才说明这里的销量都是非负整数。缺失单元格不会被跳过，小数也不会被四舍五入成整数后接受。
+请把这 12 行结果截图发回。如果提示表已存在，不要删表，只执行 BASIC CHECKS 注释之后的 WITH 查询即可。若有其他报错或 FAIL，保留现状并发回结果。
 
-zero_sales_cells 是记录为 0 的销量，不是 NULL，也不是错误数量。它表示对应商品门店当天记录销量为 0，不能仅据此判断缺货。total_units 是累计销售件数，不是销售金额；max_daily_units 是单个商品在单家门店单日的最大记录销量。
+## 这一小步的范围
 
-最后两项均为 0，表示当前 CSV 与原始表的完整记录一致，含字段名、文本值、NULL 和重复记录次数。这个比较不重新计算历史来源快照的 SHA-256。
+助手已在独立临时数据库完成预验证，12 项全部通过，源文件 hash 与原登记一致且验证前后不变。这不是你当前数据库的执行结果；详见 [验证说明](PRICE_IMPORT_VALIDATION.md)。
 
-如果出现 FAIL 或报错，保留现状并发回结果，不手工改销量。你当前数据库的实际 15 行结果仍待验收，助手的临时预验证不能替代它。详细方法与验证记录见 [销量审计说明](SALES_AUDIT_VALIDATION.md)。
-
-本步通过后，再进入价格原始表的导入。
+本步通过只表示基础结构与键符合预期。下一步再检查价格数值与来源完整对账；之后建模时再检验每天的销量是否有对应价格。商品门店组合数量相同，不代表每一天都已经匹配到价格，当前还不能据此计算完整销售金额。

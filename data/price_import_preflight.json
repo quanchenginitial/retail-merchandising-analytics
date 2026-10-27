@@ -1,0 +1,104 @@
+{
+  "checked_at_utc": "2026-10-27T09:02:40.773325+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": ":memory:",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/06_import_prices.sql",
+  "script_sha256": "18cbb428fe5681d17ee2d9ab6a0750ff3fdc56a264bd75b5500bfb00ca74496f",
+  "source_file": "sell_prices.csv",
+  "source_sha256": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef",
+  "source_hash_unchanged": true,
+  "elapsed_import_and_checks_seconds": 3.92,
+  "checks_passed": 12,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 6841121,
+      "expected": 6841121,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "expected_column_names",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_item_store_week_keys",
+      "actual": 6841121,
+      "expected": 6841121,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "duplicate_key_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "distinct_item_store_pairs",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_items",
+      "actual": 3049,
+      "expected": 3049,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "distinct_stores",
+      "actual": 10,
+      "expected": 10,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "distinct_weeks",
+      "actual": 282,
+      "expected": 282,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Assistant in-memory price import and basic checks only. Learner price import, numeric audit, full source reconciliation and daily sales-price coverage remain pending."
+}

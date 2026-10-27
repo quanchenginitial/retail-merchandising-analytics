@@ -1,0 +1,117 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/05_audit_sales.sql",
+  "check_count": 15,
+  "checks_passed": 15,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "source_rows",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "table_rows",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "daily_cells",
+      "actual": 59181090,
+      "expected": 59181090,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "missing_sales_cells",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "invalid_integer_sales_cells",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "negative_sales_cells",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "valid_integer_sales_cells",
+      "actual": 59181090,
+      "expected": 59181090,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "zero_sales_cells",
+      "actual": 40241819,
+      "expected": 40241819,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "total_units",
+      "actual": 66927173,
+      "expected": 66927173,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "max_daily_units",
+      "actual": 763,
+      "expected": 763,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "id_label_mismatches",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "inconsistent_product_mapping_keys",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "inconsistent_store_mapping_keys",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "source_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "table_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Sales raw values, control totals and complete two-way equality against the current CSV accepted from displayed results. The screenshot does not recompute the historical source hash or prove sales-price coverage."
+}

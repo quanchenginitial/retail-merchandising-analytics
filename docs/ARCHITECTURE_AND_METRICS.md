@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-Stage 0 design. Tables and measures below have not been implemented. Audit source schemas before freezing types or business rules.
+The analytical model below remains a design. As of 27 October 2026, the learner has implemented and validated raw.m5_calendar and raw.m5_sales_wide. The raw.m5_prices import is prepared and independently preflighted but awaits learner execution. Typed staging, core dimensions, marts and analytical measures remain planned.
 
 ## Independent modules
 
@@ -8,7 +8,9 @@ Stage 0 design. Tables and measures below have not been implemented. Audit sourc
 
 | Proposed object | Grain | Core rule |
 | --- | --- | --- |
+| `raw.m5_calendar` | One source day | Preserve source values; audited day/date mapping |
 | `raw.m5_sales_wide` | One source item/store series | Only evaluation training file; do not append overlapping validation history |
+| `raw.m5_prices` | One source item × store × week | Preserve four source VARCHAR fields; validate keys before typed joins |
 | `stg.m5_sales_daily` | One item × store × source day | UNPIVOT d_1...d_1941; preserve zero units; reject invalid numeric conversion |
 | `core.m5_product` | One item | Verify each item maps consistently to department/category |
 | `core.m5_store` | One store | Verify each store maps consistently to state |
