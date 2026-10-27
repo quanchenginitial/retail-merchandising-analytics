@@ -22,4 +22,4 @@ To reproduce from the repository root:
 python validation/preflight_price_import.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/price_import_preflight.json"
 ```
 
-The SQL and runner reference the current local M5 source directory; adjust both when reproducing elsewhere. The learner has now executed the script and passed all 12 checks. The subsequent [detailed price audit](PRICE_AUDIT_VALIDATION.md) is also accepted; follow [the current step](FIRST_STEP_ZH.md) for typed calendar staging. Assistant preflight remains separate from learner evidence.
+The SQL and runner reference the current local M5 source directory; adjust both when reproducing elsewhere. The learner has now executed the script and passed all 12 checks. The subsequent [detailed price audit](PRICE_AUDIT_VALIDATION.md) is also accepted; follow [the current step](FIRST_STEP_ZH.md) for the next learner action. Assistant preflight remains separate from learner evidence.

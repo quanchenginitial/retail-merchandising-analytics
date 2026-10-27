@@ -33,8 +33,10 @@
 - [x] 1C4b 用户截图确认价格详细检查 15/15 PASS：6,841,121 个有限正价格，范围 0.01–107.32；必要字段、重复键、编号对应及双向来源差异均为 0。见 [截图转录记录](data/price_audit_learner_acceptance.json)。此结果不代表日级价格覆盖已验收。
 - [x] 原始层里程碑：三表导入及 47 项详细审计完成，见 [阶段记录](docs/RAW_LAYER_CHECKPOINT.md)。
 - [x] 助手独立预验证日历清洗层：13/13 PASS，逐列类型/顺序及回转文本后的双向对账通过；未操作用户数据库，见 [验证说明](docs/CALENDAR_STAGING_VALIDATION.md)。
-- [ ] 2A1 用户建立 stg.m5_calendar，完成日期和整数类型转换及 13 项验收。
-- [ ] 2A2 价格类型转换、销量宽转长，并记录异常处理规则与对账结果。
+- [x] 2A1 用户截图确认 stg.m5_calendar 的 13 项检查全部 PASS：1,969 行、14 列，逐列类型及顺序正确、事件空值保留，回转原始文本后的双向差异均为 0。见 [截图转录记录](data/calendar_staging_learner_acceptance.json)。
+- [x] 助手核实价格来源精度：624,039 条一位小数、6,217,082 条两位小数，无更高精度值；价格清洗脚本 13 项预验证与 7 个针对性用例通过，见 [验证说明](docs/PRICE_STAGING_VALIDATION.md)。
+- [ ] 2A2 用户建立 stg.m5_prices，验证精确价格转换及 13 项检查。
+- [ ] 2A3 销量宽转长与整数转换，记录处理规则并对账。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -48,6 +50,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/08_stage_calendar.sql，建立 stg.m5_calendar 并返回 13 行结果。三张 raw 表已完成详细验收；当前只转换日历类型，保留全部日期与事件空值，不提前标记维度、销量长表或价格覆盖完成。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/09_stage_prices.sql，建立 stg.m5_prices 并返回 13 行结果。日历清洗层已验收；本步验证价格精确数值等价，raw 仍保留原始写法，不提前计算销售金额或标记日级覆盖完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

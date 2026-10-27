@@ -1,28 +1,28 @@
-# 当前一步：建立类型化日历清洗表
+# 当前一步：建立精确价格清洗表
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-你的最新价格审计截图 15 项全部 PASS。三张原始表的导入与详细审计已经完成：日历 17 项、销量 15 项、价格 15 项，共 47 项详细检查通过。
+你的最新截图中，日历清洗表 13 项全部 PASS，日期与整数转换、事件空值及还原对账均已验收。现在建立 stg.m5_prices，暂不展开销量或计算销售金额。
 
-## 从原始层进入清洗层
+## 先看价格精度与类型
 
-raw 保留来源原值，方便追溯。stg 是清洗层，让字段具备适合计算和连接的类型。今天只建立 stg.m5_calendar，不转换销量或价格表。
+助手实际检查了全部 6,841,121 条来源价格：624,039 条有一位小数、6,217,082 条有两位小数，最多两位；整数部分最多三位。因此这份快照可以无损存入 DECIMAL(18,2)，其中 18 表示总位数上限、2 表示固定小数位数。
 
-| 字段 | 清洗层类型 | 用途 |
-| --- | --- | --- |
-| date | DATE | 日期筛选、日期差与时间分析 |
-| wm_yr_wk、wday、month、year、snap_CA、snap_TX、snap_WI | INTEGER | 周编号连接、年月筛选与 0/1 标记运算 |
-| weekday、d、event_name_1、event_type_1、event_name_2、event_type_2 | VARCHAR | 保留名称、来源日编号和事件文本 |
+| 字段 | 清洗层类型 |
+| --- | --- |
+| store_id、item_id | VARCHAR |
+| wm_yr_wk | INTEGER |
+| sell_price | DECIMAL(18,2) |
 
-仍然保留 14 列、1,969 行，事件字段的 NULL 不补成 0 或空字符串。日历保留至 2016-06-19，不截到销量末日；这不表示我们拥有最后 28 天的真实销量。周编号按来源转换，不重新计算为公历周。
+例如原始 2.0 在清洗层显示为 2.00，数值不变。原始写法仍保留在 raw.m5_prices。这里核对的是精确数值等价，不能再要求价格文本逐字相同。
 
 ## 本次只执行这一份脚本
 
-1. 打开 [08_stage_calendar.sql](../sql/08_stage_calendar.sql)，复制全部内容。
-2. 在 DBeaver 当前 retail_merchandising 连接中粘贴，使用“执行 SQL 脚本”（默认 Alt+X）运行整份脚本一次。
-3. 等待最后 13 行结果，把截图发回。
+1. 打开 [09_stage_prices.sql](../sql/09_stage_prices.sql)，复制全部内容。
+2. 在 DBeaver 当前 retail_merchandising 连接中粘贴，按“执行 SQL 脚本”（默认 Alt+X）运行整份脚本一次。
+3. 等待最后 13 行结果，将截图发回。
 
-脚本创建 stg.m5_calendar，不改动 raw.m5_calendar。它使用 CAST 转换类型；转换错误会报错，不会用 TRY_CAST 静默生成 NULL。类型转换后还会回转为文本，与原始表逐行对账，检查是否改变了原值。
+脚本在转换前检查当前精度规则：允许 1.2500 这种仅多出尾随零的写法，拒绝 1.2501 这种需要舍入的值；超出范围、缺失或非正价格也会停止建表。周编号先核实为不以零开头的五位数字。原始表保持不变。
 
 ## 预期结果
 
@@ -30,24 +30,23 @@ raw 保留来源原值，方便追溯。stg 是清洗层，让字段具备适合
 
 | check_name | 预期 |
 | --- | ---: |
-| staging_rows | 1969 |
-| column_count | 14 |
+| staging_rows | 6841121 |
+| column_count | 4 |
 | schema_mismatch_count | 0 |
-| distinct_dates、distinct_day_ids | 各 1969 |
-| missing_core_rows | 0 |
-| first_date | 2011-01-29 |
-| last_date | 2016-06-19 |
-| invalid_snap_rows | 0 |
-| event_1_nulls | 1807 |
-| event_2_nulls | 1964 |
-| raw_only_rows、staging_only_rows | 各 0 |
+| distinct_item_store_week_keys | 6841121 |
+| missing_core_rows、nonpositive_price_rows | 各 0 |
+| minimum_price、maximum_price | 0.01、107.32 |
+| distinct_item_store_pairs | 30490 |
+| distinct_weeks | 282 |
+| raw_contract_violation_rows | 0 |
+| raw_canonical_only_rows、staging_canonical_only_rows | 各 0 |
 
-schema_mismatch_count 会逐列核对名称、类型与顺序，不是只看类型数量。最后两项均为 0，表示转换后的记录还原成文本后，与当前 raw 日历完全一致，包含事件 NULL 和重复次数；此处比较对象是 raw 表，不重新读取 CSV。
+最后两项比较原始表和清洗表的精确价格值：只统一整数前导零、小数尾随零的写法，不先把原始价格舍入。这样既能接受 2.0 与 2.00 等价，又能发现 2.0001 被错误变成 2.00。重复次数也参与比较。
 
-如果提示表已存在，不要删表，只运行 VALIDATION 注释之后的 WITH 查询即可。其他报错或 FAIL 请保留现状并发回结果。
+如果提示表已存在，不要删表，只执行 VALIDATION 注释之后的 WITH 查询。其他报错或 FAIL 请保留现状并发回。
 
-## 当前验收范围
+## 验收范围
 
-助手在独立临时数据库中预验证 13/13 PASS，详见 [验证说明](CALENDAR_STAGING_VALIDATION.md)。用户创建清洗表仍待当前截图确认。
+助手已在独立临时数据库验证 13/13 PASS，并完成 7 个针对性用例；详见 [验证说明](PRICE_STAGING_VALIDATION.md)。你的价格清洗表仍待实际结果确认。
 
-这是类型化清洗表，尚未建立最终 core 日历维度、主键约束、销量长表或日级价格覆盖。本步通过后，再继续其余清洗与建模步骤。
+本步不验证每条日销量的价格覆盖，也不生成销售金额。通过后，再推进销量宽转长与对应的数量核对。

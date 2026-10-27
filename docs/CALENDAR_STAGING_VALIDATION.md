@@ -1,6 +1,6 @@
-# Calendar typed staging preflight
+# Calendar typed staging acceptance and preflight
 
-27 October 2026. The learner has completed the [raw-layer checkpoint](RAW_LAYER_CHECKPOINT.md). The next action is [08_stage_calendar.sql](../sql/08_stage_calendar.sql), which creates stg.m5_calendar from the validated raw calendar. Learner staging execution remains pending.
+27 October 2026. The learner has completed the [raw-layer checkpoint](RAW_LAYER_CHECKPOINT.md). The learner has now executed [08_stage_calendar.sql](../sql/08_stage_calendar.sql) and supplied a screenshot showing all 13 checks with status PASS. The [learner transcription](../data/calendar_staging_learner_acceptance.json) records schema, row count, dates, NULL preservation and zero round-trip differences. This accepts stg.m5_calendar from screenshot evidence, not a new direct database read.
 
 ## Transformation contract
 

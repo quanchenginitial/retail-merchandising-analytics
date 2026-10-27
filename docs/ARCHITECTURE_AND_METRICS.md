@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains a design. As of 27 October 2026, the learner has implemented and fully validated raw.m5_calendar, raw.m5_sales_wide and raw.m5_prices. The next object, stg.m5_calendar, preserves the 14 source fields while converting date and numeric types; it is independently preflighted but awaits learner execution. Other staging tables, core dimensions, marts and analytical measures remain planned. The staging calendar is not the final core calendar dimension.
+The analytical model below remains a design. As of 27 October 2026, the learner has validated all three M5 raw tables and accepted stg.m5_calendar with its 13 checks. The next object, stg.m5_prices, preserves item/store text, converts source weeks to INTEGER and stores prices as DECIMAL(18,2) only after a no-rounding guard. It is independently preflighted but awaits learner execution. Sales daily staging, core dimensions, marts and analytical measures remain planned. The staging calendar is not the final core calendar dimension.
 
 ## Independent modules
 
@@ -16,7 +16,7 @@ The analytical model below remains a design. As of 27 October 2026, the learner 
 | `core.m5_product` | One item | Verify each item maps consistently to department/category |
 | `core.m5_store` | One store | Verify each store maps consistently to state |
 | `core.m5_calendar` | One source day | Unique d/date; map weekly identifier explicitly |
-| `stg.m5_prices` | One item × store × week | Unique composite key; preserve missing prices as unknown |
+| `stg.m5_prices` | One item × store × week | Guarded DECIMAL(18,2), INTEGER week, exact value-equivalence reconciliation; absent price rows remain unknown |
 | `mart.m5_sales_daily` | One item × store × date | Join calendar then LEFT JOIN prices; row count and units unchanged |
 | `mart.m5_product_week` | One item × store × week | Aggregate only after daily reconciliation; distinguish missing price coverage |
 | `stg.rr_events` | One source event row | Audit duplicates; no invented source event ID; retain an ingestion row identifier for traceability |

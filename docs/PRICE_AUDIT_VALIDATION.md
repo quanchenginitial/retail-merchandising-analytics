@@ -32,4 +32,4 @@ To reproduce from the repository root:
 python validation/test_price_audit.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/price_audit_preflight.json"
 ```
 
-The SQL and runner contain the current local source paths; adjust them when reproducing elsewhere. The learner has now supplied and passed all 15 audit rows, completing the [raw-layer checkpoint](RAW_LAYER_CHECKPOINT.md). The next step is [typed calendar staging](CALENDAR_STAGING_VALIDATION.md), following [the current step](FIRST_STEP_ZH.md). Daily price coverage and downstream modelling remain pending.
+The SQL and runner contain the current local source paths; adjust them when reproducing elsewhere. The learner has now supplied and passed all 15 audit rows, completing the [raw-layer checkpoint](RAW_LAYER_CHECKPOINT.md). [Typed calendar staging](CALENDAR_STAGING_VALIDATION.md) has subsequently been accepted. Follow [the current step](FIRST_STEP_ZH.md) for the next learner action. Daily price coverage and downstream modelling remain pending.

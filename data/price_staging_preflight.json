@@ -1,0 +1,167 @@
+{
+  "checked_at_utc": "2026-10-27T10:08:17.854232+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": ":memory:",
+  "settings": {
+    "threads": 2,
+    "memory_limit": "3GB"
+  },
+  "script": "sql/09_stage_prices.sql",
+  "script_sha256": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+  "source_file": "sell_prices.csv",
+  "source_sha256": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef",
+  "source_hash_unchanged": true,
+  "precision_profile": {
+    "row_count": 6841121,
+    "non_plain_decimal_rows": 0,
+    "max_integer_digits": 3,
+    "max_fraction_digits": 2,
+    "one_decimal_rows": 624039,
+    "two_decimal_rows": 6217082,
+    "more_than_two_decimal_rows": 0,
+    "fixed_scale_text_differences": 624039
+  },
+  "baseline_setup_profile_and_checks_seconds": 29.825,
+  "checks_passed": 13,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": "6841121",
+      "expected": "6841121",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "4",
+      "expected": "4",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_item_store_week_keys",
+      "actual": "6841121",
+      "expected": "6841121",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "nonpositive_price_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "minimum_price",
+      "actual": "0.01",
+      "expected": "0.01",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "maximum_price",
+      "actual": "107.32",
+      "expected": "107.32",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "distinct_item_store_pairs",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_weeks",
+      "actual": "282",
+      "expected": "282",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_contract_violation_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "raw_canonical_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "staging_canonical_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 7,
+  "fixture_cases": [
+    {
+      "case": "exact_values_with_format_variants",
+      "passed": true,
+      "checked_actuals": {
+        "schema_mismatch_count": "0",
+        "raw_canonical_only_rows": "0",
+        "staging_canonical_only_rows": "0"
+      }
+    },
+    {
+      "case": "nonzero_subcent_precision",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "decimal_overflow",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "missing_price",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "nonpositive_price",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "fractional_week",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "validation_detects_subcent_change",
+      "passed": true,
+      "checked_actuals": {
+        "raw_contract_violation_rows": "1",
+        "raw_canonical_only_rows": "1",
+        "staging_canonical_only_rows": "1"
+      }
+    }
+  ],
+  "scope": "Assistant price staging preflight only. Exact decimal value equality under documented text canonicalisation; not raw spelling equality or daily price coverage. Learner staging remains pending."
+}
