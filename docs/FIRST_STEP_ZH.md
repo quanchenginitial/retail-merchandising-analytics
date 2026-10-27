@@ -2,7 +2,7 @@
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-**前置条件已完成：** [quanchenginitial/retail-merchandising-analytics](https://github.com/quanchenginitial/retail-merchandising-analytics) Public 仓库已创建，main 分支与初始 README 已确认。助手已准备阶段 0 的研究与路线。完整数据下载、来源审计和你的学习验收尚未完成；阶段文件是否已上传，以远端实际提交记录为准。
+**前置条件已完成：** [quanchenginitial/retail-merchandising-analytics](https://github.com/quanchenginitial/retail-merchandising-analytics) Public 仓库已创建；阶段 0 的 12 份研究与路线文件已上传并逐份核对，研究提交为 [994cdb7](https://github.com/quanchenginitial/retail-merchandising-analytics/commit/994cdb794b2734ddd5951b5523dee669162e77e5)。完整数据下载、来源审计和你的学习验收尚未完成。
 
 ## 这一步的目的
 
