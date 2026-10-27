@@ -2,7 +2,7 @@
 
 A guided SQL, Python and Power BI portfolio project investigating product assortment, sales predictability and shopping behaviour using public datasets.
 
-**Status: M5 source-file audit completed on 27 October 2026.** The learner supplied all three core CSVs. The assistant verified 30,490 sales series, 1,969 calendar rows and 6,841,121 price rows; all 33 recorded source checks passed. Persistent database import, analytical models and Power BI remain pending. See the [audit results](docs/M5_SOURCE_AUDIT.md) and [progress record](PROJECT_CHECKLIST.md).
+**Status: M5 source audit and learner database connection verified on 27 October 2026.** The learner supplied all three core CSVs. The assistant verified 30,490 sales series, 1,969 calendar rows and 6,841,121 price rows; all 33 recorded source checks passed. The learner's DBeaver screenshot confirms database `retail_merchandising` and DuckDB `v1.5.5`. The calendar import SQL passed an independent in-memory preflight; learner table import, analytical models and Power BI remain pending. See the [audit results](docs/M5_SOURCE_AUDIT.md) and [progress record](PROJECT_CHECKLIST.md).
 
 ## Business purpose
 

@@ -1,0 +1,20 @@
+{
+  "checked_at_utc": "2026-10-27T08:09:15.113544+00:00",
+  "executor": "assistant",
+  "engine": "DuckDB v1.5.5",
+  "database": ":memory:",
+  "script": "sql/02_import_calendar.sql",
+  "script_sha256": "de92ffacd22389c80ba5cdbccdd3ce88590164df48d32e093630b1bd0d6c1fbf",
+  "source_file": "calendar.csv",
+  "source_sha256": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+  "observed": {
+    "database_name": "memory",
+    "row_count": 1969,
+    "column_count": 14,
+    "varchar_column_count": 14,
+    "distinct_day_ids": 1969,
+    "first_date": "2011-01-29",
+    "last_date": "2016-06-19"
+  },
+  "scope": "Independent in-memory preflight only. Learner database was not modified. Learner import remains pending."
+}

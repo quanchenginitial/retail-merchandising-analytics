@@ -16,10 +16,12 @@
 ## 实际操作尚待完成
 
 - [x] 1A 用户下载并提供 M5 三个核心 CSV；本地存在性已核对，已满足取得文件这一步。
-- [ ] 1A 后续：用户确认本地正式项目位置与 DuckDB/DBeaver 工作方式。
+- [x] 1A 后续：用户截图确认 DBeaver 连接检查成功，database_name 为 retail_merchandising，duckdb_version 为 v1.5.5。截图未显示物理文件完整路径，不据此声称路径已独立核验。
 - [x] 1B 三个原始文件已取得，助手登记文件名、大小和 SHA-256，并完成只读源文件审计：33/33 通过。精确下载时间、实际下载 URL 和压缩包 hash 未采集。
 - [x] 独立检查确认日历范围、日期映射，以及价格行数、复合键和价格范围。见 [审计记录](docs/M5_SOURCE_AUDIT.md)。
-- [ ] 1C 导入 raw 层并核对文件行列数、时间范围、ID 和空值。
+- [x] 助手独立预验证日历导入 SQL：临时数据库中得到 1,969 行、14 列、14 个 VARCHAR、1,969 个日编号及正确日期范围。此结果不代表用户已经导入。
+- [ ] 1C1 用户执行日历 raw 导入并提交基础检查结果。
+- [ ] 1C2 日历详细检查及销量、价格 raw 导入与对账。
 - [ ] 2A 清洗、宽转长、类型转换，并记录异常处理规则。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
@@ -34,6 +36,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：由用户在 DBeaver 建立 retail_merchandising DuckDB 连接并查询数据库名和版本。源文件保留现有位置。连接通过后只导入最小的日历文件。源文件审计完成不等于用户已完成数据库导入。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户在已验证的 retail_merchandising 连接中运行 sql/02_import_calendar.sql，导入 raw.m5_calendar 并返回检查结果。当前只处理日历文件；用户导入结果未收到前，不标记 1C1 完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -1,33 +1,37 @@
-# 当前一步：建立商品项目的 DuckDB 连接
+# 当前一步：导入日历原始表
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-三份核心 CSV 已由你下载并提供，助手已完成源文件扫描，33 项记录的检查通过。源文件保持在 `D:/database/m5-forecasting-accuracy/`，无需重新下载或搬动。实际结果见 [源文件审计](M5_SOURCE_AUDIT.md)。目前尚未建立或验收你的项目数据库连接。
+你的截图已经确认 `database_name = retail_merchandising`、`duckdb_version = v1.5.5`。连接检查通过。三份 CSV 的源文件审计也已完成，详见 [审计结果](M5_SOURCE_AUDIT.md)。本次只导入最小的日历文件。
 
-## 这一步的目的
+## 为什么先做这一步
 
-CSV 是输入文件，DuckDB 数据库用于保存后续的原始表、清洗表和分析模型，DBeaver 则是连接数据库并编写 SQL 的操作界面。这一步只建立连接并确认连接到正确的新数据库。
+日历将销量文件中的 d_1、d_2 等编号对应到真实日期，并提供周编号、事件和 SNAP 标志。先把它导入 raw 原始层，保留所有列为 VARCHAR 文本；类型转换放到后续清洗层。CSV 中的空白字段读为 SQL NULL，表示没有记录对应事件，不填成数字 0。
 
-## 本次操作
+## 操作
 
-1. 打开 DBeaver，选择新建数据库连接，搜索并选择 **DuckDB**。
-2. 将数据库文件路径设为 `D:/database/retail_merchandising.duckdb`，连接名设为 `retail_merchandising`。此路径在本轮检查时不存在，用于新项目；不选择银行项目数据库，也不把 CSV 文件当作数据库路径。若界面提供创建数据库选项，使用该选项。
-3. 完成连接，在该连接下打开 SQL 编辑器，执行：
+1. 确认编辑器顶部当前连接仍为 **retail_merchandising**。
+2. 打开 [02_import_calendar.sql](../sql/02_import_calendar.sql)，将完整内容放入当前 SQL 编辑器。
+3. 使用 **执行 SQL 脚本**（DBeaver 默认快捷键 Alt+X）按顺序运行全部语句。普通的单语句执行可能只运行光标所在语句。
 
-```sql
-SELECT
-    current_database() AS database_name,
-    version() AS duckdb_version;
-```
+脚本先创建 raw 分区，再创建 `raw.m5_calendar` 并读取文件，最后输出一行检查结果。输入文件保持在 `D:/database/m5-forecasting-accuracy/calendar.csv`。完成后，可刷新左侧数据库树查看新表。
 
-也可打开仓库中的 [连接检查 SQL](../sql/01_connection_check.sql)。它只读取连接信息，不建表、不加载数据。
+## 预期结果
 
-## 我们怎样验收
+| 字段 | 预期值 |
+| --- | --- |
+| database_name | retail_merchandising |
+| row_count | 1969 |
+| column_count | 14 |
+| varchar_column_count | 14 |
+| distinct_day_ids | 1969 |
+| first_date | 2011-01-29 |
+| last_date | 2016-06-19 |
 
-结果应只有一行，`database_name` 应为 `retail_merchandising`，另一个字段返回你的实际 DuckDB 版本。把结果发回来即可；如出现报错，提供报错内容，我们先解决连接问题。
+把这一行结果发回来即可。如果出现报错，先停在报错处，提供报错内容。若提示表已存在，只运行文件末尾的 SELECT 检查语句，不删除表，也不重复导入。
 
-助手在本机独立复核价格数据时使用的命令行版本是 v1.5.5；DBeaver 的驱动版本需以你实际查询结果为准，两者不提前视为相同。
+## 已验证与待验证
 
-## 下一步
+助手已在独立的临时数据库中运行同一 SQL，得到预期的行数、列数、类型数量、日编号数量和日期范围，见 [预验证记录](../data/calendar_import_preflight.json)。其中 database_name 为 memory，因为它是临时验证环境。没有操作你正在连接的数据库。你的实际导入结果仍待截图验收。
 
-连接通过后，只导入最小的 `calendar.csv` 到原始层，检查 1,969 行、14 列与日期字段，再进入较大的销量和价格文件。不要一次导入全部文件或提前做宽转长。
+基础检查通过后，再检查日历字段和源文件是否一致，然后进入另外两份文件；暂不进行预测、指标计算或宽转长。
