@@ -1,0 +1,225 @@
+{
+  "checked_at_utc": "2026-10-27T13:48:51.337525+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 957100032,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/20_product_unit_concentration.sql",
+  "script_sha256": "faead93d10973af756e730b2e517945b3136125eb4e3bd3c3b7ba55861c09751",
+  "prerequisite_script_sha256": {
+    "sql/02_import_calendar.sql": "de92ffacd22389c80ba5cdbccdd3ce88590164df48d32e093630b1bd0d6c1fbf",
+    "sql/04_import_sales.sql": "80741e8c8a93636b03b339ce23e0700e65ca08900580c17ec5be4c06a4f8d9cf",
+    "sql/06_import_prices.sql": "18cbb428fe5681d17ee2d9ab6a0750ff3fdc56a264bd75b5500bfb00ca74496f",
+    "sql/08_stage_calendar.sql": "615f193ca97e6d125fdd16d5f7435bbb293318cfabc30576550240075200ee92",
+    "sql/09_stage_prices.sql": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+    "sql/10_stage_sales_daily.sql": "141b2671c323be2a92387bad3cfb36033f4871051668cc82894802a79b8227fc",
+    "sql/12_build_product_dimension.sql": "30506a8faf3141dfc1b8b0575a0ee2d725fa40903142e8c216cd5ef690e43a90",
+    "sql/13_build_store_dimension.sql": "d15fc515f5813914d46056bf6450d8e2275126439b9e77b2f7163c30bfc6b630",
+    "sql/14_build_calendar_dimension.sql": "7d3541ca678ece969b57a57645c22a3651fc17c69690ede8b39131e9fad27ff9",
+    "sql/17_build_sales_fact.sql": "0b66a00657e705928b486f751296b53b137f8f034133da3acc8a30903c33dc9f"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+  },
+  "source_hashes_unchanged": true,
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "daily_rows": 2744100,
+    "scope": "SKU totals across all 10 stores; source product universe includes zeros."
+  },
+  "ranking_rule": "Sum units by item_id across stores; positive units descending, item_id ascending; explicit ROWS cumulative sums.",
+  "threshold_rule": "Smallest positive-SKU prefix with cumulative_units*100 >= total_units*target; crossing SKU included; undefined for zero total units.",
+  "setup_seconds": 118.001,
+  "report_query_seconds": 1.117,
+  "independent_reference_seconds": 0.691,
+  "sku_comparison_seconds": 0.554,
+  "rank_comparison_seconds": 0.55,
+  "result_rows": 8,
+  "sku_aggregates_compared": 3049,
+  "sku_mismatches": 0,
+  "positive_rank_rows_compared": 3045,
+  "rank_mismatches": 0,
+  "independent_reference_matched": true,
+  "accepted_department_counts_units_matched": true,
+  "accepted_department_evidence": "data/department_contribution_learner_acceptance.json",
+  "accepted_department_evidence_sha256": "607d3ed0d83aea13bbd6a09509d5b733e160324c0c06cdb920820b0199a10a00",
+  "results": [
+    {
+      "segment": "TOP_10",
+      "sku_count": 10,
+      "sku_share_pct": "0.3280",
+      "units": "247361",
+      "unit_share_pct": "6.5662",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "TOP_50",
+      "sku_count": 50,
+      "sku_share_pct": "1.6399",
+      "units": "667622",
+      "unit_share_pct": "17.7220",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "TOP_100",
+      "sku_count": 100,
+      "sku_share_pct": "3.2798",
+      "units": "984906",
+      "unit_share_pct": "26.1443",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "REACH_80_PCT",
+      "sku_count": 1135,
+      "sku_share_pct": "37.2253",
+      "units": "3013899",
+      "unit_share_pct": "80.0038",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "REACH_95_PCT",
+      "sku_count": 2103,
+      "sku_share_pct": "68.9734",
+      "units": "3579077",
+      "unit_share_pct": "95.0064",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ALL_POSITIVE",
+      "sku_count": 3045,
+      "sku_share_pct": "99.8688",
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ZERO_SALES",
+      "sku_count": 4,
+      "sku_share_pct": "0.1312",
+      "units": "0",
+      "unit_share_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ALL_PRODUCTS",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "check_status": "PASS"
+    }
+  ],
+  "independent_department_unit_rollup": {
+    "FOODS_1": {
+      "sku_count": 216,
+      "units": 276769
+    },
+    "FOODS_2": {
+      "sku_count": 398,
+      "units": 511688
+    },
+    "FOODS_3": {
+      "sku_count": 823,
+      "units": 1722888
+    },
+    "HOBBIES_1": {
+      "sku_count": 416,
+      "units": 317010
+    },
+    "HOBBIES_2": {
+      "sku_count": 149,
+      "units": 33516
+    },
+    "HOUSEHOLD_1": {
+      "sku_count": 532,
+      "units": 726805
+    },
+    "HOUSEHOLD_2": {
+      "sku_count": 515,
+      "units": 178520
+    }
+  },
+  "fixture_cases_passed": 14,
+  "fixture_cases": [
+    {
+      "case": "exact_80_and_95_boundaries_cross_store_zero_sku",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "crossing_sku_included",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "one_sku_crosses_both_thresholds",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "ties_and_explicit_rowwise_cumulative_units",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "top_10_50_100_are_distinct_prefixes",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "all_zero_thresholds_undefined",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "positive_sku_count_below_ten",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "excluded_adjacent_dates",
+      "passed": true,
+      "guard_rejected": false
+    },
+    {
+      "case": "duplicate_product_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "orphan_product_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "duplicate_missing_day_same_count",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "negative_units",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "null_units",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "missing_store_mapping",
+      "passed": true,
+      "guard_rejected": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner concentration report pending. Every SKU total/mapping and every positive rank/cumulative total checked against independently aggregated staging/raw inputs and Python ranking. No SKU-level extracts published. Overlapping segment summaries are not ABC classes. Units basis only, not revenue/profit concentration or inventory decisions."
+}

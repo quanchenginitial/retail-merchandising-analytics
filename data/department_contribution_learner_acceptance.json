@@ -1,0 +1,108 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/19_department_contribution.sql",
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "All 3,049 source products, seven departments, three categories and 10 source stores, including zero-sales observations; the interval is defined by SQL19."
+  },
+  "display_normalization": "Thousands separators are omitted. Money is represented with two decimal places and percentages with four. Padding trailing zeros preserves displayed numeric values. TOTAL within_category_value_share_pct remains JSON null because it has no parent category; it is not replaced with zero or 100 percent.",
+  "result_rows": 8,
+  "rows_with_pass_status": 8,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "category": "FOODS",
+      "department": "FOODS_3",
+      "sku_count": 823,
+      "units": "1722888",
+      "unit_share_pct": "45.7340",
+      "estimated_sales_value_usd": "4078467.22",
+      "value_share_pct": "34.4263",
+      "within_category_value_share_pct": "60.9198",
+      "check_status": "PASS"
+    },
+    {
+      "category": "FOODS",
+      "department": "FOODS_2",
+      "sku_count": 398,
+      "units": "511688",
+      "unit_share_pct": "13.5827",
+      "estimated_sales_value_usd": "1836210.56",
+      "value_share_pct": "15.4994",
+      "within_category_value_share_pct": "27.4273",
+      "check_status": "PASS"
+    },
+    {
+      "category": "FOODS",
+      "department": "FOODS_1",
+      "sku_count": 216,
+      "units": "276769",
+      "unit_share_pct": "7.3468",
+      "estimated_sales_value_usd": "780139.28",
+      "value_share_pct": "6.5852",
+      "within_category_value_share_pct": "11.6529",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOUSEHOLD",
+      "department": "HOUSEHOLD_1",
+      "sku_count": 532,
+      "units": "726805",
+      "unit_share_pct": "19.2930",
+      "estimated_sales_value_usd": "2751516.58",
+      "value_share_pct": "23.2255",
+      "within_category_value_share_pct": "76.2764",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOUSEHOLD",
+      "department": "HOUSEHOLD_2",
+      "sku_count": 515,
+      "units": "178520",
+      "unit_share_pct": "4.7388",
+      "estimated_sales_value_usd": "855780.92",
+      "value_share_pct": "7.2236",
+      "within_category_value_share_pct": "23.7236",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOBBIES",
+      "department": "HOBBIES_1",
+      "sku_count": 416,
+      "units": "317010",
+      "unit_share_pct": "8.4150",
+      "estimated_sales_value_usd": "1474142.70",
+      "value_share_pct": "12.4432",
+      "within_category_value_share_pct": "95.4242",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOBBIES",
+      "department": "HOBBIES_2",
+      "sku_count": 149,
+      "units": "33516",
+      "unit_share_pct": "0.8897",
+      "estimated_sales_value_usd": "70688.72",
+      "value_share_pct": "0.5967",
+      "within_category_value_share_pct": "4.5758",
+      "check_status": "PASS"
+    },
+    {
+      "category": "TOTAL",
+      "department": "TOTAL",
+      "sku_count": 3049,
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "estimated_sales_value_usd": "11846945.98",
+      "value_share_pct": "100.0000",
+      "within_category_value_share_pct": null,
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and the eight displayed department contribution rows are accepted for the fixed pre-holdout 90-day window. Global and within-category shares use different denominators; TOTAL has no within-category denominator. PASS concerns data and aggregation checks, not business performance. Value is the accepted weekly-price-based USD proxy, not verified transaction revenue or profit. The accompanying business interpretation is explicitly attributed to the assistant. The screenshot does not independently recompute source hashes or certify upstream per-row mappings; no per-SKU productivity, ABC/XYZ, forecasting, inventory or causal result is claimed."
+}

@@ -1,6 +1,6 @@
 # Department contribution: hierarchy and denominator checks
 
-28 October 2026. [19_department_contribution.sql](../sql/19_department_contribution.sql) extends the learner-accepted category analysis to seven source departments. This is a read-only query; assistant preflight and learner acceptance remain separate. Department results are currently awaiting learner execution.
+28 October 2026. The learner screenshot confirms all eight result rows from [19_department_contribution.sql](../sql/19_department_contribution.sql) have check_status=PASS and numerically match the independent preflight results. The seven-department report and TOTAL row are accepted for the fixed window below. The [screenshot transcription](../data/department_contribution_learner_acceptance.json) records learner execution separately from assistant preflight; the assistant did not directly open the learner database.
 
 ## Business question and scope
 
@@ -28,9 +28,9 @@ The reference uses staging sales/calendar/prices and product/department/category
 
 Fourteen targeted cases cover hand-calculated global versus parent denominators, cross-store SKU de-duplication, a completely zero-sales SKU, missing-price zeros, inclusive/excluded date boundaries, all-zero denominators, one zero-valued category alongside positive categories, wrong/unknown/NULL/missing department mappings, duplicate products, orphan items, duplicate/missing dates, positive units without a price and incorrect amounts. In particular, a zero-valued category has 0% global value share when the overall total is positive but NULL within-category share; TOTAL within-category share is always NULL.
 
-## Assistant observations — awaiting learner confirmation
+## Accepted learner results and independent preflight
 
-All eight report rows passed and matched the independent department reference. Department rollups matched all learner-accepted SQL18 category SKU counts, units and exact amounts; TOTAL remains 3,049 products, 3,767,196 units and USD 11,846,945.98. All 14 targeted cases passed. Report execution took 2.955 seconds after prerequisites were rebuilt in this environment; this is not a performance guarantee. Source hashes remained unchanged and the private database was removed.
+The learner's eight displayed rows match the table below, including the expected NULL within-category share on TOTAL. Money is normalized to two decimal places and percentages to four; padding trailing zeros changes formatting only. Independently, the assistant preflight matched all eight rows to its department reference and rolled them up to the learner-accepted SQL18 category SKU counts, units and exact amounts. TOTAL remains 3,049 products, 3,767,196 units and USD 11,846,945.98. All 14 targeted cases passed. Preflight execution took 2.955 seconds after rebuilding prerequisites; this is not a performance guarantee. Source hashes remained unchanged and the private database was removed. These runtime and hash observations belong to the assistant preflight, not the learner screenshot.
 
 | Category | Department | SKUs | Units | Global unit % | Estimated value USD | Global value % | Within-category value % |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -43,6 +43,16 @@ All eight report rows passed and matched the independent department reference. D
 | HOBBIES | HOBBIES_2 | 149 | 33516 | 0.8897 | 70688.72 | 0.5967 | 4.5758 |
 | TOTAL | TOTAL | 3049 | 3767196 | 100.0000 | 11846945.98 | 100.0000 | NULL |
 
-The percentages above describe different denominators even on the same row. For example, the assistant observation for FOODS_3 is 34.4263% of overall estimated value and 60.9198% of FOODS value. This is not a per-SKU productivity or profitability comparison and is not yet a learner-accepted department finding.
+The percentages above describe different denominators even on the same row. For example, the accepted FOODS_3 result is 34.4263% of overall estimated value and 60.9198% of FOODS value. TOTAL has no parent category, so its NULL within-category share is intentional and is not a failed check.
 
-See [machine-readable preflight](../data/department_contribution_preflight.json) and [current learner step](FIRST_STEP_ZH.md). Department findings become accepted analysis only after the learner result is reviewed. No ABC/XYZ labels, forecast errors, inventory diagnosis or assortment intervention is delivered by this step.
+## Business reading of the accepted output
+
+The following is the assistant's interpretation of the accepted results for this fixed historical window:
+
+- FOODS_3 accounts for 60.9198% of estimated FOODS value and 34.4263% of the overall value proxy. It is the largest value contributor within FOODS, with 823 source SKUs compared with 398 in FOODS_2 and 216 in FOODS_1.
+- HOUSEHOLD_1 accounts for 76.2764% of estimated HOUSEHOLD value. It contains 532 source SKUs, compared with 515 in HOUSEHOLD_2.
+- HOBBIES_1 accounts for 95.4242% of estimated HOBBIES value. It contains 416 source SKUs, compared with 149 in HOBBIES_2.
+
+These leading departments also contain more recorded SKU IDs than their siblings. Their absolute contributions combine assortment size, product mix, recorded quantities and weekly prices; this report does not isolate the effect of any one factor. Higher contribution does not establish higher per-SKU productivity, profitability or a causal benefit from carrying more SKUs. The source codes do not reveal the departments' specific product types, and the counts do not establish active inventory.
+
+See [learner acceptance evidence](../data/department_contribution_learner_acceptance.json), [machine-readable preflight](../data/department_contribution_preflight.json) and [current learner step](FIRST_STEP_ZH.md). Learner execution and the displayed department results are now accepted. No ABC/XYZ labels, forecast errors, inventory diagnosis or assortment intervention is delivered by this step.
