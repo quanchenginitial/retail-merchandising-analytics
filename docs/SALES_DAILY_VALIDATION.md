@@ -1,6 +1,6 @@
 # Daily sales reshape preflight and acceptance scope
 
-27 October 2026. Calendar and price staging are accepted from learner screenshots. [10_stage_sales_daily.sql](../sql/10_stage_sales_daily.sql) prepares the next learner action: create the daily sales table and inspect 14 checks. Learner execution and subsequent per-cell value reconciliation remain pending.
+27 October 2026. The learner screenshot confirms all 14 checks from [10_stage_sales_daily.sql](../sql/10_stage_sales_daily.sql) passed. The four-column daily sales table is accepted for schema, complete unique day keys, zero preservation and aggregate controls. The [acceptance transcription](../data/sales_daily_learner_acceptance.json) is separate from the assistant preflight below. Full per-cell value reconciliation remains the next learner step.
 
 ## Table and transformation contract
 

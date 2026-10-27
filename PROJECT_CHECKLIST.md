@@ -37,7 +37,8 @@
 - [x] 助手核实价格来源精度：624,039 条一位小数、6,217,082 条两位小数，无更高精度值；价格清洗脚本 13 项预验证与 7 个针对性用例通过，见 [验证说明](docs/PRICE_STAGING_VALIDATION.md)。
 - [x] 2A2 用户截图确认价格清洗表 13/13 PASS：6,841,121 行、4 列，DECIMAL(18,2) 与 INTEGER 周编号正确，唯一键及规范化后的精确数值对账通过。见 [截图转录记录](data/price_staging_learner_acceptance.json)。
 - [x] 助手完成完整销量宽转长预验证：59,181,090 行、14/14 检查通过，另有 8 个针对性用例；使用自有临时磁盘库并已清理，见 [验证说明](docs/SALES_DAILY_VALIDATION.md)。
-- [ ] 2A3a 用户建立四列 stg.m5_sales_daily，通过 14 项结构、键完整性及汇总检查。
+- [x] 2A3a 用户截图确认四列 stg.m5_sales_daily 的 14 项检查全部 PASS：59,181,090 行、40,241,819 个零销量、累计 66,927,173 件，完整唯一日键及门店总量一致。见 [截图转录记录](data/sales_daily_learner_acceptance.json)。本步尚不证明逐格值一致。
+- [x] 助手独立预验证逐格值对账：完整来源 15/15 PASS，16 个针对性用例通过，能识别总量不变的日期销量移位；见 [验证说明](docs/SALES_RECONCILIATION_VALIDATION.md)。
 - [ ] 2A3b 用户执行长表与原始宽表的逐单元格销量值对账。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
@@ -52,6 +53,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/10_stage_sales_daily.sql，建立四列销量长表并返回 14 行结果。日历和价格清洗层已验收；本步核对结构、完整唯一的日键与汇总控制数，逐单元格值对账属于下一步。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行只读 sql/11_reconcile_sales_daily.sql，返回 15 行结果。销量长表已建立并通过结构、键完整性与汇总检查；现在确认每个商品门店每天的具体销量都与原始宽表对应单元格相等。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

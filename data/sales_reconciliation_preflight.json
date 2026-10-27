@@ -1,0 +1,273 @@
+{
+  "checked_at_utc": "2026-10-27T10:54:17.545236+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 300691456,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/11_reconcile_sales_daily.sql",
+  "script_sha256": "01c86cf6f765b728dc18db3ab7744ffa0cf30b723547d62a39be4f27a548bbae",
+  "source_file": "sales_train_evaluation.csv",
+  "source_sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+  "source_hash_unchanged": true,
+  "setup_seconds": 79.983,
+  "reconciliation_seconds": 12.597,
+  "checks_passed": 15,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_series_rows",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "raw_day_columns",
+      "actual": "1941",
+      "expected": "1941",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "raw_day_sequence_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "raw_key_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "staging_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "staging_series_count",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_day_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "series_row_count_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "series_day_coverage_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_only_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "staging_only_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "compared_cells",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "value_mismatch_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "value_mismatch_cells",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 16,
+  "fixture_cases": [
+    {
+      "case": "correct_values_with_reverse_physical_order",
+      "passed": true,
+      "checked_actuals": {
+        "compared_cells": "3882",
+        "value_mismatch_series": "0",
+        "value_mismatch_cells": "0",
+        "raw_day_sequence_errors": "0"
+      },
+      "value_check_status": "PASS"
+    },
+    {
+      "case": "same_total_same_zero_count_two_day_shift",
+      "passed": true,
+      "checked_actuals": {
+        "compared_cells": "3882",
+        "value_mismatch_series": "1",
+        "value_mismatch_cells": "2",
+        "series_day_coverage_errors": "0"
+      },
+      "value_check_status": "FAIL"
+    },
+    {
+      "case": "duplicate_and_missing_day_with_equal_values",
+      "passed": true,
+      "checked_actuals": {
+        "series_row_count_errors": "0",
+        "series_day_coverage_errors": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "missing_day",
+      "passed": true,
+      "checked_actuals": {
+        "series_row_count_errors": "1",
+        "series_day_coverage_errors": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "noncanonical_day",
+      "passed": true,
+      "checked_actuals": {
+        "invalid_day_rows": "1",
+        "series_day_coverage_errors": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "out_of_range_day",
+      "passed": true,
+      "checked_actuals": {
+        "invalid_day_rows": "1",
+        "series_day_coverage_errors": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "null_units",
+      "passed": true,
+      "checked_actuals": {
+        "missing_core_rows": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "replaced_series_key",
+      "passed": true,
+      "checked_actuals": {
+        "raw_only_series": "1",
+        "staging_only_series": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "extra_series_beyond_complete_comparable_grid",
+      "passed": true,
+      "checked_actuals": {
+        "staging_rows": "5823",
+        "staging_only_series": "1",
+        "compared_cells": "3882",
+        "value_mismatch_cells": "0"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "raw_duplicate_key",
+      "passed": true,
+      "checked_actuals": {
+        "raw_key_error_rows": "2",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "raw_null_key",
+      "passed": true,
+      "checked_actuals": {
+        "raw_key_error_rows": "1",
+        "raw_only_series": "1",
+        "staging_only_series": "1",
+        "compared_cells": "1941"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "raw_day_columns_reordered",
+      "passed": true,
+      "checked_actuals": {
+        "raw_day_columns": "1941",
+        "raw_day_sequence_errors": "2",
+        "compared_cells": "0"
+      },
+      "value_check_status": "INCOMPLETE"
+    },
+    {
+      "case": "raw_null",
+      "passed": true,
+      "raw_value_rejected": true
+    },
+    {
+      "case": "raw_fractional",
+      "passed": true,
+      "raw_value_rejected": true
+    },
+    {
+      "case": "raw_negative",
+      "passed": true,
+      "raw_value_rejected": true
+    },
+    {
+      "case": "raw_overflow",
+      "passed": true,
+      "raw_value_rejected": true
+    }
+  ],
+  "scope": "Exact daily values, multiplicity and key coverage reconcile to the current raw wide table. Assistant-only execution; learner reconciliation is pending. No daily price joins or business findings."
+}

@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains a design. As of 27 October 2026, the learner has validated all three M5 raw tables and accepted stg.m5_calendar and stg.m5_prices. The current step creates stg.m5_sales_daily with only item_id, store_id, d and INTEGER units, preserving zero sales. Its independent full-source preflight passed; learner creation and subsequent per-cell value reconciliation remain pending. Product/category/state attributes remain in the validated raw sales table for later dimensions. Core dimensions, marts and analytical measures are not yet built.
+The analytical model below remains a design. As of 27 October 2026, the learner has validated all three M5 raw tables, accepted stg.m5_calendar and stg.m5_prices, and created stg.m5_sales_daily with item_id, store_id, d and INTEGER units. All 14 daily-table structure, key and aggregate checks passed. The current learner step is exact per-cell value reconciliation against the raw wide table; its independent preflight passed, but learner execution remains pending. Product/category/state attributes remain in the validated raw sales table for later dimensions. Core dimensions, marts and analytical measures are not yet built.
 
 ## Independent modules
 

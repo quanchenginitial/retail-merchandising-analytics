@@ -1,61 +1,49 @@
-# 当前一步：将销量宽表展开为逐日长表
+# 当前一步：逐个核对日销量值
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-你的最新截图中，价格清洗层 13 项全部 PASS。日历与价格的类型转换已验收；现在处理销量表的形状。
+你的最新截图中，销量长表 14 项全部 PASS：59,181,090 行、40,241,819 个零销量、累计 66,927,173 件，商品门店的日编号完整且唯一，十家门店总量一致。该结果已记录在 [验收记录](../data/sales_daily_learner_acceptance.json)。
 
-## 为什么要宽转长
+## 为什么还需要这一步
 
-目前每个商品门店占一行，d_1 到 d_1941 分别是每日销量列。展开后，每行只表示一个“商品 × 门店 × 日编号”的销量，便于以后连接日历、价格并按时间汇总。
+总量一致，不能单独证明每一天的值都正确。例如两天的销量从 0、1 变成 1、0，总量、零值个数和行数都不变，但每天的销量已经错位。
 
-例如某商品门店 d_1=0、d_2=2，展开后就是两行，各自保留对应日编号和销量。零销量行也必须保留。这是原有单元格换一种排列方式，不是新增交易。
-
-新表 stg.m5_sales_daily 只有四列：
-
-| 字段 | 类型 | 含义 |
-| --- | --- | --- |
-| item_id | VARCHAR | 商品编号 |
-| store_id | VARCHAR | 门店编号 |
-| d | VARCHAR | 来源日编号，例如 d_1 |
-| units | INTEGER | 当日记录销量，允许 0 |
-
-类别、部门、州及来源系列编号仍在 raw.m5_sales_wide 中，后续用于维度和追溯，不重复存储到全部 5,918 万行中。本次不连接日历或价格，因此还没有实际日期字段或销售金额。
+本次按数字日编号把每个商品门店的 1,941 天排好，再逐个比较长表的销量和原始宽表对应单元格。同时重新检查日期完整性、重复或缺失组合，防止“只比较到了部分数据”被误认为全部一致。比较的是完整值列表，不用总量或校验和替代精确比较。
 
 ## 本次只执行这一份脚本
 
-1. 打开 [10_stage_sales_daily.sql](../sql/10_stage_sales_daily.sql)，复制全部内容。
-2. 在 DBeaver 当前 retail_merchandising 连接中，按“执行 SQL 脚本”（默认 Alt+X）运行整份脚本一次。
-3. 等待最终的 14 行检查结果，把截图发回。
+1. 打开 [11_reconcile_sales_daily.sql](../sql/11_reconcile_sales_daily.sql)，复制全部内容。
+2. 在 DBeaver 当前 retail_merchandising 连接中新建 SQL 编辑器，粘贴后选中全部并执行（默认 Ctrl+Enter）。这是一条只读查询，可以重复运行。
+3. 等最终 15 行结果出现，把完整结果截图发回。
 
-这是首次创建 59,181,090 行的表，比前几步处理量大，请等待完成，不重复点击。助手在独立临时数据库中完成原始表加载、长表创建与检查合计约 75 秒；实际耗时因环境而异。
-
-脚本不修改原始表。NULL 不会被悄悄跳过；缺失、小数、负数或超出 INTEGER 范围的销量会报错停止，而不是补 0 或舍入。
+本步读取已存在的 raw.m5_sales_wide 与 stg.m5_sales_daily，不新建、覆盖或修改表。需要扫描完整长表，请等待结束，不重复点击。助手已在独立临时数据库完成全量预验证；运行耗时与资源记录见 [验证说明](SALES_RECONCILIATION_VALIDATION.md)。
 
 ## 预期结果
 
-所有 14 行 status 均为 PASS。
+所有 15 行 status 均为 PASS。
 
 | check_name | 预期 |
 | --- | ---: |
+| raw_series_rows | 30490 |
+| raw_day_columns | 1941 |
+| raw_day_sequence_errors | 0 |
+| raw_key_error_rows | 0 |
 | staging_rows | 59181090 |
-| column_count | 4 |
-| schema_mismatch_count | 0 |
+| staging_series_count | 30490 |
 | missing_core_rows | 0 |
-| negative_sales_rows | 0 |
-| zero_sales_rows | 40241819 |
-| total_units | 66927173 |
-| max_daily_units | 763 |
-| series_count | 30490 |
+| invalid_day_rows | 0 |
 | series_row_count_errors | 0 |
 | series_day_coverage_errors | 0 |
-| invalid_day_rows | 0 |
-| series_set_difference_rows | 0 |
-| store_total_mismatches | 0 |
+| raw_only_series | 0 |
+| staging_only_series | 0 |
+| compared_cells | 59181090 |
+| value_mismatch_series | 0 |
+| value_mismatch_cells | 0 |
 
-每个商品门店必须有 1,941 行，且 d_1 至 d_1941 每个日编号都出现。两项同时通过，就能证明该组合没有重复或漏掉日键。另有组合集合核对，以及十家门店分别对应的原始销量总量核对。
+最后三项表示：完整比较了 59,181,090 个单元格，存在销量差异的商品门店序列为 0，具体不一致的销量单元格为 0。若前 13 项有任何一项未通过，最后两项会显示 INCOMPLETE，表示尚不能接受完整对账结论。
 
-如果提示表已存在，不要删除，只运行 VALIDATION 注释之后的 WITH 查询。若有其他报错或 FAIL，保留现状并发回结果。
+若出现 FAIL、INCOMPLETE 或报错，保留现状并发回结果，不删除表或补 0。本步只对当前 raw 宽表进行来源核对，不重新认证历史下载文件。
 
-## 本步通过后还要做什么
+## 通过后
 
-本步验证结构、键完整性、零销量与汇总控制数；它还不能证明每个日期上的具体销量都未发生错位。完整的逐单元格来源对账安排在下一步。助手已验证 14/14 PASS 与 8 个针对性用例，详见 [验证说明](SALES_DAILY_VALIDATION.md)，其中包含一个总量不变但单格值移位的例子，用来明确这个检查边界。
+逐格对账通过后，销量宽转长才完成完整验收。接下来进入维度建模，再逐步检查日期与价格关联；当前还没有日级价格覆盖结果或销售金额指标。
