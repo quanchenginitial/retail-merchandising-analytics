@@ -1,6 +1,6 @@
-# Category contribution: fixed-window method and preflight
+# Category contribution: fixed-window method and acceptance
 
-28 October 2026. [18_category_contribution.sql](../sql/18_category_contribution.sql) is the first business-analysis query after daily fact acceptance. It is read-only and returns three categories plus TOTAL. Assistant preflight does not substitute for learner execution; category analysis acceptance remains pending.
+28 October 2026. The learner screenshot confirms all four result rows from [18_category_contribution.sql](../sql/18_category_contribution.sql) have check_status=PASS and numerically match the independent preflight results. This first business-analysis query after daily fact acceptance is accepted for the fixed window below. The [screenshot transcription](../data/category_contribution_learner_acceptance.json) records the displayed output separately from assistant preflight evidence; the assistant did not directly open the learner database.
 
 ## Question, scope and interpretation
 
@@ -26,9 +26,9 @@ An independent reference uses staging sales, staging calendar, staging prices an
 
 Sixteen targeted cases cover hand-calculated category totals, cross-store SKU de-duplication, missing-price zeros, inclusive boundary dates and excluded adjacent days, zero denominators, duplicate/missing mappings, invalid category/store keys, missing and duplicate dates, missing prices on positive units, invalid flags/prices/units/values and the zero-unit value policy. These cases test plausible aggregation failures rather than business outcomes.
 
-## Observed assistant preflight results — awaiting learner confirmation
+## Accepted learner results and independent preflight
 
-All four rows passed and matched the independent reference. The report query took 4.349 seconds after rebuilding prerequisites; this is an environment-specific observation, not a runtime promise. All 16 targeted cases passed. Source hashes were unchanged and the private database was removed.
+The learner's four displayed rows match the table below. Trailing zeros are normalized to two decimal places for money and four for percentages; this changes formatting only. Independently, the assistant preflight matched all four rows to its source-based reference. The preflight query took 4.349 seconds after rebuilding prerequisites; this is an environment-specific observation, not a runtime promise. All 16 targeted cases passed. Source hashes were unchanged and the private database was removed. These resource and source-hash observations belong to the assistant preflight, not the learner screenshot.
 
 | Category | Source SKUs | Units | Unit share % | Estimated value USD | Value share % | Priced daily rows % |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -37,6 +37,14 @@ All four rows passed and matched the independent reference. The report query too
 | HOBBIES | 565 | 350526 | 9.3047 | 1544831.42 | 13.0399 | 100.0000 |
 | TOTAL | 3049 | 3767196 | 100.0000 | 11846945.98 | 100.0000 | 99.9943 |
 
-The window contains 156 unpriced daily rows, all with zero units (40 FOODS, 116 HOUSEHOLD). This explains why daily price coverage is slightly below 100% while every positive unit is priced. Category monetary totals add exactly to USD 11,846,945.98. These are preflight observations; the learner's report has not yet been accepted.
+The independent preflight reference identifies 156 unpriced daily rows, all with zero units (40 FOODS, 116 HOUSEHOLD). This explains why the accepted daily-row price coverage is slightly below 100% while every positive unit is priced. The exact missing-row counts are reference evidence, not additional fields displayed in the learner result. Category monetary totals add exactly to USD 11,846,945.98.
 
-See [machine-readable preflight evidence](../data/category_contribution_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md). Only after the learner's result is reviewed should category findings be recorded as accepted analysis. This query does not yet deliver ABC/XYZ classes, forecast scores, stockout diagnoses or recommendations to alter the assortment.
+## Business reading of the accepted output
+
+The following is the assistant's interpretation of the accepted query results for this fixed historical window:
+
+- FOODS contributes the most recorded units and estimated value: 66.6635% of units and 56.5109% of the value proxy. It is the largest category by these two measures within this scope.
+- HOUSEHOLD contributes 24.0318% of units and 30.4492% of estimated value; HOBBIES contributes 9.3047% and 13.0399%, respectively. Their higher value shares than unit shares describe a higher estimated value per recorded unit relative to the overall mix. This is not evidence of higher margins, causal pricing power or superior business performance.
+- Across all three categories, the window records 3,767,196 units and an estimated USD 11,846,945.98. These describe the specified 90 days, not full-history totals, verified transaction revenue or profit. The included SKU counts and missing-price zeros do not establish active assortment, inventory availability or stockouts.
+
+See [learner acceptance evidence](../data/category_contribution_learner_acceptance.json), [machine-readable preflight evidence](../data/category_contribution_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md). Learner execution and the displayed category results are now accepted. This query does not yet deliver ABC/XYZ classes, forecast scores, stockout diagnoses or recommendations to alter the assortment.

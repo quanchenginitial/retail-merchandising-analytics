@@ -1,0 +1,60 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/18_category_contribution.sql",
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "All 3,049 source products and all 10 source stores, including zero-sales observations; the interval is defined by SQL18."
+  },
+  "display_normalization": "Thousands separators are omitted. Money is represented with two decimal places and percentages with four. Padding trailing zeros preserves the displayed numeric values; no amounts or counts are inferred from rounded percentages.",
+  "result_rows": 4,
+  "rows_with_pass_status": 4,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "category": "FOODS",
+      "sku_count": 1437,
+      "units": "2511345",
+      "unit_share_pct": "66.6635",
+      "estimated_sales_value_usd": "6694817.06",
+      "value_share_pct": "56.5109",
+      "price_row_coverage_pct": "99.9969",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOUSEHOLD",
+      "sku_count": 1047,
+      "units": "905325",
+      "unit_share_pct": "24.0318",
+      "estimated_sales_value_usd": "3607297.50",
+      "value_share_pct": "30.4492",
+      "price_row_coverage_pct": "99.9877",
+      "check_status": "PASS"
+    },
+    {
+      "category": "HOBBIES",
+      "sku_count": 565,
+      "units": "350526",
+      "unit_share_pct": "9.3047",
+      "estimated_sales_value_usd": "1544831.42",
+      "value_share_pct": "13.0399",
+      "price_row_coverage_pct": "100.0000",
+      "check_status": "PASS"
+    },
+    {
+      "category": "TOTAL",
+      "sku_count": 3049,
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "estimated_sales_value_usd": "11846945.98",
+      "value_share_pct": "100.0000",
+      "price_row_coverage_pct": "99.9943",
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and the four displayed category contribution rows are accepted for the fixed pre-holdout 90-day window. PASS concerns data and aggregation checks, not business performance. Estimated sales value is the accepted weekly-price-based USD proxy, not verified transaction revenue or profit. This screenshot does not independently recompute source hashes or certify upstream per-row mappings. The accompanying business reading is explicitly attributed to the assistant; no ABC/XYZ, forecasting, inventory or causal result is claimed."
+}

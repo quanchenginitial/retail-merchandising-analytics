@@ -56,7 +56,9 @@
 - [x] 3C 用户截图确认 mart.m5_sales_daily 的 20 项检查全部 PASS、1 项 INFO：59,181,090 行、30,490 条完整序列、66,927,173 件，逐值及日期/价格/标记/金额差异均为 0；估算销售额合计 USD 191,577,546.04。见 [截图转录记录](data/sales_fact_learner_acceptance.json)。
 - [x] 3 商品分析模型阶段完成：维度、事实表、键唯一性与覆盖、关联无膨胀、销量逐值及金额口径均验收；未声明物理主键。见 [阶段记录](docs/ANALYTICAL_MODEL_CHECKPOINT.md)。
 - [x] 助手准备类别贡献查询并独立预验证：固定 2016-01-26 至 2016-04-24 的 90 天窗口，三类别及总计，与来源整数分金额汇总一致；16 个针对性用例通过。见 [方法与预查](docs/CATEGORY_CONTRIBUTION_VALIDATION.md)。
-- [ ] 4A 用户执行类别贡献查询，核对 4 行结果，并解释销量份额与估算金额份额的区别。
+- [x] 4A 用户截图确认类别贡献 4 行全部 PASS：90 天合计 3,767,196 件、估算金额 USD 11,846,945.98；三类商品的数量、金额、占比和覆盖率与预查一致。见 [截图记录](data/category_contribution_learner_acceptance.json)；[结果文档](docs/CATEGORY_CONTRIBUTION_VALIDATION.md)提供助手的业务解读。
+- [x] 助手准备部门贡献查询并独立预验证：同一 90 天窗口，7 部门及 TOTAL；来源整数分计算一致，向上汇总与已验收类别结果一致，14 个针对性用例通过。见 [方法与预查](docs/DEPARTMENT_CONTRIBUTION_VALIDATION.md)。
+- [ ] 4B 用户执行部门贡献查询，核对 8 行结果，区分全局占比和类别内金额占比。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
@@ -65,10 +67,10 @@
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
 - [ ] 9 干净环境复跑、英文结论、中文讲解和最终作品集检查完成。
 
-以上空框均表示未完成；创建文档不等于用户已完成练习。已完成的模型和验收规模可以如实描述；类别预查尚待用户确认，预测误差、模型提升和自动刷新成果尚未产生。
+以上空框均表示未完成；创建文档不等于用户已完成练习。已完成的模型和验收规模可以如实描述；类别结果已验收；部门预查尚待用户确认，预测误差、模型提升和自动刷新成果尚未产生。
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户在 retail_merchandising 连接中运行只读 sql/18_category_contribution.sql，返回三类商品加 TOTAL 共 4 行结果。目的是比较固定 90 天窗口内的销量与估算销售额贡献；全部 check_status 应为 PASS。每次新操作都先简述本步目的及其分析用途，再给执行内容。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户在 retail_merchandising 连接中运行只读 sql/19_department_contribution.sql，返回 7 部门加 TOTAL 共 8 行结果。目的是定位类别内部的贡献来源；全局占比使用全部销售额作分母，类别内占比使用该类别金额作分母。全部 check_status 应为 PASS；TOTAL 的类别内占比为空，表示不适用。每次新操作都先简述目的及分析用途，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
