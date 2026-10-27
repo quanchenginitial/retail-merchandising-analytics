@@ -1,0 +1,177 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/16_audit_price_coverage.sql",
+  "result_row_count": 23,
+  "check_count": 14,
+  "checks_passed": 14,
+  "mechanical_checks_passed": 12,
+  "coverage_gates_passed": 2,
+  "observation_rows": 9,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "price_rows",
+      "actual": "6841121",
+      "expected": "6841121",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "base_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "joined_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "row_count_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "base_units",
+      "actual": "66927173",
+      "expected": "66927173",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "joined_units",
+      "actual": "66927173",
+      "expected": "66927173",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "units_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "base_zero_rows",
+      "actual": "40241819",
+      "expected": "40241819",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "joined_zero_rows",
+      "actual": "40241819",
+      "expected": "40241819",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "missing_calendar_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "invalid_sales_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "store_control_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "missing_price_positive_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "missing_price_units",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "priced_daily_rows",
+      "actual": "46881677",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "missing_price_daily_rows",
+      "actual": "12299413",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "missing_price_zero_rows",
+      "actual": "12299413",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "positive_sales_rows",
+      "actual": "18939271",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "priced_positive_rows",
+      "actual": "18939271",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 20,
+      "check_name": "priced_units",
+      "actual": "66927173",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 21,
+      "check_name": "daily_row_coverage_pct",
+      "actual": "79.2173",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 22,
+      "check_name": "positive_row_coverage_pct",
+      "actual": "100.0000",
+      "expected": "observed",
+      "status": "INFO"
+    },
+    {
+      "check_order": 23,
+      "check_name": "units_coverage_pct",
+      "actual": "100.0000",
+      "expected": "observed",
+      "status": "INFO"
+    }
+  ],
+  "scope": "Learner screenshot accepted for all 23 daily price-coverage result rows: 14 PASS and 9 INFO. All 59,181,090 rows, 66,927,173 units and 40,241,819 zero-sales rows are preserved. Of these daily rows, 46,881,677 have an exact item/store/source-week price; all 12,299,413 unpriced rows have zero sales. All 18,939,271 positive-sales rows and all 66,927,173 units are priced. Missing prices remain NULL, with no stockout or listing inference. This checkpoint accepts coverage only; monetary measures and a persisted joined fact table remain unaccepted. The separate assistant preflight record remains unchanged."
+}

@@ -51,7 +51,9 @@
 - [x] 助手独立预验证完整销量维度关联：20/20 检查与 15 个针对性用例通过，59,181,090 行、66,927,173 件和 40,241,819 个零销量行均保留；见 [验证说明](docs/DIMENSION_JOINS_VALIDATION.md)。
 - [x] 3B1 用户截图确认完整销量维度关联 20/20 PASS：59,181,090 行、66,927,173 件、40,241,819 个零销量行均保留，三类未匹配与门店汇总差异为 0；见 [截图转录记录](data/dimension_joins_learner_acceptance.json)。
 - [x] 助手独立预查价格覆盖：12 项机械检查及 2 项正销量覆盖门槛通过，15 个针对性用例通过；观察到 12,299,413 个缺价日记录全部为零销量，销量件数覆盖率 100%。仅为助手预查，见 [验证说明](docs/PRICE_COVERAGE_VALIDATION.md)。
-- [ ] 3B2 用户执行价格覆盖审计，核对 14 项检查/门槛及 9 项 INFO 覆盖统计。
+- [x] 3B2 用户截图确认价格覆盖 14 PASS、9 INFO：12,299,413 个缺价日记录全部为零销量，日记录覆盖率 79.2173%，正销量记录和销量件数覆盖率均为 100%；见 [截图转录记录](data/price_coverage_learner_acceptance.json)。
+- [x] 助手独立预验证日销量事实表：全量 20 项检查通过，25 个针对性用例通过；保留缺价 NULL，以零销量金额为 0 的明确口径生成金额代理，见 [验证说明](docs/SALES_FACT_VALIDATION.md)。仅为助手临时库验证。
+- [ ] 3C 用户建立 mart.m5_sales_daily，核对 20 项 PASS 及 1 项 INFO 金额统计；不得把助手执行标为用户完成。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -65,6 +67,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行只读 sql/16_audit_price_coverage.sql，返回 23 行结果。目的是区分零销量缺价与正销量缺价，明确估算销售额的覆盖范围；预期前 14 行 PASS、后 9 行 INFO。每次新操作都先简述本步目的及其分析用途，再给执行内容。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户在 retail_merchandising 连接中首次运行 sql/17_build_sales_fact.sql 全文件，返回 21 行结果。目的是把已核验的销量、日期和周价格保存成可供商品分析使用的事实表；预期前 20 行 PASS、最后 1 行 INFO。每次新操作都先简述本步目的及其分析用途，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

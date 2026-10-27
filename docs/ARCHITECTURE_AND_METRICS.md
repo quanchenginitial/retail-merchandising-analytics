@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw/staging tables, exact daily value reconciliation, all three core dimensions and full sales-dimension joins. The current step audits daily price coverage. Independent preflight observed 100% positive-row and unit coverage, with missing prices only on zero-sales rows; learner confirmation remains pending. No joined fact table or monetary total has been persisted, and analytical marts and measures remain later work.
+The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw/staging tables, exact daily value reconciliation, all three core dimensions, full sales-dimension joins and daily price coverage. All positive sales have matching weekly prices; missing prices occur only on zero-sales rows. The current step builds the daily fact under the value policy below. Assistant-only temporary-database verification is documented separately from pending learner fact acceptance. Analytical marts, forecasting and Power BI remain later work.
 
 ## Independent modules
 
@@ -17,7 +17,7 @@ The analytical model below remains partly a design. As of 27 October 2026, the l
 | `core.m5_store` | One store | Two source VARCHAR codes; exact mapping and unique store_id accepted in 13 checks; no state inferred from identifier prefix or physical PRIMARY KEY declared |
 | `core.m5_calendar` | One source day | Original 14 fields plus INTEGER day_number, unique d/date and exact source equality accepted in 17 checks; all 1,969 dates retained, including 28 after sales observation |
 | `stg.m5_prices` | One item × store × week | Guarded DECIMAL(18,2), INTEGER week, exact value-equivalence reconciliation; absent price rows remain unknown |
-| `mart.m5_sales_daily` | One item × store × date | Join calendar then LEFT JOIN prices; row count and units unchanged |
+| `mart.m5_sales_daily` | One item × store × observed date | Nine fields: item_id/store_id/d VARCHAR, date DATE, wm_yr_wk/units INTEGER, sell_price DECIMAL(18,2), has_price BOOLEAN, estimated_sales_value DECIMAL(28,2). Exact calendar/week price joins; no future rows or declared physical PRIMARY KEY |
 | `mart.m5_product_week` | One item × store × week | Aggregate only after daily reconciliation; distinguish missing price coverage |
 | `stg.rr_events` | One source event row | Audit duplicates; no invented source event ID; retain an ingestion row identifier for traceability |
 | `stg.rr_item_property_history` | One item × property × change time | Resolve equal-time conflicting values explicitly before as-of joining |
@@ -28,7 +28,7 @@ The analytical model below remains partly a design. As of 27 October 2026, the l
 ## Planned M5 metrics
 
 - **Recorded units:** sum of observed nonnegative integer units. This measures realized recorded sales, not latent demand.
-- **Estimated sales value (USD proxy):** sum of units × published weekly average sell_price for price-covered rows. Expose daily-row, positive-row and unit-weighted price coverage separately. If positive sales lack a price, headline complete-value totals stay unavailable instead of silently becoming partial totals. Keep missing prices as NULL; explicitly define zero-sales/missing-price value handling before implementation. Do not call it net revenue, margin or customer spend.
+- **Estimated sales value (USD proxy):** when units=0, value=0.00 whether or not a price is present; when units>0, multiply by the matching published weekly average sell_price. Positive sales without a price abort this fact build. Preserve the absent price as NULL and has_price=false; never substitute a zero price. The zero-quantity convention describes recorded sales value only, not lost sales or demand. Expose daily-row, positive-row and unit-weighted coverage separately. Use DECIMAL(20,0) for the units operand so DuckDB evaluates the product as DECIMAL(38,2), then store DECIMAL(28,2); no floating-point multiplication or rounding of source cents. Do not call it verified transaction revenue, net revenue, margin or customer spend.
 - **Product share:** units (or covered value proxy) divided by the total under exactly the same date/store/category filters. State which measure is used.
 - **ABC:** initial proposed bands A through 80% cumulative units, B through 95%, C remainder, over a fixed trailing 90-day window ending at the analysis cutoff. Sort deterministically by units then item ID. Report boundary-crossing convention and sensitivity; thresholds are project choices, not industry laws. Display non-selling SKUs separately.
 - **XYZ:** variability classification using weekly units from a documented comparable observation window. CV is undefined at mean zero; keep that group separate. A provisional X ≤ 0.5, Y ≤ 1, Z > 1 classification needs sensitivity review. Also show zero-sales share and mean nonzero gap so CV does not hide intermittent sales. Availability is not known from zero units.

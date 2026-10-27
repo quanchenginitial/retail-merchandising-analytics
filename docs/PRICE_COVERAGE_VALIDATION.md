@@ -1,6 +1,6 @@
-# Daily price coverage: method and independent observations
+# Daily price coverage: method, observations and learner acceptance
 
-27 October 2026. The learner has passed all 20 sales-dimension join checks. The next action is [16_audit_price_coverage.sql](../sql/16_audit_price_coverage.sql), a single read-only query checking exact daily-to-weekly price matches. Assistant preflight is complete; learner price-coverage acceptance remains pending.
+27 October 2026. The learner-supplied DBeaver screenshot for [16_audit_price_coverage.sql](../sql/16_audit_price_coverage.sql) shows all 23 result rows: 14 PASS and 9 INFO. Every displayed value matches the earlier independent preflight. Daily price coverage is accepted on screenshot evidence; no direct read of the learner database was performed. The [learner acceptance record](../data/price_coverage_learner_acceptance.json) preserves the transcribed results separately from assistant execution evidence.
 
 ## Purpose and matching rule
 
@@ -12,19 +12,19 @@ Independent base/join aggregates check rows, units, zero-sales rows and store-le
 
 ## Reading the 23 result rows
 
-- Rows 1–12: mechanical checks, expected PASS. These establish valid inputs and unchanged rows/units/zeros at overall and store levels.
-- Rows 13–14: positive-sales price-coverage gates. Zero unpriced positive-sales rows and zero unpriced units are required before claiming a complete estimated sales-value proxy. A nonzero result blocks that completeness claim; it does not automatically prove the source is wrong or prevent unit-based analysis.
-- Rows 15–23: observed counts and percentages, marked INFO. A zero denominator gives NULL with status N/A, never a fabricated 100%.
+- Rows 1â€“12: mechanical checks, expected PASS. These establish valid inputs and unchanged rows/units/zeros at overall and store levels.
+- Rows 13â€“14: positive-sales price-coverage gates. Zero unpriced positive-sales rows and zero unpriced units are required before claiming a complete estimated sales-value proxy. A nonzero result blocks that completeness claim; it does not automatically prove the source is wrong or prevent unit-based analysis.
+- Rows 15â€“23: observed counts and percentages, marked INFO. A zero denominator gives NULL with status N/A, never a fabricated 100%.
 
-If any of rows 1–12 fails, rows 13–23 show INCOMPLETE. In particular, a missing calendar match must not be interpreted as confirmed missing price coverage for a valid week. An invalid price/calendar guard stops the query instead of returning the grid.
+If any of rows 1â€“12 fails, rows 13â€“23 show INCOMPLETE. In particular, a missing calendar match must not be interpreted as confirmed missing price coverage for a valid week. An invalid price/calendar guard stops the query instead of returning the grid.
 
 Daily row coverage counts all observed item/store/day cells, including zeros. Positive-row coverage counts only rows with units greater than zero. Unit coverage weights by the number of units sold. These denominators answer different questions and are reported separately.
 
-## Assistant full-source observations — learner confirmation pending
+## Full-source observations â€” confirmed by learner screenshot
 
 All 12 mechanical checks and both positive-sales coverage gates passed. Base and joined totals remain 59,181,090 rows, 66,927,173 units and 40,241,819 zero-sales rows. Calendar misses, invalid sales and store-control differences are zero.
 
-| Observed metric | Independent result |
+| Observed metric | Independent result and learner screenshot |
 | --- | ---: |
 | Priced daily rows | 46,881,677 |
 | Missing-price daily rows | 12,299,413 |
@@ -38,13 +38,15 @@ All 12 mechanical checks and both positive-sales coverage gates passed. Base and
 | Positive-row coverage | 100.0000% |
 | Unit coverage | 100.0000% |
 
-The observed missing prices all coincide with zero recorded sales. This check does not determine why prices are absent and does not identify stockouts, launch dates, delistings or unconstrained demand. It does not convert absent prices to zero. Before a future sales-value calculation, the learner must confirm this coverage result, and the zero-sales/missing-price value convention must be stated explicitly. Weekly prices still support an estimated sales-value proxy, not verified transaction revenue, profit or margin.
+The observed missing prices all coincide with zero recorded sales. This check does not determine why prices are absent and does not identify stockouts, launch dates, delistings or unconstrained demand. It does not convert absent prices to zero. The learner has now confirmed this coverage result. The next [fact-table step](SALES_FACT_VALIDATION.md) explicitly assigns zero value to zero units while preserving missing prices as NULL. Weekly prices still support an estimated sales-value proxy, not verified transaction revenue, profit or margin.
 
 ## Independent execution and tests
 
 The [runner](../validation/preflight_price_coverage.py) reproduced raw calendar/sales/prices, the corresponding staging tables and core calendar in its own temporary on-disk DuckDB under the ignored repository tmp directory. It never opened the learner database. The original three file hashes matched the source registry and remained unchanged.
 
 With DuckDB v1.5.5, two threads, memory_limit=2GB and a spill directory inside the temporary folder, setup took 77.43 seconds and the full coverage audit took 12.739 seconds. The private directory was checked for workspace containment and removed after execution. These are one-run timings and configured limits, not a runtime guarantee or measurement of total process memory. Learner connection settings are not changed. [Preflight evidence](../data/price_coverage_preflight.json) records hashes, results, settings and cleanup.
+
+The preflight file remains an unchanged historical assistant-only record. Its original statement that learner execution was pending describes the time of that run; the separate learner acceptance record above establishes the subsequently accepted screenshot result.
 
 Fifteen targeted cases passed: shared same-week prices with zero-sales gaps; positive unpriced sales; refusal to borrow another store's or adjacent week's price; duplicate unused price keys; NULL, zero, negative and nonfinite prices; empty keys or NULL price weeks; duplicate or missing calendar days; NULL sales units; and all-zero sales with undefined positive-row/unit coverage. Fixture controls describe each small synthetic input; coverage logic is unchanged. Positive unpriced sales yield failed coverage gates while preserving valid mechanical checks; invalid mechanics make all coverage outputs INCOMPLETE.
 
@@ -54,4 +56,4 @@ To reproduce from the repository root:
 python validation/preflight_price_coverage.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/price_coverage_preflight.json"
 ```
 
-The setup uses current local CSV paths. The learner query reads named tables and can be rerun safely. Follow [the current step](FIRST_STEP_ZH.md) and return all 23 rows for acceptance. No joined fact table or monetary total has been created by this step.
+The setup uses current local CSV paths. The learner query reads named tables and can be rerun safely. This coverage step is complete; follow [the current step](FIRST_STEP_ZH.md) for the next learner action. No joined fact table or monetary total was created by the coverage audit.
