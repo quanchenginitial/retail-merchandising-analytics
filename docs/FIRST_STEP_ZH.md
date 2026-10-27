@@ -1,46 +1,51 @@
-# 当前一步：导入价格原始表
+# 当前一步：核对价格值、编号对应关系与来源一致性
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-你的最新截图中，销量详细检查 15 项全部 PASS。59,181,090 个日销量单元格、累计 66,927,173 件和双向来源对账均符合预期；日历与销量原始表现已验收完成。
+你的最新截图中，价格基础检查 12 项全部 PASS。三张 raw 原始表已经导入；日历和销量已完成详细审计，本步补齐价格表的详细验收。
 
-## 先理解价格表的一行
+## 为什么不能只看组合数量
 
-sell_prices.csv 每行是一件商品在一家门店、某个来源周的价格记录。四个字段依次为 store_id、item_id、wm_yr_wk、sell_price。其中 wm_yr_wk 用于以后与日历中的同名字段对应。
+30,490 个商品门店组合与销量表的组合数量相同，并不证明具体编号都对应。例如，少一个正确组合、多一个错误组合，总数仍然相同。这次要检查每个价格组合是否真实存在于销量表，以及每个价格周编号是否存在于日历。
 
-价格表的粒度是“商品 × 门店 × 周”，不是每天一行。所以这次要核对三个字段组合后的唯一键；不能只按商品编号连接价格，否则以后可能把一条日销量匹配到多条价格，放大计算结果。
+价格还需要能够解析为有限正数，同时与原 CSV 的完整文本记录一致。这两件事分别检查；不会先把价格四舍五入成两位小数再比较。
 
-## 本次只执行这一份脚本
+## 本次只执行一条只读查询
 
-1. 打开 [06_import_prices.sql](../sql/06_import_prices.sql)，复制全部内容。
-2. 在 DBeaver 确认连接仍为 retail_merchandising，粘贴到 SQL 编辑器。
-3. 使用“执行 SQL 脚本”（默认 Alt+X）运行整份脚本一次，等待最后的 12 行结果。
+1. 打开 [07_audit_prices.sql](../sql/07_audit_prices.sql)，复制全部内容。
+2. 在 DBeaver 当前 retail_merchandising 连接中，粘贴并执行完整查询一次。
+3. 等待最后的 15 行结果，再把截图发回。
 
-脚本会创建 raw.m5_prices，四列均先按 VARCHAR 保留原值，再检查结构、键和必要字段。当前不转换价格类型，也不连接销量表。源 CSV 约 203 MB，请等执行完成，不重复运行。
+本查询不建表、不修改原值、不计算销售金额。它会重新读取价格 CSV，对四个字段双向逐行对账，包含重复次数；处理量比基础计数大，请等待完成，不重复点击运行。
 
 ## 预期结果
 
-所有 12 行 status 均为 PASS。
+所有 15 行 status 均为 PASS。
 
 | check_name | 预期 |
 | --- | ---: |
-| row_count | 6841121 |
-| column_count | 4 |
-| varchar_column_count | 4 |
-| expected_column_names | 4 |
-| column_sequence_errors | 0 |
-| distinct_item_store_week_keys | 6841121 |
-| duplicate_key_rows | 0 |
+| source_rows、table_rows | 各 6841121 |
 | missing_required_rows | 0 |
-| distinct_item_store_pairs | 30490 |
-| distinct_items | 3049 |
-| distinct_stores | 10 |
-| distinct_weeks | 282 |
+| duplicate_key_rows | 0 |
+| valid_numeric_price_rows | 6841121 |
+| invalid_price_rows | 0 |
+| nonpositive_price_rows | 0 |
+| minimum_price | 0.01 |
+| maximum_price | 107.32 |
+| invalid_week_code_rows | 0 |
+| unknown_calendar_week_rows | 0 |
+| orphan_item_store_rows | 0 |
+| sales_pairs_without_any_price | 0 |
+| source_only_rows、table_only_rows | 各 0 |
 
-请把这 12 行结果截图发回。如果提示表已存在，不要删表，只执行 BASIC CHECKS 注释之后的 WITH 查询即可。若有其他报错或 FAIL，保留现状并发回结果。
+valid_numeric_price_rows 只表示可以解析为有限数值，是否大于 0 由 nonpositive_price_rows 单独检查。额外小数位不会被自动认定为非法；完整来源对账仍会发现价格文本变化。
 
-## 这一小步的范围
+orphan_item_store_rows 为 0，表示价格中的商品门店组合都存在于销量表。sales_pairs_without_any_price 为 0，表示销量表中的每个商品门店组合至少在某一周有价格记录。这不等于每天的销量都有对应价格；日级覆盖会在后续模型连接时单独核验。
 
-助手已在独立临时数据库完成预验证，12 项全部通过，源文件 hash 与原登记一致且验证前后不变。这不是你当前数据库的执行结果；详见 [验证说明](PRICE_IMPORT_VALIDATION.md)。
+最后两项均为 0，表示当前价格 CSV 与 raw 表的四字段完整记录一致。此 SQL 不重新计算历史来源快照 hash。
 
-本步通过只表示基础结构与键符合预期。下一步再检查价格数值与来源完整对账；之后建模时再检验每天的销量是否有对应价格。商品门店组合数量相同，不代表每一天都已经匹配到价格，当前还不能据此计算完整销售金额。
+## 验收与下一步
+
+助手已经在独立临时数据库中验证完整来源 15/15 PASS，并完成 12 个微型用例；详见 [验证说明](PRICE_AUDIT_VALIDATION.md)。这些结果不能替代你当前数据库的实际执行结果。如果出现 FAIL 或报错，保留现状并发回截图，不手动修价格或删记录。
+
+本步通过后，三份原始表的导入与详细对账即可完成，再进入清洗层类型转换和后续建模。

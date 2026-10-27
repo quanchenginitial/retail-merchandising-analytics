@@ -1,0 +1,96 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/06_import_prices.sql",
+  "check_count": 12,
+  "checks_passed": 12,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 6841121,
+      "expected": 6841121,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "expected_column_names",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_item_store_week_keys",
+      "actual": 6841121,
+      "expected": 6841121,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "duplicate_key_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "distinct_item_store_pairs",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_items",
+      "actual": 3049,
+      "expected": 3049,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "distinct_stores",
+      "actual": 10,
+      "expected": 10,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "distinct_weeks",
+      "actual": 282,
+      "expected": 282,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Price raw import structure, keys and required-field checks accepted from displayed results. Numeric validity, exact source reconciliation, pair/week existence and daily sales-price coverage are not established by this screenshot."
+}

@@ -30,4 +30,4 @@ To reproduce from the repository root:
 python validation/test_sales_audit.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/sales_audit_preflight.json"
 ```
 
-Adjust the local source paths in both SQL and runner when reproducing elsewhere. The learner has now supplied and passed all 15 result rows. The next step is [price import and basic checks](PRICE_IMPORT_VALIDATION.md), following [the current step](FIRST_STEP_ZH.md). Price import and downstream modelling remain pending. Zero recorded sales do not by themselves establish a stockout or unconstrained demand.
+Adjust the local source paths in both SQL and runner when reproducing elsewhere. The learner has now supplied and passed all 15 result rows. The [price import and basic checks](PRICE_IMPORT_VALIDATION.md) have now also passed. The current step is [detailed price validation](PRICE_AUDIT_VALIDATION.md), following [the current step](FIRST_STEP_ZH.md). Downstream modelling remains pending. Zero recorded sales do not by themselves establish a stockout or unconstrained demand.

@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains a design. As of 27 October 2026, the learner has implemented and validated raw.m5_calendar and raw.m5_sales_wide. The raw.m5_prices import is prepared and independently preflighted but awaits learner execution. Typed staging, core dimensions, marts and analytical measures remain planned.
+The analytical model below remains a design. As of 27 October 2026, the learner has implemented and validated raw.m5_calendar and raw.m5_sales_wide. The learner has also imported raw.m5_prices and passed its 12 basic structure/key checks; detailed price validation remains pending. Typed staging, core dimensions, marts and analytical measures remain planned.
 
 ## Independent modules
 

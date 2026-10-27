@@ -1,0 +1,260 @@
+{
+  "checked_at_utc": "2026-10-27T09:36:33.410860+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": ":memory:",
+  "settings": {
+    "threads": 2,
+    "memory_limit": "3GB"
+  },
+  "script": "sql/07_audit_prices.sql",
+  "script_sha256": "27999a88f6cd98ab5040a923cd3b2eef8626e35caf747cc8884562c230ca9517",
+  "source_sha256": {
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef",
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "reference_scope": "Only item_id/store_id from the sales CSV and wm_yr_wk from calendar are imported as reference projections.",
+  "baseline_checks_passed": 15,
+  "baseline_setup_and_audit_seconds": 26.689,
+  "baseline_results": [
+    {
+      "check_order": 1,
+      "check_name": "source_rows",
+      "actual": "6841121",
+      "expected": "6841121",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "table_rows",
+      "actual": "6841121",
+      "expected": "6841121",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "duplicate_key_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "valid_numeric_price_rows",
+      "actual": "6841121",
+      "expected": "6841121",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "invalid_price_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "nonpositive_price_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "minimum_price",
+      "actual": "0.01",
+      "expected": "0.01",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "maximum_price",
+      "actual": "107.32",
+      "expected": "107.32",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "invalid_week_code_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "unknown_calendar_week_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "orphan_item_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "sales_pairs_without_any_price",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "source_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "table_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 12,
+  "fixture_cases": [
+    {
+      "case": "clean_tiny_fixture",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.459,
+      "checked_actuals": {
+        "valid_numeric_price_rows": "3",
+        "minimum_price": "1.25",
+        "maximum_price": "3.0",
+        "source_only_rows": "0",
+        "table_only_rows": "0"
+      }
+    },
+    {
+      "case": "missing_price_values",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.147,
+      "checked_actuals": {
+        "missing_required_rows": "2",
+        "invalid_price_rows": "0",
+        "valid_numeric_price_rows": "1",
+        "source_only_rows": "2",
+        "table_only_rows": "2"
+      }
+    },
+    {
+      "case": "invalid_text",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.154,
+      "checked_actuals": {
+        "invalid_price_rows": "1",
+        "valid_numeric_price_rows": "2"
+      }
+    },
+    {
+      "case": "nonfinite_price_values",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.197,
+      "checked_actuals": {
+        "invalid_price_rows": "2",
+        "valid_numeric_price_rows": "1",
+        "minimum_price": "3.0",
+        "maximum_price": "3.0"
+      }
+    },
+    {
+      "case": "nonpositive_prices",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.152,
+      "checked_actuals": {
+        "nonpositive_price_rows": "2",
+        "valid_numeric_price_rows": "3"
+      }
+    },
+    {
+      "case": "additional_precision",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.154,
+      "checked_actuals": {
+        "invalid_price_rows": "0",
+        "valid_numeric_price_rows": "3",
+        "source_only_rows": "1",
+        "table_only_rows": "1"
+      }
+    },
+    {
+      "case": "duplicate_record",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.149,
+      "checked_actuals": {
+        "table_rows": "4",
+        "duplicate_key_rows": "1",
+        "source_only_rows": "0",
+        "table_only_rows": "1"
+      }
+    },
+    {
+      "case": "missing_record",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.138,
+      "checked_actuals": {
+        "table_rows": "2",
+        "sales_pairs_without_any_price": "0",
+        "source_only_rows": "1",
+        "table_only_rows": "0"
+      }
+    },
+    {
+      "case": "unknown_pair",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.139,
+      "checked_actuals": {
+        "orphan_item_store_rows": "1",
+        "sales_pairs_without_any_price": "1",
+        "source_only_rows": "1",
+        "table_only_rows": "1"
+      }
+    },
+    {
+      "case": "invalid_and_unknown_weeks",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.145,
+      "checked_actuals": {
+        "invalid_week_code_rows": "1",
+        "unknown_calendar_week_rows": "2"
+      }
+    },
+    {
+      "case": "sales_pair_without_prices",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.143,
+      "checked_actuals": {
+        "sales_pairs_without_any_price": "1",
+        "source_only_rows": "2",
+        "table_only_rows": "0"
+      }
+    },
+    {
+      "case": "equivalent_numeric_text",
+      "assertions_passed": true,
+      "elapsed_seconds": 0.159,
+      "checked_actuals": {
+        "valid_numeric_price_rows": "3",
+        "minimum_price": "1.25",
+        "maximum_price": "3.0",
+        "source_only_rows": "1",
+        "table_only_rows": "1"
+      }
+    }
+  ],
+  "scope": "Assistant real-source baseline and tiny fixtures only. Learner detailed price audit remains pending. No daily price-coverage check or sales-value calculation."
+}
