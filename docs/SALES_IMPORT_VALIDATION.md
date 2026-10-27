@@ -1,6 +1,6 @@
-# Sales wide-table import preflight
+# Sales wide-table import acceptance and preflight
 
-27 October 2026. This checkpoint prepares one learner action: import the evaluation sales CSV into raw.m5_sales_wide and inspect basic structure and identifiers. The learner has completed the calendar's 17-check audit; the learner's sales import remains pending.
+27 October 2026. The learner has completed the calendar's 17-check audit and now supplied a DBeaver screenshot showing all 14 sales import checks with status PASS. The [screenshot transcription](../data/sales_import_learner_acceptance.json) records the displayed values. This accepts the raw wide-table structure and identifiers; it does not establish equality of all daily sales values.
 
 ## Import contract
 
@@ -20,4 +20,4 @@ To reproduce from the repository root:
 python validation/preflight_sales_import.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/sales_import_preflight.json"
 ```
 
-The SQL and runner currently reference the learner's local M5 source directory; adjust both when reproducing elsewhere. User execution of the import and subsequent sales-value reconciliation remain separate acceptance steps. Next learner instructions are in [the current step](FIRST_STEP_ZH.md).
+The SQL and runner currently reference the learner's local M5 source directory; adjust both when reproducing elsewhere. The learner import is now accepted at the basic-check level. Sales-value validation and full-record reconciliation remain pending; the next learner instructions are in [the current step](FIRST_STEP_ZH.md).

@@ -22,4 +22,4 @@ python validation/test_calendar_audit.py --duckdb "E:/DuckDB/duckdb.exe" --outpu
 
 The SQL files currently reference the learner's existing M5 source directory. Adjust source paths when reproducing elsewhere. Every test database is :memory:; no learner database or raw file is changed. Six passing cases do not imply exhaustive test coverage.
 
-The learner's detailed calendar check is now accepted. The next step is [sales raw import and basic checks](../sql/04_import_sales.sql). Sales and prices have not yet been imported into the learner database as part of this workflow.
+The learner's detailed calendar check is accepted. The subsequent [sales raw import](SALES_IMPORT_VALIDATION.md) has also passed its 14 basic checks. The current step is the [detailed sales audit](SALES_AUDIT_VALIDATION.md); price import remains pending.
