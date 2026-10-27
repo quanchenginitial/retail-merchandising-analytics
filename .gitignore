@@ -1,0 +1,32 @@
+# Source data and generated row-level outputs
+data/raw/**
+data/processed/**
+database/**
+exports/**
+*.duckdb
+*.duckdb.wal
+*.db
+*.parquet
+*.rds
+*.zip
+*.gz
+*.pbix
+*.pbit
+
+# Local environments and credentials
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+kaggle.json
+credentials*.json
+*.pem
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+tmp/

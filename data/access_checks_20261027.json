@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-10-27T06:31:09.331653+00:00",
+  "scope": "Public official metadata and four archive bytes only; full archive not downloaded or audited.",
+  "dataset": "retailrocket/ecommerce-dataset",
+  "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/retailrocket/ecommerce-dataset",
+  "download_url": "https://www.kaggle.com/api/v1/datasets/download/retailrocket/ecommerce-dataset?datasetVersionNumber=2",
+  "dataset_version": 2,
+  "license": "CC BY-NC-SA 4.0",
+  "metadata_total_uncompressed_bytes": 987498023,
+  "counts_source": "Publisher description in official Kaggle view API; reported values, not independently counted.",
+  "publisher_reported": {
+    "events": 2756101,
+    "view_events": 2664312,
+    "addtocart_events": 69332,
+    "transaction_events": 22457,
+    "unique_visitors": 1407580,
+    "item_property_rows": 20275902,
+    "unique_items_in_properties": 417053,
+    "category_tree_rows": 1669,
+    "coverage_description": "4.5 months",
+    "events_with_corresponding_properties": "about 90%"
+  },
+  "access_proof": {
+    "request_method": "GET",
+    "request_range": "bytes=0-3",
+    "status": 206,
+    "content_type": "application/zip",
+    "content_length": 4,
+    "content_range": "bytes 0-3/304719974",
+    "signature_hex": "504b0304",
+    "full_archive_bytes": 304719974
+  },
+  "limits": [
+    "transaction events are not a verified count of distinct orders",
+    "full raw row counts and date endpoints not independently audited",
+    "only categoryid and available property names are interpretable per publisher",
+    "available is not inventory quantity",
+    "property history requires time-aware joining; no future-value backfill",
+    "no signed redirect URL, cookies, credentials or raw visitor records retained"
+  ]
+}
