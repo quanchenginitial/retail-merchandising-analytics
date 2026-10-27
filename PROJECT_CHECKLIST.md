@@ -44,7 +44,9 @@
 - [x] 助手独立预验证商品维度：完整来源投影得到 3,049 个商品，15/15 检查和 12 个针对性用例通过；见 [验证说明](docs/PRODUCT_DIMENSION_VALIDATION.md)。
 - [x] 3A1 用户截图确认 core.m5_product 的 15 项检查全部 PASS：3,049 个唯一商品、3 列、7 个部门和 3 个类别，来源映射及商品键一对一检查通过；见 [截图转录记录](data/product_dimension_learner_acceptance.json)。
 - [x] 助手独立预验证门店维度：13/13 检查和 11 个针对性用例通过，来源确认 CA 4 家、TX 3 家、WI 3 家；见 [验证说明](docs/STORE_DIMENSION_VALIDATION.md)。
-- [ ] 3A2 用户建立 core.m5_store，验收一门店一行及门店/州来源对应关系。
+- [x] 3A2 用户截图确认 core.m5_store 的 13 项检查全部 PASS：10 家唯一门店、2 列、3 个州，来源映射、州门店数和来源键关联检查通过；见 [截图转录记录](data/store_dimension_learner_acceptance.json)。
+- [x] 助手独立预验证日历维度：17/17 检查及 13 个故障用例通过，保留 1,969 天和原 14 字段，新增 day_number；见 [验证说明](docs/CALENDAR_DIMENSION_VALIDATION.md)。
+- [ ] 3A3 用户建立 core.m5_calendar，验收唯一日/日期键、原字段一致性及数值日序。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -58,6 +60,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/13_build_store_dimension.sql，建立两列门店维度并返回 13 行结果。目的是为后续门店与地区销量比较提供唯一的门店/州对应关系。每次新操作都先简述本步目的及其分析用途，再给执行内容。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/14_build_calendar_dimension.sql，建立 15 列日历维度并返回 17 行结果。目的是把日编号对应到真实日期、数值日序及来源周编号，为时间趋势和后续价格关联提供统一依据。每次新操作都先简述本步目的及其分析用途，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

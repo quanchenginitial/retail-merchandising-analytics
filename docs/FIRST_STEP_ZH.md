@@ -1,56 +1,64 @@
-# 当前一步：建立门店维度表
+# 当前一步：建立日历维度表
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-**这一步为了什么：将每家门店与所属州整理成唯一对应关系，支持后续比较各门店、各地区的销量表现，避免关联时重复计算或归错地区。**
+**这一步为了什么：把销量日编号对应到真实日期、数值日序及来源周编号，支持按时间分析销量，并为后续匹配周价格提供依据。**
 
-你的最新截图中，商品维度 15 项全部 PASS：3,049 个唯一商品、3 列、7 个部门、3 个类别，来源对应关系及商品键关联检查通过。见 [商品验收记录](../data/product_dimension_learner_acceptance.json)。
+你的最新截图中，门店维度 13 项全部 PASS：10 家唯一门店、2 列、3 个州，来源对应关系与州门店数检查均通过。见 [门店验收记录](../data/store_dimension_learner_acceptance.json)。
 
-## 门店维度表是什么
+## 本次在已有日历基础上做什么
 
-商品维度提供商品分类，门店维度提供销售地点的州归属。以后销量表通过 store_id 连接这张表，就能按门店或州汇总。
+已验收的 stg.m5_calendar 保留了转换好类型的 14 个来源字段。本次建立分析使用的 core.m5_calendar，保留这 14 列，增加 day_number，并核对日编号、日期及日序是否一一对应。
 
-raw.m5_sales_wide 中，同一家门店会随不同商品重复出现。本步合并完全相同的 store_id、state_id 对应关系，建立 10 家门店各一行的 core.m5_store。
-
-| 字段 | 类型 | 含义 |
+| 字段 | 示例 | 本步用途 |
 | --- | --- | --- |
-| store_id | VARCHAR | 来源门店编号，每个编号一行 |
-| state_id | VARCHAR | 来源州编号 |
+| d | d_1 | 与销量长表的来源日编号连接 |
+| date | 2011-01-29 | 按真实日期、月份和年份分析 |
+| day_number（新增） | 1 | 按数值顺序排序，检查观测区间 |
+| wm_yr_wk | 保留来源周编号 | 后续匹配商品门店周价格 |
 
-一个州可以有多家门店，但一家门店必须只对应一个州。州归属直接读取原始 state_id；原始代码保留不变。若来源出现缺失、空代码或同店多州，脚本会报错。
+新表共 15 列。日序号从 d 后面的数字提取，再独立与日期差核对，避免按文字排序时 d_10 跑到 d_2 前面。来源周编号和星期编号保留原定义。
+
+日历保留全部 1,969 天。现有销量覆盖前 1,941 天，截止 2016-05-22；之后 28 天只有日历信息，本步不会为这些日期生成销量或补零。后续模型验证仍会使用更早的切分点。
 
 ## 本次只执行这一份脚本
 
-1. 打开 [13_build_store_dimension.sql](../sql/13_build_store_dimension.sql)，复制全部内容。
+1. 打开 [14_build_calendar_dimension.sql](../sql/14_build_calendar_dimension.sql)，复制全部内容。
 2. 在 DBeaver 当前 retail_merchandising 连接中新建 SQL 编辑器，粘贴后使用“执行 SQL 脚本”（默认 Alt+X），运行整份脚本一次。
-3. 等最终 13 行检查结果出现，把完整结果截图发回。
+3. 等最终 17 行检查结果出现，把完整结果截图发回。
 
-助手已在独立临时内存数据库验证完整来源：13 项检查及 11 个针对性用例全部通过。来源确认州分布为 CA 4 家、TX 3 家、WI 3 家，详见 [验证说明](STORE_DIMENSION_VALIDATION.md)。
+助手已在独立临时内存数据库验证：完整数据 17 项检查和 13 个故障用例全部通过，详见 [验证说明](CALENDAR_DIMENSION_VALIDATION.md)。
 
 ## 预期结果
 
-所有 13 行 status 均为 PASS。
+所有 17 行 status 均为 PASS。
 
 | check_name | 预期 |
 | --- | ---: |
-| store_rows | 10 |
-| column_count | 2 |
+| calendar_rows | 1969 |
+| column_count | 15 |
 | schema_mismatch_count | 0 |
-| distinct_stores | 10 |
-| duplicate_or_null_store_rows | 0 |
-| missing_required_rows | 0 |
-| distinct_states | 3 |
-| raw_missing_required_rows | 0 |
-| raw_store_mapping_conflicts | 0 |
-| raw_only_store_rows | 0 |
-| dimension_only_store_rows | 0 |
+| distinct_dates | 1969 |
+| distinct_day_ids | 1969 |
+| distinct_day_numbers | 1969 |
+| missing_core_rows | 0 |
+| invalid_day_mapping_rows | 0 |
+| first_date | 2011-01-29 |
+| last_date | 2016-06-19 |
+| distinct_weeks | 282 |
+| observed_sales_days | 1941 |
+| post_observation_days | 28 |
+| observed_last_date | 2016-05-22 |
+| stg_only_rows | 0 |
+| core_only_rows | 0 |
 | source_key_join_errors | 0 |
-| state_store_count_mismatches | 0 |
 
-这些检查共同确认一门店一行、州归属无冲突、没有遗漏或新增门店、字段与来源精确一致，并且每个来源门店键都匹配恰好一行。唯一性由查询验证，本步未建立物理主键约束。
+检查共同确认日期键唯一且完整、原 14 个字段与清洗层精确一致、事件空值保留，以及新增日序与日编号和真实日期相符。
 
-source_key_join_errors 检查的是小型来源门店键集合；完整日销量连接会另行验收。若表已存在，只执行 VALIDATION 注释之后的 WITH 查询。其他报错或 FAIL 请保留现状发回，不删除表或手动选择冲突州。
+observed_sales_days 和 post_observation_days 是按已验收的销量快照边界统计日历行数；本步没有重新扫描销量或验收完整销量连接。唯一性由查询检查，未建立物理主键约束。
+
+若表已存在，只执行 VALIDATION 注释之后的 WITH 查询。其他报错或 FAIL 请保留现状发回，不删除日期或改填销量。
 
 ## 通过后
 
-接下来完成日历维度，再逐步检查销量与各维度、价格的关联，核对行数、销量和价格覆盖后开展分析。
+接下来检查销量与商品、门店、日历的完整关联，确认每条记录都能正确匹配，且行数和销量不变，再检查价格覆盖。

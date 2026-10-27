@@ -1,6 +1,6 @@
 # Store dimension: purpose and validation
 
-27 October 2026. The learner has accepted core.m5_product with all 15 checks passed. The next action is [13_build_store_dimension.sql](../sql/13_build_store_dimension.sql), providing a consistent store-to-state mapping for later store and regional sales comparisons. Assistant preflight is complete; learner creation of core.m5_store remains pending.
+27 October 2026. The learner screenshot confirms all 13 checks from [13_build_store_dimension.sql](../sql/13_build_store_dimension.sql) passed: ten unique stores, two fields and three states, with zero schema, missing-value, mapping, source-difference, key-join or state-count errors. core.m5_store is accepted for later store and regional sales comparisons. The [screenshot transcription](../data/store_dimension_learner_acceptance.json) is separate from the assistant preflight below; follow [the current step](FIRST_STEP_ZH.md) for subsequent work.
 
 ## Table and transformation contract
 
@@ -32,4 +32,4 @@ To reproduce from the repository root:
 python validation/preflight_store_dimension.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/store_dimension_preflight.json"
 ```
 
-The runner uses the current local CSV path. The learner SQL reads existing named tables. When core.m5_store already exists, run only the query after VALIDATION. Follow [the current step](FIRST_STEP_ZH.md) and return the 13-row result for acceptance.
+The runner uses the current local CSV path. The learner SQL reads existing named tables. When core.m5_store already exists, run only the query after VALIDATION. Learner acceptance is recorded above; follow [the current step](FIRST_STEP_ZH.md) for the next action.

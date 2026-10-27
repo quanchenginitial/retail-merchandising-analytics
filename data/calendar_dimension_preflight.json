@@ -1,0 +1,236 @@
+{
+  "checked_at_utc": "2026-10-27T11:42:02.068332+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private in-memory DuckDB; learner database never opened.",
+  "settings": {
+    "threads": 2,
+    "memory_limit": "512MB"
+  },
+  "script": "sql/14_build_calendar_dimension.sql",
+  "script_sha256": "7d3541ca678ece969b57a57645c22a3651fc17c69690ede8b39131e9fad27ff9",
+  "source_file": "calendar.csv",
+  "source_sha256": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+  "source_hash_unchanged": true,
+  "raw_staging_core_creation_and_validation_seconds": 0.309,
+  "checks_passed": 17,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "calendar_rows",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "15",
+      "expected": "15",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_dates",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "distinct_day_ids",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_day_numbers",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_day_mapping_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "first_date",
+      "actual": "2011-01-29",
+      "expected": "2011-01-29",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "last_date",
+      "actual": "2016-06-19",
+      "expected": "2016-06-19",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "distinct_weeks",
+      "actual": "282",
+      "expected": "282",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "observed_sales_days",
+      "actual": "1941",
+      "expected": "1941",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "post_observation_days",
+      "actual": "28",
+      "expected": "28",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "observed_last_date",
+      "actual": "2016-05-22",
+      "expected": "2016-05-22",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "stg_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "core_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "source_key_join_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 13,
+  "fixture_cases": [
+    {
+      "case": "duplicate_source_day_and_date",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "noncanonical_day_label",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "out_of_range_day",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "null_day",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "swapped_day_labels_preserve_counts",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "wrong_derived_day_number_source_fields_unchanged",
+      "passed": true,
+      "checked_actuals": {
+        "invalid_day_mapping_rows": "1",
+        "stg_only_rows": "0",
+        "core_only_rows": "0",
+        "distinct_day_numbers": "1968"
+      }
+    },
+    {
+      "case": "changed_event_text",
+      "passed": true,
+      "checked_actuals": {
+        "stg_only_rows": "1",
+        "core_only_rows": "1"
+      }
+    },
+    {
+      "case": "lost_existing_event_value",
+      "passed": true,
+      "checked_actuals": {
+        "stg_only_rows": "1",
+        "core_only_rows": "1"
+      }
+    },
+    {
+      "case": "trimmed_post_observation_dates",
+      "passed": true,
+      "checked_actuals": {
+        "calendar_rows": "1941",
+        "observed_sales_days": "1941",
+        "post_observation_days": "0",
+        "stg_only_rows": "28",
+        "source_key_join_errors": "28"
+      }
+    },
+    {
+      "case": "missing_interior_day",
+      "passed": true,
+      "checked_actuals": {
+        "calendar_rows": "1968",
+        "stg_only_rows": "1",
+        "source_key_join_errors": "1"
+      }
+    },
+    {
+      "case": "duplicate_dimension_row",
+      "passed": true,
+      "checked_actuals": {
+        "calendar_rows": "1970",
+        "distinct_dates": "1969",
+        "core_only_rows": "1",
+        "source_key_join_errors": "1"
+      }
+    },
+    {
+      "case": "reordered_columns",
+      "passed": true,
+      "checked_actuals": {
+        "schema_mismatch_count": "15",
+        "stg_only_rows": "0",
+        "core_only_rows": "0"
+      }
+    },
+    {
+      "case": "empty_source_fails_acceptance_even_if_ctas_succeeds",
+      "passed": true
+    }
+  ],
+  "scope": "Assistant preflight of core calendar keys, exact preservation of 14 staging fields and derived day_number. Learner execution pending. The 1,941/28 day partition uses the accepted sales snapshot boundary, not a scan of daily sales or a model-specific training cutoff. No daily price coverage or physical PRIMARY KEY."
+}

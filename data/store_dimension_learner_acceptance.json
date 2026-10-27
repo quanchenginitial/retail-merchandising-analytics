@@ -1,0 +1,103 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/13_build_store_dimension.sql",
+  "check_count": 13,
+  "checks_passed": 13,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "store_rows",
+      "actual": "10",
+      "expected": "10",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "2",
+      "expected": "2",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_stores",
+      "actual": "10",
+      "expected": "10",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "duplicate_or_null_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_states",
+      "actual": "3",
+      "expected": "3",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "raw_missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "raw_store_mapping_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "raw_only_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "dimension_only_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "source_key_join_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "state_store_count_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Store dimension accepted: ten unique stores, two source VARCHAR fields, three states, exact source pair equality and one dimension match per source store key. State-count control matches CA4/TX3/WI3. No physical PRIMARY KEY is declared; no full daily sales join or regional performance conclusion is claimed."
+}
