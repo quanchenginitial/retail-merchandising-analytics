@@ -1,0 +1,210 @@
+{
+  "checked_at_utc": "2026-10-27T11:10:11.228010+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private in-memory DuckDB; learner database never opened.",
+  "baseline_source_projection": [
+    "item_id",
+    "dept_id",
+    "cat_id"
+  ],
+  "settings": {
+    "threads": 2,
+    "memory_limit": "512MB"
+  },
+  "script": "sql/12_build_product_dimension.sql",
+  "script_sha256": "30506a8faf3141dfc1b8b0575a0ee2d725fa40903142e8c216cd5ef690e43a90",
+  "source_file": "sales_train_evaluation.csv",
+  "source_sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+  "source_hash_unchanged": true,
+  "source_projection_creation_and_validation_seconds": 4.488,
+  "checks_passed": 15,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "product_rows",
+      "actual": "3049",
+      "expected": "3049",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "3",
+      "expected": "3",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_items",
+      "actual": "3049",
+      "expected": "3049",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "duplicate_or_null_item_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_departments",
+      "actual": "7",
+      "expected": "7",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_categories",
+      "actual": "3",
+      "expected": "3",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "raw_missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "raw_item_mapping_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_department_mapping_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "dimension_department_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "raw_only_product_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "dimension_only_product_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "source_key_join_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 12,
+  "fixture_cases": [
+    {
+      "case": "identical_product_rows_collapse_and_source_codes_preserved",
+      "passed": true
+    },
+    {
+      "case": "conflicting_item_mapping",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "department_has_two_categories",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "null_category",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "empty_item",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "space_only_department",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "duplicate_dimension_row",
+      "passed": true,
+      "checked_actuals": {
+        "duplicate_or_null_item_rows": "1",
+        "dimension_only_product_rows": "1",
+        "source_key_join_errors": "1"
+      }
+    },
+    {
+      "case": "changed_mapping_with_same_row_count",
+      "passed": true,
+      "checked_actuals": {
+        "product_rows": "2",
+        "raw_only_product_rows": "1",
+        "dimension_only_product_rows": "1",
+        "dimension_department_conflicts": "1"
+      }
+    },
+    {
+      "case": "missing_product",
+      "passed": true,
+      "checked_actuals": {
+        "raw_only_product_rows": "1",
+        "source_key_join_errors": "1"
+      }
+    },
+    {
+      "case": "extra_product",
+      "passed": true,
+      "checked_actuals": {
+        "dimension_only_product_rows": "1",
+        "product_rows": "3"
+      }
+    },
+    {
+      "case": "reordered_columns",
+      "passed": true,
+      "checked_actuals": {
+        "schema_mismatch_count": "2",
+        "raw_only_product_rows": "0",
+        "dimension_only_product_rows": "0"
+      }
+    },
+    {
+      "case": "empty_source_fails_acceptance_even_if_ctas_succeeds",
+      "passed": true
+    }
+  ],
+  "scope": "Assistant preflight of one-row-per-product mapping and exact source triple coverage. Learner execution pending. Key uniqueness is checked, not enforced by a physical PRIMARY KEY. No daily sales join or category sales analysis."
+}

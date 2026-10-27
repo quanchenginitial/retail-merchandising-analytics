@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains a design. As of 27 October 2026, the learner has validated all three M5 raw tables, accepted stg.m5_calendar and stg.m5_prices, and created stg.m5_sales_daily with item_id, store_id, d and INTEGER units. All 14 daily-table structure, key and aggregate checks passed. The current learner step is exact per-cell value reconciliation against the raw wide table; its independent preflight passed, but learner execution remains pending. Product/category/state attributes remain in the validated raw sales table for later dimensions. Core dimensions, marts and analytical measures are not yet built.
+The analytical model below remains partly a design. As of 27 October 2026, the learner has validated all three M5 raw tables and accepted typed calendar, price and daily sales staging. All 14 daily-table structure/key/aggregate checks and 15 exact value-reconciliation checks passed. The current learner step builds core.m5_product from the raw item/department/category mapping; its independent preflight passed, but learner creation remains pending. State attributes remain in raw for the later store dimension. Analytical marts, daily price joins and measures are not yet built.
 
 ## Independent modules
 
@@ -13,7 +13,7 @@ The analytical model below remains a design. As of 27 October 2026, the learner 
 | `raw.m5_prices` | One source item × store × week | Preserve four source VARCHAR fields; validate keys before typed joins |
 | `stg.m5_calendar` | One source day | DATE plus seven INTEGER and six VARCHAR fields; retain all dates and event NULLs; lossless round-trip validation |
 | `stg.m5_sales_daily` | One item × store × source day | Four columns: item_id/store_id/d VARCHAR and units INTEGER; retain zero units; verify complete day keys, then reconcile every value |
-| `core.m5_product` | One item | Verify each item maps consistently to department/category |
+| `core.m5_product` | One item | Three source VARCHAR codes; reject conflicting mappings; validate unique item_id and exact source triple equality; prepared, learner creation pending |
 | `core.m5_store` | One store | Verify each store maps consistently to state |
 | `core.m5_calendar` | One source day | Unique d/date; map weekly identifier explicitly |
 | `stg.m5_prices` | One item × store × week | Guarded DECIMAL(18,2), INTEGER week, exact value-equivalence reconciliation; absent price rows remain unknown |

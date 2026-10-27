@@ -39,7 +39,10 @@
 - [x] 助手完成完整销量宽转长预验证：59,181,090 行、14/14 检查通过，另有 8 个针对性用例；使用自有临时磁盘库并已清理，见 [验证说明](docs/SALES_DAILY_VALIDATION.md)。
 - [x] 2A3a 用户截图确认四列 stg.m5_sales_daily 的 14 项检查全部 PASS：59,181,090 行、40,241,819 个零销量、累计 66,927,173 件，完整唯一日键及门店总量一致。见 [截图转录记录](data/sales_daily_learner_acceptance.json)。本步尚不证明逐格值一致。
 - [x] 助手独立预验证逐格值对账：完整来源 15/15 PASS，16 个针对性用例通过，能识别总量不变的日期销量移位；见 [验证说明](docs/SALES_RECONCILIATION_VALIDATION.md)。
-- [ ] 2A3b 用户执行长表与原始宽表的逐单元格销量值对账。
+- [x] 2A3b 用户截图确认逐格对账 15/15 PASS：59,181,090 个单元格全部比较，销量不一致序列与单元格均为 0，键完整性和来源集合一致。见 [截图转录记录](data/sales_reconciliation_learner_acceptance.json)。
+- [x] M5 清洗层里程碑完成，见 [阶段记录](docs/STAGING_LAYER_CHECKPOINT.md)。
+- [x] 助手独立预验证商品维度：完整来源投影得到 3,049 个商品，15/15 检查和 12 个针对性用例通过；见 [验证说明](docs/PRODUCT_DIMENSION_VALIDATION.md)。
+- [ ] 3A1 用户建立 core.m5_product，验收一商品一行及部门/类别来源对应关系。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -53,6 +56,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行只读 sql/11_reconcile_sales_daily.sql，返回 15 行结果。销量长表已建立并通过结构、键完整性与汇总检查；现在确认每个商品门店每天的具体销量都与原始宽表对应单元格相等。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/12_build_product_dimension.sql，建立三列商品维度并返回 15 行结果。目的是为后续商品贡献、品类汇总和波动分析提供唯一的商品分类对应关系。每次新操作都先简述本步目的及其分析用途，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

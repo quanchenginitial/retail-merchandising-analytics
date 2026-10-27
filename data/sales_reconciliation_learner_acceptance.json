@@ -1,0 +1,117 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/11_reconcile_sales_daily.sql",
+  "check_count": 15,
+  "checks_passed": 15,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_series_rows",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "raw_day_columns",
+      "actual": "1941",
+      "expected": "1941",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "raw_day_sequence_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "raw_key_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "staging_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "staging_series_count",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_day_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "series_row_count_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "series_day_coverage_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_only_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "staging_only_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "compared_cells",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "value_mismatch_series",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "value_mismatch_cells",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Daily sales staging accepted: all 59,181,090 values exactly reconcile to current raw wide cells with complete unique daily keys and no missing or extra series. Closes M5 typed staging acceptance. No daily price joins, dimensions or analytical outcomes are claimed from this screenshot."
+}

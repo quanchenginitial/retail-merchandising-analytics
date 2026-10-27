@@ -1,6 +1,6 @@
 # Daily sales exact value reconciliation
 
-27 October 2026. The learner has passed all 14 sales-reshape checks, as recorded in the [screenshot transcription](../data/sales_daily_learner_acceptance.json). The next learner action is [11_reconcile_sales_daily.sql](../sql/11_reconcile_sales_daily.sql). Its assistant preflight passed; learner execution of this reconciliation remains pending.
+27 October 2026. The learner has passed all 14 sales-reshape checks and all 15 checks from [11_reconcile_sales_daily.sql](../sql/11_reconcile_sales_daily.sql). The [latest screenshot transcription](../data/sales_reconciliation_learner_acceptance.json) confirms 59,181,090 compared cells, zero mismatching series/cells and complete unique daily keys. Exact daily value reconciliation is accepted. The assistant preflight below is separate evidence; see the [staging checkpoint](STAGING_LAYER_CHECKPOINT.md) and [current step](FIRST_STEP_ZH.md) for subsequent work.
 
 ## What the query proves
 
@@ -36,4 +36,4 @@ To reproduce from the repository root:
 python validation/preflight_sales_reconciliation.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/sales_reconciliation_preflight.json"
 ```
 
-The runner and import script use the current local CSV path; adjust them for another machine. The learner query reads only named tables and can be rerun safely. Follow [the current step](FIRST_STEP_ZH.md) and return all 15 result rows for acceptance.
+The runner and import script use the current local CSV path; adjust them for another machine. The learner query reads only named tables and can be rerun safely. Learner acceptance is now recorded above; follow [the current step](FIRST_STEP_ZH.md) for the next action.

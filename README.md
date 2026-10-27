@@ -2,7 +2,7 @@
 
 A guided SQL, Python and Power BI portfolio project investigating product assortment, sales predictability and shopping behaviour using public datasets.
 
-**Status: daily sales reshape accepted; exact per-cell reconciliation is the current learner step.** On 27 October 2026, the learner completed all three raw imports, 47 detailed raw audit checks, 13 checks each for typed calendar and exact-decimal price staging, and 14 daily-sales reshape checks. The [latest acceptance](docs/SALES_DAILY_VALIDATION.md) confirms 59,181,090 rows, complete unique day keys, preserved zeros and aggregate controls. The next read-only reconciliation compares all daily values to their original wide-table cells; its independent preflight passed 15 full-source checks and 16 targeted cases. Learner value reconciliation remains pending, as do daily price coverage, core dimensions, analytical models and Power BI. See [the current step](docs/FIRST_STEP_ZH.md), [reconciliation validation](docs/SALES_RECONCILIATION_VALIDATION.md) and [progress record](PROJECT_CHECKLIST.md).
+**Status: M5 typed staging accepted; the product dimension is the current learner step.** On 27 October 2026, the learner completed all three raw imports, 47 detailed raw audit checks, 13 checks each for typed calendar and exact-decimal price staging, 14 daily-sales reshape checks and 15 exact daily-value reconciliation checks. All 59,181,090 daily sales values match their raw wide-table cells. The [staging checkpoint](docs/STAGING_LAYER_CHECKPOINT.md) records this milestone. The next script builds a one-row-per-product department/category mapping; its independent preflight passed 15 full-source checks and 12 targeted cases. Learner dimension creation, daily price coverage, analytical models and Power BI remain pending. See [the current step](docs/FIRST_STEP_ZH.md), [product validation](docs/PRODUCT_DIMENSION_VALIDATION.md) and [progress record](PROJECT_CHECKLIST.md).
 
 ## Business purpose
 
@@ -35,7 +35,7 @@ The [question coverage matrix](docs/QUESTION_COVERAGE_ZH.md) distinguishes measu
 
 ## Working method
 
-Explain one concept → learner performs one action → inspect actual evidence → update the checklist → publish the completed checkpoint to GitHub. Assistant preparation and learner completion are recorded separately.
+Briefly explain the step's purpose and intended analytical use → learner performs one small action → inspect actual evidence → update the checklist → publish the completed checkpoint to GitHub. Assistant preparation and learner completion are recorded separately. Each new instruction starts with that purpose summary.
 
 Planned stack: DuckDB SQL in DBeaver, Python for auditing and evaluation, Power BI for reporting, and GitHub for versioned checkpoints. The schemas will separate raw, typed staging and module-specific marts. [Architecture and metrics](docs/ARCHITECTURE_AND_METRICS.md) defines grains, joins and proposed measures; [evaluation design](docs/EVALUATION_PLAN.md) defines future-information controls and validation gates.
 

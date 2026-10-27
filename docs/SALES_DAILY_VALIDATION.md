@@ -1,6 +1,6 @@
 # Daily sales reshape preflight and acceptance scope
 
-27 October 2026. The learner screenshot confirms all 14 checks from [10_stage_sales_daily.sql](../sql/10_stage_sales_daily.sql) passed. The four-column daily sales table is accepted for schema, complete unique day keys, zero preservation and aggregate controls. The [acceptance transcription](../data/sales_daily_learner_acceptance.json) is separate from the assistant preflight below. Full per-cell value reconciliation remains the next learner step.
+27 October 2026. The learner screenshot confirms all 14 checks from [10_stage_sales_daily.sql](../sql/10_stage_sales_daily.sql) passed. The four-column daily sales table is accepted for schema, complete unique day keys, zero preservation and aggregate controls. The [acceptance transcription](../data/sales_daily_learner_acceptance.json) is separate from the assistant preflight below. Subsequent full per-cell reconciliation has also passed; see [its acceptance record](SALES_RECONCILIATION_VALIDATION.md).
 
 ## Table and transformation contract
 
@@ -16,7 +16,7 @@ Exactly 1,941 rows together with 1,941 covered valid day numbers proves that eve
 
 The baseline controls are 59,181,090 rows, 30,490 series, 40,241,819 zero-sales rows, 66,927,173 total units and maximum units of 763. Each series must have 1,941 rows and complete day coverage, with zero schema, missing-value, negative-unit, day-label, pair-set or store-total errors.
 
-These tests do not establish equality of each individual unit value to its original wide cell. A same-total shift between two dates can preserve every key and aggregate. Full value reconciliation is a separate next acceptance step; no analytical model or price coverage is claimed here.
+These tests alone do not establish equality of each individual unit value to its original wide cell. A same-total shift between two dates can preserve every key and aggregate. Full value reconciliation is a separate acceptance step, subsequently completed and linked above; no analytical model or price coverage is claimed here.
 
 ## Independent execution and resources
 
