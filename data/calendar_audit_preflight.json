@@ -1,0 +1,224 @@
+{
+  "checked_at_utc": "2026-10-27T08:19:59.615619+00:00",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": ":memory:",
+  "executor": "assistant",
+  "audit_script_sha256": "3c9677aa0ff823148c3bef1f232b6a581e00c6f154028de9c61608c4b696e809",
+  "scope": "All mutations affect disposable in-memory fixtures only. Learner detailed audit remains pending.",
+  "cases_passed": 6,
+  "cases": [
+    {
+      "case": "clean_source",
+      "synthetic_fault": false,
+      "assertions_passed": true,
+      "checked_actuals": {},
+      "failed_check_names": [],
+      "baseline_results": [
+        {
+          "check_order": 1,
+          "check_name": "source_rows",
+          "actual": 1969,
+          "expected": 1969,
+          "status": "PASS"
+        },
+        {
+          "check_order": 2,
+          "check_name": "table_rows",
+          "actual": 1969,
+          "expected": 1969,
+          "status": "PASS"
+        },
+        {
+          "check_order": 3,
+          "check_name": "missing_core_rows",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 4,
+          "check_name": "invalid_dates",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 5,
+          "check_name": "duplicate_dates",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 6,
+          "check_name": "duplicate_day_ids",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 7,
+          "check_name": "day_date_mapping_errors",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 8,
+          "check_name": "calendar_attribute_errors",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 9,
+          "check_name": "invalid_week_codes",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 10,
+          "check_name": "distinct_weeks",
+          "actual": 282,
+          "expected": 282,
+          "status": "PASS"
+        },
+        {
+          "check_order": 11,
+          "check_name": "invalid_snap_rows",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 12,
+          "check_name": "event_1_pair_errors",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 13,
+          "check_name": "event_2_pair_errors",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 14,
+          "check_name": "event_1_nulls",
+          "actual": 1807,
+          "expected": 1807,
+          "status": "PASS"
+        },
+        {
+          "check_order": 15,
+          "check_name": "event_2_nulls",
+          "actual": 1964,
+          "expected": 1964,
+          "status": "PASS"
+        },
+        {
+          "check_order": 16,
+          "check_name": "source_only_rows",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "check_order": 17,
+          "check_name": "table_only_rows",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "case": "duplicate_row",
+      "synthetic_fault": true,
+      "assertions_passed": true,
+      "checked_actuals": {
+        "table_rows": 1970,
+        "duplicate_dates": 1,
+        "duplicate_day_ids": 1,
+        "table_only_rows": 1,
+        "source_only_rows": 0
+      },
+      "failed_check_names": [
+        "table_rows",
+        "duplicate_dates",
+        "duplicate_day_ids",
+        "event_1_nulls",
+        "event_2_nulls",
+        "table_only_rows"
+      ]
+    },
+    {
+      "case": "missing_row",
+      "synthetic_fault": true,
+      "assertions_passed": true,
+      "checked_actuals": {
+        "table_rows": 1968,
+        "source_only_rows": 1,
+        "table_only_rows": 0
+      },
+      "failed_check_names": [
+        "table_rows",
+        "event_1_nulls",
+        "event_2_nulls",
+        "source_only_rows"
+      ]
+    },
+    {
+      "case": "null_snap",
+      "synthetic_fault": true,
+      "assertions_passed": true,
+      "checked_actuals": {
+        "invalid_snap_rows": 1,
+        "missing_core_rows": 1,
+        "source_only_rows": 1,
+        "table_only_rows": 1
+      },
+      "failed_check_names": [
+        "missing_core_rows",
+        "invalid_snap_rows",
+        "source_only_rows",
+        "table_only_rows"
+      ]
+    },
+    {
+      "case": "invalid_date",
+      "synthetic_fault": true,
+      "assertions_passed": true,
+      "checked_actuals": {
+        "invalid_dates": 1,
+        "day_date_mapping_errors": 1,
+        "calendar_attribute_errors": 1
+      },
+      "failed_check_names": [
+        "invalid_dates",
+        "day_date_mapping_errors",
+        "calendar_attribute_errors",
+        "source_only_rows",
+        "table_only_rows"
+      ]
+    },
+    {
+      "case": "changed_event_text",
+      "synthetic_fault": true,
+      "assertions_passed": true,
+      "checked_actuals": {
+        "event_1_pair_errors": 0,
+        "event_1_nulls": 1807,
+        "source_only_rows": 1,
+        "table_only_rows": 1
+      },
+      "failed_check_names": [
+        "source_only_rows",
+        "table_only_rows"
+      ]
+    }
+  ]
+}
