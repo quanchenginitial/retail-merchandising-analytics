@@ -1,0 +1,118 @@
+{
+  "checked_at_utc": "2026-10-27T08:34:56.115498+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": ":memory:",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/04_import_sales.sql",
+  "script_sha256": "80741e8c8a93636b03b339ce23e0700e65ca08900580c17ec5be4c06a4f8d9cf",
+  "source_file": "sales_train_evaluation.csv",
+  "source_sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+  "source_hash_unchanged": true,
+  "elapsed_import_and_checks_seconds": 12.326,
+  "checks_passed": 14,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 1947,
+      "expected": 1947,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 1947,
+      "expected": 1947,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "identifier_column_count",
+      "actual": 6,
+      "expected": 6,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "day_column_count",
+      "actual": 1941,
+      "expected": 1941,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "day_column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_series_ids",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_item_store_keys",
+      "actual": 30490,
+      "expected": 30490,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "distinct_items",
+      "actual": 3049,
+      "expected": 3049,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_stores",
+      "actual": 10,
+      "expected": 10,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "distinct_states",
+      "actual": 3,
+      "expected": 3,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "distinct_departments",
+      "actual": 7,
+      "expected": 7,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "distinct_categories",
+      "actual": 3,
+      "expected": 3,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "missing_identifier_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Assistant in-memory import and basic checks only. Learner sales import and full-value reconciliation remain pending."
+}

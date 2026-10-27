@@ -1,39 +1,50 @@
-# 当前一步：核对日历内容和源文件
+# 当前一步：导入销量原始宽表
 
 更新日期：2026-10-27（Australia/Sydney）。
 
-你的截图已确认日历导入的七项基础结果：数据库 retail_merchandising、1,969 行、14 列、14 个 VARCHAR、1,969 个不同日编号，以及 2011-01-29 至 2016-06-19 的日期范围。这一步已通过。
+你的最新截图中，日历详细检查 17 项全部 PASS，source_only_rows 和 table_only_rows 均为 0。日历导入与当前 CSV 的完整对账已经通过。
 
-## 为什么还要核对一次
+## 先理解一行代表什么
 
-行数和日期范围正确，并不能证明每个字段都导入正确。例如，把某个节日名称导错，行数依然不变。现在直接比较原 CSV 和 raw.m5_calendar 的全部 14 个字段，同时检查日期、编号、属性和空值。
+sales_train_evaluation.csv 的一行是一个“商品 × 门店”的历史销量序列。前 6 列是 id、item_id、dept_id、cat_id、store_id、state_id；后面 d_1 到 d_1941 是每天的销量。
 
-## 本次只做一个操作
+所以它有 30,490 行、1,947 列，而不是 59,181,090 行。后一个数字是 30,490 × 1,941 个日销量单元格；后续转成长表时才会变成对应的日记录。这里的记录不代表单笔交易。
 
-打开 [03_audit_calendar.sql](../sql/03_audit_calendar.sql)，复制全部内容到当前 retail_merchandising SQL 编辑器，执行完整查询即可。这是一条只读 WITH 查询，不建表、不修改记录，不需要重新执行 02 导入脚本。
+原始层先保留宽表，所有列按 VARCHAR 读取，便于追溯原值；后续在清洗层统一转换销量类型。当前不拼接 sales_train_validation.csv，因为其历史日期与 evaluation 文件重叠。
+
+## 本次只执行这一份脚本
+
+1. 打开 [04_import_sales.sql](../sql/04_import_sales.sql)，复制全部内容。
+2. 在 DBeaver 确认当前连接仍是 retail_merchandising，把内容粘贴到 SQL 编辑器。
+3. 使用“执行 SQL 脚本”（默认 Alt+X）运行整份脚本一次，等待完成后查看最后的结果表。
+
+脚本将建立 raw.m5_sales_wide，然后显示 14 行基础检查。源文件约 122 MB，这次处理量比日历大，等待执行结束即可，不要重复点击运行。
 
 ## 预期结果
 
-查询应返回 **17 行**，每行都有 check_name、actual、expected、status，所有 status 都应为 **PASS**。
+所有 14 行的 status 都应为 PASS。
 
-| 检查类型 | 预期 |
-| --- | --- |
-| source_rows、table_rows | 都是 1969 |
-| distinct_weeks | 282 |
-| event_1_nulls | 1807 |
-| event_2_nulls | 1964 |
-| 其余错误或差异计数 | 都是 0 |
+| check_name | actual / expected |
+| --- | ---: |
+| row_count | 30490 |
+| column_count | 1947 |
+| varchar_column_count | 1947 |
+| identifier_column_count | 6 |
+| day_column_count | 1941 |
+| day_column_sequence_errors | 0 |
+| distinct_series_ids | 30490 |
+| distinct_item_store_keys | 30490 |
+| distinct_items | 3049 |
+| distinct_stores | 10 |
+| distinct_states | 3 |
+| distinct_departments | 7 |
+| distinct_categories | 3 |
+| missing_identifier_rows | 0 |
 
-其中最后两行 source_only_rows 和 table_only_rows 都为 0，表示当前 CSV 与数据库表逐行一致。EXCEPT ALL 会保留重复次数的差异，避免普通去重比较漏掉重复导入。
+请发回这 14 行结果的截图。如果提示表已存在，不需要删表：只执行脚本中 BASIC CHECKS 注释之后的 WITH 查询即可。若有其他报错或 FAIL，保留原状并发回结果。
 
-事件字段的 NULL 是没有记录事件。1807 和 1964 是来源中对应字段的空值数量，不是错误数量，不需要填成 0。周编号采用 M5 自己的编号；查询检查格式、数量和源文件一致性，不把它改成公历周编号。
+## 助手预验证与下一步
 
-请发回 17 行结果的截图。若有 FAIL，保留现状并发回结果，我们先找原因，不手动填值或删行。
+助手已在独立临时数据库中执行本脚本，14 项基础检查全部通过，导入与检查合计约 12.3 秒；实际耗时因环境而异。源文件 SHA-256 与先前登记一致，且验证前后未变。详见 [销量导入验证说明](SALES_IMPORT_VALIDATION.md)。助手没有操作你的持久数据库，因此用户导入仍待上述实际结果。
 
-## 已验证范围
-
-助手已在独立临时数据库验证正常数据的 17 项检查，并用五种临时故障验证重复行、漏行、NULL、无效日期和错误文本能够被识别。详见 [验证说明](CALENDAR_VALIDATION.md)。这不能替代你当前数据库的实际结果。
-
-本次 SQL 比较的是当前路径中的 CSV；不重新计算以前保存的 SHA-256。来源快照校验值仍保留在源文件审计记录中。
-
-这一步通过后，再导入销量文件。暂不展开 1,941 个日销量列。
+这一步只验收导入结构与标识的基本完整性，不代表全部销量值已经对账。通过后，下一步再检查销量值、总量和来源一致性；价格文件及宽转长仍待后续操作。

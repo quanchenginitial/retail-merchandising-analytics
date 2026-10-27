@@ -1,0 +1,131 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/03_audit_calendar.sql",
+  "check_count": 17,
+  "checks_passed": 17,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "source_rows",
+      "actual": 1969,
+      "expected": 1969,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "table_rows",
+      "actual": 1969,
+      "expected": 1969,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "missing_core_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "invalid_dates",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "duplicate_dates",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "duplicate_day_ids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "day_date_mapping_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "calendar_attribute_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "invalid_week_codes",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_weeks",
+      "actual": 282,
+      "expected": 282,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "invalid_snap_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "event_1_pair_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "event_2_pair_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "event_1_nulls",
+      "actual": 1807,
+      "expected": 1807,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "event_2_nulls",
+      "actual": 1964,
+      "expected": 1964,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "source_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "table_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "scope": "All 17 displayed checks passed, including two-way full-row equality with the current calendar CSV. This screenshot does not recompute the recorded source hash or establish the database physical path."
+}

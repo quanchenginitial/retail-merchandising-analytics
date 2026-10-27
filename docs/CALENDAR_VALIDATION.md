@@ -2,7 +2,9 @@
 
 27 October 2026. The learner's DBeaver screenshot confirms database retail_merchandising, 1,969 calendar rows, 14 columns, 14 VARCHAR columns, 1,969 distinct day IDs and dates from 2011-01-29 through 2016-06-19. The earlier connection screenshot confirmed DuckDB v1.5.5. Physical file path and full source equality were not established by these screenshots.
 
-## Detailed audit prepared for learner execution
+## Detailed audit accepted from learner evidence
+
+The subsequent learner screenshot shows all 17 audit rows with status PASS. In particular, source_only_rows and table_only_rows are both zero. Source/table counts are both 1,969, distinct weeks are 282, event_1_nulls is 1,807 and event_2_nulls is 1,964. All other error counts are zero. The [screenshot transcription](../data/calendar_learner_acceptance.json) records these displayed results without publishing the screenshot itself. This is learner-provided execution evidence, not a new direct inspection of the persistent database.
 
 [03_audit_calendar.sql](../sql/03_audit_calendar.sql) is one read-only query. Its 17 output rows cover source/table counts, missing core values, invalid or duplicate dates and IDs, exact day/date mapping, calendar attributes, source week-code shape/count, SNAP values, paired event missingness, expected event NULL counts and two-way full-row reconciliation.
 
@@ -20,4 +22,4 @@ python validation/test_calendar_audit.py --duckdb "E:/DuckDB/duckdb.exe" --outpu
 
 The SQL files currently reference the learner's existing M5 source directory. Adjust source paths when reproducing elsewhere. Every test database is :memory:; no learner database or raw file is changed. Six passing cases do not imply exhaustive test coverage.
 
-The learner's detailed 17-row result is pending. Sales and prices have not yet been imported into the learner database as part of this workflow.
+The learner's detailed calendar check is now accepted. The next step is [sales raw import and basic checks](../sql/04_import_sales.sql). Sales and prices have not yet been imported into the learner database as part of this workflow.

@@ -22,8 +22,11 @@
 - [x] 助手独立预验证日历导入 SQL：临时数据库中得到 1,969 行、14 列、14 个 VARCHAR、1,969 个日编号及正确日期范围。此结果不代表用户已经导入。
 - [x] 1C1 用户截图确认 raw.m5_calendar 基础导入检查：database_name=retail_merchandising；1,969 行、14 列且全为 VARCHAR、1,969 个不同日编号；日期为 2011-01-29 至 2016-06-19。此截图未证明全部字段已与源文件逐行对账。
 - [x] 助手独立验证 03 日历审计 SQL：正常来源 17/17 PASS；重复行、少一行、NULL SNAP、无效日期和变更事件文本五种临时故障均被识别，共六个用例通过。仅操作临时数据库。
-- [ ] 1C2 用户执行日历 17 项详细检查与双向全字段对账。
-- [ ] 1C3 销量、价格 raw 导入与对账。
+- [x] 1C2 用户截图确认日历 17/17 PASS：source_only_rows=0、table_only_rows=0；日期、编号、属性、SNAP 和事件空值检查均通过。证明当前 CSV 与 raw 日历表逐行一致（含重复次数），不是重新核验历史源文件 hash。见 [截图转录记录](data/calendar_learner_acceptance.json)。
+- [x] 助手在独立临时数据库预验证销量导入脚本：14/14 基础检查通过，源文件 hash 与登记一致且前后不变；不是用户导入结果。见 [验证说明](docs/SALES_IMPORT_VALIDATION.md)。
+- [ ] 1C3a 用户执行销量 raw 宽表导入与 14 项结构、标识基础检查。
+- [ ] 1C3b 用户执行销量值检查与来源对账。
+- [ ] 1C4 价格 raw 导入与对账。
 - [ ] 2A 清洗、宽转长、类型转换，并记录异常处理规则。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
@@ -38,6 +41,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行只读 sql/03_audit_calendar.sql，返回 17 行检查结果。日历基础导入已经通过，不重复建表；实际详细对账结果未收到前，不标记 1C2 完成。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/04_import_sales.sql，导入 raw.m5_sales_wide 并返回 14 行基础检查结果。日历已验收，不重复执行日历脚本；销量基础导入、销量值对账分别验收。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
