@@ -42,7 +42,9 @@
 - [x] 2A3b 用户截图确认逐格对账 15/15 PASS：59,181,090 个单元格全部比较，销量不一致序列与单元格均为 0，键完整性和来源集合一致。见 [截图转录记录](data/sales_reconciliation_learner_acceptance.json)。
 - [x] M5 清洗层里程碑完成，见 [阶段记录](docs/STAGING_LAYER_CHECKPOINT.md)。
 - [x] 助手独立预验证商品维度：完整来源投影得到 3,049 个商品，15/15 检查和 12 个针对性用例通过；见 [验证说明](docs/PRODUCT_DIMENSION_VALIDATION.md)。
-- [ ] 3A1 用户建立 core.m5_product，验收一商品一行及部门/类别来源对应关系。
+- [x] 3A1 用户截图确认 core.m5_product 的 15 项检查全部 PASS：3,049 个唯一商品、3 列、7 个部门和 3 个类别，来源映射及商品键一对一检查通过；见 [截图转录记录](data/product_dimension_learner_acceptance.json)。
+- [x] 助手独立预验证门店维度：13/13 检查和 11 个针对性用例通过，来源确认 CA 4 家、TX 3 家、WI 3 家；见 [验证说明](docs/STORE_DIMENSION_VALIDATION.md)。
+- [ ] 3A2 用户建立 core.m5_store，验收一门店一行及门店/州来源对应关系。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -56,6 +58,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/12_build_product_dimension.sql，建立三列商品维度并返回 15 行结果。目的是为后续商品贡献、品类汇总和波动分析提供唯一的商品分类对应关系。每次新操作都先简述本步目的及其分析用途，再给执行内容。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/13_build_store_dimension.sql，建立两列门店维度并返回 13 行结果。目的是为后续门店与地区销量比较提供唯一的门店/州对应关系。每次新操作都先简述本步目的及其分析用途，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -1,0 +1,208 @@
+{
+  "checked_at_utc": "2026-10-27T11:27:02.065516+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private in-memory DuckDB; learner database never opened.",
+  "baseline_source_projection": [
+    "store_id",
+    "state_id"
+  ],
+  "source_state_store_counts": [
+    {
+      "state_id": "CA",
+      "store_count": 4
+    },
+    {
+      "state_id": "TX",
+      "store_count": 3
+    },
+    {
+      "state_id": "WI",
+      "store_count": 3
+    }
+  ],
+  "settings": {
+    "threads": 2,
+    "memory_limit": "512MB"
+  },
+  "script": "sql/13_build_store_dimension.sql",
+  "script_sha256": "d15fc515f5813914d46056bf6450d8e2275126439b9e77b2f7163c30bfc6b630",
+  "source_file": "sales_train_evaluation.csv",
+  "source_sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+  "source_hash_unchanged": true,
+  "source_projection_creation_validation_and_profile_seconds": 3.927,
+  "checks_passed": 13,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "store_rows",
+      "actual": "10",
+      "expected": "10",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "2",
+      "expected": "2",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_stores",
+      "actual": "10",
+      "expected": "10",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "duplicate_or_null_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_states",
+      "actual": "3",
+      "expected": "3",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "raw_missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "raw_store_mapping_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "raw_only_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "dimension_only_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "source_key_join_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "state_store_count_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 11,
+  "fixture_cases": [
+    {
+      "case": "identical_store_state_rows_collapse",
+      "passed": true
+    },
+    {
+      "case": "conflicting_store_mapping",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "null_state",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "empty_store",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "space_only_state",
+      "passed": true,
+      "creation_rejected": true
+    },
+    {
+      "case": "duplicate_dimension_row",
+      "passed": true,
+      "checked_actuals": {
+        "duplicate_or_null_store_rows": "1",
+        "dimension_only_store_rows": "1",
+        "source_key_join_errors": "1",
+        "state_store_count_mismatches": "1"
+      }
+    },
+    {
+      "case": "swapped_states_preserve_all_counts",
+      "passed": true,
+      "checked_actuals": {
+        "store_rows": "2",
+        "distinct_states": "2",
+        "state_store_count_mismatches": "0",
+        "raw_only_store_rows": "2",
+        "dimension_only_store_rows": "2"
+      }
+    },
+    {
+      "case": "missing_store",
+      "passed": true,
+      "checked_actuals": {
+        "raw_only_store_rows": "1",
+        "source_key_join_errors": "1",
+        "state_store_count_mismatches": "1"
+      }
+    },
+    {
+      "case": "extra_store_and_state",
+      "passed": true,
+      "checked_actuals": {
+        "dimension_only_store_rows": "1",
+        "store_rows": "3",
+        "state_store_count_mismatches": "1"
+      }
+    },
+    {
+      "case": "reordered_columns",
+      "passed": true,
+      "checked_actuals": {
+        "schema_mismatch_count": "2",
+        "raw_only_store_rows": "0",
+        "dimension_only_store_rows": "0"
+      }
+    },
+    {
+      "case": "empty_source_fails_acceptance_even_if_ctas_succeeds",
+      "passed": true
+    }
+  ],
+  "scope": "Assistant preflight of one-row-per-store mapping and exact source pair coverage. Learner execution pending. State is read from the source column, not inferred from store code prefixes. No physical PRIMARY KEY or full daily sales join."
+}

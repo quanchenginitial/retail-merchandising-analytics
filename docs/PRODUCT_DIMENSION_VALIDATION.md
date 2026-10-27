@@ -1,6 +1,6 @@
 # Product dimension: purpose and validation
 
-27 October 2026. M5 typed staging has passed learner acceptance, including exact reconciliation of every daily sales cell. The next learner action is [12_build_product_dimension.sql](../sql/12_build_product_dimension.sql). Assistant preflight is complete; learner creation of core.m5_product remains pending.
+27 October 2026. The learner screenshot confirms all 15 checks from [12_build_product_dimension.sql](../sql/12_build_product_dimension.sql) passed: 3,049 unique products, seven departments and three categories, with zero schema, missing-value, mapping, source-difference or source-key join errors. core.m5_product is accepted. The [screenshot transcription](../data/product_dimension_learner_acceptance.json) is separate from the assistant preflight below; follow [the current step](FIRST_STEP_ZH.md) for subsequent work.
 
 ## Purpose and table contract
 
@@ -34,4 +34,4 @@ To reproduce from the repository root:
 python validation/preflight_product_dimension.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/product_dimension_preflight.json"
 ```
 
-The runner uses the current local CSV path. The learner SQL reads named tables only. When core.m5_product already exists, execute only the query after VALIDATION. Follow [the current step](FIRST_STEP_ZH.md) and return the 15-row result for acceptance.
+The runner uses the current local CSV path. The learner SQL reads named tables only. When core.m5_product already exists, execute only the query after VALIDATION. Learner acceptance is recorded above; follow [the current step](FIRST_STEP_ZH.md) for the next action.

@@ -1,0 +1,117 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/12_build_product_dimension.sql",
+  "check_count": 15,
+  "checks_passed": 15,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "product_rows",
+      "actual": "3049",
+      "expected": "3049",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "3",
+      "expected": "3",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_items",
+      "actual": "3049",
+      "expected": "3049",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "duplicate_or_null_item_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_departments",
+      "actual": "7",
+      "expected": "7",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_categories",
+      "actual": "3",
+      "expected": "3",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "raw_missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "raw_item_mapping_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_department_mapping_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "dimension_department_conflicts",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "raw_only_product_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "dimension_only_product_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "source_key_join_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Product dimension accepted: 3,049 unique products, three source VARCHAR fields, seven departments, three categories, exact source triple equality and one dimension match per source product key. No physical PRIMARY KEY is declared; no full daily sales join or product performance conclusion is claimed."
+}
