@@ -1,0 +1,191 @@
+{
+  "checked_at_utc": "2026-10-27T10:36:51.704376+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 300429312,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/10_stage_sales_daily.sql",
+  "script_sha256": "141b2671c323be2a92387bad3cfb36033f4871051668cc82894802a79b8227fc",
+  "source_file": "sales_train_evaluation.csv",
+  "source_sha256": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+  "source_hash_unchanged": true,
+  "baseline_setup_reshape_and_checks_seconds": 74.952,
+  "checks_passed": 14,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "4",
+      "expected": "4",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "negative_sales_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "zero_sales_rows",
+      "actual": "40241819",
+      "expected": "40241819",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "total_units",
+      "actual": "66927173",
+      "expected": "66927173",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "max_daily_units",
+      "actual": "763",
+      "expected": "763",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "series_count",
+      "actual": "30490",
+      "expected": "30490",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "series_row_count_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "series_day_coverage_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "invalid_day_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "series_set_difference_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "store_total_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 8,
+  "fixture_cases": [
+    {
+      "case": "two_complete_series_preserve_zeros",
+      "passed": true,
+      "checked_actuals": {
+        "staging_rows": "3882",
+        "schema_mismatch_count": "0",
+        "missing_core_rows": "0",
+        "zero_sales_rows": "3880",
+        "total_units": "2",
+        "max_daily_units": "1",
+        "series_count": "2",
+        "series_row_count_errors": "0",
+        "series_day_coverage_errors": "0",
+        "invalid_day_rows": "0",
+        "series_set_difference_rows": "0"
+      }
+    },
+    {
+      "case": "missing_sales",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "fractional_sales",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "negative_sales",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "integer_overflow",
+      "passed": true,
+      "conversion_rejected": true
+    },
+    {
+      "case": "duplicate_and_missing_day_same_row_count",
+      "passed": true,
+      "checked_actuals": {
+        "staging_rows": "3882",
+        "series_row_count_errors": "0",
+        "series_day_coverage_errors": "1",
+        "invalid_day_rows": "0"
+      }
+    },
+    {
+      "case": "out_of_range_day",
+      "passed": true,
+      "checked_actuals": {
+        "series_day_coverage_errors": "1",
+        "invalid_day_rows": "1"
+      }
+    },
+    {
+      "case": "same_total_shift_is_outside_this_check_scope",
+      "passed": true,
+      "checked_actuals": {
+        "staging_rows": "3882",
+        "zero_sales_rows": "3880",
+        "total_units": "2",
+        "max_daily_units": "1",
+        "series_row_count_errors": "0",
+        "series_day_coverage_errors": "0",
+        "series_set_difference_rows": "0"
+      }
+    }
+  ],
+  "scope": "Assistant-only reshape, schema, key completeness and aggregate controls. Full per-cell value reconciliation and learner execution remain pending. No calendar/price join or sales-value calculation."
+}

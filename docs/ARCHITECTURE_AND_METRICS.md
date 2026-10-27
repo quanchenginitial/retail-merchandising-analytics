@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains a design. As of 27 October 2026, the learner has validated all three M5 raw tables and accepted stg.m5_calendar with its 13 checks. The next object, stg.m5_prices, preserves item/store text, converts source weeks to INTEGER and stores prices as DECIMAL(18,2) only after a no-rounding guard. It is independently preflighted but awaits learner execution. Sales daily staging, core dimensions, marts and analytical measures remain planned. The staging calendar is not the final core calendar dimension.
+The analytical model below remains a design. As of 27 October 2026, the learner has validated all three M5 raw tables and accepted stg.m5_calendar and stg.m5_prices. The current step creates stg.m5_sales_daily with only item_id, store_id, d and INTEGER units, preserving zero sales. Its independent full-source preflight passed; learner creation and subsequent per-cell value reconciliation remain pending. Product/category/state attributes remain in the validated raw sales table for later dimensions. Core dimensions, marts and analytical measures are not yet built.
 
 ## Independent modules
 
@@ -12,7 +12,7 @@ The analytical model below remains a design. As of 27 October 2026, the learner 
 | `raw.m5_sales_wide` | One source item/store series | Only evaluation training file; do not append overlapping validation history |
 | `raw.m5_prices` | One source item × store × week | Preserve four source VARCHAR fields; validate keys before typed joins |
 | `stg.m5_calendar` | One source day | DATE plus seven INTEGER and six VARCHAR fields; retain all dates and event NULLs; lossless round-trip validation |
-| `stg.m5_sales_daily` | One item × store × source day | UNPIVOT d_1...d_1941; preserve zero units; reject invalid numeric conversion |
+| `stg.m5_sales_daily` | One item × store × source day | Four columns: item_id/store_id/d VARCHAR and units INTEGER; retain zero units; verify complete day keys, then reconcile every value |
 | `core.m5_product` | One item | Verify each item maps consistently to department/category |
 | `core.m5_store` | One store | Verify each store maps consistently to state |
 | `core.m5_calendar` | One source day | Unique d/date; map weekly identifier explicitly |

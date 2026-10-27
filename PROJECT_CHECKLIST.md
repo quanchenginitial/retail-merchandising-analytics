@@ -35,8 +35,10 @@
 - [x] 助手独立预验证日历清洗层：13/13 PASS，逐列类型/顺序及回转文本后的双向对账通过；未操作用户数据库，见 [验证说明](docs/CALENDAR_STAGING_VALIDATION.md)。
 - [x] 2A1 用户截图确认 stg.m5_calendar 的 13 项检查全部 PASS：1,969 行、14 列，逐列类型及顺序正确、事件空值保留，回转原始文本后的双向差异均为 0。见 [截图转录记录](data/calendar_staging_learner_acceptance.json)。
 - [x] 助手核实价格来源精度：624,039 条一位小数、6,217,082 条两位小数，无更高精度值；价格清洗脚本 13 项预验证与 7 个针对性用例通过，见 [验证说明](docs/PRICE_STAGING_VALIDATION.md)。
-- [ ] 2A2 用户建立 stg.m5_prices，验证精确价格转换及 13 项检查。
-- [ ] 2A3 销量宽转长与整数转换，记录处理规则并对账。
+- [x] 2A2 用户截图确认价格清洗表 13/13 PASS：6,841,121 行、4 列，DECIMAL(18,2) 与 INTEGER 周编号正确，唯一键及规范化后的精确数值对账通过。见 [截图转录记录](data/price_staging_learner_acceptance.json)。
+- [x] 助手完成完整销量宽转长预验证：59,181,090 行、14/14 检查通过，另有 8 个针对性用例；使用自有临时磁盘库并已清理，见 [验证说明](docs/SALES_DAILY_VALIDATION.md)。
+- [ ] 2A3a 用户建立四列 stg.m5_sales_daily，通过 14 项结构、键完整性及汇总检查。
+- [ ] 2A3b 用户执行长表与原始宽表的逐单元格销量值对账。
 - [ ] 3 建维度与事实表；检查主键、关联覆盖、行数不膨胀、销量对账。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
@@ -50,6 +52,6 @@
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/09_stage_prices.sql，建立 stg.m5_prices 并返回 13 行结果。日历清洗层已验收；本步验证价格精确数值等价，raw 仍保留原始写法，不提前计算销售金额或标记日级覆盖完成。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户运行 sql/10_stage_sales_daily.sql，建立四列销量长表并返回 14 行结果。日历和价格清洗层已验收；本步核对结构、完整唯一的日键与汇总控制数，逐单元格值对账属于下一步。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

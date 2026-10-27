@@ -1,6 +1,6 @@
-# Price typed staging preflight and precision contract
+# Price typed staging acceptance and precision contract
 
-27 October 2026. The learner has accepted calendar staging. [09_stage_prices.sql](../sql/09_stage_prices.sql) prepares stg.m5_prices; learner execution remains pending.
+27 October 2026. The learner has accepted calendar staging. The learner has now executed [09_stage_prices.sql](../sql/09_stage_prices.sql) and supplied a screenshot showing all 13 checks with status PASS. The [acceptance transcription](../data/price_staging_learner_acceptance.json) records schema, keys, decimal range and zero canonical differences. This is learner-provided evidence, not a new direct database read.
 
 ## Observed source precision
 

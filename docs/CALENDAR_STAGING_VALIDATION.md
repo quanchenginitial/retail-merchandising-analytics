@@ -24,4 +24,4 @@ To reproduce from the repository root:
 python validation/preflight_calendar_staging.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/calendar_staging_preflight.json"
 ```
 
-The production staging SQL reads only database tables; the preflight runner and raw calendar import contain the local CSV path. Adjust those source paths when reproducing elsewhere. For an existing staging table, execute only the VALIDATION query. Follow [the current step](FIRST_STEP_ZH.md) for the learner action. Sales/price typing, core dimensions and daily sales-price coverage remain pending.
+The production staging SQL reads only database tables; the preflight runner and raw calendar import contain the local CSV path. Adjust those source paths when reproducing elsewhere. For an existing staging table, execute only the VALIDATION query. Follow [the current step](FIRST_STEP_ZH.md) for the learner action. Price typing has subsequently been accepted. Sales daily staging, core dimensions and daily sales-price coverage remain pending.
