@@ -60,8 +60,10 @@
 - [x] 助手准备部门贡献查询并独立预验证：同一 90 天窗口，7 部门及 TOTAL；来源整数分计算一致，向上汇总与已验收类别结果一致，14 个针对性用例通过。见 [方法与预查](docs/DEPARTMENT_CONTRIBUTION_VALIDATION.md)。
 - [x] 4B 用户截图确认部门贡献 8 行全部 PASS：部门汇总与类别一致，TOTAL 的类别内金额占比为 NULL；FOODS_3、HOUSEHOLD_1、HOBBIES_1 的类别内金额占比分别为 60.9198%、76.2764%、95.4242%。见 [截图记录](data/department_contribution_learner_acceptance.json) 和 [助手解读](docs/DEPARTMENT_CONTRIBUTION_VALIDATION.md)。
 - [x] 助手准备商品销量集中度查询并独立预验证：同一 90 天窗口、销量排序及精确累计阈值，逐商品、逐排名/累计值来源对照通过，14 个针对性用例通过；见 [方法与预查](docs/PRODUCT_UNIT_CONCENTRATION_VALIDATION.md)。
-- [ ] 4C1 用户执行商品销量集中度查询，核对 8 个重叠观察范围和 80%/95% 所需商品数；本步不分配 ABC 标签。
-- [ ] 4C2 明确 ABC 边界和零销量规则，执行分类并核验阈值敏感性。
+- [x] 4C1 用户截图确认商品销量集中度 8 行全部 PASS：达到 80%/95% 分别需 1,135/2,103 个商品；3,045 个正销量商品、4 个零销量商品，累计销量仍为 3,767,196 件。见 [截图记录](data/product_unit_concentration_learner_acceptance.json)；该结果尚非 ABC 标签。
+- [x] 助手准备 80%/95% 销量 ABC 基线表与验收查询：逐商品来源/标签对照及与已验收累计范围对账通过，21 个边界与异常用例通过。见 [方法与预验证](docs/PRODUCT_ABC_UNITS_VALIDATION.md)。
+- [ ] 4C2 用户建立 mart.m5_product_abc_90d，核对 A/B/C/ZERO_SALES/TOTAL 五行，验收销量 ABC 基线。
+- [ ] 4C3 检查 ABC 阈值敏感性和边界商品变化；不将固定阈值当作已证实的最优经营策略。
 - [ ] 4 商品结构、ABC/XYZ、趋势分析通过检查。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
@@ -70,10 +72,10 @@
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
 - [ ] 9 干净环境复跑、英文结论、中文讲解和最终作品集检查完成。
 
-以上空框均表示未完成；创建文档不等于用户已完成练习。已完成的模型和验收规模可以如实描述；类别及部门结果已验收；商品集中度预查尚待用户确认，ABC/XYZ、预测误差、模型提升和自动刷新成果尚未产生。
+以上空框均表示未完成；创建文档不等于用户已完成练习。已完成的模型和验收规模可以如实描述；类别及部门结果已验收；商品集中度已验收；ABC 基线预查尚待用户确认，敏感性、XYZ、预测误差、模型提升和自动刷新成果尚未产生。
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户在 retail_merchandising 连接中运行只读 sql/20_product_unit_concentration.sql，返回 8 行、6 列。目的是量化少数商品承担的销量，先核对排序与累计值，再开展 ABC 分类。各观察范围重叠，不能相加；SKU 占比分母为全部来源商品，销量占比分母为同一窗口总件数。每次新操作先简述目的，再给执行内容。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：用户在 retail_merchandising 连接中首次运行 sql/21_build_product_abc_units.sql 全文件，建立 3,049 行商品分类表并返回 5 行、8 列汇总。目的是将重叠累计范围变成互斥标签；A 与 REACH_80 一致，A+B 与 REACH_95 一致。已有表时只执行 VALIDATION 下方查询，不覆盖表。先简述目的，再给执行内容。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

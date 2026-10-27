@@ -1,6 +1,6 @@
 # Product-unit concentration: ranking and threshold validation
 
-28 October 2026. [20_product_unit_concentration.sql](../sql/20_product_unit_concentration.sql) prepares the ranking/cumulative step for later ABC classification. It is a read-only analysis; assistant preparation is separate from pending learner acceptance. No ABC labels are produced here.
+28 October 2026. The learner's DBeaver screenshot confirms all eight output rows from [20_product_unit_concentration.sql](../sql/20_product_unit_concentration.sql) have `check_status=PASS` and numerically match the independent assistant preflight. The ranking and cumulative-contribution result is accepted. This read-only step prepares the evidence for later ABC classification; no ABC labels are produced here. The [learner acceptance record](../data/product_unit_concentration_learner_acceptance.json) transcribes the screenshot and is separate from the assistant's private-database checks; no direct read of the learner database was performed.
 
 ## Question and fixed scope
 
@@ -38,9 +38,11 @@ The independent reference aggregates staging sales through staging calendar and 
 
 Fourteen focused cases cover exact 80%/95% boundaries, overshoot by a crossing SKU, one SKU crossing both targets, equal-unit ties and rowwise cumulative sums, different top-N prefixes, fewer than ten positive products, zero-sales products, entirely zero sales, inclusive window boundaries, duplicate/orphan products, duplicate/missing dates, negative/NULL units and missing store mappings. No repeated forecast or financial validation is implied.
 
-## Assistant observations — awaiting learner confirmation
+## Accepted learner results and independent preflight
 
-All eight report rows passed. All 3,049 product totals/mappings and 3,045 positive ranks/cumulative totals matched the independent reference with zero discrepancies. SKU counts and units rolled up exactly to the accepted department result. Fourteen targeted cases passed; input hashes were unchanged and the private database was removed. Report execution took 1.117 seconds after rebuilding prerequisites in this environment.
+The learner screenshot reproduces all eight rows below, including all PASS statuses. Thousands separators are omitted and percentage values are padded to four decimal places in the machine-readable acceptance record; this normalization preserves the displayed numeric values.
+
+Separately, the assistant preflight compared all 3,049 product totals/mappings and 3,045 positive ranks/cumulative totals with the independent reference and found zero discrepancies. SKU counts and units rolled up exactly to the accepted department result. Fourteen targeted cases passed; input hashes were unchanged and the private database was removed. Report execution took 1.117 seconds after rebuilding prerequisites in the assistant's environment. These independent checks and timings are assistant evidence, not measurements established by the learner screenshot.
 
 | Segment | SKUs | SKU share % | Units | Unit share % | Status |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -53,6 +55,12 @@ All eight report rows passed. All 3,049 product totals/mappings and 3,045 positi
 | ZERO_SALES | 4 | 0.1312 | 0 | 0.0000 | PASS |
 | ALL_PRODUCTS | 3049 | 100.0000 | 3767196 | 100.0000 | PASS |
 
-In this preflight, the first 100 positive SKUs contribute 26.1443% of units. Reaching 80% requires 1,135 SKUs (37.2253% of the source product universe), and reaching 95% requires 2,103 (68.9734%). Four products have zero window units. These observations do not support assuming a literal 20%/80% split, and zero units do not prove delisting or stockout. They await learner reproduction; they are not ABC labels or financial-priority recommendations.
+## Business reading of the accepted output
 
-See [machine-readable preflight](../data/product_unit_concentration_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md). After the learner confirms concentration results, define the mutually exclusive ABC bands and their boundary/zero-sales policy in a separate step, followed by threshold sensitivity checks.
+The following interpretation is supplied by the assistant. The first 10 SKUs contribute 6.5662% of recorded units, the first 50 contribute 17.7220%, and the first 100 contribute 26.1443%. The top 100 are 3.2798% of the product universe, so their recorded unit contribution is disproportionately large relative to their count. This remains a comparison of pieces across heterogeneous products, not a measure of value, margin or service importance.
+
+Reaching 80% requires 1,135 SKUs, or 37.2253% of all source products. Reaching 95% requires 2,103, or 68.9734%. The actual cumulative unit shares are 80.0038% and 95.0064% because each threshold includes its crossing SKU. This evidence does not support a literal assumption that 20% of products account for 80% of this window's units. The overlapping TOP and REACH rows describe different prefixes of the same ranking and must not be summed.
+
+Four products have zero recorded units across all 10 stores during this 90-day window. They remain in the 3,049-product denominator. Their zero sales alone do not establish delisting, stockout, latent demand or a reason to remove them from the assortment. The 3,045 positive-sales products account for all 3,767,196 units. No ABC assignments, revenue/profit concentration, inventory decision or causal result has yet been established.
+
+See the [learner acceptance record](../data/product_unit_concentration_learner_acceptance.json), [machine-readable preflight](../data/product_unit_concentration_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md). Execution and displayed results are accepted; define mutually exclusive ABC bands and their boundary/zero-sales policy in a separate step, followed by threshold sensitivity checks.

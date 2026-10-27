@@ -1,0 +1,86 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/20_product_unit_concentration.sql",
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "Units aggregated by product across all 10 source stores and all 3,049 source products, including zero-sales products; the interval is defined by SQL20."
+  },
+  "display_normalization": "Thousands separators are omitted. Percentage values are represented with four decimal places. Padding trailing zeros preserves displayed numeric values.",
+  "ranking_rule": "Sum units by item_id across stores; positive units descending, item_id ascending; explicit ROWS cumulative sums.",
+  "threshold_rule": "Smallest positive-SKU prefix with cumulative_units*100 >= total_units*target; crossing SKU included. TOP and REACH segments overlap and must not be summed.",
+  "result_rows": 8,
+  "rows_with_pass_status": 8,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "segment": "TOP_10",
+      "sku_count": 10,
+      "sku_share_pct": "0.3280",
+      "units": "247361",
+      "unit_share_pct": "6.5662",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "TOP_50",
+      "sku_count": 50,
+      "sku_share_pct": "1.6399",
+      "units": "667622",
+      "unit_share_pct": "17.7220",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "TOP_100",
+      "sku_count": 100,
+      "sku_share_pct": "3.2798",
+      "units": "984906",
+      "unit_share_pct": "26.1443",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "REACH_80_PCT",
+      "sku_count": 1135,
+      "sku_share_pct": "37.2253",
+      "units": "3013899",
+      "unit_share_pct": "80.0038",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "REACH_95_PCT",
+      "sku_count": 2103,
+      "sku_share_pct": "68.9734",
+      "units": "3579077",
+      "unit_share_pct": "95.0064",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ALL_POSITIVE",
+      "sku_count": 3045,
+      "sku_share_pct": "99.8688",
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ZERO_SALES",
+      "sku_count": 4,
+      "sku_share_pct": "0.1312",
+      "units": "0",
+      "unit_share_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ALL_PRODUCTS",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": "3767196",
+      "unit_share_pct": "100.0000",
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and the eight displayed product-unit concentration rows are accepted for the fixed pre-holdout 90-day window. SKU-share denominators include all 3,049 source products; unit-share denominators contain all 3,767,196 recorded units. ALL_POSITIVE and ZERO_SALES alone partition ALL_PRODUCTS; the TOP and REACH summaries overlap. PASS concerns data and aggregation checks, not business performance. The accompanying business interpretation is explicitly attributed to the assistant. The screenshot does not independently recompute source hashes or verify every SKU mapping/rank against raw inputs. Zero recorded units do not establish delisting or stockout. No ABC assignment, revenue/profit concentration, inventory decision or causal result is claimed."
+}
