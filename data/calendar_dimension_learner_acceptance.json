@@ -1,0 +1,131 @@
+{
+  "observed_date": "2026-10-27",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/14_build_calendar_dimension.sql",
+  "check_count": 17,
+  "checks_passed": 17,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "calendar_rows",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "15",
+      "expected": "15",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_dates",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "distinct_day_ids",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_day_numbers",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_day_mapping_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "first_date",
+      "actual": "2011-01-29",
+      "expected": "2011-01-29",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "last_date",
+      "actual": "2016-06-19",
+      "expected": "2016-06-19",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "distinct_weeks",
+      "actual": "282",
+      "expected": "282",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "observed_sales_days",
+      "actual": "1941",
+      "expected": "1941",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "post_observation_days",
+      "actual": "28",
+      "expected": "28",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "observed_last_date",
+      "actual": "2016-05-22",
+      "expected": "2016-05-22",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "stg_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "core_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "source_key_join_errors",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Core calendar accepted: 1,969 unique days/dates, 15 correctly typed fields, exact preservation of 14 staging fields and correct derived day_number. Calendar partitions into 1,941 observed-snapshot days and 28 later dates. Completes product/store/calendar dimension acceptance; no full daily sales join or price coverage is claimed from this screenshot."
+}

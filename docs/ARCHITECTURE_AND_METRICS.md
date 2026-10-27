@@ -1,6 +1,6 @@
 # Proposed data model and metric contract
 
-The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw and typed-staging tables, exact daily value reconciliation, core.m5_product and core.m5_store. The current learner step builds core.m5_calendar by preserving 14 typed staging fields and appending INTEGER day_number. Its independent preflight passed, but learner creation remains pending. Full daily sales joins, analytical marts and measures are not yet built.
+The analytical model below remains partly a design. As of 27 October 2026, the learner has accepted all M5 raw and typed-staging tables, exact daily value reconciliation, and all three core dimensions. The current learner step executes the complete daily-sales joins to product, store and calendar and checks match coverage and preservation of rows/units/zeros. Its independent preflight passed; learner join acceptance remains pending. No joined fact table has been persisted, and price coverage, analytical marts and measures remain later work.
 
 ## Independent modules
 
@@ -15,7 +15,7 @@ The analytical model below remains partly a design. As of 27 October 2026, the l
 | `stg.m5_sales_daily` | One item × store × source day | Four columns: item_id/store_id/d VARCHAR and units INTEGER; retain zero units; verify complete day keys, then reconcile every value |
 | `core.m5_product` | One item | Three source VARCHAR codes; unique item_id and exact source triple equality accepted in 15 checks; no declared physical PRIMARY KEY |
 | `core.m5_store` | One store | Two source VARCHAR codes; exact mapping and unique store_id accepted in 13 checks; no state inferred from identifier prefix or physical PRIMARY KEY declared |
-| `core.m5_calendar` | One source day | Preserve 14 staging fields, append INTEGER day_number; validate unique d/date and exact source equality; retain 1,969 dates including 28 after sales observation; prepared, learner creation pending |
+| `core.m5_calendar` | One source day | Original 14 fields plus INTEGER day_number, unique d/date and exact source equality accepted in 17 checks; all 1,969 dates retained, including 28 after sales observation |
 | `stg.m5_prices` | One item × store × week | Guarded DECIMAL(18,2), INTEGER week, exact value-equivalence reconciliation; absent price rows remain unknown |
 | `mart.m5_sales_daily` | One item × store × date | Join calendar then LEFT JOIN prices; row count and units unchanged |
 | `mart.m5_product_week` | One item × store × week | Aggregate only after daily reconciliation; distinguish missing price coverage |

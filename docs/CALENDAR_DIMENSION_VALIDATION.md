@@ -1,6 +1,6 @@
 # Core calendar: purpose and validation
 
-27 October 2026. Product and store dimensions have passed learner acceptance. The next action is [14_build_calendar_dimension.sql](../sql/14_build_calendar_dimension.sql), creating a unique lookup from source day identifiers to actual dates and retail-week identifiers. Assistant preflight is complete; learner creation of core.m5_calendar remains pending.
+27 October 2026. The learner screenshot confirms all 17 checks from [14_build_calendar_dimension.sql](../sql/14_build_calendar_dimension.sql) passed: 1,969 unique days/dates, 15 correctly typed fields, exact preservation of the original 14 fields and valid derived day numbers. core.m5_calendar is accepted. The [screenshot transcription](../data/calendar_dimension_learner_acceptance.json) is separate from the assistant preflight below. Product, store and calendar acceptance is summarised in the [dimension checkpoint](DIMENSIONS_CHECKPOINT.md).
 
 ## Why a core calendar
 
@@ -34,4 +34,4 @@ To reproduce from the repository root:
 python validation/preflight_calendar_dimension.py --duckdb "E:/DuckDB/duckdb.exe" --output "data/calendar_dimension_preflight.json"
 ```
 
-The import setup uses the current local CSV path. The learner SQL reads existing named tables. When core.m5_calendar already exists, run only the query after VALIDATION. Follow [the current step](FIRST_STEP_ZH.md) and return the 17-row result for acceptance.
+The import setup uses the current local CSV path. The learner SQL reads existing named tables. When core.m5_calendar already exists, run only the query after VALIDATION. Learner acceptance is recorded above; follow [the current step](FIRST_STEP_ZH.md) for the next action.

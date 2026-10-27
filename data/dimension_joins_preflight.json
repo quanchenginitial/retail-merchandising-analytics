@@ -1,0 +1,294 @@
+{
+  "checked_at_utc": "2026-10-27T11:56:11.148284+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 302002176,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/15_audit_sales_dimension_joins.sql",
+  "script_sha256": "e1459e9741031066a18668220eea8ab8ab6c4c31756da528fd7dfccf6a22779d",
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "setup_seconds": 62.148,
+  "full_join_audit_seconds": 5.936,
+  "checks_passed": 20,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "product_rows",
+      "actual": "3049",
+      "expected": "3049",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "store_rows",
+      "actual": "10",
+      "expected": "10",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "calendar_rows",
+      "actual": "1969",
+      "expected": "1969",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "base_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "joined_rows",
+      "actual": "59181090",
+      "expected": "59181090",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "row_count_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "base_units",
+      "actual": "66927173",
+      "expected": "66927173",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "joined_units",
+      "actual": "66927173",
+      "expected": "66927173",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "units_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "base_zero_rows",
+      "actual": "40241819",
+      "expected": "40241819",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "joined_zero_rows",
+      "actual": "40241819",
+      "expected": "40241819",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "missing_product_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "missing_store_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "missing_calendar_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "source_missing_core_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "source_negative_units_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "invalid_joined_day_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "first_sales_date",
+      "actual": "2011-01-29",
+      "expected": "2011-01-29",
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "last_sales_date",
+      "actual": "2016-05-22",
+      "expected": "2016-05-22",
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "store_control_mismatches",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 15,
+  "fixture_cases": [
+    {
+      "case": "correct_three_joins_preserve_zero_rows",
+      "passed": true,
+      "checked_actuals": {
+        "product_rows": "2",
+        "store_rows": "2",
+        "calendar_rows": "3",
+        "base_rows": "4",
+        "joined_rows": "4",
+        "row_count_difference": "0",
+        "base_units": "3",
+        "joined_units": "3",
+        "units_difference": "0",
+        "base_zero_rows": "2",
+        "joined_zero_rows": "2",
+        "missing_product_rows": "0",
+        "missing_store_rows": "0",
+        "missing_calendar_rows": "0",
+        "source_missing_core_rows": "0",
+        "source_negative_units_rows": "0",
+        "invalid_joined_day_rows": "0",
+        "first_sales_date": "2011-01-29",
+        "last_sales_date": "2011-01-30",
+        "store_control_mismatches": "0"
+      }
+    },
+    {
+      "case": "missing_product",
+      "passed": true,
+      "checked_actuals": {
+        "missing_product_rows": "2",
+        "joined_rows": "4",
+        "joined_units": "3"
+      }
+    },
+    {
+      "case": "missing_store",
+      "passed": true,
+      "checked_actuals": {
+        "missing_store_rows": "2",
+        "joined_rows": "4",
+        "joined_units": "3"
+      }
+    },
+    {
+      "case": "missing_calendar_key_for_zero_only_rows",
+      "passed": true,
+      "checked_actuals": {
+        "missing_calendar_rows": "2",
+        "joined_rows": "4",
+        "joined_units": "3",
+        "joined_zero_rows": "2"
+      }
+    },
+    {
+      "case": "duplicate_product_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "duplicate_store_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "duplicate_unused_future_calendar_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "null_product_key",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "missing_product_attribute",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "missing_store_attribute",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "missing_calendar_attribute",
+      "passed": true,
+      "guard_rejected": true
+    },
+    {
+      "case": "sale_uses_post_observation_calendar_day",
+      "passed": true,
+      "checked_actuals": {
+        "invalid_joined_day_rows": "1",
+        "missing_calendar_rows": "0",
+        "row_count_difference": "0",
+        "units_difference": "0"
+      }
+    },
+    {
+      "case": "null_units_cannot_hide_in_sum",
+      "passed": true,
+      "checked_actuals": {
+        "source_missing_core_rows": "1",
+        "base_units": "3",
+        "joined_units": "3"
+      }
+    },
+    {
+      "case": "negative_units",
+      "passed": true,
+      "checked_actuals": {
+        "source_negative_units_rows": "1",
+        "base_units": "2",
+        "joined_units": "2"
+      }
+    },
+    {
+      "case": "wrong_joined_date",
+      "passed": true,
+      "checked_actuals": {
+        "invalid_joined_day_rows": "2",
+        "joined_rows": "4",
+        "joined_units": "3"
+      }
+    }
+  ],
+  "scope": "Assistant-only full LEFT JOIN audit against the three accepted dimensions. Verifies match coverage and preservation of base rows, units, zero rows and store controls. Relies on previously accepted source values/dimension semantics; not a new raw-cell reconciliation. Learner execution pending; no prices, financial values or persisted joined fact table."
+}
