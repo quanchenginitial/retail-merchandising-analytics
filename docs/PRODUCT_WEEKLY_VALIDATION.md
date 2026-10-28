@@ -1,6 +1,6 @@
 # Complete retail-week product sales: construction and validation
 
-28 October 2026. [ABC threshold sensitivity](ABC_THRESHOLD_SENSITIVITY_VALIDATION.md) is learner-accepted. SQL23 prepares a weekly product series for later XYZ variability analysis. This step does not calculate CV or assign XYZ classes; learner weekly-table acceptance is pending.
+28 October 2026. The learner's DBeaver screenshot confirms all 13 SQL23 report rows have `check_status=PASS` and numerically match the assistant's independent preflight. The weekly table and displayed validation results are accepted. The [learner acceptance record](../data/product_weekly_learner_acceptance.json) transcribes the screenshot; no direct read of the learner database was performed. Following the accepted [ABC threshold sensitivity](ABC_THRESHOLD_SENSITIVITY_VALIDATION.md), this step prepares weekly observations for later variability analysis. It does not calculate CV or assign XYZ classes.
 
 ## Purpose, grain and observation window
 
@@ -51,7 +51,9 @@ All 36,588 product/week rows matched the independent wide-column reference acros
 
 The preflight used two threads and a 2GB memory limit. Preparing its 90-day fixture took 7.997 seconds; SQL23 build and validation took 1.159 and 1.192 seconds. These are assistant DuckDB CLI execution timings, exclude Python comparisons/file hashing, and are not promises for the learner environment.
 
-## Assistant result; learner confirmation pending
+## Accepted learner results and independent preflight
+
+The learner screenshot reproduces the 12 weekly rows and TOTAL below, including all PASS statuses. Thousands separators are omitted in the acceptance record, dates use YYYY-MM-DD, and integer counts retain their numeric values. The source-level row comparisons, targeted cases and timings above are separate assistant preflight evidence; the screenshot does not independently establish those checks.
 
 | Retail week | Start | End | Product/week rows | Source daily rows | Units | Zero-unit product/weeks | Status |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -69,10 +71,12 @@ The preflight used two threads and a 2GB memory limit. Preparing its 90-day fixt
 | 11612 | 2016-04-16 | 2016-04-22 | 3049 | 213430 | 286524 | 65 | PASS |
 | TOTAL | 2016-01-30 | 2016-04-22 | 36588 | 2561160 | 3536539 | 1056 | PASS |
 
-The window bridge is **3,767,196 units over 90 days = 3,536,539 over 84 days + 230,657 on the six excluded days**. The identity also holds for every source product, with no per-product differences.
+The accepted TOTAL contains 36,588 product/week records, 2,561,160 contributing daily records, 3,536,539 units and 1,056 zero-unit product/week observations. The last count is not a count of distinct products: one product can contribute a zero observation in several weeks.
 
-There are seven products with zero units across the 84-day window, compared with four across the 90-day ABC window; the additional three sold only on the excluded dates. The 1,056 zero-unit product/week observations are a different count: an item may appear in several weeks. Neither result changes the stored 90-day ABC labels or establishes unavailable inventory.
+Separately, the assistant's independent original-CSV preflight established the window bridge **3,767,196 units over 90 days = 3,536,539 over 84 days + 230,657 on the six excluded days**. It also checked this identity for every source product with no differences. The screenshot displays the 84-day total, not the excluded-day total or the per-product bridge.
 
-These are assistant preflight observations. Only a subsequent learner result establishes execution in the learner database. No XYZ, forecasting, inventory or causal performance result is claimed.
+The assistant preflight additionally counted seven distinct products with zero units throughout the 84-day window, compared with four throughout the 90-day ABC window; the additional three sold only on the excluded dates. The seven-product count is not displayed in the learner screenshot and is not claimed as screenshot evidence. It differs from the displayed 1,056 zero-unit product/week observations. These findings neither change the stored 90-day ABC labels nor establish unavailable inventory.
 
-See the [machine-readable preflight](../data/product_weekly_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md).
+The next step prepares per-product mean weekly units, population standard deviation, CV and zero-sales-week share from the 12 equal-length observations. Those variability metrics and XYZ labels are not completed by SQL23. No forecasting, inventory or causal performance result is claimed.
+
+See the [learner acceptance record](../data/product_weekly_learner_acceptance.json), [machine-readable preflight](../data/product_weekly_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md).

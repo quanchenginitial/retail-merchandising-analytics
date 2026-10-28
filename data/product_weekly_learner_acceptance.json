@@ -1,0 +1,172 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/23_build_product_weekly.sql",
+  "table": "mart.m5_product_weekly_12w",
+  "weekly_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "retail_weeks": [
+      11601,
+      11602,
+      11603,
+      11604,
+      11605,
+      11606,
+      11607,
+      11608,
+      11609,
+      11610,
+      11611,
+      11612
+    ],
+    "week_count": 12,
+    "scope": "One product per complete Saturday-Friday source retail week, pooled across all 10 source stores; all 3,049 source products and observed zero-sales weeks retained."
+  },
+  "abc_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "The accepted ABC baseline retains its original window; SQL23 does not reassign ABC labels."
+  },
+  "display_normalization": "Thousands separators are omitted and dates use YYYY-MM-DD. Product/week counts and zero-unit product/week counts are JSON integers; summed source daily rows and units are decimal-integer strings, matching prior evidence conventions and preserving their values. Retail-week identifiers, including TOTAL, are strings.",
+  "result_rows": 13,
+  "rows_with_pass_status": 13,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "retail_week": "11601",
+      "week_start": "2016-01-30",
+      "week_end": "2016-02-05",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "291534",
+      "zero_sales_product_weeks": 92,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11602",
+      "week_start": "2016-02-06",
+      "week_end": "2016-02-12",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "305409",
+      "zero_sales_product_weeks": 102,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11603",
+      "week_start": "2016-02-13",
+      "week_end": "2016-02-19",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "299279",
+      "zero_sales_product_weeks": 105,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11604",
+      "week_start": "2016-02-20",
+      "week_end": "2016-02-26",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "280579",
+      "zero_sales_product_weeks": 96,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11605",
+      "week_start": "2016-02-27",
+      "week_end": "2016-03-04",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "291839",
+      "zero_sales_product_weeks": 104,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11606",
+      "week_start": "2016-03-05",
+      "week_end": "2016-03-11",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "304015",
+      "zero_sales_product_weeks": 100,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11607",
+      "week_start": "2016-03-12",
+      "week_end": "2016-03-18",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "297551",
+      "zero_sales_product_weeks": 84,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11608",
+      "week_start": "2016-03-19",
+      "week_end": "2016-03-25",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "281241",
+      "zero_sales_product_weeks": 94,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11609",
+      "week_start": "2016-03-26",
+      "week_end": "2016-04-01",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "282697",
+      "zero_sales_product_weeks": 73,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11610",
+      "week_start": "2016-04-02",
+      "week_end": "2016-04-08",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "309668",
+      "zero_sales_product_weeks": 69,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11611",
+      "week_start": "2016-04-09",
+      "week_end": "2016-04-15",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "306203",
+      "zero_sales_product_weeks": 72,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11612",
+      "week_start": "2016-04-16",
+      "week_end": "2016-04-22",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "286524",
+      "zero_sales_product_weeks": 65,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "TOTAL",
+      "week_start": "2016-01-30",
+      "week_end": "2016-04-22",
+      "product_week_rows": 36588,
+      "source_daily_rows": "2561160",
+      "units": "3536539",
+      "zero_sales_product_weeks": 1056,
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and all 13 displayed weekly validation rows are accepted. TOTAL counts 36,588 product/week records, 2,561,160 contributing daily records, 3,536,539 recorded units and 1,056 zero-unit product/week observations. The zero-unit observation count is not a count of distinct products. The assistant separately counted seven products with zero units throughout the 84-day window and independently checked each product against original CSVs and the 90/84/excluded-six-day bridge; those checks, source hashes, fixture tests and timings are not established by this screenshot. The weekly table provides 12 equal-length observations per product and does not complete mean, population standard deviation, CV, zero-sales-week share or XYZ classification. No store-specific variability, stockout, forecast, inventory or causal-performance result is claimed."
+}

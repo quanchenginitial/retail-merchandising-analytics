@@ -1,0 +1,410 @@
+{
+  "checked_at_utc": "2026-10-28T05:54:05.010415+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 20197376,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/24_build_product_variability.sql",
+  "script_sha256": "9978038deb932afbbb087a3079e9b2475c4d21a78da6db23647c7a136a458329",
+  "weekly_script": "sql/23_build_product_weekly.sql",
+  "weekly_script_sha256": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+  "preflight_strategy": "Read only sales/calendar CSVs. Project six source identifiers and d_1828..d_1911 into a private raw table; construct a six-column 84-day daily table and small dimensions. Execute actual SQL23 build/validation followed by SQL24. This is a window-only fixture, not a full SQL17 rebuild. No ABC table is needed, opened or built.",
+  "independent_reference": "Aggregate each of the twelve original seven-column wide sales arrays directly per SKU, without reading the daily or weekly fact. Compute centered population variance and square root at 70 Decimal digits; cross-check Python statistics.pstdev. Positive gaps are explicit adjacent positive-week differences. CV quantiles use Type7 linear interpolation on unrounded values, then ROUND_HALF_UP to six display decimals.",
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "source_scope": "Sales and calendar only; prices are irrelevant and were neither read nor hashed.",
+  "analysis_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "week_count": 12,
+    "scope": "Each product pooled across all 10 stores; zero-sales weeks retained."
+  },
+  "source_controls": {
+    "source_series": 30490,
+    "source_products": 3049,
+    "source_stores": 10,
+    "calendar_rows": 1969,
+    "calendar_day_keys": 1969,
+    "calendar_dates": 1969,
+    "calendar_weeks": 282,
+    "calendar_mapping_errors": 0,
+    "private_84d_daily_rows": 2561160
+  },
+  "window_setup_seconds": 5.801,
+  "weekly_build_seconds": 0.853,
+  "weekly_validation_seconds": 0.878,
+  "independent_wide_vector_query_seconds": 0.334,
+  "variability_build_seconds": 0.18,
+  "variability_validation_seconds": 0.198,
+  "variability_snapshot_query_seconds": 0.136,
+  "timing_scope": "DuckDB CLI process timings only; excludes Python references/comparisons and source-file hashing.",
+  "weekly_input_rows_compared": 36588,
+  "weekly_input_columns_compared": 8,
+  "weekly_input_mismatches": 0,
+  "accepted_weekly_evidence": "data/product_weekly_learner_acceptance.json",
+  "accepted_weekly_evidence_sha256": "50ba08f4f5122b95b2da79e5c377f95ad1d61d98acf0e6c1d216f5d15ec87826",
+  "accepted_weekly_summary_matched": true,
+  "weekly_input_unchanged": true,
+  "weekly_rows_sha256_before": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+  "weekly_rows_sha256_after": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+  "sku_rows_compared": 3049,
+  "columns_compared": 14,
+  "exact_columns": 9,
+  "floating_columns": 5,
+  "exact_field_mismatches": 0,
+  "floating_field_mismatches": 0,
+  "null_field_mismatches": 0,
+  "numeric_tolerance": {
+    "absolute": "1e-9",
+    "relative": "1e-9",
+    "rule": "abs(actual-reference) <= 1e-9 + 1e-9*abs(reference); NULL patterns exact and all compared non-NULL floats finite."
+  },
+  "float_error_summary": {
+    "mean_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.666666666666666666666666667E-13",
+      "max_error_to_tolerance_ratio": "1.297858533419857235561323816E-7",
+      "max_allowed_tolerance": "0.000003853333333333333333333333333"
+    },
+    "stddev_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.062030593488337599160975268E-13",
+      "max_error_to_tolerance_ratio": "0.000001503357601032562008657723242",
+      "max_allowed_tolerance": "7.101692861291222677628880905E-7"
+    },
+    "cv_weekly": {
+      "nonnull_values_compared": 3042,
+      "null_values_compared": 7,
+      "max_absolute_error": "6.549651135575672569153626340E-16",
+      "max_error_to_tolerance_ratio": "1.813502983823136878383552243E-7",
+      "max_allowed_tolerance": "4.316624790355399849114932737E-9"
+    },
+    "zero_week_share": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "6.666666666666666666666666667E-17",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526317E-8",
+      "max_allowed_tolerance": "2E-9"
+    },
+    "mean_positive_gap_weeks": {
+      "nonnull_values_compared": 3032,
+      "null_values_compared": 17,
+      "max_absolute_error": "1.666666666666666666666666667E-16",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526316E-8",
+      "max_allowed_tolerance": "1.1E-8"
+    }
+  },
+  "reference_pstdev_max_absolute_difference": "9.37969406511662400839024731953022767532817148793171354E-14",
+  "positive_weeks_distribution": [
+    {
+      "positive_weeks": 0,
+      "sku_count": 7
+    },
+    {
+      "positive_weeks": 1,
+      "sku_count": 10
+    },
+    {
+      "positive_weeks": 2,
+      "sku_count": 6
+    },
+    {
+      "positive_weeks": 3,
+      "sku_count": 10
+    },
+    {
+      "positive_weeks": 4,
+      "sku_count": 7
+    },
+    {
+      "positive_weeks": 5,
+      "sku_count": 16
+    },
+    {
+      "positive_weeks": 6,
+      "sku_count": 19
+    },
+    {
+      "positive_weeks": 7,
+      "sku_count": 19
+    },
+    {
+      "positive_weeks": 8,
+      "sku_count": 23
+    },
+    {
+      "positive_weeks": 9,
+      "sku_count": 28
+    },
+    {
+      "positive_weeks": 10,
+      "sku_count": 45
+    },
+    {
+      "positive_weeks": 11,
+      "sku_count": 69
+    },
+    {
+      "positive_weeks": 12,
+      "sku_count": 2790
+    }
+  ],
+  "zero_sales_weeks_distribution": [
+    {
+      "zero_sales_weeks": 0,
+      "sku_count": 2790
+    },
+    {
+      "zero_sales_weeks": 1,
+      "sku_count": 69
+    },
+    {
+      "zero_sales_weeks": 2,
+      "sku_count": 45
+    },
+    {
+      "zero_sales_weeks": 3,
+      "sku_count": 28
+    },
+    {
+      "zero_sales_weeks": 4,
+      "sku_count": 23
+    },
+    {
+      "zero_sales_weeks": 5,
+      "sku_count": 19
+    },
+    {
+      "zero_sales_weeks": 6,
+      "sku_count": 19
+    },
+    {
+      "zero_sales_weeks": 7,
+      "sku_count": 16
+    },
+    {
+      "zero_sales_weeks": 8,
+      "sku_count": 7
+    },
+    {
+      "zero_sales_weeks": 9,
+      "sku_count": 10
+    },
+    {
+      "zero_sales_weeks": 10,
+      "sku_count": 6
+    },
+    {
+      "zero_sales_weeks": 11,
+      "sku_count": 10
+    },
+    {
+      "zero_sales_weeks": 12,
+      "sku_count": 7
+    }
+  ],
+  "undefined_cv_skus": 7,
+  "undefined_positive_gap_skus": 17,
+  "result_rows": 3,
+  "results": [
+    {
+      "sales_group": "POSITIVE_12W",
+      "sku_count": 3042,
+      "units": "3536539",
+      "zero_sales_product_weeks": "972",
+      "median_cv": "0.205417",
+      "p90_cv": "0.495779",
+      "max_cv": "3.316625",
+      "check_status": "PASS"
+    },
+    {
+      "sales_group": "ZERO_12W",
+      "sku_count": 7,
+      "units": "0",
+      "zero_sales_product_weeks": "84",
+      "median_cv": null,
+      "p90_cv": null,
+      "max_cv": null,
+      "check_status": "PASS"
+    },
+    {
+      "sales_group": "TOTAL",
+      "sku_count": 3049,
+      "units": "3536539",
+      "zero_sales_product_weeks": "1056",
+      "median_cv": "0.205417",
+      "p90_cv": "0.495779",
+      "max_cv": "3.316625",
+      "check_status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 22,
+  "fixture_cases": [
+    {
+      "case": "mixed_exact_controls_population_sd_gaps_and_near_constant",
+      "passed": true,
+      "guard_rejected": false,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "all_zero_products_empty_positive_report",
+      "passed": true,
+      "guard_rejected": false,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "no_zero_products_empty_zero_report",
+      "passed": true,
+      "guard_rejected": false,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "empty_weekly_source",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "missing_source_week",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "duplicate_and_missing_source_week",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "wrong_source_week_date",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "wrong_source_daily_count",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "negative_source_units",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "null_source_units",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "duplicate_product_mapping",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "wrong_source_units_type",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "missing_metric_product",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "duplicate_metric_product",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "positive_cv_cannot_be_null",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "nan_standard_deviation",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "infinite_mean",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "zero_sales_cv_must_remain_null",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "wrong_positive_gap_inside_valid_range",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "offsetting_zero_and_positive_counts",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "same_total_units_redistributed_between_products",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "wrong_target_float_schema",
+      "passed": true,
+      "guard_rejected": true,
+      "weekly_input_unchanged": true,
+      "failed_build_left_no_target_table": null
+    }
+  ],
+  "scope": "Assistant preflight only; learner variability-table execution pending. Population SD describes the observed twelve weeks. CV is undefined for all-zero products; mean positive gap is undefined below two positive weeks and excludes edge censoring. Report quantiles describe per-SKU CVs, not variability of pooled aggregate demand. No XYZ labels, availability inference, forecast or SKU-level extract is published; no learner database is opened."
+}
