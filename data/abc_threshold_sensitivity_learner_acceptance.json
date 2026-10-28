@@ -1,0 +1,125 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/22_abc_threshold_sensitivity.sql",
+  "analysis_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90,
+    "scope": "Global product unit ranking across all 10 source stores and all categories, including zero-sales products; unchanged from the accepted SQL21 snapshot."
+  },
+  "comparison_baseline": "mart.m5_product_abc_90d with accepted 80/95 labels",
+  "metric_denominators": {
+    "changed_sku_pct_all_products": 3049,
+    "changed_unit_share_pct_all_historical_units": "3767196"
+  },
+  "display_normalization": "Thousands separators are omitted. Percentage values are represented with four decimal places. Padding trailing zeros preserves displayed numeric values.",
+  "scenarios": [
+    {
+      "scenario": "BASE_80_95",
+      "a_target": 80,
+      "ab_target": 95,
+      "allowed_change": null
+    },
+    {
+      "scenario": "A75_95",
+      "a_target": 75,
+      "ab_target": 95,
+      "allowed_change": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "scenario": "A85_95",
+      "a_target": 85,
+      "ab_target": 95,
+      "allowed_change": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "scenario": "AB80_92",
+      "a_target": 80,
+      "ab_target": 92,
+      "allowed_change": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "scenario": "AB80_98",
+      "a_target": 80,
+      "ab_target": 98,
+      "allowed_change": [
+        "C",
+        "B"
+      ]
+    }
+  ],
+  "result_rows": 5,
+  "rows_with_pass_status": 5,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "scenario": "BASE_80_95",
+      "a_skus": 1135,
+      "b_skus": 968,
+      "c_skus": 942,
+      "zero_skus": 4,
+      "changed_skus": 0,
+      "changed_sku_pct": "0.0000",
+      "changed_unit_share_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "A75_95",
+      "a_skus": 941,
+      "b_skus": 1162,
+      "c_skus": 942,
+      "zero_skus": 4,
+      "changed_skus": 194,
+      "changed_sku_pct": "6.3627",
+      "changed_unit_share_pct": "4.9878",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "A85_95",
+      "a_skus": 1375,
+      "b_skus": 728,
+      "c_skus": 942,
+      "zero_skus": 4,
+      "changed_skus": 240,
+      "changed_sku_pct": "7.8714",
+      "changed_unit_share_pct": "5.0062",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "AB80_92",
+      "a_skus": 1135,
+      "b_skus": 695,
+      "c_skus": 1215,
+      "zero_skus": 4,
+      "changed_skus": 273,
+      "changed_sku_pct": "8.9538",
+      "changed_unit_share_pct": "2.9960",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "AB80_98",
+      "a_skus": 1135,
+      "b_skus": 1360,
+      "c_skus": 550,
+      "zero_skus": 4,
+      "changed_skus": 392,
+      "changed_sku_pct": "12.8567",
+      "changed_unit_share_pct": "2.9961",
+      "check_status": "PASS"
+    }
+  ],
+  "interpretation_boundary": "changed_unit_share_pct is the historical unit share carried by relabelled products, not a sales change. The A alternatives move one threshold by five percentage points; the A+B alternatives move one threshold by three percentage points. Their change counts do not directly establish which boundary is more sensitive under an equal-sized adjustment.",
+  "scope": "Learner execution and the five displayed fixed-scenario sensitivity rows are accepted. The query checks internal consistency of the accepted nine-column ABC snapshot and product mapping, relying on SQL21 source equality rather than rescanning the daily fact or original files. Independent source comparisons, fixture tests and timing remain separate assistant preflight evidence. Scenario summaries are alternatives and must not be summed. The accompanying interpretation is explicitly attributed to the assistant; no learner explanation of the concepts is claimed. The results do not establish optimal thresholds, a causal sales effect, stability across time or an inventory/assortment policy. The next preparation step is all-store weekly sales per product over 12 complete retail weeks; XYZ labels have not yet been assigned."
+}

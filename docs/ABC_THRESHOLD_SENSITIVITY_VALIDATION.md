@@ -1,6 +1,6 @@
-# ABC threshold sensitivity: method and independent preflight
+# ABC threshold sensitivity: method and accepted results
 
-28 October 2026. The learner has accepted the [SQL21 80/95 baseline](PRODUCT_ABC_UNITS_VALIDATION.md). This step compares alternative thresholds without changing that snapshot. Assistant preflight and learner execution are recorded separately; learner sensitivity acceptance is pending.
+28 October 2026. The learner's DBeaver screenshot confirms all five SQL22 scenario rows have `check_status=PASS` and numerically match the independent assistant preflight. Execution and displayed threshold-sensitivity results are accepted. The comparison uses the accepted [SQL21 80/95 baseline](PRODUCT_ABC_UNITS_VALIDATION.md) without changing its saved labels. The [learner acceptance record](../data/abc_threshold_sensitivity_learner_acceptance.json) transcribes the screenshot separately from assistant preflight evidence; no direct read of the learner database was performed.
 
 ## Purpose and fixed design
 
@@ -42,7 +42,9 @@ All 26 targeted cases passed. Valid cases cover exact 75/80/85/92/95/98 boundari
 
 The source preflight found zero mismatches across 3,049 baseline rows (all nine fields), 15,245 scenario/product assignments and all five summary rows. SQL21 summaries matched the learner acceptance record, and the baseline remained unchanged. Preparing the private window data took 6.131 seconds; SQL22's summary query took 0.147 seconds in the assistant environment. Both source hashes were unchanged and the temporary database was removed. These timings are not performance promises for the learner environment.
 
-## Assistant result; learner confirmation pending
+## Accepted learner results and independent preflight
+
+The learner screenshot reproduces the five rows below, including all PASS statuses. The acceptance record omits thousands separators and pads percentages to four decimal places without changing their displayed numeric values. The source comparisons, targeted cases and timings above remain evidence from the assistant's independent preflight; the screenshot does not independently establish those checks.
 
 | Scenario | A SKUs | B SKUs | C SKUs | Zero SKUs | Changed SKUs | Changed SKU % | Changed historical unit share % | Status |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -52,6 +54,14 @@ The source preflight found zero mismatches across 3,049 baseline rows (all nine 
 | AB80_92 | 1135 | 695 | 1215 | 4 | 273 | 8.9538 | 2.9960 | PASS |
 | AB80_98 | 1135 | 1360 | 550 | 4 | 392 | 12.8567 | 2.9961 | PASS |
 
-These are assistant preflight measurements. They do not establish learner execution, optimal thresholds or improved business performance. The purpose is to expose how chosen boundaries affect membership before combining ABC contribution labels with later XYZ variability classes. Sensitivity across thresholds does not measure stability across time, and neither establishes inventory/service requirements without additional data.
+## Business reading of the accepted comparison
 
-See [machine-readable preflight](../data/abc_threshold_sensitivity_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md).
+The following interpretation is supplied by the assistant. Reducing the A boundary from 80% to 75% moves 194 products from A to B: 6.3627% of all source products, carrying 4.9878% of the window's historical units. Increasing it to 85% moves 240 products from B to A: 7.8714% of products, carrying 5.0062% of historical units. The different product counts reflect how the existing unit-ranked products sit around the two boundaries; the underlying sales observations have not changed.
+
+Reducing the A+B boundary from 95% to 92% moves 273 products from B to C, while increasing it to 98% moves 392 products from C to B. These products account for 8.9538% and 12.8567% of all SKUs, respectively, and carry 2.9960% and 2.9961% of historical units. The four zero-sales products remain separate in every scenario. The baseline has zero label changes, as required for the comparison control.
+
+The A-boundary alternatives move that target by five percentage points, whereas the A+B alternatives move it by three percentage points. Their change counts therefore do not directly establish which boundary is more sensitive under an equal-sized adjustment. These results describe dependence on the specified thresholds; they establish neither optimal thresholds nor a causal sales effect or stability across time. They do not determine inventory, service or assortment-removal policies.
+
+The next preparation step is a product-level weekly-sales series pooled across all stores over 12 complete retail weeks. That step prepares comparable weekly observations for later variability analysis; it does not yet assign XYZ labels.
+
+See the [learner acceptance record](../data/abc_threshold_sensitivity_learner_acceptance.json), [machine-readable preflight](../data/abc_threshold_sensitivity_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md).

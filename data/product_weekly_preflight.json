@@ -1,0 +1,412 @@
+{
+  "checked_at_utc": "2026-10-28T05:13:21.248293+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 22556672,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/23_build_product_weekly.sql",
+  "script_sha256": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+  "abc_baseline_script": "sql/21_build_product_abc_units.sql",
+  "abc_baseline_script_sha256": "e024e3ccf71f047181c16b00fde033442ce62cae030f2058c14fd007a5427c05",
+  "preflight_strategy": "Only sales/calendar CSVs are read. A private raw projection retains six identifiers and the 90 day columns. A six-column, 2,744,100-row daily table and small dimensions support actual SQL21 and SQL23; this is a window-only fixture, not a full SQL17 rebuild or learner database access.",
+  "independent_reference": "For each of the twelve fixed source retail weeks, sum its original seven wide CSV columns per SKU, without using the daily fact. Separately sum original 90-day, 84-day and excluded-six-day arrays per SKU. Independent Python crossing-prefix labels reconcile the 90-day data to accepted ABC evidence.",
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "source_scope": "Sales and calendar only; price is irrelevant and was neither read nor hashed.",
+  "weekly_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "retail_weeks": [
+      11601,
+      11602,
+      11603,
+      11604,
+      11605,
+      11606,
+      11607,
+      11608,
+      11609,
+      11610,
+      11611,
+      11612
+    ],
+    "week_count": 12,
+    "scope": "Each SKU pooled over all 10 stores; observed zero-sales weeks retained."
+  },
+  "abc_window": {
+    "start_date": "2016-01-26",
+    "end_date": "2016-04-24",
+    "inclusive_days": 90
+  },
+  "source_controls": {
+    "source_series": 30490,
+    "source_products": 3049,
+    "source_stores": 10,
+    "calendar_rows": 1969,
+    "calendar_day_keys": 1969,
+    "calendar_dates": 1969,
+    "calendar_weeks": 282,
+    "calendar_mapping_errors": 0,
+    "private_90d_daily_rows": 2744100,
+    "private_84d_daily_rows": 2561160
+  },
+  "window_setup_seconds": 7.997,
+  "independent_balance_query_seconds": 0.727,
+  "abc_build_seconds": 0.451,
+  "abc_validation_seconds": 0.466,
+  "weekly_build_seconds": 1.159,
+  "weekly_validation_seconds": 1.192,
+  "independent_weekly_reference_query_seconds": 0.482,
+  "weekly_snapshot_query_seconds": 0.314,
+  "timing_scope": "DuckDB CLI process timings; excludes Python comparison and source-file hashing time.",
+  "weekly_rows_compared": 36588,
+  "weekly_columns_compared": 8,
+  "weekly_row_mismatches": 0,
+  "source_reference_matched": true,
+  "per_sku_week_set_matched": true,
+  "window_comparison": {
+    "sku_rows_compared": 3049,
+    "per_sku_90_equals_84_plus_6": true,
+    "per_sku_balance_mismatches": 0,
+    "units_90d": 3767196,
+    "units_84d": 3536539,
+    "excluded_6d_units": 230657,
+    "zero_sales_skus_90d": 4,
+    "zero_sales_skus_84d": 7,
+    "zero_sales_product_weeks_12w": 1056,
+    "positive_90d_but_zero_84d_skus": 3,
+    "excluded_dates": [
+      "2016-01-26",
+      "2016-01-27",
+      "2016-01-28",
+      "2016-01-29",
+      "2016-04-23",
+      "2016-04-24"
+    ]
+  },
+  "accepted_abc_baseline_matched": true,
+  "accepted_abc_evidence": "data/product_abc_units_learner_acceptance.json",
+  "accepted_abc_evidence_sha256": "754c58be7fe9c4b28b4df851c4757a70383a0b79da5d2210251d304faa95237b",
+  "abc_baseline_unchanged": true,
+  "abc_rows_sha256_before": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+  "abc_rows_sha256_after": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+  "abc_sku_rows_compared": 3049,
+  "abc_baseline_results": [
+    {
+      "abc_class": "A",
+      "sku_count": 1135,
+      "sku_share_pct": "37.2253",
+      "units": 3013899,
+      "unit_share_pct": "80.0038",
+      "first_rank": 1,
+      "last_rank": 1135,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "B",
+      "sku_count": 968,
+      "sku_share_pct": "31.7481",
+      "units": 565178,
+      "unit_share_pct": "15.0026",
+      "first_rank": 1136,
+      "last_rank": 2103,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "C",
+      "sku_count": 942,
+      "sku_share_pct": "30.8954",
+      "units": 188119,
+      "unit_share_pct": "4.9936",
+      "first_rank": 2104,
+      "last_rank": 3045,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "sku_count": 4,
+      "sku_share_pct": "0.1312",
+      "units": 0,
+      "unit_share_pct": "0.0000",
+      "first_rank": null,
+      "last_rank": null,
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "TOTAL",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": 3767196,
+      "unit_share_pct": "100.0000",
+      "first_rank": 1,
+      "last_rank": 3045,
+      "check_status": "PASS"
+    }
+  ],
+  "result_rows": 13,
+  "results": [
+    {
+      "retail_week": "11601",
+      "week_start": "2016-01-30",
+      "week_end": "2016-02-05",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "291534",
+      "zero_sales_product_weeks": 92,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11602",
+      "week_start": "2016-02-06",
+      "week_end": "2016-02-12",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "305409",
+      "zero_sales_product_weeks": 102,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11603",
+      "week_start": "2016-02-13",
+      "week_end": "2016-02-19",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "299279",
+      "zero_sales_product_weeks": 105,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11604",
+      "week_start": "2016-02-20",
+      "week_end": "2016-02-26",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "280579",
+      "zero_sales_product_weeks": 96,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11605",
+      "week_start": "2016-02-27",
+      "week_end": "2016-03-04",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "291839",
+      "zero_sales_product_weeks": 104,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11606",
+      "week_start": "2016-03-05",
+      "week_end": "2016-03-11",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "304015",
+      "zero_sales_product_weeks": 100,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11607",
+      "week_start": "2016-03-12",
+      "week_end": "2016-03-18",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "297551",
+      "zero_sales_product_weeks": 84,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11608",
+      "week_start": "2016-03-19",
+      "week_end": "2016-03-25",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "281241",
+      "zero_sales_product_weeks": 94,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11609",
+      "week_start": "2016-03-26",
+      "week_end": "2016-04-01",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "282697",
+      "zero_sales_product_weeks": 73,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11610",
+      "week_start": "2016-04-02",
+      "week_end": "2016-04-08",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "309668",
+      "zero_sales_product_weeks": 69,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11611",
+      "week_start": "2016-04-09",
+      "week_end": "2016-04-15",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "306203",
+      "zero_sales_product_weeks": 72,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11612",
+      "week_start": "2016-04-16",
+      "week_end": "2016-04-22",
+      "product_week_rows": 3049,
+      "source_daily_rows": "213430",
+      "units": "286524",
+      "zero_sales_product_weeks": 65,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "TOTAL",
+      "week_start": "2016-01-30",
+      "week_end": "2016-04-22",
+      "product_week_rows": 36588,
+      "source_daily_rows": "2561160",
+      "units": "3536539",
+      "zero_sales_product_weeks": 1056,
+      "check_status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 20,
+  "fixture_cases": [
+    {
+      "case": "full_weeks_zero_weeks_and_edge_only_sales_product",
+      "passed": true,
+      "guard_rejected": false,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "all_zero_sales_still_keep_every_week",
+      "passed": true,
+      "guard_rejected": false,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "adjacent_and_holdout_days_are_excluded",
+      "passed": true,
+      "guard_rejected": false,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "empty_daily_source",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "duplicate_and_missing_day_preserves_counts",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "missing_store_daily_records",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "wrong_fact_source_week",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "wrong_fact_day_identifier",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "duplicate_selected_calendar_day",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "seven_nonconsecutive_calendar_dates",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "clipped_partial_week_cannot_become_selected",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "negative_daily_units",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "duplicate_product_mapping",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": true
+    },
+    {
+      "case": "wrong_stored_week_boundary",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "same_week_total_preserving_sku_redistribution",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "wrong_stored_source_row_count",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "duplicate_product_week",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "missing_product_week",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "wrong_units_schema",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    },
+    {
+      "case": "wrong_stored_product_hierarchy",
+      "passed": true,
+      "guard_rejected": true,
+      "failed_build_left_no_target_table": null
+    }
+  ],
+  "scope": "Assistant preflight only; learner weekly-table execution pending. The 84-day weekly sequence is separate from the unchanged 90-day ABC baseline. Missing source records are rejected, not filled with zero. No XYZ labels, stockout inference or store-specific variability claim is made. No SKU-level extract is published and no learner database is opened."
+}
