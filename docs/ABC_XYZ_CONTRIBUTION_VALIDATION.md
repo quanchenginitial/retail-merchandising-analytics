@@ -1,6 +1,6 @@
 # ABC × XYZ cell contribution: recorded units and product shares
 
-29 October 2026. The learner's SQL27 screenshot has accepted all five product-count matrix rows with both observation windows. SQL28 adds descriptive recorded-unit contribution to that accepted combination. It is a single read-only query; no classifications or tables are updated. See [combined snapshot acceptance](PRODUCT_ABC_XYZ_VALIDATION.md) and [SQL28](../sql/28_abc_xyz_contribution.sql).
+29 October 2026. The learner's SQL28 screenshot confirms all seventeen contribution rows PASS, with all ten columns and both observation windows visible; the displayed values match the assistant preflight. SQL28 adds descriptive recorded-unit contribution to the accepted SQL27 combination. It is a single read-only query; no classifications or tables are updated. See [learner acceptance](../data/abc_xyz_contribution_learner_acceptance.json), [combined snapshot acceptance](PRODUCT_ABC_XYZ_VALIDATION.md) and [SQL28](../sql/28_abc_xyz_contribution.sql).
 
 ## Purpose and frozen membership
 
@@ -41,9 +41,11 @@ The contribution layer checks exactly sixteen distinct class pairs. Their counts
 
 All source tables remain unchanged. The current output is not saved as another database table; its query, definitions and aggregate validation evidence form the reproducible checkpoint. Product-level source extracts and original CSVs are not published.
 
-## Independent preflight and results
+## Independent preflight and accepted results
 
-Assistant preflight passed; learner SQL28 execution remains pending. The numerical comparison below omits only the two repeated display-window columns: every actual report row includes ABC `2016-01-26..2016-04-24` and XYZ `2016-01-30..2016-04-22`.
+Assistant preflight passed and the learner subsequently accepted all seventeen report rows by screenshot on 29 October 2026. Counts, units, percentages and statuses match numerically; display-only thousands separators and omitted trailing decimal zeros are normalized in the [acceptance record](../data/abc_xyz_contribution_learner_acceptance.json). The table below omits only the two repeated display-window columns: every actual report row includes ABC `2016-01-26..2016-04-24` and XYZ `2016-01-30..2016-04-22`, both visible in the learner screenshot.
+
+The screenshot establishes the displayed aggregate result and learner execution. The independent original-CSV comparisons, product-field and membership checks, test cases and before/after fingerprints described below remain separate assistant preflight evidence; the learner database was not opened by the assistant.
 
 | 组合 | 商品数 | 商品占比 % | 90 天销量 | 90 天销量占比 % | 84 天销量 | 84 天销量占比 % | 状态 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -65,7 +67,7 @@ Assistant preflight passed; learner SQL28 execution remains pending. The numeric
 | ZERO_SALES × ZERO_SALES | 4 | 0.1312 | 0 | 0.0000 | 0 | 0.0000 | PASS |
 | TOTAL | 3049 | 100.0000 | 3767196 | 100.0000 | 3536539 | 100.0000 | PASS |
 
-A × X has 35.4870% of products and 76.7842% of 90-day units (76.8488% of 84-day units). C × X has 24.9262% of products but 4.2672% of 90-day units. These are descriptive quantity-contribution differences under the fixed membership, not economic-value rankings or changes between periods. Five cells are empty and remain visible. C × ZERO_SALES contains three products with 12 units in 90 days and zero in 84 days; ZERO_SALES × ZERO_SALES contains four products with zero in both windows.
+Assistant interpretation of the accepted output: A × X has 35.4870% of products and 76.7842% of 90-day units (76.8488% of 84-day units). C × X has 24.9262% of products but 4.2672% of 90-day units. These are descriptive quantity-contribution differences under the fixed membership, not economic-value rankings or changes between periods. Five cells are empty and remain visible. C × ZERO_SALES contains three products with 12 units in 90 days and zero in 84 days; ZERO_SALES × ZERO_SALES contains four products with zero in both windows.
 
 The [runner](../validation/preflight_abc_xyz_contribution.py) reads only registered sales/calendar CSVs, verifies their hashes before and after, and creates a private 90-day fixture before executing actual SQL21, SQL23, SQL24, SQL25, SQL27 and read-only SQL28. It does not open the learner database or rebuild full-history facts. Independently aggregate original wide day arrays into each product's 90-day total, twelve weekly vectors and excluded-six-day total. Independent Python crossing-prefix endpoints determine ABC; centered Fraction population CV squared determines XYZ. The existing 70-digit Decimal reference validates floating metrics with the declared tolerance, while copied snapshot fields must match exactly.
 
@@ -77,4 +79,6 @@ Before/after fingerprints match for all five input tables: ABC, weekly sales, va
 
 ## Interpretation and next step
 
-Inspect contribution together with the accepted variability label; do not prioritize a cell solely because it contains many products. After learner acceptance, inspect representative product records within selected cells and explain their historical quantities, zero weeks and relative variation. Any subsequent operational recommendation must respect the short observation window, smoothing from store pooling and unavailable cost, inventory and lead-time data.
+The contribution report is now accepted. Inspect contribution together with the accepted variability label; product count alone does not set a cell's priority. The next planned step is a read-only drilldown of all fifteen A × Z products, ordered by 90-day units descending and item_id ascending, to examine both unit totals, CV, zero-sales weeks and positive-week gaps with both dates retained. It is a complete view of that cell, not a selected sample. The learner has not yet run that step. Product rows and identifiers remain local; public evidence will retain only aggregate checks and a membership hash.
+
+This is the assistant's interpretation and proposed next step, not a claim that the learner has explained these concepts. Any subsequent operational recommendation must respect the short observation window, smoothing from store pooling and unavailable cost, inventory and lead-time data.
