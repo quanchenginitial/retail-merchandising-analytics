@@ -1,6 +1,6 @@
 # Weekly trajectory of the volume-leading A × Z product
 
-29 October 2026. SQL29's complete fifteen-product drilldown is accepted from the learner screenshot, with canonical detail and ordered membership fingerprints matching independent preflight. [SQL30](../sql/30_az_leading_product_weekly.sql) now examines one deterministically selected case. Assistant preflight passed; learner execution remains pending.
+29 October 2026. The learner's SQL30 screenshot confirms all twelve trajectory rows and ten columns PASS, with both observation windows visible. The selected-product, ordered canonical-trajectory and weekly-unit-vector fingerprints match the historical assistant preflight after display normalization. [SQL30](../sql/30_az_leading_product_weekly.sql) examines one deterministically selected case; [learner acceptance](../data/az_leading_product_weekly_learner_acceptance.json) publishes only aggregates and fingerprints.
 
 ## Purpose and selection
 
@@ -37,11 +37,11 @@ Start the result from a singleton health row and left join the selected observat
 
 The [runner](../validation/preflight_az_leading_product_weekly.py) and [aggregate evidence](../data/az_leading_product_weekly_preflight.json) retain the independent preflight. Read registered sales/calendar CSVs into a private temporary database and execute prerequisites. Independent original-wide daily arrays define the 90-day totals, twelve weekly vectors, exact ABC crossing-prefix and XYZ labels. Reconstruct the accepted SQL29 detail fingerprint before selecting its first product; compare every actual SQL30 row and all ten fields, chronological order, weekly and cumulative shares, dates and NULL/boolean handling.
 
-Keep screenshot evidence separate from assistant preflight: [SQL29 acceptance](../data/az_product_drilldown_learner_acceptance.json) establishes the learner's displayed result; the new runner independently checks source-derived trajectories. Preserve all five accepted input tables, source hashes and historical preflight records. The learner's persistent database is never opened.
+Keep screenshot evidence separate from assistant preflight: [SQL29 acceptance](../data/az_product_drilldown_learner_acceptance.json) establishes the preceding drilldown, while [SQL30 acceptance](../data/az_leading_product_weekly_learner_acceptance.json) now confirms the displayed weekly trajectory. The runner independently checks source-derived trajectories. Preserve all five accepted input tables, source hashes and historical preflight records. The learner's persistent database is never opened.
 
 Publish only aggregate controls, test outcomes and SHA-256 fingerprints of selection and ordered trajectories. Never publish real identifiers, twelve-week product rows, raw CSVs or screenshots. The displayed trajectory remains local.
 
-## Preflight results
+## Independent preflight and accepted trajectory aggregates
 
 All 3,049 combined products across twenty-two fields matched independent source-derived references. Reconstructed SQL29 detail and membership fingerprints matched the learner acceptance exactly. The selected product and all twelve SQL30 rows across ten fields matched, including column names/order, dates, time order, booleans, integer units and both percentage columns. All eighteen targeted cases passed.
 
@@ -60,7 +60,7 @@ All 3,049 combined products across twenty-two fields matched independent source-
 | Sum of displayed weekly shares | 100.0002% |
 | Final cumulative share | 100.0000% |
 
-The highest three weeks are ranked by units and need not be consecutive. Half-window figures describe chronological first/last six complete weeks, not the two ABC/XYZ windows. This series concentrates recorded units in the latter half; this observation alone does not identify a cause. The 100.0002% display sum is an expected consequence of individually rounding twelve percentages; no observation is adjusted to force the rounded sum to 100%. Cumulative shares use integer cumulative units and remain monotone, ending at exactly 100.0000%.
+The learner screenshot also confirms the trajectory-derived aggregates above. The 90-day total and excluded-six-day bridge are retained from the prior drilldown and independent preflight; they are not newly displayed by SQL30. The highest three weeks are ranked by units and need not be consecutive. Half-window figures describe chronological first/last six complete weeks, not the two ABC/XYZ windows. Assistant interpretation: this series concentrates recorded units in the latter half; this observation alone does not identify a cause. The 100.0002% display sum is an expected consequence of individually rounding twelve percentages; no observation is adjusted to force the rounded sum to 100%. Cumulative shares use integer cumulative units and remain monotone, ending at exactly 100.0000%.
 
 Seven valid fixtures cover reversed source order with zeros retained, selection by the defined 90-day ranking, tied selection with the item key as tiebreaker, four-place half-up rounding and integer cumulative sums, valid empty cohorts with positive and all-zero source universes, and exact Z labels near the display boundary. Eleven rejection cases cover invalid empty inputs, empty/duplicate combined snapshots, label or copied-float drift, wrong weekly schema, missing weeks, a duplicate/missing pair preserving total row count, incorrect dates and incorrect source ABC ranks or XYZ labels.
 
@@ -69,3 +69,11 @@ All five input tables, both original source hashes and 28 historical preflight r
 ## Interpretation limits
 
 Describe when recorded sales concentrate and where zeros occur. CV alone has no time order: a permutation of weekly values preserves it. A trajectory adds temporal information but cannot independently establish stockouts, launch timing, promotions, seasonality or a cause. One case does not generalize to the entire cell. Pooling stores can hide store-specific patterns, and observed units do not measure unconstrained demand. Inventory, lead time, cost and further contextual evidence remain necessary for operating decisions.
+
+## Learner acceptance and next step
+
+On 29 October 2026, all twelve screenshot rows were transcribed only in memory. Four-place percentages were normalized by restoring trailing zeros, dates were retained, and DBeaver's zero-sales checkboxes were converted to booleans. All three fingerprints matched the historical preflight exactly: the selected product, the ordered full ten-column trajectory and the chronological integer unit vector. The complete sequence has 2,730 units, eleven positive weeks and one zero week; the 100.0002% rounded share sum and 100.0000% final cumulative share are both confirmed. No actual product identifier, weekly rows, numeric vector or screenshot is saved in the public record.
+
+This accepts learner execution and the displayed sequence. The independent source reconstruction, selected-product rule, all-product checks and targeted tests remain separate assistant evidence; the learner database was not opened. The interpretation is the assistant's, not a claim that the learner has explained the metrics.
+
+The next planned step examines first/last-six-week recorded units by store for the same automatically selected product, to see how the pooled pattern is distributed across stores. That analysis has not yet been executed by the learner and would remain descriptive.

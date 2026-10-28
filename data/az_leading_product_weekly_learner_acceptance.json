@@ -1,0 +1,62 @@
+{
+  "observed_date": "2026-10-29",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant in-memory transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/30_az_leading_product_weekly.sql",
+  "query_type": "Single read-only complete twelve-week trajectory; no table created or updated.",
+  "analysis_windows": {
+    "abc": {
+      "start_date": "2016-01-26",
+      "end_date": "2016-04-24",
+      "days": 90
+    },
+    "xyz": {
+      "start_date": "2016-01-30",
+      "end_date": "2016-04-22",
+      "days": 84,
+      "weeks": 12
+    }
+  },
+  "selection_policy": "Highest 90-day unit total among the accepted A x Z cohort, then ascending item_id for a tie. No hard-coded product identifier, peak-based selection or relabelling. A valid empty cohort yields one EMPTY row with all seven item/week fields NULL.",
+  "display_normalization": "Units are JSON integers. Weekly and cumulative percentages are canonical numeric strings padded to four decimal places, restoring omitted trailing zeros only. DATE cells use YYYY-MM-DD; the displayed zero-sales checkboxes are normalized to JSON true/false. Both window strings and PASS statuses are preserved in the in-memory ten-column rows.",
+  "result_rows": 12,
+  "result_columns": 10,
+  "rows_with_pass_status": 12,
+  "both_windows_visible_in_screenshot": true,
+  "column_names_and_order_verified": true,
+  "time_order_verified": true,
+  "zero_sales_checkboxes_verified": true,
+  "selected_product_fingerprint_matches_assistant_preflight": true,
+  "ordered_trajectory_fingerprint_matches_assistant_preflight": true,
+  "ordered_weekly_units_fingerprint_matches_assistant_preflight": true,
+  "trajectory_aggregates": {
+    "week_count": 12,
+    "positive_weeks": 11,
+    "zero_sales_weeks": 1,
+    "units_total": 2730,
+    "weekly_units_min": 0,
+    "weekly_units_max": 552,
+    "mean_weekly_units": "227.5",
+    "peak_week_share_pct": "20.2198",
+    "peak_week_count": 1,
+    "top_three_weeks_units": 1580,
+    "top_three_weeks_share_pct": "57.8755",
+    "first_six_weeks_units": 62,
+    "first_six_weeks_share_pct": "2.2711",
+    "last_six_weeks_units": 2668,
+    "last_six_weeks_share_pct": "97.7289",
+    "displayed_weekly_share_sum": "100.0002",
+    "final_cumulative_share_pct": "100.0000",
+    "cumulative_shares_monotone": true,
+    "selected_product_sha256": "b35dc64487f2f30667034ad10c0e846194245f66785f4ff1c803dc91dec65d8a",
+    "ordered_trajectory_sha256": "5c7af6aaf2eb259692c144b39a88c104300ca07b04a955a517bf1eff437bf093",
+    "ordered_weekly_units_sha256": "e5f8046503d8a45a3c3307848f4185d58254e7e5d86b50f5d84218af435405d5"
+  },
+  "fingerprint_method": "SHA256 of UTF-8 compact JSON with sorted object keys and ensure_ascii=False. Selected-product hash encodes a one-element item_id string list. Trajectory hash encodes chronological rows with units as JSON integers, shares as four-decimal strings or NULL, and zero flags as JSON booleans or NULL. Weekly-units hash encodes the chronological integer vector. Only these digests are saved.",
+  "real_sku_identifiers_published": false,
+  "weekly_detail_rows_published": false,
+  "weekly_unit_vector_published": false,
+  "screenshot_saved_to_repository": false,
+  "scope": "All twelve displayed learner rows and ten fields were transcribed only in memory. The selected-product, ordered canonical-trajectory and chronological weekly-unit-vector SHA-256 fingerprints all match the historical assistant preflight. All displayed percentages, dates, zero-sales flags and statuses are included in this verification. Public acceptance retains only aggregate controls and fingerprints, without the actual product identifier, weekly rows, numeric vector or screenshot. The aggregates are derived from the accepted displayed trajectory; no 90-day total or excluded-six-day bridge is newly observed in this screenshot. Those values remain prior SQL29 and independent-preflight evidence. This confirms learner execution and the displayed result, not a new direct audit of database contents, source CSVs or the entire 3,049-product population. Independent source reconstruction, deterministic selection tests, eighteen targeted cases, source/input fingerprints and timing remain separate assistant evidence. Highest-three-week values need not refer to consecutive weeks; first/last-six-week values describe the chronological halves of the same 84-day window. Interpretation is attributed to the assistant. The next planned step is to inspect store-level first/last-six-week recorded-unit differences for the same automatically selected product; learner execution is pending. No launch timing, promotion, stockout, cause, forecast error or replenishment quantity is established."
+}

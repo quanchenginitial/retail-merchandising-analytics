@@ -1,0 +1,366 @@
+{
+  "checked_at_utc": "2026-10-28T15:14:39.031456+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 23605248,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/31_az_leading_product_store_comparison.sql",
+  "script_sha256": "d25a65b0f7e8884458cf7909b2fac0962d0f7629d08997a178b941b0c24d6dc9",
+  "prerequisite_script_sha256": {
+    "sql/21_build_product_abc_units.sql": "e024e3ccf71f047181c16b00fde033442ce62cae030f2058c14fd007a5427c05",
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/24_build_product_variability.sql": "9978038deb932afbbb087a3079e9b2475c4d21a78da6db23647c7a136a458329",
+    "sql/25_build_product_xyz.sql": "a8f8fe7d179b30b8b157aa89585d0ef3b4309253aeee5fd491588e6a88b1b87b",
+    "sql/27_build_product_abc_xyz.sql": "9676263b8cff302baf5bb8c856624ab00ab7ef0538ac13f527566aeb4388e826",
+    "sql/30_az_leading_product_weekly.sql": "ca6975477675c5efe713c4f3e4d59f99a381811a300cc7403c7d7088d4b37104"
+  },
+  "reference_helper_sha256": {
+    "validation/preflight_product_abc_xyz.py": "3ee2d4e0600183b827227134462a84f28d9ada8a3f8219bfaab8a8a68a845be7",
+    "validation/preflight_abc_xyz_contribution.py": "9de1944ffa3ba28c96d2111dd1508f5a7c512f8220a87a3604f89bc4c9f6812e",
+    "validation/preflight_az_product_drilldown.py": "6ba1bdce195cab3abdbcd9ea1ddab8743f8378832325978b32eae838ddfd8880",
+    "validation/preflight_az_leading_product_weekly.py": "70cc33fac05e58fb26efb2fa4b2a79ca3c82b8cea3609be297af9611f78e76dd",
+    "validation/preflight_abc_threshold_sensitivity.py": "ba90401f6b802b81bd4127fb698421ad0137fb6bdce91df15d486fa153b567bd",
+    "validation/preflight_product_variability.py": "5682ab1a997ef82c66be04092fc7fbc9156725637f2f17e77dff6baf162ae072",
+    "validation/preflight_product_xyz.py": "9cd9f7f543d619e91052e87db78af498c0c08a8f3b33228f5fc0632d0c9bd404",
+    "validation/preflight_xyz_threshold_sensitivity.py": "8b63508b94d2cc4de8ebfa765be2f9914d00a0197832c2aba02ac050a0625a55"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "historical_preflight_sha256": {
+    "data/abc_threshold_sensitivity_preflight.json": "a11053f48b59f09d94b890d4eb83f9b75210482ea5b2391f9588d1f6e56de339",
+    "data/abc_xyz_contribution_preflight.json": "cce56e1a9a0746936b40fd640cee32a0ec2b6f40bd92a825cbcf9641c2194007",
+    "data/az_leading_product_weekly_preflight.json": "03567ad5e63d5c161b3d808b082c839af73375124c2b2601364732e4962544f9",
+    "data/az_product_drilldown_preflight.json": "2b48b5473b9fcd34de19ee2e4f1049bf7a9beea9347e1076881c8199024dd56c",
+    "data/calendar_audit_preflight.json": "76a2e40ac54597acee84aa5d7a6dd112b19b58412c2b1acaa860d150ffdd9f90",
+    "data/calendar_dimension_preflight.json": "ac9e379e2838f698de5f858a3006fc398604b17a9bf55b61c560ba28658c416b",
+    "data/calendar_import_preflight.json": "72a6191620ef88df12d4a2012cb204701f3b2833f242e01e0e6c28a6d3f83e87",
+    "data/calendar_staging_preflight.json": "67f07e4bf89c18edaaf0bd87089d98d12d768b75e768d4e81da8c43b0f461c18",
+    "data/category_contribution_preflight.json": "e66d6e4832833746abd9555755ea52ff324592c2e49ac8caf957dabf6462f37f",
+    "data/department_contribution_preflight.json": "31db61d17130a6e730ea15e04b2f652a267a41e0f2674448ba62d1f81457d07f",
+    "data/dimension_joins_preflight.json": "4df748b6c343dc8c513a07e3fb318bcd696b7e5cf9eedffd056bb4df10a65ae9",
+    "data/price_audit_preflight.json": "e2fbe41f0b22dd103c40e6811ba8b78b27980b257636865f7f6f8386c307a30c",
+    "data/price_coverage_preflight.json": "ef2bc88c3466b958c3c6832f52125835d46ec3f7a31ffe1b3d4b9d4d1149660a",
+    "data/price_import_preflight.json": "04b00ec67ab53d9b8a695496dc691e2f893afe6bae61bfffbb1450b3c95edbf8",
+    "data/price_staging_preflight.json": "a24bb94f812c97e55f273dde4a99f657057014a7a807b9544bd8021dbd452ec5",
+    "data/product_abc_units_preflight.json": "33c525addcd588045b132ffe6d66faaaf1c9e9d197567293cc71a3312c21503a",
+    "data/product_abc_xyz_preflight.json": "a23167c247c46e02e1401dbc0a0767029b2d1dd73c5eba8efd7365828e2d30b1",
+    "data/product_dimension_preflight.json": "f80f785795bdbc6e51c362dfe3bc5b0a0ea2c4853eaad33d9a416801c63d1406",
+    "data/product_unit_concentration_preflight.json": "7582aefa60ad95879647c7e221343e7296ac90cd2cb908bee52fc7cd6d014849",
+    "data/product_variability_preflight.json": "34fe40f85839374ce8112f37593fa9c0467529995c53488853bf716948ad0dba",
+    "data/product_weekly_preflight.json": "fa6aecbe040ee997dd6f69d3c430ddcff7ac2e19d11073c261fb2d82845b8286",
+    "data/product_xyz_preflight.json": "44fada6977a90ac31beb113e62980c559223da1f7fa18c67b8dcef2608f1e341",
+    "data/sales_audit_preflight.json": "571df148f470f287316b7d1ab4b280f0ef3358e7816983a3fc6c902df7797e31",
+    "data/sales_daily_preflight.json": "7715d083bd2b6c6b569c127a9e75ae3c9cd24e0eaacd1f87e7e5dcfff56e34c4",
+    "data/sales_fact_preflight.json": "15c56fc13ca89e46fdc4fcc0c35afa746874506d9f9577be4bfb0fc72f4f2d01",
+    "data/sales_import_preflight.json": "455d51237689f9853b7d06d8bfd148ee4a94cf60d0750356974f3e658d320036",
+    "data/sales_reconciliation_preflight.json": "00857bd0778673309a1ada13bec9a57ae8248fba69d5e6a2d8cf4b89ab49bbb8",
+    "data/store_dimension_preflight.json": "beaa6fdee6ed71a6f78f20ecb2c44998d8dbd4a35217b27d4c0c381f5c0cd20d",
+    "data/xyz_threshold_sensitivity_preflight.json": "17c37f0d09894160bb856f7e46dbcbedff77a400d7e56e3739d5d5972ceea942"
+  },
+  "historical_preflights_unchanged": true,
+  "preflight_strategy": "Original sales/calendar CSVs feed a private 90-day six-column daily table, actual SQL21,23,24,25,27 and read-only SQL30,31. core.m5_store includes original state_id; a raw.m5_sales_wide view exposes only original store/state columns. No learner database is opened.",
+  "independent_reference": "Original wide arrays independently define all product ABC/XYZ fields and select the leading A x Z product. Its ten original 84-day store arrays supply every one of 840 reference daily cells, the 12-week vector, and per-store 42-day sums. Decimal half-up rounding defines shares of the all-store late-window total.",
+  "comparison_windows": {
+    "first6w": {
+      "start_date": "2016-01-30",
+      "end_date": "2016-03-11",
+      "days": 42
+    },
+    "last6w": {
+      "start_date": "2016-03-12",
+      "end_date": "2016-04-22",
+      "days": 42
+    }
+  },
+  "selection_policy": "Same accepted highest-90-day-unit A x Z product, with item_id ascending as tie-break. Preserve all ten stores including true zeros; missing daily records fail rather than being treated as zero.",
+  "share_policy": "Late share uses all stores late-window units, not net change. Zero late-window denominator gives NULL in every share including TOTAL. Signed unit differences and equal-length windows describe recorded-sales changes only.",
+  "timings": {
+    "window_setup_seconds": 6.148,
+    "sql21_build_seconds": 0.354,
+    "sql21_validation_seconds": 0.375,
+    "sql23_build_seconds": 0.903,
+    "sql23_validation_seconds": 0.93,
+    "sql24_build_seconds": 0.196,
+    "sql24_validation_seconds": 0.219,
+    "sql25_build_seconds": 0.256,
+    "sql25_validation_seconds": 0.255,
+    "sql27_build_seconds": 0.314,
+    "sql27_validation_seconds": 0.372,
+    "independent_wide_vector_query_seconds": 0.542,
+    "independent_store_day_arrays_query_seconds": 0.137,
+    "accepted_trajectory_query_seconds": 0.418,
+    "store_comparison_query_seconds": 0.501
+  },
+  "timing_scope": "DuckDB CLI process timings; excludes Python comparisons and hashing.",
+  "combined_product_rows_compared": 3049,
+  "combined_columns_compared": 22,
+  "combined_field_mismatches": 0,
+  "combined_float_error_summary": {
+    "mean_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.666666666666666666666666667E-13",
+      "max_error_to_tolerance_ratio": "1.297858533419857235561323816E-7",
+      "max_allowed_tolerance": "0.000003853333333333333333333333333"
+    },
+    "stddev_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.268426587277874278586383756E-13",
+      "max_error_to_tolerance_ratio": "9.842430058565408268408532243E-7",
+      "max_allowed_tolerance": "7.101692861291222677628880905E-7"
+    },
+    "cv_weekly": {
+      "nonnull_values_compared": 3042,
+      "null_values_compared": 7,
+      "max_absolute_error": "7.811113766865144953989633802E-16",
+      "max_error_to_tolerance_ratio": "1.890458410519201328202904339E-7",
+      "max_allowed_tolerance": "4.316624790355399849114932737E-9"
+    },
+    "zero_week_share": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "6.666666666666666666666666667E-17",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526317E-8",
+      "max_allowed_tolerance": "2E-9"
+    },
+    "mean_positive_gap_weeks": {
+      "nonnull_values_compared": 3032,
+      "null_values_compared": 17,
+      "max_absolute_error": "1.666666666666666666666666667E-16",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526316E-8",
+      "max_allowed_tolerance": "1.1E-8"
+    }
+  },
+  "selected_daily_rows_compared": 840,
+  "daily_projection_columns_compared": 6,
+  "selected_daily_cell_mismatches": 0,
+  "stores_compared": 10,
+  "distinct_days_per_store": 84,
+  "first_half_days_per_store": 42,
+  "last_half_days_per_store": 42,
+  "first_half_daily_rows": 420,
+  "last_half_daily_rows": 420,
+  "original_store_state_mapping_matched": true,
+  "original_twelve_week_vector_matched": true,
+  "accepted_trajectory_fingerprints_matched": true,
+  "accepted_baseline_evidence": "data/az_leading_product_weekly_learner_acceptance.json",
+  "accepted_baseline_evidence_sha256": "f5f4643baa78a0f2952d905ce07ed058fa4531bcb00ab4126b656314ab88b817",
+  "selected_product_sha256": "b35dc64487f2f30667034ad10c0e846194245f66785f4ff1c803dc91dec65d8a",
+  "reconstructed_trajectory_sha256": "5c7af6aaf2eb259692c144b39a88c104300ca07b04a955a517bf1eff437bf093",
+  "reconstructed_weekly_units_sha256": "e5f8046503d8a45a3c3307848f4185d58254e7e5d86b50f5d84218af435405d5",
+  "result_rows": 11,
+  "rows_with_pass_status": 11,
+  "result_columns": 11,
+  "output_columns": [
+    "item_id",
+    "store_id",
+    "state_id",
+    "units_first6w",
+    "units_last6w",
+    "unit_difference",
+    "late_unit_share_pct",
+    "units_84d",
+    "first6w_window",
+    "last6w_window",
+    "check_status"
+  ],
+  "result_field_mismatches": 0,
+  "column_names_and_order_verified": true,
+  "store_order_and_total_verified": true,
+  "store_aggregates": {
+    "store_count": 10,
+    "units_first6w": 62,
+    "units_last6w": 2668,
+    "unit_difference": 2606,
+    "units_84d": 2730,
+    "increased_stores": 10,
+    "decreased_stores": 0,
+    "unchanged_stores": 0,
+    "zero_first6w_stores": 6,
+    "zero_last6w_stores": 0,
+    "zero_84d_stores": 0,
+    "positive_unit_differences": 2606,
+    "negative_unit_differences": 0,
+    "store_unit_difference_min": 160,
+    "store_unit_difference_max": 541,
+    "store_last6w_units_min": 169,
+    "store_last6w_units_max": 541,
+    "largest_store_last6w_share_pct": "20.2774",
+    "top_three_stores_last6w_units": 1218,
+    "top_three_stores_last6w_share_pct": "45.6522",
+    "displayed_store_share_sum": "99.9999",
+    "total_share_pct": "100.0000",
+    "ordered_store_report_sha256": "4b946b546384e2f5e78f094224b04b0b2a3699ad844232f4fdebf138b7f9842d"
+  },
+  "independent_reference_store_report_sha256": "4b946b546384e2f5e78f094224b04b0b2a3699ad844232f4fdebf138b7f9842d",
+  "fingerprint_method": "SHA256 of UTF-8 compact JSON with sorted object keys and ensure_ascii=False. Store report rows remain in store_id ascending order with TOTAL last; units/differences are JSON integers, late shares four-decimal strings or NULL. Identifiers occur only in memory before hashing.",
+  "unchanged_input_scope": "Five complete accepted snapshots (ABC, weekly, variability, XYZ, combined), plus the selected product six-column 840-row daily projection, complete two-column core store mapping and distinct raw store/state mapping. This is not a full-table daily or raw-wide equality audit.",
+  "five_snapshots_and_three_projections_unchanged": true,
+  "input_rows_sha256_before": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "e2d82332aed520a1b2ba90267208ab49b819ea37e6d27b1197f77b67c3ad7428",
+    "xyz": "97c91a02cad9437575a5d622934de523625a7d2c7087490ca6717551b2252362",
+    "combined": "ccd0e38cb9d066309f6e53c548ddb842aea06799e2d5b33927c14d68fa78cecb",
+    "selected_daily_84d": "1d6086b76b790c8e421e07aab669a1322866850f89506a2123f2561d88a0da09",
+    "core_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0",
+    "raw_distinct_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0"
+  },
+  "input_rows_sha256_after": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "e2d82332aed520a1b2ba90267208ab49b819ea37e6d27b1197f77b67c3ad7428",
+    "xyz": "97c91a02cad9437575a5d622934de523625a7d2c7087490ca6717551b2252362",
+    "combined": "ccd0e38cb9d066309f6e53c548ddb842aea06799e2d5b33927c14d68fa78cecb",
+    "selected_daily_84d": "1d6086b76b790c8e421e07aab669a1322866850f89506a2123f2561d88a0da09",
+    "core_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0",
+    "raw_distinct_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0"
+  },
+  "input_projection_row_counts": {
+    "abc": 3049,
+    "weekly": 36588,
+    "metrics": 3049,
+    "xyz": 3049,
+    "combined": 3049,
+    "selected_daily_84d": 840,
+    "core_store_mapping": 10,
+    "raw_distinct_store_mapping": 10
+  },
+  "real_sku_identifiers_published": false,
+  "real_store_identifiers_published": false,
+  "store_detail_rows_published": false,
+  "daily_or_weekly_vectors_published": false,
+  "fixture_cases_passed": 20,
+  "fixture_cases": [
+    {
+      "case": "real_zero_store_negative_change_and_store_order",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "late_window_zero_denominator_is_null_including_total",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "halfway_shares_round_individually_and_total_separately",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "valid_empty_positive_sources_have_eight_null_fields",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "valid_empty_zero_sources_have_eight_null_fields",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "unused_price_columns_do_not_change_unit_query",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "invalid_empty_mapping_still_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "missing_zero_day_cannot_be_filled_as_zero",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_and_missing_zero_day_preserve_count_and_units",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "incorrect_day_identifier",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "incorrect_retail_week",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "incorrect_daily_date",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "orphan_daily_store",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "core_state_mapping_disagrees_with_raw",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "conflicting_raw_store_state_mapping",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "missing_core_store",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_core_store",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "null_daily_units_not_zero",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "negative_daily_units",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    },
+    {
+      "case": "daily_integer_contract_wrong_type",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_three_projections_unchanged": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner local store comparison pending. Public evidence contains cross-store aggregates and one-way fingerprints, never real item/store identifiers, store rows or day/week vectors. Results do not establish promotion, demand growth, availability, stockout causes or replenishment needs."
+}
