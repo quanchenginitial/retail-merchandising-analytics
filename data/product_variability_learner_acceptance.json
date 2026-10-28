@@ -1,0 +1,52 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/24_build_product_variability.sql",
+  "table": "mart.m5_product_variability_12w",
+  "analysis_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "week_count": 12,
+    "scope": "Per-product metrics across 12 complete source retail weeks, with all 10 source stores pooled and observed zero-sales weeks included."
+  },
+  "display_normalization": "Thousands separators are omitted. sku_count is a JSON integer; summed units and zero_sales_product_weeks are decimal-integer strings. CV summaries preserve six decimal places as strings, and undefined ZERO_12W CV summaries remain JSON null. Dates use YYYY-MM-DD.",
+  "result_rows": 3,
+  "rows_with_pass_status": 3,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "sales_group": "POSITIVE_12W",
+      "sku_count": 3042,
+      "units": "3536539",
+      "zero_sales_product_weeks": "972",
+      "median_cv": "0.205417",
+      "p90_cv": "0.495779",
+      "max_cv": "3.316625",
+      "check_status": "PASS"
+    },
+    {
+      "sales_group": "ZERO_12W",
+      "sku_count": 7,
+      "units": "0",
+      "zero_sales_product_weeks": "84",
+      "median_cv": null,
+      "p90_cv": null,
+      "max_cv": null,
+      "check_status": "PASS"
+    },
+    {
+      "sales_group": "TOTAL",
+      "sku_count": 3049,
+      "units": "3536539",
+      "zero_sales_product_weeks": "1056",
+      "median_cv": "0.205417",
+      "p90_cv": "0.495779",
+      "max_cv": "3.316625",
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and the three displayed product-variability validation rows are accepted. POSITIVE_12W and ZERO_12W partition the 3,049 products and their 3,536,539 units; 972 plus 84 zero-sales product/week observations reconcile to 1,056. The displayed seven ZERO_12W products have undefined CV. TOTAL and POSITIVE_12W share CV summaries because NULL values are excluded; these are the equally weighted distribution of individual product CVs, not a CV of pooled product sales. Original-CSV comparisons, all 14 per-product fields, targeted tests, floating discrepancies, positive-week-gap statistics, source hashes and timing are separate assistant preflight evidence, not independently established by this screenshot. The accompanying business interpretation is attributed to the assistant. XYZ baseline execution remains pending; no optimal threshold, forecast accuracy, future stability, stockout or causal-performance result is claimed."
+}

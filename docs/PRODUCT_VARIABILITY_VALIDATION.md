@@ -1,6 +1,6 @@
 # Product weekly variability metrics: construction and validation
 
-28 October 2026. The learner has accepted [SQL23's weekly observations](PRODUCT_WEEKLY_VALIDATION.md). SQL24 converts each product's 12-week vector into descriptive metrics. Assistant preflight is distinct from pending learner execution. No XYZ labels are assigned in this step.
+28 October 2026. The learner's DBeaver screenshot confirms all three SQL24 summary rows have `check_status=PASS` and numerically match the independent assistant preflight. The product variability table and displayed validation results are accepted. The [learner acceptance record](../data/product_variability_learner_acceptance.json) transcribes the screenshot; no direct read of the learner database was performed. SQL24 converts the accepted [SQL23 weekly observations](PRODUCT_WEEKLY_VALIDATION.md) into descriptive metrics. No XYZ labels are assigned in this step.
 
 ## Purpose and scope
 
@@ -65,7 +65,9 @@ The largest observed absolute floating discrepancy was approximately 1.67e-13, a
 
 Using two threads and a 2GB memory limit, the private source fixture took 5.801 seconds to prepare; SQL24 build/validation took 0.180/0.198 seconds. These are assistant DuckDB CLI timings, excluding Python references/comparisons and hashing, and are not performance promises for the learner environment.
 
-## Assistant preflight result; learner confirmation pending
+## Accepted learner results and independent preflight
+
+The learner screenshot reproduces all three rows below, including PASS statuses and the three intentional NULL CV summaries for ZERO_12W. The acceptance record removes thousands separators and preserves six decimal places for displayed CV values. The original-CSV comparisons, 22 targeted cases, floating discrepancies, timings and count of undefined positive-week gaps above remain separate assistant preflight evidence; the screenshot does not independently establish those checks.
 
 | Group | SKUs | Units | Zero-sales product/weeks | Median CV | P90 CV | Max CV | Status |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -73,6 +75,12 @@ Using two threads and a 2GB memory limit, the private source fixture took 5.801 
 | ZERO_12W | 7 | 0 | 84 | NULL | NULL | NULL | PASS |
 | TOTAL | 3049 | 3536539 | 1056 | 0.205417 | 0.495779 | 3.316625 | PASS |
 
-These are descriptive measurements for the stated recorded-sales window. XYZ classification, threshold sensitivity, forecast evaluation and inventory policies remain subsequent work.
+## Business reading of the accepted metrics
 
-See the [machine-readable preflight](../data/product_variability_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md).
+The following interpretation is supplied by the assistant. There are 3,042 products with some recorded sales in the 84-day window and seven with none. The positive-sales products account for 972 zero-sales product/weeks; the seven all-zero products contribute another 7 × 12 = 84, restoring the 1,056 observations accepted in SQL23. A zero-sales product/week is not a distinct product and does not prove a stockout.
+
+Among products with defined CV, the median is 0.205417, the 90th percentile is 0.495779 and the maximum is 3.316625. The median describes a typical point in the equally weighted product-CV distribution: its standard-deviation-to-mean ratio is about 20.54%. These are neither sales-weighted shares nor a CV calculated after pooling different products. TOTAL repeats the same CV summaries because the seven all-zero products' CV values are NULL; those products still contribute to its count of 3,049. Low CV alone does not demonstrate forecast accuracy or future stability.
+
+The next step prepares an XYZ baseline with frozen CV thresholds and a separate zero-sales class; its execution and acceptance remain pending. Later threshold sensitivity, forecast evaluation and inventory policies are separate work. This completed step describes the stated recorded-sales window and makes no causal, demand or inventory-performance claim.
+
+See the [learner acceptance record](../data/product_variability_learner_acceptance.json), [machine-readable preflight](../data/product_variability_preflight.json) and [current learner instructions](FIRST_STEP_ZH.md).
