@@ -1,6 +1,6 @@
 # XYZ threshold sensitivity: fixed-window, read-only scenarios
 
-28 October 2026. The learner's SQL25 screenshot has accepted all five baseline report rows. This step evaluates whether classification conclusions depend heavily on chosen CV cutoffs; it does not replace the baseline or estimate an intervention effect. See [baseline acceptance](PRODUCT_XYZ_VALIDATION.md) and [SQL26](../sql/26_xyz_threshold_sensitivity.sql).
+28 October 2026. The learner's DBeaver screenshot confirms all five SQL26 scenario rows have `check_status=PASS` and numerically match the independent assistant preflight. Execution and displayed XYZ threshold-sensitivity results are accepted. The [learner acceptance record](../data/xyz_threshold_sensitivity_learner_acceptance.json) transcribes the screenshot; no direct read of the learner database was performed. This step evaluates dependence on the chosen CV cutoffs without replacing the accepted baseline or estimating an intervention effect. See [baseline acceptance](PRODUCT_XYZ_VALIDATION.md) and [SQL26](../sql/26_xyz_threshold_sensitivity.sql).
 
 ## Frozen data and scenarios
 
@@ -36,9 +36,9 @@ Five rows and nine columns: scenario, x_skus, y_skus, z_skus, zero_skus, changed
 - changed_unit_share_pct = historical 84-day units of the changed products / all 3,536,539 window units, times 100. It is not an increase/decrease in sales, a financial return, or an effect caused by reclassification.
 - Shares display four decimal places. A zero unit denominator gives NULL, including the all-zero baseline fixture. Products with zero units still count in the SKU denominator and never change class.
 
-## Independent preflight and current results
+## Accepted learner results and independent preflight
 
-The assistant preflight passed; learner execution of SQL26 remains pending. These are the independently checked five report rows:
+The learner screenshot reproduces the five rows below, including all PASS statuses. The acceptance record omits thousands separators and pads displayed percentages to four decimal places without changing their numeric values. The source comparisons, targeted cases, before/after fingerprints, hashes and timings described below remain separate assistant preflight evidence; the screenshot does not independently establish those checks.
 
 | 场景 | X 商品 | Y 商品 | Z 商品 | 全零商品 | 换组商品 | 换组商品占比 % | 涉及历史销量占比 % | 状态 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -48,7 +48,7 @@ The assistant preflight passed; learner execution of SQL26 remains pending. Thes
 | X050_Y090 | 2745 | 152 | 145 | 7 | 15 | 0.4920 | 0.2411 | PASS |
 | X050_Y110 | 2745 | 191 | 106 | 7 | 24 | 0.7871 | 0.5665 | PASS |
 
-Lowering the X bound from 0.5 to 0.4 moves 164 products from X to Y, representing 5.3788% of products and 2.6335% of historical units. The four alternatives affect 0.2411%–2.6335% of window units individually. This describes the selected local adjustments; none changes recorded units or demonstrates improved forecasts. Do not add scenario effects as if they represented a single boundary change.
+The following interpretation is supplied by the assistant. Lowering the X bound from 0.5 to 0.4 moves 164 products from X to Y, representing 5.3788% of products and 2.6335% of historical units. The four alternatives affect 0.2411%–2.6335% of window units individually. This describes the selected local adjustments; none changes recorded units or demonstrates improved forecasts. Do not add scenario effects as if they represented a single boundary change.
 
 The [runner](../validation/preflight_xyz_threshold_sensitivity.py) reads only registered sales and calendar CSVs, verifies their hashes before and after, and builds a private 84-day fixture before executing the actual SQL23, SQL24 and SQL25. It then executes the unchanged read-only SQL26. Independently aggregate each original seven-column wide block to a weekly vector. Python Fraction computes centered population variance divided by mean squared exactly, rather than SQL's raw-moment expression, and compares rational squared thresholds. Reused 70-digit Decimal metric references verify the baseline's fifteen fields. Confirm all 36,588 weekly source rows/eight fields, the 3,049-product baseline/fifteen fields, all **15,245 product/scenario memberships**, and all five report rows. The baseline summary also matches learner SQL25 acceptance.
 
@@ -60,4 +60,4 @@ Before/after row fingerprints match for the weekly, metric and XYZ input tables.
 
 A changed count tells us how many products depend on that particular cutoff. Their historical unit share adds a volume perspective; it does not reflect profit or inventory risk. Unchanged labels within these five scenarios do not prove robustness to larger adjustments, alternative windows, seasonal changes or individual stores. Low CV is not validated forecast accuracy, and zero units do not prove stockout.
 
-After learner acceptance, retain the declared 0.5/1.0 baseline for the next ABC × XYZ analysis rather than silently choosing the most convenient sensitivity outcome. Combined output must disclose ABC's 90-day window (2016-01-26–2016-04-24) and XYZ's 84-day window (2016-01-30–2016-04-22). Decisions about replenishment or inventory need additional data and validation.
+The next planned step combines the accepted ABC and XYZ baselines, retaining the declared XYZ 0.5/1.0 thresholds. Its execution and results are still pending. Combined output must disclose ABC's 90-day window (2016-01-26–2016-04-24) and XYZ's 84-day window (2016-01-30–2016-04-22), and preserve zero-sales groups rather than drop products with no sales in the shorter window. Products sold only on the six excluded dates can have positive 90-day units and zero 84-day units without a classification contradiction. Decisions about replenishment or inventory need additional data and validation.

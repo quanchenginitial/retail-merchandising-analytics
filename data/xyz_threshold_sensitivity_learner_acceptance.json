@@ -1,0 +1,126 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/26_xyz_threshold_sensitivity.sql",
+  "analysis_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "week_count": 12,
+    "scope": "Global product population CV over 12 complete retail weeks with all 10 source stores pooled, observed zero weeks retained, and all 3,049 source products included."
+  },
+  "comparison_baseline": "mart.m5_product_xyz_12w with accepted X <= 0.5, Y <= 1.0 and Z > 1.0 boundaries for positive units; zero-sales products separate",
+  "metric_denominators": {
+    "changed_sku_pct_all_products": 3049,
+    "changed_unit_share_pct_all_historical_units": "3536539"
+  },
+  "display_normalization": "Thousands separators are omitted. Group counts and changed_skus are JSON integers. Percentage values are represented as strings with four decimal places; padding trailing zeros preserves displayed numeric values. Dates use YYYY-MM-DD.",
+  "scenarios": [
+    {
+      "scenario": "BASE_050_100",
+      "x_tenths": 5,
+      "y_tenths": 10,
+      "allowed_change": null
+    },
+    {
+      "scenario": "X040_Y100",
+      "x_tenths": 4,
+      "y_tenths": 10,
+      "allowed_change": [
+        "X",
+        "Y"
+      ]
+    },
+    {
+      "scenario": "X060_Y100",
+      "x_tenths": 6,
+      "y_tenths": 10,
+      "allowed_change": [
+        "Y",
+        "X"
+      ]
+    },
+    {
+      "scenario": "X050_Y090",
+      "x_tenths": 5,
+      "y_tenths": 9,
+      "allowed_change": [
+        "Y",
+        "Z"
+      ]
+    },
+    {
+      "scenario": "X050_Y110",
+      "x_tenths": 5,
+      "y_tenths": 11,
+      "allowed_change": [
+        "Z",
+        "Y"
+      ]
+    }
+  ],
+  "result_rows": 5,
+  "rows_with_pass_status": 5,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "scenario": "BASE_050_100",
+      "x_skus": 2745,
+      "y_skus": 167,
+      "z_skus": 130,
+      "zero_skus": 7,
+      "changed_skus": 0,
+      "changed_sku_pct": "0.0000",
+      "changed_unit_share_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X040_Y100",
+      "x_skus": 2581,
+      "y_skus": 331,
+      "z_skus": 130,
+      "zero_skus": 7,
+      "changed_skus": 164,
+      "changed_sku_pct": "5.3788",
+      "changed_unit_share_pct": "2.6335",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X060_Y100",
+      "x_skus": 2811,
+      "y_skus": 101,
+      "z_skus": 130,
+      "zero_skus": 7,
+      "changed_skus": 66,
+      "changed_sku_pct": "2.1646",
+      "changed_unit_share_pct": "1.3061",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X050_Y090",
+      "x_skus": 2745,
+      "y_skus": 152,
+      "z_skus": 145,
+      "zero_skus": 7,
+      "changed_skus": 15,
+      "changed_sku_pct": "0.4920",
+      "changed_unit_share_pct": "0.2411",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X050_Y110",
+      "x_skus": 2745,
+      "y_skus": 191,
+      "z_skus": 106,
+      "zero_skus": 7,
+      "changed_skus": 24,
+      "changed_sku_pct": "0.7871",
+      "changed_unit_share_pct": "0.5665",
+      "check_status": "PASS"
+    }
+  ],
+  "interpretation_boundary": "Each alternative changes one CV boundary by 0.1 in absolute units, equivalent to 20 percent of the baseline X boundary or 10 percent of the baseline Y boundary. Changed-unit share is the historical unit share carried by relabelled products, not an actual sales change or a policy effect. The scenarios do not establish sensitivity to equal relative changes or to other observation windows.",
+  "scope": "Learner execution and the five displayed fixed-scenario sensitivity rows are accepted. The baseline has zero label changes, all scenarios retain seven zero-sales products, and the four alternatives change 164, 66, 15 and 24 labels respectively. Source comparisons, all 15 baseline fields, 15,245 independent scenario/product checks, targeted tests, before/after input fingerprints, source hashes and timing remain separate assistant preflight evidence, not independently established by the screenshot. The accompanying interpretation is attributed to the assistant. The next ABC-by-XYZ combination is planned with both observation windows and zero-sales groups preserved; its execution/results remain pending. No optimal threshold, forecast improvement, out-of-time stability, inventory policy or causal-performance result is claimed."
+}
