@@ -1,6 +1,6 @@
 # Product XYZ baseline: construction and validation
 
-28 October 2026. SQL24 has been accepted from the learner's three PASS screenshot rows. SQL25 has passed independent assistant preflight; learner XYZ execution remains pending. See the [variability acceptance](PRODUCT_VARIABILITY_VALIDATION.md), [SQL25](../sql/25_build_product_xyz.sql), [preflight evidence](../data/product_xyz_preflight.json) and [runner](../validation/preflight_product_xyz.py).
+28 October 2026. The learner's DBeaver screenshot confirms all five SQL25 report rows have `check_status=PASS` and numerically match the independent assistant preflight. The XYZ baseline and displayed validation results are accepted. The [learner acceptance record](../data/product_xyz_learner_acceptance.json) transcribes the screenshot; no direct read of the learner database was performed. See the preceding [variability acceptance](PRODUCT_VARIABILITY_VALIDATION.md), [SQL25](../sql/25_build_product_xyz.sql), [preflight evidence](../data/product_xyz_preflight.json) and [runner](../validation/preflight_product_xyz.py).
 
 ## Purpose and frozen scope
 
@@ -28,7 +28,7 @@ Then derive exact integer labels from the weekly observations. The new target is
 
 X, Y, Z and ZERO_SALES partition all products; TOTAL is their reconciliation. Eight columns report class, SKU count/share, units/share, zero-sales product/week count, median CV and status. Empty groups remain visible with zero counts and NULL median CV. SKU-share denominator includes all 3,049 products. Unit shares use all 3,536,539 recorded units in this window; a zero denominator yields NULL. Percentages display four decimals and can have rounding residuals. Median CV is an equally weighted per-product Type7 quantile, excluding NULL, displayed to six decimals. TOTAL therefore uses the same defined-CV population as SQL24's POSITIVE_12W; it is not the CV of pooled product sales.
 
-The following are assistant preflight results, not yet learner acceptance:
+The learner screenshot reproduces the following five rows, including all PASS statuses and the intentional NULL median for ZERO_SALES. The acceptance record removes thousands separators, pads percentages to four decimals and median CV to six decimals, and retains NULL. This formatting normalization preserves the displayed values. Independent original-CSV comparisons, copied-field checks, 24 targeted cases, hashes and timings remain separate assistant preflight evidence; the screenshot does not independently establish those checks.
 
 | 分组 | 商品数 | 商品占比 % | 销量 | 销量占比 % | 零销量商品周 | CV 中位数 | 状态 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -48,4 +48,8 @@ All **24 targeted cases** pass: exact and immediately adjacent threshold cases, 
 
 ## Interpretation and next step
 
-Under these choices, X contains 2,745 products (90.0295%) and 95.1371% of recorded units. Store pooling can smooth single-store fluctuations; twelve weeks offer limited evidence about longer periods. Low relative variation is not a forecast-accuracy measurement. ZERO_SALES identifies observed zero units, not availability, launch status or stockout. No cost or inventory evidence supports a direct reorder quantity, safety-stock or profit recommendation. Proceed to threshold sensitivity after learner acceptance, then combine ABC and XYZ with their different observation windows disclosed.
+The following interpretation is supplied by the assistant. Under the frozen thresholds, X contains 2,745 products (90.0295%) and 95.1371% of recorded units; Y contains 167 products and Z contains 130. The remaining seven ZERO_SALES products complete the 3,049-product universe. The four classes reconcile to 3,536,539 units and 1,056 zero-sales product/week observations. X itself contains 32 zero-sales product/weeks, so its relative-variation label does not mean every product sold in every week. TOTAL's median CV of 0.205417 reconciles to SQL24's defined-CV population.
+
+Store pooling can smooth single-store fluctuations; twelve weeks offer limited evidence about longer periods. Low relative variation is not a forecast-accuracy measurement. ZERO_SALES identifies observed zero units, not availability, launch status or stockout. No cost or inventory evidence supports a direct reorder quantity, safety-stock or profit recommendation.
+
+SQL26 is planned as a read-only threshold-sensitivity comparison against the accepted baseline: (X boundary, Y boundary) = (0.5, 1.0), (0.4, 1.0), (0.6, 1.0), (0.5, 0.9) and (0.5, 1.1). Each alternative changes one boundary, retains zero sales separately and uses exact integer comparisons. This next step has not been executed or accepted by the learner. Later ABC/XYZ combinations must continue to disclose their different observation windows.

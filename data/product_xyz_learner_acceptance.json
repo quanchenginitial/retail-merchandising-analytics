@@ -1,0 +1,73 @@
+{
+  "observed_date": "2026-10-28",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/25_build_product_xyz.sql",
+  "table": "mart.m5_product_xyz_12w",
+  "analysis_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "week_count": 12,
+    "scope": "Per-product population CV over 12 complete source retail weeks, with all 10 source stores pooled and observed zero-sales weeks included."
+  },
+  "classification_rule": "ZERO_SALES first for zero total units and undefined CV. For positive total units, X has CV <= 0.5; Y has 0.5 < CV <= 1; Z has CV > 1. Class boundaries use exact integer weekly moments: N=12*sum(x*x)-sum(x)^2 and D=sum(x)^2; X if 4*N<=D, else Y if N<=D, else Z. Display rounding and floating tolerance do not determine membership.",
+  "display_normalization": "Thousands separators are omitted. sku_count is a JSON integer; units and zero_sales_product_weeks are decimal-integer strings. Percentages retain four decimal places and median CV six decimal places as strings. ZERO_SALES median_cv remains JSON null. Padding trailing zeros preserves displayed numeric values.",
+  "result_rows": 5,
+  "rows_with_pass_status": 5,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "xyz_class": "X",
+      "sku_count": 2745,
+      "sku_share_pct": "90.0295",
+      "units": "3364560",
+      "unit_share_pct": "95.1371",
+      "zero_sales_product_weeks": "32",
+      "median_cv": "0.193941",
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "Y",
+      "sku_count": 167,
+      "sku_share_pct": "5.4772",
+      "units": "130861",
+      "unit_share_pct": "3.7003",
+      "zero_sales_product_weeks": "218",
+      "median_cv": "0.654150",
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "Z",
+      "sku_count": 130,
+      "sku_share_pct": "4.2637",
+      "units": "41118",
+      "unit_share_pct": "1.1627",
+      "zero_sales_product_weeks": "722",
+      "median_cv": "1.645851",
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "ZERO_SALES",
+      "sku_count": 7,
+      "sku_share_pct": "0.2296",
+      "units": "0",
+      "unit_share_pct": "0.0000",
+      "zero_sales_product_weeks": "84",
+      "median_cv": null,
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "TOTAL",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": "3536539",
+      "unit_share_pct": "100.0000",
+      "zero_sales_product_weeks": "1056",
+      "median_cv": "0.205417",
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and all five displayed XYZ baseline validation rows are accepted. X/Y/Z/ZERO_SALES partition 3,049 source products, 3,536,539 units and 1,056 zero-sales product/week observations. SKU shares include all products; unit shares use the full 84-day recorded-unit total. Median CV is an equally weighted per-product summary excluding NULL, not a pooled-sales CV. Original-CSV comparisons, all 15 stored fields, exact copied-field fingerprints, targeted tests, hashes and timing are separate assistant preflight evidence, not independently established by this screenshot. The accompanying business interpretation is attributed to the assistant. The separate 90-day ABC window remains unchanged. SQL26 read-only threshold sensitivity is planned and not learner-accepted; no optimized threshold, forecast accuracy, future stability, stockout or causal-performance result is claimed."
+}

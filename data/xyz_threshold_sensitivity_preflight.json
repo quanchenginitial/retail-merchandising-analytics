@@ -1,0 +1,400 @@
+{
+  "checked_at_utc": "2026-10-28T07:08:35.682611+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 20197376,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/26_xyz_threshold_sensitivity.sql",
+  "script_sha256": "a287db0e8e661157f467ddccea62788359d4ed9d99f850f711cfb347e06edc0c",
+  "prerequisite_script_sha256": {
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/24_build_product_variability.sql": "9978038deb932afbbb087a3079e9b2475c4d21a78da6db23647c7a136a458329",
+    "sql/25_build_product_xyz.sql": "a8f8fe7d179b30b8b157aa89585d0ef3b4309253aeee5fd491588e6a88b1b87b"
+  },
+  "reference_helper_sha256": {
+    "validation/preflight_product_variability.py": "5682ab1a997ef82c66be04092fc7fbc9156725637f2f17e77dff6baf162ae072",
+    "validation/preflight_product_xyz.py": "9cd9f7f543d619e91052e87db78af498c0c08a8f3b33228f5fc0632d0c9bd404"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "preflight_strategy": "Read only sales/calendar CSVs. Build a private 84-day six-column daily table and small dimensions, then execute actual SQL23/24/25 before read-only SQL26. This is not a full-history rebuild; no learner database or ABC table is opened.",
+  "independent_reference": "Original wide seven-day arrays supply twelve integer values per SKU. Fraction computes centered population variance / mean squared exactly, rather than the SQL raw-moment expression. Inclusive rational threshold comparisons define all labels; reused 70-digit Decimal metric references verify the fifteen-field baseline.",
+  "analysis_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "inclusive_days": 84,
+    "week_count": 12,
+    "scope": "Each product pooled across all ten stores, retaining zero-sales weeks."
+  },
+  "scenarios": [
+    {
+      "scenario": "BASE_050_100",
+      "x_tenths": 5,
+      "y_tenths": 10,
+      "allowed_change": null
+    },
+    {
+      "scenario": "X040_Y100",
+      "x_tenths": 4,
+      "y_tenths": 10,
+      "allowed_change": [
+        "X",
+        "Y"
+      ]
+    },
+    {
+      "scenario": "X060_Y100",
+      "x_tenths": 6,
+      "y_tenths": 10,
+      "allowed_change": [
+        "Y",
+        "X"
+      ]
+    },
+    {
+      "scenario": "X050_Y090",
+      "x_tenths": 5,
+      "y_tenths": 9,
+      "allowed_change": [
+        "Y",
+        "Z"
+      ]
+    },
+    {
+      "scenario": "X050_Y110",
+      "x_tenths": 5,
+      "y_tenths": 11,
+      "allowed_change": [
+        "Z",
+        "Y"
+      ]
+    }
+  ],
+  "scenario_design": "One boundary at a time, fixed before outputs. Absolute CV changes are 0.1; relative changes are 20% for X and 10% for Y. These are illustrative scenarios, not optimized thresholds.",
+  "timings": {
+    "window_setup_seconds": 6.961,
+    "sql23_build_seconds": 1.091,
+    "sql23_validation_seconds": 1.171,
+    "sql24_build_seconds": 0.24,
+    "sql24_validation_seconds": 0.268,
+    "sql25_build_seconds": 0.298,
+    "sql25_validation_seconds": 0.327,
+    "independent_wide_vector_query_seconds": 0.436,
+    "sensitivity_query_seconds": 0.352,
+    "scenario_membership_query_seconds": 0.217
+  },
+  "timing_scope": "DuckDB CLI process timings; excludes Python reference/comparison and file hashing.",
+  "baseline_sku_rows_compared": 3049,
+  "baseline_columns_compared": 15,
+  "baseline_label_mismatches": 0,
+  "baseline_float_error_summary": {
+    "mean_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.666666666666666666666666667E-13",
+      "max_error_to_tolerance_ratio": "1.297858533419857235561323816E-7",
+      "max_allowed_tolerance": "0.000003853333333333333333333333333"
+    },
+    "stddev_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.268426587277874278586383756E-13",
+      "max_error_to_tolerance_ratio": "7.228626471971128578283198142E-7",
+      "max_allowed_tolerance": "7.101692861291222677628880905E-7"
+    },
+    "cv_weekly": {
+      "nonnull_values_compared": 3042,
+      "null_values_compared": 7,
+      "max_absolute_error": "7.811113766865144953989633802E-16",
+      "max_error_to_tolerance_ratio": "1.890458410519201328202904339E-7",
+      "max_allowed_tolerance": "4.316624790355399849114932737E-9"
+    },
+    "zero_week_share": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "6.666666666666666666666666667E-17",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526317E-8",
+      "max_allowed_tolerance": "2E-9"
+    },
+    "mean_positive_gap_weeks": {
+      "nonnull_values_compared": 3032,
+      "null_values_compared": 17,
+      "max_absolute_error": "1.666666666666666666666666667E-16",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526316E-8",
+      "max_allowed_tolerance": "1.1E-8"
+    }
+  },
+  "copied_metric_fields_match_exactly": true,
+  "scenario_sku_rows_compared": 15245,
+  "scenario_membership_mismatches": 0,
+  "accepted_xyz_baseline_matched": true,
+  "accepted_xyz_evidence": "data/product_xyz_learner_acceptance.json",
+  "accepted_xyz_evidence_sha256": "21946bf93633e360d6aee7dc20fcee92a6ed0c778d954a9945303247c1bbdb70",
+  "all_input_tables_unchanged": true,
+  "input_rows_sha256_before": {
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "a9d355cf331a1731b7cae671b59b1c553e5885c827c18d0ca355901bebc313e9",
+    "xyz": "e65e90b8304a6eab462bef7d169d0de897d1420b5e2623093da828dd08cb21dd"
+  },
+  "input_rows_sha256_after": {
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "a9d355cf331a1731b7cae671b59b1c553e5885c827c18d0ca355901bebc313e9",
+    "xyz": "e65e90b8304a6eab462bef7d169d0de897d1420b5e2623093da828dd08cb21dd"
+  },
+  "baseline_results": [
+    {
+      "xyz_class": "X",
+      "sku_count": 2745,
+      "sku_share_pct": "90.0295",
+      "units": "3364560",
+      "unit_share_pct": "95.1371",
+      "zero_sales_product_weeks": "32",
+      "median_cv": "0.193941",
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "Y",
+      "sku_count": 167,
+      "sku_share_pct": "5.4772",
+      "units": "130861",
+      "unit_share_pct": "3.7003",
+      "zero_sales_product_weeks": "218",
+      "median_cv": "0.654150",
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "Z",
+      "sku_count": 130,
+      "sku_share_pct": "4.2637",
+      "units": "41118",
+      "unit_share_pct": "1.1627",
+      "zero_sales_product_weeks": "722",
+      "median_cv": "1.645851",
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "ZERO_SALES",
+      "sku_count": 7,
+      "sku_share_pct": "0.2296",
+      "units": "0",
+      "unit_share_pct": "0.0000",
+      "zero_sales_product_weeks": "84",
+      "median_cv": null,
+      "check_status": "PASS"
+    },
+    {
+      "xyz_class": "TOTAL",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units": "3536539",
+      "unit_share_pct": "100.0000",
+      "zero_sales_product_weeks": "1056",
+      "median_cv": "0.205417",
+      "check_status": "PASS"
+    }
+  ],
+  "result_rows": 5,
+  "results": [
+    {
+      "scenario": "BASE_050_100",
+      "x_skus": 2745,
+      "y_skus": 167,
+      "z_skus": 130,
+      "zero_skus": 7,
+      "changed_skus": 0,
+      "changed_sku_pct": "0.0000",
+      "changed_unit_share_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X040_Y100",
+      "x_skus": 2581,
+      "y_skus": 331,
+      "z_skus": 130,
+      "zero_skus": 7,
+      "changed_skus": 164,
+      "changed_sku_pct": "5.3788",
+      "changed_unit_share_pct": "2.6335",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X060_Y100",
+      "x_skus": 2811,
+      "y_skus": 101,
+      "z_skus": 130,
+      "zero_skus": 7,
+      "changed_skus": 66,
+      "changed_sku_pct": "2.1646",
+      "changed_unit_share_pct": "1.3061",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X050_Y090",
+      "x_skus": 2745,
+      "y_skus": 152,
+      "z_skus": 145,
+      "zero_skus": 7,
+      "changed_skus": 15,
+      "changed_sku_pct": "0.4920",
+      "changed_unit_share_pct": "0.2411",
+      "check_status": "PASS"
+    },
+    {
+      "scenario": "X050_Y110",
+      "x_skus": 2745,
+      "y_skus": 191,
+      "z_skus": 106,
+      "zero_skus": 7,
+      "changed_skus": 24,
+      "changed_sku_pct": "0.7871",
+      "changed_unit_share_pct": "0.5665",
+      "check_status": "PASS"
+    }
+  ],
+  "exact_boundary_controls": [
+    "0.4",
+    "0.5",
+    "0.6",
+    "0.9",
+    "1.0",
+    "1.1"
+  ],
+  "fixture_cases_passed": 21,
+  "fixture_cases": [
+    {
+      "case": "six_exact_boundaries_and_adjacent_integer_vectors",
+      "passed": true,
+      "rejected": false,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "all_zero_shares_are_null",
+      "passed": true,
+      "rejected": false,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "constant_positive_empty_y_z_zero_groups",
+      "passed": true,
+      "rejected": false,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "upper_supported_bound_keeps_integer_comparisons_safe",
+      "passed": true,
+      "rejected": false,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "tolerated_double_cv_drift_does_not_move_exact_memberships",
+      "passed": true,
+      "rejected": false,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "empty_weekly_source",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "missing_source_week",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_and_missing_source_week",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "wrong_source_week_date",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "unsafe_weekly_square_input",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "wrong_source_metric_cv",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "nan_source_metric_sd",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_product_mapping",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "missing_baseline_product",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_baseline_product",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "swapped_labels_preserve_class_counts_and_units",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "baseline_copied_float_drift",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "wrong_baseline_window",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "zero_baseline_class_cannot_be_x",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "wrong_baseline_schema",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    },
+    {
+      "case": "null_scenario_boundary_rejected",
+      "passed": true,
+      "rejected": true,
+      "all_three_input_tables_unchanged": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner XYZ sensitivity execution pending. Changed-unit share is historical units belonging to reclassified products, not a sales change. Query rechecks accepted weekly, metric and XYZ snapshots without daily rescan; this private preflight independently compares original CSV totals. No optimization, temporal-stability or forecast-performance claim, no SKU-level extract and no ABC-table access."
+}
