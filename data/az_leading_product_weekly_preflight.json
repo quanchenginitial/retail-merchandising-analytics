@@ -1,0 +1,344 @@
+{
+  "checked_at_utc": "2026-10-28T14:46:51.391337+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 23605248,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/30_az_leading_product_weekly.sql",
+  "script_sha256": "ca6975477675c5efe713c4f3e4d59f99a381811a300cc7403c7d7088d4b37104",
+  "prerequisite_script_sha256": {
+    "sql/21_build_product_abc_units.sql": "e024e3ccf71f047181c16b00fde033442ce62cae030f2058c14fd007a5427c05",
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/24_build_product_variability.sql": "9978038deb932afbbb087a3079e9b2475c4d21a78da6db23647c7a136a458329",
+    "sql/25_build_product_xyz.sql": "a8f8fe7d179b30b8b157aa89585d0ef3b4309253aeee5fd491588e6a88b1b87b",
+    "sql/27_build_product_abc_xyz.sql": "9676263b8cff302baf5bb8c856624ab00ab7ef0538ac13f527566aeb4388e826",
+    "sql/29_az_product_drilldown.sql": "422fd8ba2fff6801a49d98832ef5408a0f5fa69d1209950c9e53c33d48a4d76e"
+  },
+  "reference_helper_sha256": {
+    "validation/preflight_product_abc_xyz.py": "3ee2d4e0600183b827227134462a84f28d9ada8a3f8219bfaab8a8a68a845be7",
+    "validation/preflight_abc_xyz_contribution.py": "9de1944ffa3ba28c96d2111dd1508f5a7c512f8220a87a3604f89bc4c9f6812e",
+    "validation/preflight_az_product_drilldown.py": "6ba1bdce195cab3abdbcd9ea1ddab8743f8378832325978b32eae838ddfd8880",
+    "validation/preflight_abc_threshold_sensitivity.py": "ba90401f6b802b81bd4127fb698421ad0137fb6bdce91df15d486fa153b567bd",
+    "validation/preflight_product_variability.py": "5682ab1a997ef82c66be04092fc7fbc9156725637f2f17e77dff6baf162ae072",
+    "validation/preflight_product_xyz.py": "9cd9f7f543d619e91052e87db78af498c0c08a8f3b33228f5fc0632d0c9bd404",
+    "validation/preflight_xyz_threshold_sensitivity.py": "8b63508b94d2cc4de8ebfa765be2f9914d00a0197832c2aba02ac050a0625a55"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "historical_preflight_sha256": {
+    "data/abc_threshold_sensitivity_preflight.json": "a11053f48b59f09d94b890d4eb83f9b75210482ea5b2391f9588d1f6e56de339",
+    "data/abc_xyz_contribution_preflight.json": "cce56e1a9a0746936b40fd640cee32a0ec2b6f40bd92a825cbcf9641c2194007",
+    "data/az_product_drilldown_preflight.json": "2b48b5473b9fcd34de19ee2e4f1049bf7a9beea9347e1076881c8199024dd56c",
+    "data/calendar_audit_preflight.json": "76a2e40ac54597acee84aa5d7a6dd112b19b58412c2b1acaa860d150ffdd9f90",
+    "data/calendar_dimension_preflight.json": "ac9e379e2838f698de5f858a3006fc398604b17a9bf55b61c560ba28658c416b",
+    "data/calendar_import_preflight.json": "72a6191620ef88df12d4a2012cb204701f3b2833f242e01e0e6c28a6d3f83e87",
+    "data/calendar_staging_preflight.json": "67f07e4bf89c18edaaf0bd87089d98d12d768b75e768d4e81da8c43b0f461c18",
+    "data/category_contribution_preflight.json": "e66d6e4832833746abd9555755ea52ff324592c2e49ac8caf957dabf6462f37f",
+    "data/department_contribution_preflight.json": "31db61d17130a6e730ea15e04b2f652a267a41e0f2674448ba62d1f81457d07f",
+    "data/dimension_joins_preflight.json": "4df748b6c343dc8c513a07e3fb318bcd696b7e5cf9eedffd056bb4df10a65ae9",
+    "data/price_audit_preflight.json": "e2fbe41f0b22dd103c40e6811ba8b78b27980b257636865f7f6f8386c307a30c",
+    "data/price_coverage_preflight.json": "ef2bc88c3466b958c3c6832f52125835d46ec3f7a31ffe1b3d4b9d4d1149660a",
+    "data/price_import_preflight.json": "04b00ec67ab53d9b8a695496dc691e2f893afe6bae61bfffbb1450b3c95edbf8",
+    "data/price_staging_preflight.json": "a24bb94f812c97e55f273dde4a99f657057014a7a807b9544bd8021dbd452ec5",
+    "data/product_abc_units_preflight.json": "33c525addcd588045b132ffe6d66faaaf1c9e9d197567293cc71a3312c21503a",
+    "data/product_abc_xyz_preflight.json": "a23167c247c46e02e1401dbc0a0767029b2d1dd73c5eba8efd7365828e2d30b1",
+    "data/product_dimension_preflight.json": "f80f785795bdbc6e51c362dfe3bc5b0a0ea2c4853eaad33d9a416801c63d1406",
+    "data/product_unit_concentration_preflight.json": "7582aefa60ad95879647c7e221343e7296ac90cd2cb908bee52fc7cd6d014849",
+    "data/product_variability_preflight.json": "34fe40f85839374ce8112f37593fa9c0467529995c53488853bf716948ad0dba",
+    "data/product_weekly_preflight.json": "fa6aecbe040ee997dd6f69d3c430ddcff7ac2e19d11073c261fb2d82845b8286",
+    "data/product_xyz_preflight.json": "44fada6977a90ac31beb113e62980c559223da1f7fa18c67b8dcef2608f1e341",
+    "data/sales_audit_preflight.json": "571df148f470f287316b7d1ab4b280f0ef3358e7816983a3fc6c902df7797e31",
+    "data/sales_daily_preflight.json": "7715d083bd2b6c6b569c127a9e75ae3c9cd24e0eaacd1f87e7e5dcfff56e34c4",
+    "data/sales_fact_preflight.json": "15c56fc13ca89e46fdc4fcc0c35afa746874506d9f9577be4bfb0fc72f4f2d01",
+    "data/sales_import_preflight.json": "455d51237689f9853b7d06d8bfd148ee4a94cf60d0750356974f3e658d320036",
+    "data/sales_reconciliation_preflight.json": "00857bd0778673309a1ada13bec9a57ae8248fba69d5e6a2d8cf4b89ab49bbb8",
+    "data/store_dimension_preflight.json": "beaa6fdee6ed71a6f78f20ecb2c44998d8dbd4a35217b27d4c0c381f5c0cd20d",
+    "data/xyz_threshold_sensitivity_preflight.json": "17c37f0d09894160bb856f7e46dbcbedff77a400d7e56e3739d5d5972ceea942"
+  },
+  "historical_preflights_unchanged": true,
+  "preflight_strategy": "Original sales/calendar CSVs feed a private 90-day daily table and actual SQL21,23,24,25,27, followed by read-only SQL29 and30. This is not a full-history rebuild and never opens the learner database.",
+  "independent_reference": "Original wide 90-day totals independently define ABC prefix labels and twelve weekly vectors define exact centered-Fraction XYZ labels. Select the first independently sorted A x Z product by 90-day units descending then item_id ascending. Python integer cumulative sums and Decimal half-up four-place percentages provide every trajectory field.",
+  "analysis_windows": {
+    "abc": {
+      "start_date": "2016-01-26",
+      "end_date": "2016-04-24",
+      "days": 90
+    },
+    "xyz": {
+      "start_date": "2016-01-30",
+      "end_date": "2016-04-22",
+      "days": 84,
+      "weeks": 12
+    }
+  },
+  "selection_policy": "Highest 90-day unit total among the accepted A x Z cohort, then ascending item_id for a tie. No hard-coded product identifier, peak-based selection or relabelling. A valid empty cohort yields one EMPTY row with all seven item/week fields NULL.",
+  "percentage_policy": "Every weekly/cumulative share uses the selected product 84-day total. Cumulate integer weekly units before division and round only for display; rounded weekly shares need not sum exactly to 100.",
+  "timings": {
+    "window_setup_seconds": 6.201,
+    "sql21_build_seconds": 0.387,
+    "sql21_validation_seconds": 0.398,
+    "sql23_build_seconds": 0.915,
+    "sql23_validation_seconds": 0.941,
+    "sql24_build_seconds": 0.2,
+    "sql24_validation_seconds": 0.221,
+    "sql25_build_seconds": 0.261,
+    "sql25_validation_seconds": 0.268,
+    "sql27_build_seconds": 0.325,
+    "sql27_validation_seconds": 0.381,
+    "independent_wide_vector_query_seconds": 0.584,
+    "accepted_drilldown_query_seconds": 0.373,
+    "weekly_trajectory_query_seconds": 0.419
+  },
+  "timing_scope": "DuckDB CLI process timings; excludes Python comparisons and file hashing.",
+  "combined_product_rows_compared": 3049,
+  "combined_columns_compared": 22,
+  "combined_field_mismatches": 0,
+  "combined_float_error_summary": {
+    "mean_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.666666666666666666666666667E-13",
+      "max_error_to_tolerance_ratio": "1.297858533419857235561323816E-7",
+      "max_allowed_tolerance": "0.000003853333333333333333333333333"
+    },
+    "stddev_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.268426587277874278586383756E-13",
+      "max_error_to_tolerance_ratio": "7.228626471971128578283198142E-7",
+      "max_allowed_tolerance": "7.101692861291222677628880905E-7"
+    },
+    "cv_weekly": {
+      "nonnull_values_compared": 3042,
+      "null_values_compared": 7,
+      "max_absolute_error": "6.549651135575672569153626340E-16",
+      "max_error_to_tolerance_ratio": "1.813502983823136878383552243E-7",
+      "max_allowed_tolerance": "4.316624790355399849114932737E-9"
+    },
+    "zero_week_share": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "6.666666666666666666666666667E-17",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526317E-8",
+      "max_allowed_tolerance": "2E-9"
+    },
+    "mean_positive_gap_weeks": {
+      "nonnull_values_compared": 3032,
+      "null_values_compared": 17,
+      "max_absolute_error": "1.666666666666666666666666667E-16",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526316E-8",
+      "max_allowed_tolerance": "1.1E-8"
+    }
+  },
+  "reconstructed_cohort_rows": 15,
+  "reconstructed_cohort_detail_sha256": "ce5e8c463496315ef718aaa8c8f9fdd84f127eee86b5e4882d99ef36dc580b08",
+  "reconstructed_cohort_membership_sha256": "2182d023d004fa61f8127f3ff4db048e3781737e935342c3f86cb630d6ca6e68",
+  "accepted_cohort_fingerprints_matched": true,
+  "accepted_baseline_evidence": "data/az_product_drilldown_learner_acceptance.json",
+  "accepted_baseline_evidence_sha256": "6647f23b2df5023e7f135b6992a761554120a69d6e8ad81f467230a6cc8a689b",
+  "selected_product_matches_independent_reference": true,
+  "trajectory_rows_compared": 12,
+  "result_columns": 10,
+  "output_columns": [
+    "item_id",
+    "week_start",
+    "week_end",
+    "units",
+    "unit_share_84d_pct",
+    "cumulative_unit_share_84d_pct",
+    "zero_sales_week",
+    "abc_window",
+    "xyz_window",
+    "check_status"
+  ],
+  "trajectory_field_mismatches": 0,
+  "result_rows": 12,
+  "rows_with_pass_status": 12,
+  "column_names_and_order_verified": true,
+  "time_order_verified": true,
+  "zero_weeks_retained": true,
+  "trajectory_aggregates": {
+    "selected_units_90d": 2897,
+    "selected_units_84d": 2730,
+    "selected_excluded_six_day_units": 167,
+    "selected_cv_weekly_display": "1.020247",
+    "week_count": 12,
+    "positive_weeks": 11,
+    "zero_sales_weeks": 1,
+    "units_total": 2730,
+    "weekly_units_min": 0,
+    "weekly_units_max": 552,
+    "mean_weekly_units": "227.5",
+    "peak_week_share_pct": "20.2198",
+    "peak_week_count": 1,
+    "top_three_weeks_units": 1580,
+    "top_three_weeks_share_pct": "57.8755",
+    "first_six_weeks_units": 62,
+    "first_six_weeks_share_pct": "2.2711",
+    "last_six_weeks_units": 2668,
+    "last_six_weeks_share_pct": "97.7289",
+    "displayed_weekly_share_sum": "100.0002",
+    "final_cumulative_share_pct": "100.0000",
+    "cumulative_shares_monotone": true,
+    "selected_product_sha256": "b35dc64487f2f30667034ad10c0e846194245f66785f4ff1c803dc91dec65d8a",
+    "ordered_trajectory_sha256": "5c7af6aaf2eb259692c144b39a88c104300ca07b04a955a517bf1eff437bf093",
+    "ordered_weekly_units_sha256": "e5f8046503d8a45a3c3307848f4185d58254e7e5d86b50f5d84218af435405d5"
+  },
+  "independent_reference_trajectory_sha256": "5c7af6aaf2eb259692c144b39a88c104300ca07b04a955a517bf1eff437bf093",
+  "fingerprint_method": "SHA256 of UTF-8 compact JSON with sorted object keys and ensure_ascii=False. Selected-product hash encodes a one-element item_id string list. Trajectory hash encodes chronological rows with units as JSON integers, shares as four-decimal strings or NULL, and zero flags as JSON booleans or NULL. Weekly-units hash encodes the chronological integer vector. Only these digests are saved.",
+  "real_sku_identifiers_published": false,
+  "weekly_detail_rows_published": false,
+  "all_input_tables_unchanged": true,
+  "input_rows_sha256_before": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "85352ef557e8a6b265c6f15d04e74d7a2b0297ae8a9f84a019ca035c71bc9833",
+    "xyz": "b9fe0deeec8cefe56a25063ee91c87dca2956bd3f1b208bf981ff7cad25dd844",
+    "combined": "9c40619f024c867636cb458c44a871944297a4f43e78185fb190358b069ed8c7"
+  },
+  "input_rows_sha256_after": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "85352ef557e8a6b265c6f15d04e74d7a2b0297ae8a9f84a019ca035c71bc9833",
+    "xyz": "b9fe0deeec8cefe56a25063ee91c87dca2956bd3f1b208bf981ff7cad25dd844",
+    "combined": "9c40619f024c867636cb458c44a871944297a4f43e78185fb190358b069ed8c7"
+  },
+  "fixture_cases_passed": 18,
+  "fixture_cases": [
+    {
+      "case": "complete_zero_weeks_and_time_order_from_reversed_source",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 12,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "select_by_90d_not_84d_units",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 12,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "tied_90d_selects_ascending_item_despite_reversed_source",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 12,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "halfway_rounding_and_integer_cumulative_not_rounded_sum",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 12,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "valid_empty_positive_sources_return_null_week_fields",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 1,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "valid_empty_zero_sources_return_null_week_fields",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 1,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "exact_z_boundary_survives_display_rounding",
+      "passed": true,
+      "rejected": false,
+      "returned_rows": 12,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "invalid_empty_source_still_rejected",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "empty_combined_source_not_valid_empty_cohort",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_combined_key",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "selected_combined_label_drift",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "combined_copied_float_drift",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "wrong_weekly_schema",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "missing_selected_week",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_and_missing_selected_week_preserves_row_count",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "wrong_week_date_mapping",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "incorrect_abc_source_rank",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "incorrect_xyz_source_label",
+      "passed": true,
+      "rejected": true,
+      "returned_rows": null,
+      "all_five_input_tables_unchanged": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner local weekly trajectory execution pending. Public evidence contains aggregates and one-way fingerprints, never the selected product identifier or twelve weekly rows. Peak/three-week/half-window figures describe this observed series; they establish no demand cause, stockout, forecast error or replenishment target."
+}

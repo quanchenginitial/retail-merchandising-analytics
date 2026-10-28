@@ -1,0 +1,67 @@
+{
+  "observed_date": "2026-10-29",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant in-memory transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/29_az_product_drilldown.sql",
+  "query_type": "Single read-only complete-cohort drilldown; no table created or updated.",
+  "analysis_windows": {
+    "abc": {
+      "start_date": "2016-01-26",
+      "end_date": "2016-04-24",
+      "days": 90
+    },
+    "xyz": {
+      "start_date": "2016-01-30",
+      "end_date": "2016-04-22",
+      "days": 84,
+      "weeks": 12
+    }
+  },
+  "cohort_policy": "All accepted A-by-Z products, pooled across all ten stores; sorted by units_90d descending then item_id ascending, with no Top-N truncation and no TOTAL row.",
+  "display_normalization": "Thousands separators are omitted. Unit totals and zero-sales-week counts are canonical JSON integers. Displayed CV and mean-positive-gap values are numeric strings padded to six decimal places; this only restores omitted trailing zeros. The two YYYY-MM-DD..YYYY-MM-DD date strings, segment text and PASS status are preserved exactly in the in-memory canonical rows.",
+  "result_rows": 15,
+  "result_columns": 10,
+  "rows_with_pass_status": 15,
+  "both_windows_visible_in_screenshot": true,
+  "all_displayed_rows_compared_by_canonical_hash": true,
+  "ordered_detail_matches_assistant_preflight": true,
+  "ordered_membership_matches_assistant_preflight": true,
+  "sorting_verified": true,
+  "cohort_aggregates": {
+    "product_count": 15,
+    "units_90d": 20626,
+    "units_84d": 18907,
+    "excluded_six_day_units": 1719,
+    "units_90d_range": {
+      "minimum": 892,
+      "maximum": 2897
+    },
+    "units_84d_range": {
+      "minimum": 795,
+      "maximum": 2730
+    },
+    "displayed_cv_range": {
+      "minimum": "1.000271",
+      "maximum": "1.601705"
+    },
+    "zero_sales_weeks_range": {
+      "minimum": 0,
+      "maximum": 6
+    },
+    "zero_sales_product_weeks": 49,
+    "displayed_mean_positive_gap_range": {
+      "minimum": "1.000000",
+      "maximum": "2.200000"
+    },
+    "null_mean_positive_gap_products": 0,
+    "units_90d_tied_value_groups": 0,
+    "ordered_detail_sha256": "ce5e8c463496315ef718aaa8c8f9fdd84f127eee86b5e4882d99ef36dc580b08",
+    "ordered_membership_sha256": "2182d023d004fa61f8127f3ff4db048e3781737e935342c3f86cb630d6ca6e68"
+  },
+  "fingerprint_method": "SHA256 of UTF-8 compact JSON with sorted object keys, ensure_ascii=False; list order is SQL units_90d DESC,item_id ASC. Detail integers are JSON integers; CV/gap are six-decimal strings or NULL. Membership fingerprint hashes only the ordered item_id string list. SHA256 is 32 bytes, displayed as 64 hex characters.",
+  "real_sku_rows_published": false,
+  "real_sku_identifiers_published": false,
+  "screenshot_saved_to_repository": false,
+  "scope": "All fifteen displayed learner rows and ten displayed fields were transcribed only in memory. The ordered canonical-detail and membership SHA-256 fingerprints both match the historical assistant preflight; their aggregates also match the accepted SQL28 A-by-Z cell. Public acceptance retains aggregates and fingerprints only, without product identifiers, individual rows or the screenshot. This accepts the displayed result and learner execution, not a fresh direct audit of the learner database, unrounded stored metrics or original CSVs. Source reconstruction, all 3,049 combined products, targeted cases, input/source fingerprints and timing remain separate assistant evidence. Interpretation is attributed to the assistant. The next planned step is a twelve-week trajectory for the first A-by-Z product under the fixed descending-90-day-units and ascending-item order, selected automatically rather than by a hard-coded identifier; learner execution is pending. No stockout cause, forecast error, optimal replenishment quantity or causal effect is established."
+}

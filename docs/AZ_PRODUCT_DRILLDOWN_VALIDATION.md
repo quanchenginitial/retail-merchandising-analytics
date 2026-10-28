@@ -1,6 +1,6 @@
 # Complete A × Z product drilldown
 
-29 October 2026. SQL28's seventeen contribution rows have been accepted from the learner's screenshot. [SQL29](../sql/29_az_product_drilldown.sql) exposes the complete A × Z cohort for local inspection. It is a single read-only query. Assistant preflight passed; learner execution of SQL29 remains pending and is separate evidence.
+29 October 2026. The learner's SQL29 screenshot confirms all fifteen A × Z rows and ten columns PASS, with both windows visible. Its ordered canonical-detail and membership fingerprints match the historical assistant preflight after display-only normalization. [SQL29](../sql/29_az_product_drilldown.sql) is a single read-only query; [learner acceptance](../data/az_product_drilldown_learner_acceptance.json) records aggregates and fingerprints without publishing product identifiers or rows.
 
 ## Purpose and scope
 
@@ -41,9 +41,9 @@ The [preflight runner](../validation/preflight_az_product_drilldown.py) and [mac
 
 Independently derived totals, weekly vectors, ABC crossing-prefix labels and exact XYZ labels provide the reference. Compare the complete cohort and every output column, deterministic order, displayed rounding, NULL behavior and both windows. Reconcile fifteen products and 20,626 / 18,907 units to the accepted SQL28 cell. Preserve before/after fingerprints of five input tables, source hashes and historical preflight records.
 
-Real product identifiers, product-level rows, CSV extracts and screenshots are excluded from public evidence. Public records retain aggregate controls, test results and SHA-256 fingerprints. Future learner screenshot acceptance remains distinct from this assistant-run preflight.
+Real product identifiers, product-level rows, CSV extracts and screenshots are excluded from public evidence. Public records retain aggregate controls, test results and SHA-256 fingerprints. Learner screenshot acceptance is now recorded separately from this assistant-run preflight.
 
-## Preflight results
+## Independent preflight and accepted aggregates
 
 All 3,049 products across 22 combined fields matched the independent reference. All fifteen A × Z result rows across ten columns matched, including order and both windows. The cohort's totals matched the accepted SQL28 cell: 20,626 units over 90 days and 18,907 over 84 days, with 1,719 units in the excluded six days.
 
@@ -55,8 +55,16 @@ All 3,049 products across 22 combined fields matched the independent reference. 
 | Displayed mean positive-week gap range | 1.000000–2.200000 weeks |
 | Products with NULL positive-week gap | 0 |
 
-These are cohort aggregates, not a product-level extract. The 49 observations are product/week cells, not 49 distinct products or calendar weeks. At least one product has no zero-sales weeks despite belonging to Z: relative variability is not synonymous with intermittent sales. Actual causal explanations require a closer look at time patterns and further evidence.
+These aggregate values also match the learner screenshot; no product-level extract is published. The 49 observations are product/week cells, not 49 distinct products or calendar weeks. Assistant interpretation: at least one product has no zero-sales weeks despite belonging to Z, so relative variability is not synonymous with intermittent sales. This observation does not identify a cause.
 
 All eighteen targeted cases passed. Six valid cases cover NULL/non-NULL gaps, tied units with reversed source order, valid empty cohorts from positive and all-zero sources, exact Z classification despite a displayed CV of 1.000000, and allowed source-metric numerical variation. Twelve rejection cases cover invalid empty sources, an empty combined snapshot, duplicate products, deletion of the whole cohort, incorrect labels, copied floating-value drift, wrong windows/schema, incorrect source ABC ranks or XYZ labels, missing weekly observations and nonfinite metrics. The real cohort has no tied 90-day unit values; tie behavior is established by the synthetic fixture.
 
 All five input snapshots, both original CSV hashes and all 27 historical preflight records remained unchanged; temporary databases were removed. DuckDB v1.5.5 used two threads and a 2GB memory limit. The SQL29 CLI query took 0.385 seconds in this run, excluding Python reference comparison and hashing; this is not a performance guarantee. Ordered membership and canonical detail SHA-256 hashes match the independent reference and are recorded in the public aggregate evidence.
+
+## Learner acceptance and next step
+
+On 29 October 2026, the assistant transcribed the fifteen screenshot rows only in memory and normalized integer formatting and six-place decimal display. Both dates and all PASS statuses were visible. The full ordered ten-field detail fingerprint and the ordered membership fingerprint matched the historical preflight exactly; all cohort aggregates also matched. The screenshot and real product rows or identifiers were not saved to the repository. See the [aggregate acceptance record](../data/az_product_drilldown_learner_acceptance.json).
+
+This confirms learner execution and the displayed result. It does not independently inspect unrounded database values or rerun original-source validation; those checks, the eighteen test cases and input/source fingerprints remain assistant preflight evidence. The business interpretation here is the assistant's, not a claim that the learner has explained these concepts.
+
+The next planned step follows all twelve weekly observations for the first A × Z product under the fixed order units_90d DESC, item_id ASC. Selection will be automatic rather than hard-coding a real product identifier. It will help relate the displayed CV and zero-week summary to the recorded sequence; it will not establish a stockout, cause, forecast error or replenishment quantity. That step has not yet been executed by the learner.
