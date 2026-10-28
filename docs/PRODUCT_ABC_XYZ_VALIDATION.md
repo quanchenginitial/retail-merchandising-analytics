@@ -1,6 +1,6 @@
 # Product ABC × XYZ combination: construction and validation
 
-28 October 2026. SQL26's five fixed XYZ-sensitivity scenarios have been accepted from the learner screenshot. SQL27 combines the declared ABC and XYZ baselines, retaining both observation windows. This is a product count matrix and a per-product analytical snapshot; cell-level unit contribution and drill-down follow after learner acceptance. See [XYZ sensitivity acceptance](XYZ_THRESHOLD_SENSITIVITY_VALIDATION.md) and [SQL27](../sql/27_build_product_abc_xyz.sql).
+29 October 2026 (Australia/Sydney). The learner's DBeaver screenshot confirms all five SQL27 matrix rows have `check_status=PASS` and numerically match the independent assistant preflight; both full date ranges are visible on every row. The combined snapshot and displayed product-count matrix are accepted. The [learner acceptance record](../data/product_abc_xyz_learner_acceptance.json) transcribes the screenshot; no direct read of the learner database was performed. SQL27 retains both declared ABC and XYZ windows and their accepted baseline labels. Cell-level unit contribution and drill-down remain subsequent work. See [XYZ sensitivity acceptance](XYZ_THRESHOLD_SENSITIVITY_VALIDATION.md) and [SQL27](../sql/27_build_product_abc_xyz.sql).
 
 ## Purpose and fixed definitions
 
@@ -51,9 +51,9 @@ Nine columns: abc_class, x_skus, y_skus, z_skus, zero_xyz_skus, total_skus, abc_
 
 Display ABC `2016-01-26..2016-04-24` and XYZ `2016-01-30..2016-04-22` on every report row. This first combined output reports counts only. Do not infer a cell's unit share, sales value, profit or inventory needs from its product count.
 
-## Independent preflight results
+## Accepted learner results and independent preflight
 
-Assistant preflight passed; learner SQL27 execution is pending. The independently checked matrix is:
+The learner screenshot reproduces the five rows below, including all PASS statuses, zero cells, margins and both observation-window strings. The acceptance record omits thousands separators, preserves counts as integers and retains the displayed date ranges. The original-CSV comparisons, 22-field checks, targeted cases, hashes and timings below remain separate assistant preflight evidence; the screenshot does not independently establish those checks.
 
 | ABC | X 商品 | Y 商品 | Z 商品 | 全零 XYZ 商品 | 行合计 | ABC 窗口 | XYZ 窗口 | 状态 |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
@@ -63,7 +63,7 @@ Assistant preflight passed; learner SQL27 execution is pending. The independentl
 | ZERO_SALES | 0 | 0 | 0 | 4 | 4 | 2016-01-26..2016-04-24 | 2016-01-30..2016-04-22 | PASS |
 | TOTAL | 2745 | 167 | 130 | 7 | 3049 | 2016-01-26..2016-04-24 | 2016-01-30..2016-04-22 | PASS |
 
-Original source controls reproduce **3,767,196 units in 90 days = 3,536,539 units in 84 days + 230,657 units in the excluded six days**, with zero per-product bridge mismatches. Three products have positive 90-day units but zero 84-day units; all are C × ZERO_SALES and together sold 12 units on the six excluded dates. This twelve-unit subtotal is distinct from the full-universe six-day total. The four ABC ZERO_SALES products are also XYZ ZERO_SALES, explaining the column total of seven.
+Separately, the assistant's original-CSV preflight reproduced **3,767,196 units in 90 days = 3,536,539 units in 84 days + 230,657 units in the excluded six days**, with zero per-product bridge mismatches. Three products have positive 90-day units but zero 84-day units; all are C × ZERO_SALES and together sold 12 units on the six excluded dates. This twelve-unit subtotal is distinct from the full-universe six-day total. The screenshot confirms three C × ZERO_SALES products and four products zero in both classifications, explaining the XYZ-zero column total of seven. It does not display those products' unit totals or independently verify the per-product six-day bridge.
 
 The [runner](../validation/preflight_product_abc_xyz.py) reads the registered sales/calendar CSVs without modification, projects only the 90-day window into a private database, and executes the actual SQL21, SQL23, SQL24, SQL25 and SQL27. No learner database is opened and no full-history fact is rebuilt. Independently sum original wide arrays for all 90 days, the twelve seven-day vectors and the six excluded days. Python uses crossing-prefix endpoints for ABC, exact centered Fraction population CV squared for XYZ, and 70-digit Decimal metric references. These reference methods differ from SQL's prior-cumulative ABC expression and raw-moment CV-square expression.
 
@@ -75,4 +75,8 @@ Before/after fingerprints match for all four input tables: ABC, weekly sales, va
 
 ## Interpretation and next step
 
-The matrix combines contribution and observed relative variability while preserving lineage back to each source product. A cell can contain few products yet substantial historical units, so the next step should compare cell contribution and allow product-level inspection. Short-window CV and store pooling limit interpretation; low CV is not a demonstrated forecasting result. Keep recorded sales separate from unconstrained demand and observed zero sales separate from availability. Actual replenishment decisions require inventory, lead-time, service-level and cost evidence beyond this count matrix.
+The following interpretation is supplied by the assistant. The matrix combines contribution and observed relative variability while preserving lineage back to each source product. A × X contains 1,082 products; that count alone does not establish its share of recorded units. The three C × ZERO_SALES products are a valid result of using nested observation windows, not products to discard from the join.
+
+The next planned step compares cell-level recorded-unit contribution, keeping the 90-day and 84-day totals and share denominators separate and showing both windows. Its results and learner execution are pending; monetary contribution is outside that step. A cell can contain few products yet substantial historical units, so counts and unit contribution must be examined separately before product-level inspection.
+
+Short-window CV and store pooling limit interpretation; low CV is not a demonstrated forecasting result. Keep recorded sales separate from unconstrained demand and observed zero sales separate from availability. Actual replenishment decisions require inventory, lead-time, service-level and cost evidence beyond this count matrix.

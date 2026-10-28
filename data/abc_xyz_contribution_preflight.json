@@ -1,0 +1,600 @@
+{
+  "checked_at_utc": "2026-10-28T13:48:14.271726+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under repository tmp; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 23605248,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/28_abc_xyz_contribution.sql",
+  "script_sha256": "c145cff7effe0e1126c9ae99866e9945ed3a684004f7010b2154c454150d5221",
+  "prerequisite_script_sha256": {
+    "sql/21_build_product_abc_units.sql": "e024e3ccf71f047181c16b00fde033442ce62cae030f2058c14fd007a5427c05",
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/24_build_product_variability.sql": "9978038deb932afbbb087a3079e9b2475c4d21a78da6db23647c7a136a458329",
+    "sql/25_build_product_xyz.sql": "a8f8fe7d179b30b8b157aa89585d0ef3b4309253aeee5fd491588e6a88b1b87b",
+    "sql/27_build_product_abc_xyz.sql": "9676263b8cff302baf5bb8c856624ab00ab7ef0538ac13f527566aeb4388e826"
+  },
+  "reference_helper_sha256": {
+    "validation/preflight_product_abc_xyz.py": "3ee2d4e0600183b827227134462a84f28d9ada8a3f8219bfaab8a8a68a845be7",
+    "validation/preflight_abc_threshold_sensitivity.py": "ba90401f6b802b81bd4127fb698421ad0137fb6bdce91df15d486fa153b567bd",
+    "validation/preflight_product_variability.py": "5682ab1a997ef82c66be04092fc7fbc9156725637f2f17e77dff6baf162ae072",
+    "validation/preflight_product_xyz.py": "9cd9f7f543d619e91052e87db78af498c0c08a8f3b33228f5fc0632d0c9bd404",
+    "validation/preflight_xyz_threshold_sensitivity.py": "8b63508b94d2cc4de8ebfa765be2f9914d00a0197832c2aba02ac050a0625a55"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "historical_preflight_sha256": {
+    "data/abc_threshold_sensitivity_preflight.json": "a11053f48b59f09d94b890d4eb83f9b75210482ea5b2391f9588d1f6e56de339",
+    "data/calendar_audit_preflight.json": "76a2e40ac54597acee84aa5d7a6dd112b19b58412c2b1acaa860d150ffdd9f90",
+    "data/calendar_dimension_preflight.json": "ac9e379e2838f698de5f858a3006fc398604b17a9bf55b61c560ba28658c416b",
+    "data/calendar_import_preflight.json": "72a6191620ef88df12d4a2012cb204701f3b2833f242e01e0e6c28a6d3f83e87",
+    "data/calendar_staging_preflight.json": "67f07e4bf89c18edaaf0bd87089d98d12d768b75e768d4e81da8c43b0f461c18",
+    "data/category_contribution_preflight.json": "e66d6e4832833746abd9555755ea52ff324592c2e49ac8caf957dabf6462f37f",
+    "data/department_contribution_preflight.json": "31db61d17130a6e730ea15e04b2f652a267a41e0f2674448ba62d1f81457d07f",
+    "data/dimension_joins_preflight.json": "4df748b6c343dc8c513a07e3fb318bcd696b7e5cf9eedffd056bb4df10a65ae9",
+    "data/price_audit_preflight.json": "e2fbe41f0b22dd103c40e6811ba8b78b27980b257636865f7f6f8386c307a30c",
+    "data/price_coverage_preflight.json": "ef2bc88c3466b958c3c6832f52125835d46ec3f7a31ffe1b3d4b9d4d1149660a",
+    "data/price_import_preflight.json": "04b00ec67ab53d9b8a695496dc691e2f893afe6bae61bfffbb1450b3c95edbf8",
+    "data/price_staging_preflight.json": "a24bb94f812c97e55f273dde4a99f657057014a7a807b9544bd8021dbd452ec5",
+    "data/product_abc_units_preflight.json": "33c525addcd588045b132ffe6d66faaaf1c9e9d197567293cc71a3312c21503a",
+    "data/product_abc_xyz_preflight.json": "a23167c247c46e02e1401dbc0a0767029b2d1dd73c5eba8efd7365828e2d30b1",
+    "data/product_dimension_preflight.json": "f80f785795bdbc6e51c362dfe3bc5b0a0ea2c4853eaad33d9a416801c63d1406",
+    "data/product_unit_concentration_preflight.json": "7582aefa60ad95879647c7e221343e7296ac90cd2cb908bee52fc7cd6d014849",
+    "data/product_variability_preflight.json": "34fe40f85839374ce8112f37593fa9c0467529995c53488853bf716948ad0dba",
+    "data/product_weekly_preflight.json": "fa6aecbe040ee997dd6f69d3c430ddcff7ac2e19d11073c261fb2d82845b8286",
+    "data/product_xyz_preflight.json": "44fada6977a90ac31beb113e62980c559223da1f7fa18c67b8dcef2608f1e341",
+    "data/sales_audit_preflight.json": "571df148f470f287316b7d1ab4b280f0ef3358e7816983a3fc6c902df7797e31",
+    "data/sales_daily_preflight.json": "7715d083bd2b6c6b569c127a9e75ae3c9cd24e0eaacd1f87e7e5dcfff56e34c4",
+    "data/sales_fact_preflight.json": "15c56fc13ca89e46fdc4fcc0c35afa746874506d9f9577be4bfb0fc72f4f2d01",
+    "data/sales_import_preflight.json": "455d51237689f9853b7d06d8bfd148ee4a94cf60d0750356974f3e658d320036",
+    "data/sales_reconciliation_preflight.json": "00857bd0778673309a1ada13bec9a57ae8248fba69d5e6a2d8cf4b89ab49bbb8",
+    "data/store_dimension_preflight.json": "beaa6fdee6ed71a6f78f20ecb2c44998d8dbd4a35217b27d4c0c381f5c0cd20d",
+    "data/xyz_threshold_sensitivity_preflight.json": "17c37f0d09894160bb856f7e46dbcbedff77a400d7e56e3739d5d5972ceea942"
+  },
+  "historical_preflights_unchanged": true,
+  "preflight_strategy": "Read only original sales/calendar CSVs. Build a private 90-day six-column daily table, execute actual SQL21,23,24,25,27, then read-only SQL28. This is not a full-history rebuild; the learner database is never opened.",
+  "independent_reference": "Original wide arrays independently supply each product 90-day total, twelve seven-day vectors and excluded-six-day total. Python prefix endpoints define ABC, centered Fraction population CV squared defines XYZ, and Decimal half-up rounding defines displayed four-decimal percentages. Compare every product membership and 22 combined fields before independently grouping all sixteen cells.",
+  "analysis_windows": {
+    "abc": {
+      "start_date": "2016-01-26",
+      "end_date": "2016-04-24",
+      "days": 90
+    },
+    "xyz": {
+      "start_date": "2016-01-30",
+      "end_date": "2016-04-22",
+      "days": 84,
+      "weeks": 12
+    },
+    "scope": "Every product pooled across all ten stores; zero observations retained."
+  },
+  "denominator_policy": "SKU share uses all 3049 products; each unit share uses its own window total. Empty cells have zero counts and units; if a whole-window unit total is zero, every corresponding unit share including TOTAL is NULL. Rounded cell percentages are not required to sum exactly to 100.",
+  "timings": {
+    "window_setup_seconds": 6.997,
+    "sql21_build_seconds": 0.439,
+    "sql21_validation_seconds": 0.838,
+    "sql23_build_seconds": 1.058,
+    "sql23_validation_seconds": 1.013,
+    "sql24_build_seconds": 0.206,
+    "sql24_validation_seconds": 0.237,
+    "sql25_build_seconds": 0.273,
+    "sql25_validation_seconds": 0.37,
+    "sql27_build_seconds": 0.369,
+    "sql27_validation_seconds": 0.474,
+    "independent_wide_vector_query_seconds": 0.678,
+    "contribution_query_seconds": 0.495,
+    "integer_cells_query_seconds": 0.144,
+    "product_membership_query_seconds": 0.145
+  },
+  "timing_scope": "DuckDB CLI process timings; excludes Python comparison and file hashing.",
+  "combined_product_rows_compared": 3049,
+  "combined_columns_compared": 22,
+  "combined_field_mismatches": 0,
+  "combined_float_error_summary": {
+    "mean_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.666666666666666666666666667E-13",
+      "max_error_to_tolerance_ratio": "1.297858533419857235561323816E-7",
+      "max_allowed_tolerance": "0.000003853333333333333333333333333"
+    },
+    "stddev_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "2.868426587277874278586383756E-13",
+      "max_error_to_tolerance_ratio": "0.000001634685410229443147550526478",
+      "max_allowed_tolerance": "7.101692861291222677628880905E-7"
+    },
+    "cv_weekly": {
+      "nonnull_values_compared": 3042,
+      "null_values_compared": 7,
+      "max_absolute_error": "6.549651135575672569153626340E-16",
+      "max_error_to_tolerance_ratio": "1.672428079142314616284420299E-7",
+      "max_allowed_tolerance": "4.316624790355399849114932737E-9"
+    },
+    "zero_week_share": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "6.666666666666666666666666667E-17",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526317E-8",
+      "max_allowed_tolerance": "2E-9"
+    },
+    "mean_positive_gap_weeks": {
+      "nonnull_values_compared": 3032,
+      "null_values_compared": 17,
+      "max_absolute_error": "1.666666666666666666666666667E-16",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526316E-8",
+      "max_allowed_tolerance": "1.1E-8"
+    }
+  },
+  "product_memberships_compared": 3049,
+  "membership_mismatches": 0,
+  "integer_cells_compared": 16,
+  "integer_cell_mismatches": 0,
+  "row_and_column_count_and_both_unit_margins_matched": true,
+  "source_controls": {
+    "product_count": 3049,
+    "units_90d": 3767196,
+    "units_84d": 3536539,
+    "excluded_six_day_units": 230657,
+    "empty_cells": 5
+  },
+  "accepted_combined_baseline_matched": true,
+  "accepted_baseline_evidence": "data/product_abc_xyz_learner_acceptance.json",
+  "accepted_baseline_evidence_sha256": "5eb8261a9dda6074f2f21fd3ec17c542abe7da4a587cf9b50684bfdcbda52ece",
+  "all_input_tables_unchanged": true,
+  "input_rows_sha256_before": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "cca9a768afe5516f60f63ae3c28ff6df175160d99e8b74514285287e21faacaf",
+    "xyz": "ce8162d1aedf7d5e50a45ef6e339a2c423bf20ae33bb1183b5b68a1cb229a81d",
+    "combined": "405ebf43f422aefe057e302fa96720109a584a323d53acc8e205c649c0de816f"
+  },
+  "input_rows_sha256_after": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "cca9a768afe5516f60f63ae3c28ff6df175160d99e8b74514285287e21faacaf",
+    "xyz": "ce8162d1aedf7d5e50a45ef6e339a2c423bf20ae33bb1183b5b68a1cb229a81d",
+    "combined": "405ebf43f422aefe057e302fa96720109a584a323d53acc8e205c649c0de816f"
+  },
+  "integer_cells": [
+    {
+      "abc_class": "A",
+      "xyz_class": "X",
+      "sku_count": 1082,
+      "units_90d": "2892612",
+      "units_84d": "2717788"
+    },
+    {
+      "abc_class": "A",
+      "xyz_class": "Y",
+      "sku_count": 38,
+      "units_90d": "100661",
+      "units_84d": "95885"
+    },
+    {
+      "abc_class": "A",
+      "xyz_class": "Z",
+      "sku_count": 15,
+      "units_90d": "20626",
+      "units_84d": "18907"
+    },
+    {
+      "abc_class": "A",
+      "xyz_class": "ZERO_SALES",
+      "sku_count": 0,
+      "units_90d": "0",
+      "units_84d": "0"
+    },
+    {
+      "abc_class": "B",
+      "xyz_class": "X",
+      "sku_count": 903,
+      "units_90d": "528762",
+      "units_84d": "496107"
+    },
+    {
+      "abc_class": "B",
+      "xyz_class": "Y",
+      "sku_count": 44,
+      "units_90d": "23401",
+      "units_84d": "22056"
+    },
+    {
+      "abc_class": "B",
+      "xyz_class": "Z",
+      "sku_count": 21,
+      "units_90d": "13015",
+      "units_84d": "11062"
+    },
+    {
+      "abc_class": "B",
+      "xyz_class": "ZERO_SALES",
+      "sku_count": 0,
+      "units_90d": "0",
+      "units_84d": "0"
+    },
+    {
+      "abc_class": "C",
+      "xyz_class": "X",
+      "sku_count": 760,
+      "units_90d": "160754",
+      "units_84d": "150665"
+    },
+    {
+      "abc_class": "C",
+      "xyz_class": "Y",
+      "sku_count": 85,
+      "units_90d": "13764",
+      "units_84d": "12920"
+    },
+    {
+      "abc_class": "C",
+      "xyz_class": "Z",
+      "sku_count": 94,
+      "units_90d": "13589",
+      "units_84d": "11149"
+    },
+    {
+      "abc_class": "C",
+      "xyz_class": "ZERO_SALES",
+      "sku_count": 3,
+      "units_90d": "12",
+      "units_84d": "0"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "xyz_class": "X",
+      "sku_count": 0,
+      "units_90d": "0",
+      "units_84d": "0"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "xyz_class": "Y",
+      "sku_count": 0,
+      "units_90d": "0",
+      "units_84d": "0"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "xyz_class": "Z",
+      "sku_count": 0,
+      "units_90d": "0",
+      "units_84d": "0"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "xyz_class": "ZERO_SALES",
+      "sku_count": 4,
+      "units_90d": "0",
+      "units_84d": "0"
+    }
+  ],
+  "result_rows": 17,
+  "results": [
+    {
+      "segment": "A × X",
+      "sku_count": 1082,
+      "sku_share_pct": "35.4870",
+      "units_90d": "2892612",
+      "unit_share_90d_pct": "76.7842",
+      "units_84d": "2717788",
+      "unit_share_84d_pct": "76.8488",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "A × Y",
+      "sku_count": 38,
+      "sku_share_pct": "1.2463",
+      "units_90d": "100661",
+      "unit_share_90d_pct": "2.6720",
+      "units_84d": "95885",
+      "unit_share_84d_pct": "2.7113",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "A × Z",
+      "sku_count": 15,
+      "sku_share_pct": "0.4920",
+      "units_90d": "20626",
+      "unit_share_90d_pct": "0.5475",
+      "units_84d": "18907",
+      "unit_share_84d_pct": "0.5346",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "A × ZERO_SALES",
+      "sku_count": 0,
+      "sku_share_pct": "0.0000",
+      "units_90d": "0",
+      "unit_share_90d_pct": "0.0000",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "B × X",
+      "sku_count": 903,
+      "sku_share_pct": "29.6163",
+      "units_90d": "528762",
+      "unit_share_90d_pct": "14.0360",
+      "units_84d": "496107",
+      "unit_share_84d_pct": "14.0280",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "B × Y",
+      "sku_count": 44,
+      "sku_share_pct": "1.4431",
+      "units_90d": "23401",
+      "unit_share_90d_pct": "0.6212",
+      "units_84d": "22056",
+      "unit_share_84d_pct": "0.6237",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "B × Z",
+      "sku_count": 21,
+      "sku_share_pct": "0.6888",
+      "units_90d": "13015",
+      "unit_share_90d_pct": "0.3455",
+      "units_84d": "11062",
+      "unit_share_84d_pct": "0.3128",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "B × ZERO_SALES",
+      "sku_count": 0,
+      "sku_share_pct": "0.0000",
+      "units_90d": "0",
+      "unit_share_90d_pct": "0.0000",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "C × X",
+      "sku_count": 760,
+      "sku_share_pct": "24.9262",
+      "units_90d": "160754",
+      "unit_share_90d_pct": "4.2672",
+      "units_84d": "150665",
+      "unit_share_84d_pct": "4.2602",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "C × Y",
+      "sku_count": 85,
+      "sku_share_pct": "2.7878",
+      "units_90d": "13764",
+      "unit_share_90d_pct": "0.3654",
+      "units_84d": "12920",
+      "unit_share_84d_pct": "0.3653",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "C × Z",
+      "sku_count": 94,
+      "sku_share_pct": "3.0830",
+      "units_90d": "13589",
+      "unit_share_90d_pct": "0.3607",
+      "units_84d": "11149",
+      "unit_share_84d_pct": "0.3153",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "C × ZERO_SALES",
+      "sku_count": 3,
+      "sku_share_pct": "0.0984",
+      "units_90d": "12",
+      "unit_share_90d_pct": "0.0003",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ZERO_SALES × X",
+      "sku_count": 0,
+      "sku_share_pct": "0.0000",
+      "units_90d": "0",
+      "unit_share_90d_pct": "0.0000",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ZERO_SALES × Y",
+      "sku_count": 0,
+      "sku_share_pct": "0.0000",
+      "units_90d": "0",
+      "unit_share_90d_pct": "0.0000",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ZERO_SALES × Z",
+      "sku_count": 0,
+      "sku_share_pct": "0.0000",
+      "units_90d": "0",
+      "unit_share_90d_pct": "0.0000",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "ZERO_SALES × ZERO_SALES",
+      "sku_count": 4,
+      "sku_share_pct": "0.1312",
+      "units_90d": "0",
+      "unit_share_90d_pct": "0.0000",
+      "units_84d": "0",
+      "unit_share_84d_pct": "0.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "segment": "TOTAL",
+      "sku_count": 3049,
+      "sku_share_pct": "100.0000",
+      "units_90d": "3767196",
+      "unit_share_90d_pct": "100.0000",
+      "units_84d": "3536539",
+      "unit_share_84d_pct": "100.0000",
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    }
+  ],
+  "fixture_cases_passed": 18,
+  "fixture_cases": [
+    {
+      "case": "mixed_labels_complete_cells_and_independent_denominators",
+      "passed": true,
+      "rejected": false,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "all_zero_both_unit_share_columns_are_null",
+      "passed": true,
+      "rejected": false,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "positive_90d_and_all_zero_84d_use_separate_denominators",
+      "passed": true,
+      "rejected": false,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "constant_positive_empty_classes_are_retained",
+      "passed": true,
+      "rejected": false,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "accepted_metric_float_tolerance_is_preserved",
+      "passed": true,
+      "rejected": false,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "empty_combined_snapshot",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "missing_combined_product",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_combined_product",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "combined_copied_float_drift",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "combined_six_day_bridge_drift",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "combined_wrong_window",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "swapped_product_labels_preserve_count_and_unit_margins",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "combined_wrong_schema",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "duplicate_abc_source_key",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "incorrect_abc_source_class",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "incorrect_xyz_source_class",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "missing_source_week",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    },
+    {
+      "case": "nonfinite_source_metric",
+      "passed": true,
+      "rejected": true,
+      "all_five_input_tables_unchanged": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner contribution query execution pending. Recorded units in different-length nested historical windows are not a before/after growth comparison. This descriptive report does not estimate inventory, profitability, replenishment or forecast performance; no product-level extract is saved."
+}

@@ -1,0 +1,85 @@
+{
+  "observed_date": "2026-10-29",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant transcription of the learner-supplied DBeaver result screenshot; no direct database read.",
+  "script": "sql/27_build_product_abc_xyz.sql",
+  "table": "mart.m5_product_abc_xyz",
+  "analysis_windows": {
+    "abc": {
+      "start_date": "2016-01-26",
+      "end_date": "2016-04-24",
+      "days": 90
+    },
+    "xyz": {
+      "start_date": "2016-01-30",
+      "end_date": "2016-04-22",
+      "days": 84,
+      "weeks": 12
+    },
+    "scope": "All 3,049 source products, pooled across all ten stores; both accepted baselines and their separate zero-sales groups retained."
+  },
+  "display_normalization": "Thousands separators are omitted and all product counts are JSON integers. Both displayed window strings are preserved exactly as YYYY-MM-DD..YYYY-MM-DD. Date metadata uses YYYY-MM-DD.",
+  "result_rows": 5,
+  "rows_with_pass_status": 5,
+  "both_windows_visible_in_screenshot": true,
+  "matches_assistant_preflight_numerically": true,
+  "results": [
+    {
+      "abc_class": "A",
+      "x_skus": 1082,
+      "y_skus": 38,
+      "z_skus": 15,
+      "zero_xyz_skus": 0,
+      "total_skus": 1135,
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "B",
+      "x_skus": 903,
+      "y_skus": 44,
+      "z_skus": 21,
+      "zero_xyz_skus": 0,
+      "total_skus": 968,
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "C",
+      "x_skus": 760,
+      "y_skus": 85,
+      "z_skus": 94,
+      "zero_xyz_skus": 3,
+      "total_skus": 942,
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "ZERO_SALES",
+      "x_skus": 0,
+      "y_skus": 0,
+      "z_skus": 0,
+      "zero_xyz_skus": 4,
+      "total_skus": 4,
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    },
+    {
+      "abc_class": "TOTAL",
+      "x_skus": 2745,
+      "y_skus": 167,
+      "z_skus": 130,
+      "zero_xyz_skus": 7,
+      "total_skus": 3049,
+      "abc_window": "2016-01-26..2016-04-24",
+      "xyz_window": "2016-01-30..2016-04-22",
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Learner execution and all five displayed ABC-by-XYZ count-matrix rows are accepted. Rows and column margins reconcile to the accepted ABC and XYZ product counts, with 3,049 products in total. The screenshot shows three C-by-ZERO_SALES products and four products zero under both classifications; all zero cells and groups are retained. It does not display cell unit contributions, the 12 units associated with those three products, or an independent per-product 90/84/excluded-six-day bridge. Original-CSV comparisons, all 22 product fields, targeted tests, source and input fingerprints, timing and bridge statistics remain separate assistant preflight evidence. The accompanying interpretation is attributed to the assistant. Cell-level unit contribution is the next planned step with separate denominators for the two windows; its execution/results remain pending. No monetary contribution, optimal operating policy, forecast improvement, inventory requirement or causal-performance result is claimed."
+}
