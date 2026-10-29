@@ -4,7 +4,7 @@
 
 The pilot now has accepted construction, development error and paired-coverage results. WEEKDAY4 is the preferred development baseline in that pilot, because average MAE and macro RMSSE are lower in all three windows and the paired mean/median differences are negative. Its MAE win coverage is not universal: the second window has exactly 108 improvements among 216 series. Preserve SNAIVE7 as the reference candidate.
 
-[SQL38](../sql/38_build_full_catalog_baseline_forecasts.sql) now builds both unchanged formulas over the full released catalog. This is an expansion of scope and forecast construction, not another accuracy comparison or final selection. The [fixed protocol](FULL_CATALOG_BASELINE_FORECASTS_PROTOCOL.md) records the broader roster, temporal bounds, table schema and output contract before the new construction results are inspected. The earlier [evaluation plan](EVALUATION_PLAN.md) remains unchanged.
+[SQL38](../sql/38_build_full_catalog_baseline_forecasts.sql) now builds both unchanged formulas over the full released catalog. This is an expansion of scope and forecast construction, not another accuracy comparison or final selection. The [fixed protocol](FULL_CATALOG_BASELINE_FORECASTS_PROTOCOL.md) records the broader roster, temporal bounds, table schema and output contract before the new construction results are inspected. The earlier [evaluation plan](EVALUATION_PLAN.md) remains unchanged. On 29 October 2026 (Australia/Sydney), the learner accepted all eight rows and twelve displayed fields; the canonical report fingerprint matches the historical assistant preflight exactly.
 
 ## From a pilot to all item/store combinations
 
@@ -46,7 +46,7 @@ All **13 focused cases** passed: five valid cases covered multiple products/stor
 
 ## Executed assistant construction results
 
-All eight rows below passed, each with **30,490 series and 853,720 forecast positions**. These are construction controls; **learner SQL38 execution remains pending**.
+All eight rows below passed, each with **30,490 series and 853,720 forecast positions**. These construction controls are **also accepted from the learner screenshot**. Detailed recent-input, forecast and pilot comparisons remain separate assistant preflight evidence.
 
 | Origin | Model | Input days | Input units | Predicted units | Zero forecasts | Fractional forecasts |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -64,3 +64,13 @@ The ordered report fingerprint is `8adf6723be729be1311415ef1379929c18d1637cd7316
 For a first run, copy the whole SQL38 file into a new editor under the `retail_merchandising` DBeaver connection and execute the script. It creates the broader table and returns eight summary rows. If the table already exists after a successful build, run only the part after `-- VALIDATION:`. Keep any error for diagnosis rather than deleting accepted tables. Return all eight rows including model, origin and check status.
 
 The final-origin rows are unscored candidates generated through 2016-04-24. Wider development evaluation follows this construction step. Final selection and the one final-holdout evaluation remain future work; no full-catalog accuracy, inventory benefit or completed forecasting stage is claimed here.
+
+## Learner acceptance — 29 October 2026
+
+The [learner acceptance record](../data/full_catalog_baseline_forecasts_learner_acceptance.json) transcribes all eight rows and twelve displayed fields in origin/model order. Counts and input units remain integers; integer-looking displayed predicted totals are normalized to two-decimal strings and dates to ISO format. Applying the SQL38 runner's canonicalization reproduces ordered report SHA-256 `8adf6723be729be1311415ef1379929c18d1637cd7316568b6278c654ea76587`.
+
+Every row displays 30,490 series, 853,720 forecast positions and PASS. Summing the reported positions gives 6,829,760 across both models and four origins, or 3,414,880 per model. These are forecast positions, not distinct products or sales units. Input-total identities, zero counts and fractional counts match the table above. The separate product/store/department/category/state counts come from accepted metadata audits, not extra screenshot fields.
+
+This accepts the learner's displayed construction and saved-table validation summary. It is not a direct database read or an independent inspection of all persisted predictions. The full recent-input and forecast comparisons, pilot history and original-table reconstructions, mapped overlap, 13 focused cases, preservation checks and cleanup remain historical assistant evidence. SQL38 does not read or audit the original pilot tables; their overlap and preservation were checked separately in the private preflight. Individual product identifiers, forecasts, vectors and screenshot are not published.
+
+Assistant interpretation: the same two transparent formulas have a verified construction summary across the full released catalog. The pilot's WEEKDAY4 preference does not establish superiority in this broader scope. No wider forecast errors, full-history RMSSE scales, final-holdout scores, final model choice or inventory benefit are established by this step. Wider development scoring remains next under the unchanged evaluation plan. This screenshot acceptance does not independently test the learner's conceptual understanding.
