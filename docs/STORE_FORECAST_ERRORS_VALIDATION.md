@@ -44,7 +44,7 @@ Targeted fixtures cover the new store/state attribution and store-level eligibil
 
 The executed [machine evidence](../data/store_forecast_errors_preflight.json) records **30 rows × 15 columns, all PASS**, and **8 focused fixtures passed** (three valid cases and five correctly rejected invalid cases). All 182,940 assigned diagnostics, 60 internal store/model totals and 30 store-pair controls match the independent source reference under the declared exact/numeric comparison rules. Store integer totals and the distinct all-series/valid-series weighted means reconcile to the accepted global reports.
 
-All 58,327,370 history triples, complete source mappings/calendar and 6,829,760 saved candidates passed their checks. The literal SQL39/40/41 reports, earlier department/base diagnostic and pair fingerprints, SQL38 candidate/report controls and overlapping pilot evidence reproduce unchanged. Sources, saved candidates, relevant inputs and historical dependencies remain unchanged; private detail exports and databases were removed. **Learner SQL42 execution remains pending.**
+All 58,327,370 history triples, complete source mappings/calendar and 6,829,760 saved candidates passed their checks. The literal SQL39/40/41 reports, earlier department/base diagnostic and pair fingerprints, SQL38 candidate/report controls and overlapping pilot evidence reproduce unchanged. Sources, saved candidates, relevant inputs and historical dependencies remain unchanged; private detail exports and databases were removed. **Learner SQL42 output was accepted on 29 October 2026:** the screenshot verifies all thirty rows across fourteen substantive fields, and the learner separately confirms all thirty PASS statuses because the final column is clipped. See the acceptance section below.
 
 ### Selected fields from the verified report
 
@@ -83,12 +83,22 @@ The machine evidence retains all fifteen fields. This table highlights store dif
 | DEVELOPMENT_3 | WI_2 | WI | 3049 | 0 | -0.121363 | -0.310547 | -0.038561 | -0.161626 |
 | DEVELOPMENT_3 | WI_3 | WI | 3049 | 0 | -0.112168 | -0.143162 | -0.014372 | -0.158867 |
 
-These are assistant development preflight results, awaiting learner screenshot acceptance.
+These historical assistant preflight values now also match the learner's visible numeric report. Status acceptance uses the learner's explicit all-PASS confirmation; complete status text is not visible in the screenshot.
 
 Ordered report SHA256: `e78a15f0d2dcf329c30346a3583b3198b3fe98e52751d9aeab57d269cfbab156`.
 
-## Learner action and interpretation
+## Learner acceptance — 29 October 2026
 
-Run the complete SQL42 file in a new editor under the `retail_merchandising` DBeaver connection. It is read-only, creates no table and can be repeated. Full-history controls remain part of the query; wait for completion before rerunning. Return all 30 rows and fifteen fields, splitting screenshots while keeping origin/store identifiers readable.
+The [learner acceptance record](../data/store_forecast_errors_learner_acceptance.json) records two distinct evidence sources. The assistant inspected the supplied screenshot and independently transcribed all **30 rows × 14 substantive fields**: three identifier/context fields, three counts and eight metric/delta fields per row. All **240 metric values and 90 count values**, identifiers, source state codes and ordering match the frozen preflight after removing thousands separators and restoring six-decimal trailing zeros.
+
+The rightmost **check_status column is clipped**. The learner explicitly confirms that all thirty rows are PASS; those statuses are accepted from that statement, not inferred by completing partially visible text. The complete fifteen-field report fingerprint therefore combines screenshot-verified substantive values with learner-attested statuses. It must not be described as fifteen fully visible screenshot columns.
+
+The canonical complete report SHA256 remains `e78a15f0d2dcf329c30346a3583b3198b3fe98e52751d9aeab57d269cfbab156`. The separate fingerprint for the fourteen visible fields, excluding check_status, is `5b678503c6248abb3c1516c52254e7e1c6356301ace4b8a68efd5bdecd218672`. The historical preflight record is unchanged.
+
+This accepts the displayed store/window aggregates, paired differences and scale-eligibility counts. The screenshot does not independently prove the underlying source reconciliation, all diagnostic records, numeric controls or fixture outcomes; those remain the assistant's separate preflight evidence above. The learner database was not opened, and no screenshot, product identifier or individual diagnostic was copied into the repository. Conceptual understanding, final-holdout accuracy and final selection were not independently established by this acceptance.
+
+## Repeat execution and interpretation
+
+Run the complete SQL42 file in a new editor under the `retail_merchandising` DBeaver connection. It is read-only, creates no table and can be repeated. Full-history controls remain part of the query; wait for completion before rerunning. For any future verification, retain all 30 rows and fifteen fields, splitting screenshots while keeping origin/store identifiers readable; the current acceptance explicitly records the clipped status column and separate learner confirmation.
 
 Compare methods within a store/window. Differences in unit volumes and histories mean raw MAE alone is not a store-performance ranking. A lower store mean does not establish improvement for every product or department or supply a within-store win percentage. State labels do not establish geographic causes. SQL42 does not read or score final-holdout actual quantities; earlier engineering totals do not make this a wholly unseen period. No significance, final model selection, bias correction, inventory saving or deployed business effect is claimed.
