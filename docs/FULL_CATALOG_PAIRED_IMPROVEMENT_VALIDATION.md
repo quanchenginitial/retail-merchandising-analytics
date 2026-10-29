@@ -4,7 +4,7 @@
 
 SQL39's six development-error rows are learner accepted. WEEKDAY4 has lower overall MAE and macro RMSSE in all three windows, but an average does not tell us how widely the improvement is shared. [SQL40](../sql/40_compare_full_catalog_paired_improvement.sql) compares the two forecasts within each identical product-store series to count improvements, ties and deteriorations, then summarize their magnitudes.
 
-The [fixed protocol](FULL_CATALOG_PAIRED_IMPROVEMENT_PROTOCOL.md) was written before the new paired summaries. This is a descriptive follow-up to the observed development scores. Keep the full released roster, both unchanged model formulas and the three development windows. No outcome-based subset, per-series hindsight model selection or final-holdout actual data enters this step.
+The [fixed protocol](FULL_CATALOG_PAIRED_IMPROVEMENT_PROTOCOL.md) was written before the new paired summaries. This is a descriptive follow-up to the observed development scores. Keep the full released roster, both unchanged model formulas and the three development windows. No outcome-based subset, per-series hindsight model selection or final-holdout actual data enters this step. On 29 October 2026 (Australia/Sydney), the learner accepted all six rows and twelve displayed fields; the canonical report fingerprint matches the historical assistant preflight exactly.
 
 ## What is paired
 
@@ -45,7 +45,7 @@ The runner reconciles accepted SQL38 candidates, accepted SQL39 diagnostics/repo
 
 The executed [machine evidence](../data/full_catalog_paired_improvement_preflight.json) records **six rows × twelve columns, all PASS**, and **8 focused fixtures passed** (6 valid scenarios and 2 rejected corruptions). All indexed history, mapping/calendar, saved-candidate, diagnostic and paired comparisons passed. Exact pair classifications match independent integer comparisons; roots, paired RMSSE differences and unrounded aggregates match the 70-digit Decimal reference within fixed tolerances. Mean paired differences also reconcile to full-precision development aggregate differences on the same cohort.
 
-The SQL38 construction fingerprint, SQL39 diagnostics/report and overlapping SQL37 paired report reconcile. Original sources, saved candidates, relevant inputs and historical dependencies remain unchanged. Private temporary databases and detailed exports were removed. **Learner SQL40 execution remains pending.**
+The SQL38 construction fingerprint, SQL39 diagnostics/report and overlapping SQL37 paired report reconcile. Original sources, saved candidates, relevant inputs and historical dependencies remain unchanged. Private temporary databases and detailed exports were removed. **Learner SQL40 screenshot acceptance is now recorded separately below.**
 
 ### Independently verified aggregate report
 
@@ -58,7 +58,7 @@ The SQL38 construction fingerprint, SQL39 diagnostics/report and overlapping SQL
 | DEVELOPMENT_3 | MAE | 30490 | 0 | 17019 | 3178 | 10293 | 55.8183 | -0.158501 | -0.035714 |
 | DEVELOPMENT_3 | RMSSE | 30490 | 0 | 23146 | 2540 | 4804 | 75.9134 | -0.175844 | -0.121692 |
 
-Every row has total_series 30,490. The first RMSSE row excludes the ten source-confirmed no-positive-training series; the remaining rows have no exclusions. These are assistant development preflight results, awaiting learner screenshot acceptance.
+Every row has total_series 30,490. The first RMSSE row excludes the ten source-confirmed no-positive-training series; the remaining rows have no exclusions. These development aggregates are now also accepted from the learner screenshot; detailed source and paired-record comparisons remain separate assistant evidence.
 
 WEEKDAY4 improves MAE for 53.8209%–55.8183% of series and RMSSE for 72.1686%–75.9134% of eligible series across the three windows. All six paired medians are negative. A strict majority improves for each metric/window, while many ties and SNAIVE7 wins remain; this supports further subgroup investigation rather than claiming uniform improvement or choosing a hindsight model per series.
 
@@ -71,3 +71,17 @@ Ordered report SHA256: `2b0c2d245522ac25bc24993f156606334fa36a68f3cb70757127b8c5
 Open SQL40 in a new editor under the `retail_merchandising` DBeaver connection and execute the complete file. It is read-only, makes no new table and can be repeated. Full-history validation remains part of this query, so allow it to finish before running it again. Return all six rows and twelve columns, splitting wide screenshots if needed.
 
 The same products/stores recur across windows and are not independent experimental trials. These descriptive counts do not establish significance, uniform improvement across categories or stores, final-holdout performance, inventory savings or deployed business benefits. Subgroup checks and eventual final selection remain separate work.
+
+## Learner acceptance — 29 October 2026
+
+The [learner acceptance record](../data/full_catalog_paired_improvement_learner_acceptance.json) transcribes all six rows and twelve displayed fields in origin/metric order. Counts remain integers, win percentages are normalized to four decimal places and deltas to six. For example, `-0.1113` → `-0.111300` restores formatting only. Applying the SQL40 runner's canonicalization reproduces ordered report SHA-256 `2b0c2d245522ac25bc24993f156606334fa36a68f3cb70757127b8c596a0913d`.
+
+All rows show 30,490 total series and PASS. MAE compares every series. The first RMSSE row confirms 30,480 compared and ten excluded; the later RMSSE rows compare all 30,490. The exclusion reason is preceding source-verification evidence rather than an additional screenshot field. The three origins contain 91,470 origin/series pairs, with the same pairs summarized separately by MAE and RMSSE; they are not independent experimental trials.
+
+This accepts the displayed coverage and difference summaries, not a direct database read or independent inspection of private pair-level calculations. Source and saved-forecast checks, all 182,940 model diagnostics and 91,470 pairs, exact winner/NULL decisions, high-precision deltas, eight focused cases, accepted prior fingerprints and unchanged-input/cleanup checks remain historical assistant evidence. SQL40 did not newly export and directly compare the 5,122,320 daily errors; that detailed check belongs to accepted SQL39 evidence. No product identifiers, paired vectors or screenshot are published.
+
+Assistant interpretation: WEEKDAY4 improves the metric for a majority of compared series in each window, and every mean/median paired delta is negative. Many ties and SNAIVE7 wins remain. Coverage is not a relative error reduction or significance result, and last-digit differences from separately rounded SQL39 means do not change exact wins or ties. No uniform department/store improvement, final-holdout score, final model choice or business benefit is established. Learner conceptual understanding has not been independently tested.
+
+## Next department comparison
+
+[SQL41](../sql/41_compare_department_forecast_errors.sql) will split development results by all seven departments while retaining all ten stores. The planned 21-row comparison will show both candidates' MAE, signed error and macro RMSSE, their differences and eligibility coverage. This follows the [department method](DEPARTMENT_FORECAST_ERRORS_VALIDATION.md) and keeps the same candidate formulas, dates and RMSSE definitions; no final-holdout scoring or final selection is implied.
