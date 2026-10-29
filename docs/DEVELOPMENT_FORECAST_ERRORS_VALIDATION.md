@@ -2,7 +2,7 @@
 
 ## Purpose and scope
 
-[SQL36](../sql/36_compare_development_forecast_errors.sql) makes the first direct error comparison between the accepted SNAIVE7 and WEEKDAY4 candidates. It answers how their predicted units compare with recorded units on the three fixed development windows. It is a read-only query; learner execution remains pending. The [evaluation plan](EVALUATION_PLAN.md) specifies metrics, temporal boundaries and aggregation before computing these results.
+[SQL36](../sql/36_compare_development_forecast_errors.sql) makes the first direct error comparison between the accepted SNAIVE7 and WEEKDAY4 candidates. It answers how their predicted units compare with recorded units on the three fixed development windows. It is a read-only query. On 29 October 2026 (Australia/Sydney), the learner accepted all six rows and twelve displayed fields; their canonical report fingerprint matches the historical assistant preflight exactly. The [evaluation plan](EVALUATION_PLAN.md) specifies metrics, temporal boundaries and aggregation before computing these results.
 
 The population remains all 216 product-store series in FOODS_1 / CA_1. Both models are scored on the same dates and records, including zeros. This is a fixed retrospective slice from the released catalog, not evidence of performance across all 30,490 M5 series or of the active assortment known at every historical origin.
 
@@ -73,7 +73,7 @@ The executed assistant preflight matched all **413,208 training observations acr
 
 All **20 targeted cases** passed: 12 valid metric/isolation cases and eight deliberate rejections. They cover the excluded initial jump and retained later zeros, three undefined-scale reasons, mean-of-roots aggregation, signed-error cancellation, very large squared integers, origin-specific scales, changed/absent final outcomes, and damaged saved forecasts or development observations. Inputs and saved forecasts remained unchanged during both valid and rejected comparisons. The two original source files used by this step, dependent scripts/helpers, accepted candidate evidence and historical preflight records remained unchanged, and private temporary files were removed. The evaluation-plan hash was captured before tests and verified unchanged on completion.
 
-The executed aggregate results below are **assistant preflight evidence; learner SQL36 execution remains pending**. Each row has 216 series, 6,048 evaluated positions, 216 defined RMSSE scores, zero undefined scores and PASS status.
+The executed aggregate results below were first independently checked by the assistant and are now **also accepted from the learner screenshot**. These two evidence scopes remain separate: the screenshot confirms displayed aggregates; the preflight reconciles detailed source, forecast and scoring records. Each row has 216 series, 6,048 evaluated positions, 216 defined RMSSE scores, zero undefined scores and PASS status.
 
 | Origin | Model | Actual units | Predicted units | MAE | Mean error | Macro RMSSE |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -86,4 +86,18 @@ The executed aggregate results below are **assistant preflight evidence; learner
 
 WEEKDAY4 has lower MAE and macro RMSSE in each of these three development windows. Both methods underpredict in aggregate in the first two windows and overpredict in the third. This is descriptive evidence for the fixed slice, not a significance test, final model selection, final-holdout score or operational benefit. Detailed error and series rows remain private; the public JSON includes aggregate RMSSE-status coverage and fingerprints.
 
-Run the complete SQL36 file in the existing `retail_merchandising` connection. It can be repeated as a read-only check; it creates no table and leaves both saved candidates and analytical input tables unchanged. Learner acceptance will be based on the six-row output screenshot and kept separate from the assistant's detailed preflight evidence.
+Run the complete SQL36 file in the existing `retail_merchandising` connection. It can be repeated as a read-only check; it creates no table and leaves both saved candidates and analytical input tables unchanged. The six-row screenshot acceptance is recorded below and remains separate from the assistant's detailed preflight evidence.
+
+## Learner acceptance — 29 October 2026
+
+The [learner acceptance record](../data/development_forecast_errors_learner_acceptance.json) contains all six aggregate rows and twelve displayed fields in origin/model order. Predicted totals shown without decimal places are normalized to two-decimal strings; metric values retain six decimals, including omitted display zeros such as `1.5167` → `1.516700`. Counts and actual units remain integers. The SQL36 runner's canonicalization reproduces report SHA-256 `46388fd2f259920a7ce05d0fc6b0ededad3588f6c100ce0e464c3a738622d9f7`, exactly matching historical preflight.
+
+Each row shows 216 series, 6,048 evaluated positions, 216 valid RMSSE series and zero undefined series. Those 36,288 model-specific positions correspond to 18,144 distinct actual product-store days because both models score the same observations. The scope identifiers come from the earlier accepted scope audit, not extra fields in this screenshot. No direct learner-database read occurred. The screenshot accepts the displayed report; detailed source comparisons, candidate reconstruction, per-row errors, per-series diagnostics, 20 targeted cases and read-only/cleanup checks remain separate assistant evidence. No individual product identifiers, detailed vectors or screenshot are saved publicly.
+
+Assistant interpretation remains limited to these three development windows: WEEKDAY4 has lower average MAE and macro RMSSE, while both models underpredict in aggregate in the first two windows and overpredict in the third. An average advantage does not tell us how many individual series improve. This acceptance does not establish final model choice, final-holdout performance, statistical significance, operational benefit or independently tested learner understanding.
+
+## Next paired comparison
+
+[SQL37](../sql/37_compare_series_forecast_improvements.sql) will compare the two models for each series at each development origin and summarize wins, exact ties, losses and metric deltas in six origin/metric rows. For MAE, compare exact summed absolute errors in quarter units. For RMSSE, compare exact summed squared errors in sixteenths on the common valid training-scale cohort; equal positive scales and equal 28-day denominators preserve this ordering. Do not decide ties from rounded displayed metrics. Delta is WEEKDAY4 minus SNAIVE7, so a negative value favors WEEKDAY4. Report excluded/undefined RMSSE series explicitly; final-holdout actuals and final selection remain outside this step.
+
+See the [paired-series comparison method](SERIES_FORECAST_IMPROVEMENTS_VALIDATION.md) for the next step.
