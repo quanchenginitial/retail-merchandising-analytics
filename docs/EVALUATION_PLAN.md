@@ -49,6 +49,20 @@ The seven weekday means remain fixed for all four forecast weeks. Retain exact q
 
 The predicted 28-day total equals the actual last-28-day total because each four-value mean is repeated four times. This is a necessary aggregate construction check, not proof of the individual mapping or predictive accuracy. Validate every saved field and source mapping separately. Preserve the SNAIVE7 candidate for subsequent comparison; do not choose a winner from output smoothness, zero counts or forecast totals. Development-error comparison and final model selection remain later steps, and final-holdout unit values remain excluded from construction.
 
+### First development comparison: fixed aggregation contract (SQL36)
+
+Before computing candidate errors, fix [SQL36](../sql/36_compare_development_forecast_errors.sql) to score SNAIVE7 and WEEKDAY4 on the three development origins only. Each model/origin has 216 series × 28 days = 6,048 prediction–actual pairs; there are 36,288 model-specific error rows and 1,296 model/origin/series diagnostics in total. The two models share 18,144 distinct development actual observations. Validate the saved candidates against their construction rules, then score their persisted values. A corrupted saved forecast must fail rather than being silently replaced with a reconstruction.
+
+For each model and origin, report MAE and mean signed error across all 6,048 daily positions, with equal weight per position. All series have 28 positions, so these also equal the unweighted mean of series MAE/bias. Mean signed error is forecast minus actual: positive indicates overprediction and negative underprediction. These metrics are in units per product-store day, not percentages or sales-weighted metrics. Retain zero observations and zero forecasts; missing evaluation observations are errors, not zeros.
+
+Compute each series' RMSSE using the first-positive training start and scale defined above, separately at its own origin. Include later zero-sales days after the first positive observation, but exclude the jump from a leading zero into that first positive observation. No positive training value, fewer than two retained training observations, or zero training scale leaves RMSSE undefined even when evaluation error is zero. Keep those series in MAE/bias; report valid/undefined RMSSE counts and aggregate status diagnostics with MAE/bias. Never fill undefined RMSSE with zero or epsilon.
+
+The reported `macro_rmsse` is the arithmetic mean of individually computed RMSSE values over valid series. It is not the square root of an average of series ratios, a pooled ratio, a sales-weighted score, or official M5 WRMSSE. If no series has a defined RMSSE, the macro result is NULL. Both models use the same scale-eligibility cohort at each origin.
+
+Preserve WEEKDAY4's quarter predictions throughout evaluation. Exact quarter-unit error numerators and squared-error sixteenths support reconciliation; perform integer products in a wide enough type before summing. Calculate metrics from unrounded values, displaying six decimals only at the final report. Interpret close displayed values using the full-precision evidence rather than treating display rounding as model selection.
+
+SQL36 returns six rows, ordered by development origin and then SNAIVE7/WEEKDAY4, with no pooled TOTAL row. It is read-only and leaves both candidate tables unchanged. Final-origin candidate integrity may be checked without joining its outcomes; d_1914–d_1941 unit values remain excluded and no final-holdout forecast errors are calculated. This comparison supplies development evidence and does not itself select a final model or establish wider-scope performance.
+
 ## Behaviour and recommendation
 
 Choose chronological training/development/holdout boundaries after observing only source coverage. Apply all feature construction to events known at the prediction cutoff. Define a complete outcome window and exclude/censor immature episodes consistently. Split or cluster evaluation by visitor as needed to avoid treating repeated events as independent people.

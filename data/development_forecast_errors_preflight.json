@@ -1,0 +1,456 @@
+{
+  "checked_at_utc": "2026-10-29T04:50:52.320719+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/36_compare_development_forecast_errors.sql",
+  "script_sha256": "dfe40da09b16247d694c520a26057d8429bcf694dc5cb58b08e51cca950903b0",
+  "prespecified_evaluation_plan": "docs/EVALUATION_PLAN.md",
+  "prespecified_evaluation_plan_sha256": "43990bb37eaf85b288fb7d3f6170a7f04ceda7c636314333b7ea4988ae75b6a9",
+  "evaluation_plan_unchanged_during_preflight": true,
+  "dependency_script_sha256": {
+    "sql/08_stage_calendar.sql": "615f193ca97e6d125fdd16d5f7435bbb293318cfabc30576550240075200ee92",
+    "sql/12_build_product_dimension.sql": "30506a8faf3141dfc1b8b0575a0ee2d725fa40903142e8c216cd5ef690e43a90",
+    "sql/13_build_store_dimension.sql": "d15fc515f5813914d46056bf6450d8e2275126439b9e77b2f7163c30bfc6b630",
+    "sql/14_build_calendar_dimension.sql": "7d3541ca678ece969b57a57645c22a3651fc17c69690ede8b39131e9fad27ff9",
+    "sql/33_forecast_scope_and_time_audit.sql": "3a3c62c0b1e4a399453b30b2da97998d7ba24e4a880a12393d856699e7caf292",
+    "sql/34_build_seasonal_naive_forecasts.sql": "073b5e4f59c66b4e37014d910723094a937e467a3211e49cfbb264b579b51a4d",
+    "sql/35_build_weekday_mean_forecasts.sql": "b657dc484ce17b745775c6cd3d98ded0e43688638c98bf1480f8cb3ccda5a808"
+  },
+  "reference_helper_sha256": {
+    "validation/preflight_forecast_scope_and_time_audit.py": "8db2bb4493a3c395ab553846a14e23aebb67d4eaa56bf83630d2908f6003d33f",
+    "validation/preflight_seasonal_naive_forecasts.py": "0bacb1d15ef272fd8761e191e5a49d1ce20ff555eafb047388f7d8ff233632ba",
+    "validation/preflight_weekday_mean_forecasts.py": "ea6cba916e1d109117e0d3368539f206a8a5209996318a050d67fcb2f1710eb7"
+  },
+  "accepted_candidate_evidence_sha256": {
+    "data/seasonal_naive_forecasts_learner_acceptance.json": "19324dcc6424d128086f3f9ae0fcd3b694987993edd1199bff928e5aba031edb",
+    "data/weekday_mean_forecasts_learner_acceptance.json": "a8ca4f7728fe025bbc4e93bdd81f5d9a180dbefc8e81480ced60eff7760fd87d"
+  },
+  "accepted_candidate_report_fingerprints_matched": true,
+  "reconstructed_candidate_report_sha256": {
+    "SNAIVE7": "ad3c5000fd81a327e400cf32fddf57b3ba41bf59bddd73bb4e4de175229ac9ce",
+    "WEEKDAY4": "075094fbbc14290ad397c358c44ccc72d7f9309042f139f21601a05bb1d19b50"
+  },
+  "accepted_candidate_forecast_fingerprints_matched": true,
+  "reconstructed_candidate_forecast_sha256": {
+    "SNAIVE7": "ba27d6983331c204021881bf048cc9ff24af867096fade669a49e05f7b47fb4e",
+    "WEEKDAY4": "cc13454ee4ebd947cbe4ff2d45cb6b67a827f019dd843ea824117828ca31b49f"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "historical_preflight_sha256": {
+    "data/abc_threshold_sensitivity_preflight.json": "a11053f48b59f09d94b890d4eb83f9b75210482ea5b2391f9588d1f6e56de339",
+    "data/abc_xyz_contribution_preflight.json": "cce56e1a9a0746936b40fd640cee32a0ec2b6f40bd92a825cbcf9641c2194007",
+    "data/az_leading_product_price_context_preflight.json": "d7b41755449aebafb2f6c4e41bf464cab60cf99e05a15b994403c50a06487026",
+    "data/az_leading_product_store_comparison_preflight.json": "6a03d2310665442559629455d45c7f80d9099be5fa007b9b26bf774f02b0df27",
+    "data/az_leading_product_weekly_preflight.json": "03567ad5e63d5c161b3d808b082c839af73375124c2b2601364732e4962544f9",
+    "data/az_product_drilldown_preflight.json": "2b48b5473b9fcd34de19ee2e4f1049bf7a9beea9347e1076881c8199024dd56c",
+    "data/calendar_audit_preflight.json": "76a2e40ac54597acee84aa5d7a6dd112b19b58412c2b1acaa860d150ffdd9f90",
+    "data/calendar_dimension_preflight.json": "ac9e379e2838f698de5f858a3006fc398604b17a9bf55b61c560ba28658c416b",
+    "data/calendar_import_preflight.json": "72a6191620ef88df12d4a2012cb204701f3b2833f242e01e0e6c28a6d3f83e87",
+    "data/calendar_staging_preflight.json": "67f07e4bf89c18edaaf0bd87089d98d12d768b75e768d4e81da8c43b0f461c18",
+    "data/category_contribution_preflight.json": "e66d6e4832833746abd9555755ea52ff324592c2e49ac8caf957dabf6462f37f",
+    "data/department_contribution_preflight.json": "31db61d17130a6e730ea15e04b2f652a267a41e0f2674448ba62d1f81457d07f",
+    "data/dimension_joins_preflight.json": "4df748b6c343dc8c513a07e3fb318bcd696b7e5cf9eedffd056bb4df10a65ae9",
+    "data/forecast_scope_and_time_audit_preflight.json": "ab9390b800a1ab0eff6a4261f8432b7d20e36b8beaa08343fc8e4ebe82572407",
+    "data/price_audit_preflight.json": "e2fbe41f0b22dd103c40e6811ba8b78b27980b257636865f7f6f8386c307a30c",
+    "data/price_coverage_preflight.json": "ef2bc88c3466b958c3c6832f52125835d46ec3f7a31ffe1b3d4b9d4d1149660a",
+    "data/price_import_preflight.json": "04b00ec67ab53d9b8a695496dc691e2f893afe6bae61bfffbb1450b3c95edbf8",
+    "data/price_staging_preflight.json": "a24bb94f812c97e55f273dde4a99f657057014a7a807b9544bd8021dbd452ec5",
+    "data/product_abc_units_preflight.json": "33c525addcd588045b132ffe6d66faaaf1c9e9d197567293cc71a3312c21503a",
+    "data/product_abc_xyz_preflight.json": "a23167c247c46e02e1401dbc0a0767029b2d1dd73c5eba8efd7365828e2d30b1",
+    "data/product_dimension_preflight.json": "f80f785795bdbc6e51c362dfe3bc5b0a0ea2c4853eaad33d9a416801c63d1406",
+    "data/product_unit_concentration_preflight.json": "7582aefa60ad95879647c7e221343e7296ac90cd2cb908bee52fc7cd6d014849",
+    "data/product_variability_preflight.json": "34fe40f85839374ce8112f37593fa9c0467529995c53488853bf716948ad0dba",
+    "data/product_weekly_preflight.json": "fa6aecbe040ee997dd6f69d3c430ddcff7ac2e19d11073c261fb2d82845b8286",
+    "data/product_xyz_preflight.json": "44fada6977a90ac31beb113e62980c559223da1f7fa18c67b8dcef2608f1e341",
+    "data/sales_audit_preflight.json": "571df148f470f287316b7d1ab4b280f0ef3358e7816983a3fc6c902df7797e31",
+    "data/sales_daily_preflight.json": "7715d083bd2b6c6b569c127a9e75ae3c9cd24e0eaacd1f87e7e5dcfff56e34c4",
+    "data/sales_fact_preflight.json": "15c56fc13ca89e46fdc4fcc0c35afa746874506d9f9577be4bfb0fc72f4f2d01",
+    "data/sales_import_preflight.json": "455d51237689f9853b7d06d8bfd148ee4a94cf60d0750356974f3e658d320036",
+    "data/sales_reconciliation_preflight.json": "00857bd0778673309a1ada13bec9a57ae8248fba69d5e6a2d8cf4b89ab49bbb8",
+    "data/seasonal_naive_forecasts_preflight.json": "ed9e5bf9bc4fbb61afe6633bdb5820cec3d1cd9ce94987aede76f49f3f2a35f4",
+    "data/store_dimension_preflight.json": "beaa6fdee6ed71a6f78f20ecb2c44998d8dbd4a35217b27d4c0c381f5c0cd20d",
+    "data/weekday_mean_forecasts_preflight.json": "9353402cfc09d2ae00fd105c0f3621998637dce62efddb7463e3d90475328067",
+    "data/xyz_threshold_sensitivity_preflight.json": "17c37f0d09894160bb856f7e46dbcbedff77a400d7e56e3739d5d5972ceea942"
+  },
+  "historical_preflights_unchanged": true,
+  "accepted_scope_cte_prefix_copies": 1,
+  "accepted_scope_cte_prefix_sha256": "67e0ed1504355e9c5bbe7ce26298130c4b8b5ec76b2d191aab1e2a7a0f284df2",
+  "baseline_database": "Private temporary DuckDB and detailed CSV exports under ignored repository tmp; resolved containment checked; all removed. Learner database never opened.",
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 12595200,
+  "frozen_scope": {
+    "dept_id": "FOODS_1",
+    "store_id": "CA_1",
+    "series_count": 216,
+    "series_membership_sha256": "6cabe9ae29616ce129fdf89fb02fec1cffd31ccb8194c4694b8bdf0ed85e622f"
+  },
+  "evaluation_scope": "Only DEVELOPMENT_1, DEVELOPMENT_2 and DEVELOPMENT_3. Every model/fold evaluates 216 series by 28 days, equally weighted. Final candidate fields may be validated from training but final actuals are not accessed or scored.",
+  "error_convention": "Forecast minus actual in unit/day; exact integer quarters for signed and absolute errors and HUGEINT squares in sixteenths.",
+  "rmsse_definition": "For each series and origin, s is the first positive training day. Scale = sum of successive squared differences for s+1 through T divided by T-s. Leading zero-to-first-positive jump excluded; later zero days retained. Per-series RMSSE is sqrt((sum quarter-error squares / 16 / 28) / scale). Macro is the mean of valid individual roots.",
+  "undefined_policy": "no_positive_training, insufficient_retained_history or zero_scale gives NULL, never epsilon. All series remain in MAE and bias; RMSSE valid and undefined counts sum to the complete scope.",
+  "display_rounding": "MAE and signed mean error use exact integer rational half-away-from-zero rounding to six decimals. Macro RMSSE uses a DOUBLE mean of per-series roots then six-place rounding; predictions use two decimal places.",
+  "source_training_rows_compared": 413208,
+  "source_training_columns_compared": 6,
+  "source_training_field_mismatches": 0,
+  "candidate_rows_compared_per_model": 24192,
+  "candidate_columns_compared": {
+    "SNAIVE7": 13,
+    "WEEKDAY4": 15
+  },
+  "candidate_field_mismatches": 0,
+  "scored_rows_compared": 36288,
+  "scored_columns_compared": 12,
+  "exact_scored_field_mismatches": 0,
+  "series_diagnostics_compared": 1296,
+  "series_diagnostic_columns_compared": 16,
+  "exact_integer_and_status_mismatches": 0,
+  "independent_reference_precision_digits": 70,
+  "rmsse_absolute_tolerance": "1E-10",
+  "rmsse_relative_tolerance": "1E-13",
+  "maximum_per_series_rmsse_absolute_error": "3.349306704060253953016728482E-16",
+  "maximum_macro_rmsse_absolute_error": "3.726232798065220240930980848E-16",
+  "independent_reference": "Original CSV integers and calendar mappings supply every input. Unmodified candidate reference helpers independently reproduce each saved row. This runner independently slices each origin history at first positive, zips retained successive observations, computes all errors with Python integers, then evaluates roots/means at 70 Decimal digits. All row-level errors, exact diagnostics, NULL statuses and displayed aggregates are compared.",
+  "result_rows": 6,
+  "result_columns": 12,
+  "rows_with_pass_status": 6,
+  "output_columns": [
+    "origin",
+    "model",
+    "series_count",
+    "evaluated_rows",
+    "actual_units",
+    "predicted_units",
+    "mae",
+    "mean_error",
+    "rmsse_valid_series",
+    "rmsse_undefined_series",
+    "macro_rmsse",
+    "check_status"
+  ],
+  "results": [
+    {
+      "origin": "DEVELOPMENT_1",
+      "model": "SNAIVE7",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "actual_units": 8891,
+      "predicted_units": "8268.00",
+      "mae": "1.516700",
+      "mean_error": "-0.103009",
+      "rmsse_valid_series": 216,
+      "rmsse_undefined_series": 0,
+      "macro_rmsse": "0.937803",
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_1",
+      "model": "WEEKDAY4",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "actual_units": 8891,
+      "predicted_units": "8336.00",
+      "mae": "1.358714",
+      "mean_error": "-0.091766",
+      "rmsse_valid_series": 216,
+      "rmsse_undefined_series": 0,
+      "macro_rmsse": "0.807044",
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_2",
+      "model": "SNAIVE7",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "actual_units": 9456,
+      "predicted_units": "8112.00",
+      "mae": "1.384590",
+      "mean_error": "-0.222222",
+      "rmsse_valid_series": 216,
+      "rmsse_undefined_series": 0,
+      "macro_rmsse": "0.880599",
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_2",
+      "model": "WEEKDAY4",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "actual_units": 9456,
+      "predicted_units": "8891.00",
+      "mae": "1.298446",
+      "mean_error": "-0.093419",
+      "rmsse_valid_series": 216,
+      "rmsse_undefined_series": 0,
+      "macro_rmsse": "0.772624",
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_3",
+      "model": "SNAIVE7",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "actual_units": 8017,
+      "predicted_units": "11368.00",
+      "mae": "1.644676",
+      "mean_error": "0.554067",
+      "rmsse_valid_series": 216,
+      "rmsse_undefined_series": 0,
+      "macro_rmsse": "0.986653",
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_3",
+      "model": "WEEKDAY4",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "actual_units": 8017,
+      "predicted_units": "9456.00",
+      "mae": "1.225116",
+      "mean_error": "0.237930",
+      "rmsse_valid_series": 216,
+      "rmsse_undefined_series": 0,
+      "macro_rmsse": "0.722085",
+      "check_status": "PASS"
+    }
+  ],
+  "ordered_result_sha256": "46388fd2f259920a7ce05d0fc6b0ededad3588f6c100ce0e464c3a738622d9f7",
+  "result_field_mismatches": 0,
+  "rmsse_status_summary": [
+    {
+      "origin": "DEVELOPMENT_1",
+      "model": "SNAIVE7",
+      "rmsse_status": "VALID",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "mae": "1.516700",
+      "mean_error": "-0.103009"
+    },
+    {
+      "origin": "DEVELOPMENT_1",
+      "model": "WEEKDAY4",
+      "rmsse_status": "VALID",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "mae": "1.358714",
+      "mean_error": "-0.091766"
+    },
+    {
+      "origin": "DEVELOPMENT_2",
+      "model": "SNAIVE7",
+      "rmsse_status": "VALID",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "mae": "1.384590",
+      "mean_error": "-0.222222"
+    },
+    {
+      "origin": "DEVELOPMENT_2",
+      "model": "WEEKDAY4",
+      "rmsse_status": "VALID",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "mae": "1.298446",
+      "mean_error": "-0.093419"
+    },
+    {
+      "origin": "DEVELOPMENT_3",
+      "model": "SNAIVE7",
+      "rmsse_status": "VALID",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "mae": "1.644676",
+      "mean_error": "0.554067"
+    },
+    {
+      "origin": "DEVELOPMENT_3",
+      "model": "WEEKDAY4",
+      "rmsse_status": "VALID",
+      "series_count": 216,
+      "evaluated_rows": 6048,
+      "mae": "1.225116",
+      "mean_error": "0.237930"
+    }
+  ],
+  "status_summary_scope": "Independent aggregate counts and MAE/bias for every present RMSSE status group, derived from the fully reconciled private series diagnostics. No individual series are published.",
+  "ordered_scored_rows_sha256": "8094c80d0c2455515cc7a0571df332de93087fb5e8439640fc1a614356b29f64",
+  "ordered_exact_series_diagnostics_sha256": "5448bcce75aa2ff47a35e0db494694abef74985d03a2599fbda3486c787adb79",
+  "detail_fingerprint_method": "SHA256 of compact UTF-8 JSON with sorted object keys and ensure_ascii=False. Private rows ordered origin,model,item_id,store_id then horizon where applicable. Integers stay integers; exact diagnostic hash omits approximate RMSSE but includes its eligibility status.",
+  "input_projection_row_counts": {
+    "product_dimension": 3049,
+    "store_dimension": 10,
+    "calendar_projection": 1969,
+    "raw_metadata_projection": 30490,
+    "selected_training_projection": 413208,
+    "s7": 24192,
+    "w4": 24192
+  },
+  "input_and_candidate_sha256_before": {
+    "product_dimension": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "store_dimension": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "calendar_projection": "6689d88c4200572933431d015c56d76066f290ce97ca6ebcb552b4c20d72a549",
+    "raw_metadata_projection": "63412b3d524f0ec6dd4090e5f8290a1f20396f4d4fb2d4e8f48e1c2893852ca2",
+    "selected_training_projection": "7062d28d233890641cd5acdf78c5a5e01edb8a4374ecd1f9d64fb2c4f69be40d",
+    "s7": "b4ca0b68cfe1a96a2ad86b162cb695c2d215edc9528f3c87175487fee1947a28",
+    "w4": "88808b630d91bbab8388b6418bfdb5bef68aa392a990a7fe9e38c164fa517e07"
+  },
+  "input_and_candidate_sha256_after": {
+    "product_dimension": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "store_dimension": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "calendar_projection": "6689d88c4200572933431d015c56d76066f290ce97ca6ebcb552b4c20d72a549",
+    "raw_metadata_projection": "63412b3d524f0ec6dd4090e5f8290a1f20396f4d4fb2d4e8f48e1c2893852ca2",
+    "selected_training_projection": "7062d28d233890641cd5acdf78c5a5e01edb8a4374ecd1f9d64fb2c4f69be40d",
+    "s7": "b4ca0b68cfe1a96a2ad86b162cb695c2d215edc9528f3c87175487fee1947a28",
+    "w4": "88808b630d91bbab8388b6418bfdb5bef68aa392a990a7fe9e38c164fa517e07"
+  },
+  "source_and_saved_candidates_unchanged": true,
+  "read_only_comparison": true,
+  "new_table_created": false,
+  "final_holdout_actual_values_inspected": false,
+  "final_holdout_scored": false,
+  "final_model_selected": false,
+  "official_wrmsse_computed": false,
+  "timings": {
+    "independent_source_forecast_and_error_reference_seconds": 4.073,
+    "private_source_setup_seconds": 12.706,
+    "private_candidate_creation_seconds": 3.167,
+    "private_input_and_candidate_export_seconds": 0.463,
+    "development_error_query_seconds": 1.791,
+    "private_row_and_series_diagnostic_export_seconds": 1.106,
+    "unchanged_source_and_candidate_export_seconds": 0.498
+  },
+  "timing_scope": "Named Python reference and DuckDB process/export timings; remaining Python comparisons and hashing excluded.",
+  "fixture_cases_passed": 20,
+  "fixture_cases": [
+    {
+      "case": "macro_mean_of_roots_and_known_hand_metrics",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "leading_zero_jump_excluded_and_later_zeros_retained",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "all_zero_perfect_forecasts_keep_rmsse_undefined",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "constant_positive_perfect_forecasts_have_zero_scale",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "only_one_retained_training_day_is_undefined",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "positive_targets_do_not_leak_into_first_positive_search",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "signed_errors_cancel_but_absolute_errors_remain",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "huge_integer_error_and_training_squares_do_not_overflow",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "early_history_changes_scale_without_changing_forecasts",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "development_targets_change_errors_not_earlier_training_scale",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "final_holdout_changes_do_not_affect_any_development_error",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "final_holdout_absent_does_not_affect_development_errors",
+      "passed": true,
+      "rejected": false,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "saved_snaive_value_tamper_is_not_silently_recomputed",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "saved_weekday_quarter_value_tamper_rejected",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "saved_duplicate_missing_forecast_key_preserves_count",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "saved_weekday_source_count_tamper_rejected",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "missing_development_actual_rejected",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "balanced_duplicate_missing_development_actual_rejected",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "null_development_actual_rejected",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    },
+    {
+      "case": "saved_candidate_decimal_schema_changed",
+      "passed": true,
+      "rejected": true,
+      "source_and_saved_candidates_unchanged": true
+    }
+  ],
+  "real_product_identifiers_published": false,
+  "individual_errors_or_diagnostics_published": false,
+  "scope": "Assistant preflight only; learner SQL36 execution pending. Public evidence retains six development aggregates, status-group controls and fingerprints, without product lists, actual/predicted/error arrays or individual RMSSE. This is one retrospective department/store benchmark with overlapping expanding training histories and three nonoverlapping development outcome windows. Results do not establish final holdout performance, final model choice, official WRMSSE, deployment benefit or causal effects."
+}
