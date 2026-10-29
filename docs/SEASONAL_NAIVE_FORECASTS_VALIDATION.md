@@ -2,7 +2,7 @@
 
 ## Purpose and status
 
-[SQL34](../sql/34_build_seasonal_naive_forecasts.sql) creates the first reproducible 28-day unit-sales forecast candidate. It repeats each series' last observed seven days over the next four weeks. This provides a simple reference against which later methods can be compared. Correct construction does not establish accuracy; no forecast errors are computed in this step. Learner execution remains pending.
+[SQL34](../sql/34_build_seasonal_naive_forecasts.sql) creates the first reproducible 28-day unit-sales forecast candidate. It repeats each series' last observed seven days over the next four weeks. This provides a simple reference against which later methods can be compared. Correct construction does not establish accuracy; no forecast errors are computed in this step. On 29 October 2026, the learner screenshot confirmed all four summary rows and eleven columns PASS, with the ordered canonical report fingerprint matching historical preflight. [Learner acceptance](../data/seasonal_naive_forecasts_learner_acceptance.json) publishes the aggregate rows and fingerprint.
 
 The [evaluation plan](EVALUATION_PLAN.md) fixes scope, origins and later evaluation rules. [SQL33's accepted scope audit](FORECAST_SCOPE_AND_TIME_AUDIT_VALIDATION.md) establishes FOODS_1 at CA_1, with all 216 product-store series retained. The scope is a retrospective released-catalog benchmark, not an inferred list of products active at each origin. April ABC/XYZ labels and weekly prices are not inputs to this model.
 
@@ -65,9 +65,9 @@ For the first learner execution, run the whole file in the existing `retail_merc
 
 Both construction and validation recheck the frozen SQL33 scope and training-time contract. Saved predictions must have the exact schema, complete unique keys, correct dates and source-day mapping, and values matching the permitted historical inputs. An invalid input or corrupted saved forecast blocks the report. A successful output means the implemented construction checks passed; it does not mean the predictions are accurate.
 
-Independent assistant verification is recorded in [the preflight evidence](../data/seasonal_naive_forecasts_preflight.json) and implemented by [the preflight runner](../validation/preflight_seasonal_naive_forecasts.py). It uses only original read-only source files and private temporary databases under ignored `tmp/`, never the learner's persistent database. The Python reference extracts each origin's seven-element historical slice and repeats it in four loops, independently of the SQL modulo expression. The reconstructed SQL33 report also matches the learner's accepted scope-report fingerprint. Learner SQL34 screenshot acceptance remains pending.
+Independent assistant verification is recorded in [the preflight evidence](../data/seasonal_naive_forecasts_preflight.json) and implemented by [the preflight runner](../validation/preflight_seasonal_naive_forecasts.py). It uses only original read-only source files and private temporary databases under ignored `tmp/`, never the learner's persistent database. The Python reference extracts each origin's seven-element historical slice and repeats it in four loops, independently of the SQL modulo expression. The reconstructed SQL33 report also matches the learner's accepted scope-report fingerprint. Learner SQL34 screenshot acceptance is now recorded separately; the detailed source and saved-row comparisons remain assistant evidence.
 
-## Executed assistant results
+## Executed assistant results and accepted aggregates
 
 All four aggregate rows and their 11 fields match the independent reference:
 
@@ -78,7 +78,7 @@ All four aggregate rows and their 11 fields match the independent reference:
 | DEVELOPMENT_3 | 216 | 6,048 | 2,842 | 11,368 | 2,972 |
 | FINAL_HOLDOUT | 216 | 6,048 | 2,202 | 8,808 | 2,956 |
 
-These predicted totals are model outputs, not observed future sales or accuracy scores. The zero counts describe prediction positions and should not be interpreted as a measured number of future stockouts.
+All aggregate rows in this table also match the learner screenshot. These predicted totals are model outputs, not observed future sales or accuracy scores. The zero counts describe prediction positions and should not be interpreted as a measured number of future stockouts.
 
 - **24,192 saved forecast rows × 13 fields** match the independent Python reference, with zero mismatches. The exact schema/order and unique logical keys pass.
 - **413,208 historical training rows × six fields**, all product/store mappings and the used raw metadata/calendar projections match original CSV references. Both SQL34 validation prefixes match SQL33's accepted prefix byte for byte.
@@ -98,8 +98,14 @@ To reproduce the assistant preflight from the repository root in the documented 
 
 The original CSV location remains `D:/database/m5-forecasting-accuracy`; hashes are checked against the source registry. Keep rerun evidence under `tmp/` so published historical evidence remains unchanged. Source CSV records are tokenized in full, but only selected training-unit cells through d_1913 are inspected or converted; final-holdout unit values are discarded without scoring.
 
+## Learner acceptance
+
+The four-row screenshot was transcribed with integer controls and ISO forecast dates, retaining all eleven fields and origin order. Its SHA-256 matches `ad3c5000fd81a327e400cf32fddf57b3ba41bf59bddd73bb4e4de175229ac9ce` exactly. Each origin reports 216 series and 6,048 forecast positions; the four summaries account for 24,192 positions. Public acceptance includes only aggregate scope labels and results, without product identifiers, individual forecasts or a screenshot.
+
+The accepted report confirms displayed construction controls and learner execution. It is not a new direct audit of all 24,192 persisted forecasts; source-row comparisons, all thirteen saved fields, nineteen fixtures and input-preservation checks remain independent assistant evidence. The fourfold predicted totals are a consequence of repeating seven inputs, not evidence of accuracy. Neither the zero-forecast counts nor the FINAL_HOLDOUT row evaluates actual future outcomes. The interpretation is the assistant's, not a claim that the learner has explained the model.
+
 ## Limitations and next comparison
 
 Repeating one week preserves a weekly pattern, but does not explicitly model trends, holidays or promotions. A zero input produces zero predictions for that weekday even if future recorded sales are positive. These are properties to evaluate on development windows, not reasons to remove difficult series in advance.
 
-After this output is accepted, continue under the evaluation plan with the previous-four-same-weekday baseline and development-only error comparisons. Report MAE, signed error and training-scaled RMSSE with their defined zero-scale handling before any final evaluation. No accuracy score or model improvement is asserted here.
+With this output accepted, the next step is to construct the previous-four-same-weekday mean candidate under the same scope and time boundaries. Keep exact quarter-unit means rather than rounding to whole units, preserve zeros and all series, and save it separately as WEEKDAY4. Development-only error comparison follows construction of both candidates. Report MAE, signed error and training-scaled RMSSE with their defined zero-scale handling before any final evaluation. No accuracy score or model improvement is asserted here.

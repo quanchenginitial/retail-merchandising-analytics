@@ -41,6 +41,14 @@ Persist the candidate as `mart.m5_forecast_snaive7_28d` with model tag `SNAIVE7`
 
 Generation and correctness checks do not evaluate accuracy. The final-origin baseline is an unscored candidate, not a declaration of the selected final model. Do not join final-holdout actuals or compute their errors during construction. Subsequent steps will compare development results under the same scope and metrics, document model choices, and only then evaluate the final holdout. No accuracy, improvement or business benefit is claimed by saving this baseline.
 
+### Second candidate: four-observation weekday mean (SQL35)
+
+Use [SQL35](../sql/35_build_weekday_mean_forecasts.sql) to construct the second prespecified baseline, model tag `WEEKDAY4`, in `mart.m5_forecast_weekday4_28d`. Scope, four origins and 28-day horizons remain identical to SNAIVE7. For each horizon h, set r = (h-1) modulo 7 and take the arithmetic mean of observed units at days `T-6+r`, `T-13+r`, `T-20+r` and `T-27+r`. All four observations, including zeros, receive equal weight. Use the final 28 calendar days including the cutoff; do not substitute complete M5 retail weeks.
+
+The seven weekday means remain fixed for all four forecast weeks. Retain exact quarter-unit predictions as DECIMAL(18,2), with no rounding to integers. Store the integer sum of the four observations and their source-day boundaries so every mean can be reconstructed. Accumulate source units in a type that safely holds four maximum INTEGER values; calculate the mean with exact decimal arithmetic.
+
+The predicted 28-day total equals the actual last-28-day total because each four-value mean is repeated four times. This is a necessary aggregate construction check, not proof of the individual mapping or predictive accuracy. Validate every saved field and source mapping separately. Preserve the SNAIVE7 candidate for subsequent comparison; do not choose a winner from output smoothness, zero counts or forecast totals. Development-error comparison and final model selection remain later steps, and final-holdout unit values remain excluded from construction.
+
 ## Behaviour and recommendation
 
 Choose chronological training/development/holdout boundaries after observing only source coverage. Apply all feature construction to events known at the prediction cutoff. Define a complete outcome window and exclude/censor immature episodes consistently. Split or cluster evaluation by visitor as needed to avoid treating repeated events as independent people.
