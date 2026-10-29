@@ -106,7 +106,10 @@
 - [x] 助手独立预查 SQL41 部门比较：182,940 条带部门诊断 × 17 字段、42 个部门/方法/起点汇总 × 13 字段、21 个成对控制 × 5 字段及 21×14 报告核对通过；精确字段零差异，浮点指标在声明容差内一致。8 个针对性用例通过（4 个有效行为、3 个预期映射拒绝及 1 个已存候选损坏拒绝）；保留并核对 91,470 个配对及已验收 SQL38/39/40 指纹，无新增 5,122,320 条日误差直接导出核对。来源、候选、输入及 102 个固定依赖未变，临时文件已清理。见 [部门验证](docs/DEPARTMENT_FORECAST_ERRORS_VALIDATION.md) 和 [预检记录](data/department_forecast_errors_preflight.json)。
 - [x] 5A9 用户于 2026-10-29 截图确认 SQL41 部门比较 21 行、14 列位置全部匹配预检指纹，21 个 PASS 可见；末列标题截断，通过已接受 SQL 列契约识别。全部部门/窗口 MAE 与 macro RMSSE 较低，绝对平均偏差 11 组更小、10 组更大；首窗 FOODS_3 两条及 HOUSEHOLD_1 八条未定义尺度可见。见 [聚合验收](data/department_forecast_errors_learner_acceptance.json) 和 [部门验收](docs/DEPARTMENT_FORECAST_ERRORS_VALIDATION.md)。
 - [x] 5A10 助手已完成 SQL42 独立预检：8 个用例（3 个有效、5 个拒绝）通过，30 行 × 15 列报告全部匹配并 PASS；107 份固定依赖及来源保持不变，临时私有库已清理。见 [机器记录](data/store_forecast_errors_preflight.json) 与 [门店方法](docs/STORE_FORECAST_ERRORS_VALIDATION.md)。
-- [ ] 5A10 用户执行并验收 SQL42 门店级开发误差：全部十店、每店 3,049 商品、三个开发起点共 30 行、15 列，保留两方法的 MAE、有符号误差、macro RMSSE、差值及有效/未定义覆盖；state_id 仅作来源背景。助手预检已通过、用户尚未执行；不从部门结果推断门店表现或排除分布，不按门店事后择优。
+- [x] 5A10 用户于 2026-10-29 完成 SQL42 门店比较验收：30 行 × 14 个可见实质字段与历史预检完全匹配，240 个指标值、90 个计数及标识/州代码已核对；右侧状态列裁切，30 个 PASS 来自用户明确确认。见 [聚合验收](data/store_forecast_errors_learner_acceptance.json) 和 [门店验收](docs/STORE_FORECAST_ERRORS_VALIDATION.md)，不声称 15 列全部可见或直接审核了用户数据库。
+- [x] 5A11 在最终留出误差计算前冻结 [两基线最终留出协议](docs/FINAL_HOLDOUT_BASELINE_PROTOCOL.md)：[公开冻结提交](https://github.com/quanchenginitial/retail-merchandising-analytics/commit/6d270efb8c06bc06632f6e3a400066cb11e3d626) 先于最终目标读取；依据已接受开发结果，全局选定 WEEKDAY4，保留 SNAIVE7 为固定参考；只在两种已实现基线中选择，不按商品、部门或门店事后换模型。
+- [x] 助手已完成 SQL43 最终留出独立预检：7 个用例族、14 个子用例通过，2 行 × 12 列全部匹配并 PASS；1,707,440 条最终误差 × 12 字段及 60,980 条序列诊断 × 16 字段按声明规则核对。两方法均 30,490 有效尺度/0 未定义；112 个固定依赖、来源及已存预测未变，临时私有文件已清理。见 [预检记录](data/final_holdout_baselines_preflight.json) 与 [最终留出方法](docs/FINAL_HOLDOUT_BASELINES_VALIDATION.md)。
+- [ ] 5A11 用户执行并验收 SQL43 最终留出比较：训练截至 d1913（2016-04-24），只评分 d1914–d1941（2016-04-25..2016-05-22），保留全部 30,490 序列，两方法各 853,720 个位置；只读返回 2 行、12 列。助手预检已通过、用户尚未执行；WEEKDAY4 的 MAE/macro RMSSE 为 1.103654/0.828159，SNAIVE7 为 1.243972/0.997242。
 - [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
@@ -114,10 +117,10 @@
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
 - [ ] 9 干净环境复跑、英文结论、中文讲解和最终作品集检查完成。
 
-以上空框均表示未完成；创建文档不等于用户已完成练习。阶段 4 描述性里程碑、试点/全目录预测开发比较及部门汇总均已验收，不声称已独立测试用户的概念理解。门店级开发误差比较已完成助手预检、等待用户执行；最终选型、最终留出评估、价格因果和自动刷新成果尚未完成。
+以上空框均表示未完成；创建文档不等于用户已完成练习。阶段 4 描述性里程碑及试点/全目录开发比较、部门与门店汇总均已验收，不声称已独立测试用户的概念理解。两种已实现基线中的全局选择已冻结，最终留出助手预检已通过、等待用户验收；树模型仍未实现，价格因果和后续项目交付尚未完成。
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：[SQL42](sql/42_compare_store_forecast_errors.sql) 检查总体和部门均值是否掩盖门店差异。保留十个门店、每店全部 3,049 商品及三开发窗口，只读返回 30 行、15 列；各行对照两方法的指标与差值，并显示共同尺度覆盖，state_id 直接来自验证过的来源映射而非猜测位置。MAE/有符号误差保留全部序列，macro RMSSE 按各店有定义序列等权计算；还原全局时前两者按全部序列数、后者按有效序列数加权，不混用分母。新建编辑器粘贴全文件，用执行 SQL 脚本（默认 Alt+X），按 [门店方法](docs/STORE_FORECAST_ERRORS_VALIDATION.md) 核对。助手预检已通过，用户尚未执行；不读取最终留出实际值，不按门店事后选模型或加未经检验的偏差修正。先说明目的，再执行一个小步骤、验收并更新 GitHub。
+执行 [当前一步](docs/FIRST_STEP_ZH.md)：[SQL43](sql/43_evaluate_final_holdout_baselines.sql) 检验开发阶段选定的 WEEKDAY4 在保留的最后 28 天表现如何，同时完整保留 SNAIVE7 参考结果。依据 [冻结协议](docs/FINAL_HOLDOUT_BASELINE_PROTOCOL.md)，训练与尺度仅用 d1–d1913，实际目标仅进入 d1914–d1941 的误差计算；已有预测不重训、不用目标更新、不按最终结果改选择。新建编辑器粘贴全文件，用执行 SQL 脚本（默认 Alt+X），按 [最终留出方法](docs/FINAL_HOLDOUT_BASELINES_VALIDATION.md) 核对 2 行、12 列及明确的有效/未定义覆盖。助手预检已通过（7 个用例族、14 个子用例及 2×12 报告），用户尚未执行；PASS 只证明完整性与计算检查通过，不保证所选基线胜出。此后若开发树模型，不能把已经暴露的这一留出期当作新的独立最终测试。先说明目的，再执行一个小步骤、验收并更新 GitHub。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
