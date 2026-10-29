@@ -6,7 +6,7 @@
 
 This contract is recorded before inspecting the new paired summaries. Keep the existing [evaluation plan](EVALUATION_PLAN.md), three development windows, fixed FOODS_1 / CA_1 roster of 216 product-store series, 28-day horizons, forecast definitions and RMSSE scaling unchanged. The final holdout remains unscored. Both candidates are validated against their historical construction rules before their persisted values are evaluated.
 
-The separately saved [fixed protocol](SERIES_FORECAST_IMPROVEMENTS_PROTOCOL.md) is the exact document pinned before execution and checked unchanged. This method page also records the executed verification and findings below.
+The separately saved [fixed protocol](SERIES_FORECAST_IMPROVEMENTS_PROTOCOL.md) is the exact document pinned before execution and checked unchanged. This method page also records the executed verification and findings below. On 29 October 2026 (Australia/Sydney), the learner accepted all six rows and twelve displayed fields; the canonical report fingerprint matches historical assistant preflight.
 
 SQL37 is read-only. It reuses SQL36's source, candidate and scoring checks and pairs the two models by origin, item and store. There must be one SNAIVE7 and one WEEKDAY4 diagnostic for each pair, with the same actual total, 28 evaluation positions and identical training-scale eligibility. All 648 origin/series pairs must be retained. Do not restrict this comparison to high-volume products, positive outcomes or a favorable subset.
 
@@ -55,7 +55,7 @@ Original source files, dependent code and historical evidence remained unchanged
 
 ## Executed assistant preflight results
 
-The following are assistant preflight results; **learner SQL37 execution remains pending**. Each row has 216 total and compared series, zero exclusions and PASS status.
+The following results were independently checked by the assistant and are **also accepted from the learner screenshot**. The screenshot confirms displayed aggregate values; detailed paired-record verification remains separate assistant evidence. Each row has 216 total and compared series, zero exclusions and PASS status.
 
 | Origin | Metric | WEEKDAY4 wins | Ties | SNAIVE7 wins | WEEKDAY4 win % | Mean delta | Median delta |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -69,3 +69,11 @@ The following are assistant preflight results; **learner SQL37 execution remains
 Both mean and median differences favor WEEKDAY4 in each metric/window, but the coverage varies. In DEVELOPMENT_2, exactly half of the products improve on MAE: 108 wins, 14 ties and 94 losses. Do not describe that as a strict majority. RMSSE wins cover more than half in all three windows. A product can improve in one metric while worsening in another because absolute and squared errors penalize deviations differently. These descriptive counts do not justify selecting a model separately for each product using its observed future errors, and they do not establish final-holdout performance or deployment benefit.
 
 Run the whole SQL37 file in the existing `retail_merchandising` DBeaver connection and return all six rows including `check_status`. The query can be repeated and leaves inputs and candidate tables unchanged.
+
+## Learner acceptance — 29 October 2026
+
+The [learner acceptance record](../data/series_forecast_improvements_learner_acceptance.json) contains all six aggregate rows in development-origin order, with MAE then RMSSE. Every displayed field matches the table and coverage controls above. Counts remain integers, win percentages are normalized to four decimals and deltas to six: `50` → `50.0000`, `-0.41956` → `-0.419560`, and `-0.1875` → `-0.187500`. This changes formatting only. Applying the SQL37 runner's canonicalization reproduces ordered report SHA-256 `94187c0f06928611b8cf15ebf50c32fc1280233d6088daf6e3585df970a1ee41`.
+
+Each row shows 216 total/compared series, zero exclusions and PASS. The three origins contain 648 origin/series pairs; the MAE and RMSSE rows summarize those same pairs and must not be added as distinct products. Scope identifiers are inherited from the preceding accepted audit rather than extra screenshot fields. No direct learner-database read occurred. Source and candidate reconstruction, all 648 paired records across 17 fields, exact winner/eligibility checks, high-precision delta comparisons, 10 targeted cases, input/protocol immutability and cleanup remain historical assistant preflight evidence. The screenshot does not independently inspect private pair-level calculations. Individual product identifiers, paired diagnostics, vectors and screenshot are not published.
+
+Assistant interpretation: all six average and median deltas are negative, favoring WEEKDAY4 under the defined metrics, but coverage varies. In the second development window, MAE improves for exactly half the series, with 108 wins, 14 ties and 94 losses; it is not a strict majority. This does not establish daily accuracy, statistical significance, universal superiority, final-holdout performance or a final model choice. It also does not independently test the learner's conceptual understanding. Wider-scope work remains to be specified under the existing evaluation plan; no new result is claimed here.
