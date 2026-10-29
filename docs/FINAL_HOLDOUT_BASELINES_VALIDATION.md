@@ -51,11 +51,11 @@ Focused fixtures cover hand calculations, fractional forecasts/zeros, target-onl
 
 The executed [machine record](../data/final_holdout_baselines_preflight.json) records **two rows × twelve columns, both PASS**, with **7 focused fixture families and 14 executed subcases passed**. Final targets, all 1,707,440 final error rows and 60,980 diagnostics match the independent reference under the exact/numeric contracts. The selected-model-loss fixture still returns PASS, confirming that integrity does not depend on performance ranking.
 
-Historical training, complete mappings/calendar and saved candidates also passed their full comparisons. Literal SQL39/40/41/42 development reports and their diagnostic/pair/group fingerprints reproduce unchanged. Sources, relevant training/target projections, candidates and historical dependencies remain unchanged; temporary private files/databases were removed. **Learner SQL43 execution remains pending.**
+Historical training, complete mappings/calendar and saved candidates also passed their full comparisons. Literal SQL39/40/41/42 development reports and their diagnostic/pair/group fingerprints reproduce unchanged. Sources, relevant training/target projections, candidates and historical dependencies remain unchanged; temporary private files/databases were removed. **The learner subsequently accepted SQL43 on 2026-10-30**, as recorded separately below; the historical preflight record remains unchanged.
 
 ### Verified final-period report
 
-The prepublished decision remains WEEKDAY4 selected and SNAIVE7 reference. These are assistant preflight results awaiting learner reproduction, not a new selection exercise.
+The prepublished decision remains WEEKDAY4 selected and SNAIVE7 reference. The assistant preflight report below was reproduced in the learner's accepted screenshot on 2026-10-30; the final results do not change the frozen selection.
 
 | Model | Series | Positions | Actual units | Predicted units | MAE | Mean error | Valid RMSSE | Undefined RMSSE | Macro RMSSE | Status |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -64,8 +64,14 @@ The prepublished decision remains WEEKDAY4 selected and SNAIVE7 reference. These
 
 Both rows have origin FINAL_HOLDOUT. Ordered report SHA256: `3b4a0f10f18d5abf661a140abd3dbe7437301cefe87fc8dfa50e3da895a7fd2a`.
 
-## Learner execution and interpretation
+## Learner acceptance and interpretation — 2026-10-30
 
-Run the entire SQL43 file in a new editor under the `retail_merchandising` DBeaver connection. It is read-only and leaves saved forecasts unchanged. Full historical integrity checks still run; wait for completion before rerunning. Return all two rows and twelve columns, including check_status where possible.
+The learner supplied a DBeaver screenshot showing **both FINAL_HOLDOUT rows and all twelve field positions, including both complete PASS values**. All twenty-four values match the assistant preflight after removing displayed thousands separators, preserving prediction totals to two decimal places and restoring metrics to six decimal places. The [learner acceptance record](../data/final_holdout_baselines_learner_acceptance.json) reproduces the ordered report SHA256 `3b4a0f10f18d5abf661a140abd3dbe7437301cefe87fc8dfa50e3da895a7fd2a` with zero field mismatches.
 
-Compare the selected baseline with the reference under the same scope. If its final errors are worse, report the reversal without changing the frozen decision or revising the model using these outcomes. One reserved period does not establish performance at all future dates. Baseline forecasting acceptance does not complete Power BI, price/anomaly work, behaviour analysis, tree modelling or the overall portfolio project.
+This is screenshot-based acceptance of the displayed aggregate report. The assistant did not access the learner's database or rerun forecasts/final-target calculations for this acceptance. Complete private source, saved-candidate, error-row, diagnostic and fixture comparisons remain the separate historical preflight evidence described above. The frozen SQL43, protocol and preflight files remain unchanged; no screenshot, individual product identifiers, detailed errors or quantity vectors are published.
+
+The selected WEEKDAY4 baseline has lower MAE (**1.103654 versus 1.243972**) and macro RMSSE (**0.828159 versus 0.997242**) than the fixed SNAIVE7 reference in this final period. Relative reductions are approximately **11.28% for MAE** and **16.96% for macro RMSSE**, calculated from the displayed six-decimal metrics; the retained evidence does not store the unrounded independent aggregate values needed to claim more precise percentages. These are error reductions, not accuracy percentages.
+
+Both candidates underpredict in aggregate. WEEKDAY4's mean error of **-0.056386** is closer to zero than SNAIVE7's **-0.106180**. Actual minus predicted totals are exactly **48,138 units** and **90,648 units**, respectively, using the accepted aggregate totals. This does not identify individual stockouts or lost sales, and aggregate improvement does not establish that every series improved.
+
+**WEEKDAY4 remains the one global selected baseline, as frozen before final evaluation.** This result confirms its advantage over the fixed reference for this one reserved period; it does not establish statistical significance, guarantee later performance or justify tuning on these outcomes. Future tree-model work needs untouched evaluation data or an explicitly exploratory retrospective evaluation: the exposed final period cannot become a fresh test again. Learner reproduction of the baseline final evaluation is complete; Power BI, price/anomaly work, behaviour analysis, tree modelling and the overall portfolio project remain separate work.

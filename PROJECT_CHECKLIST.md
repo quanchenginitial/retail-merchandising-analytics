@@ -1,6 +1,6 @@
 # 商品分析项目进度
 
-更新日期：2026-10-29（Australia/Sydney）。
+更新日期：2026-10-30（Australia/Sydney）。
 
 ## 本次已经发生的工作
 
@@ -109,18 +109,20 @@
 - [x] 5A10 用户于 2026-10-29 完成 SQL42 门店比较验收：30 行 × 14 个可见实质字段与历史预检完全匹配，240 个指标值、90 个计数及标识/州代码已核对；右侧状态列裁切，30 个 PASS 来自用户明确确认。见 [聚合验收](data/store_forecast_errors_learner_acceptance.json) 和 [门店验收](docs/STORE_FORECAST_ERRORS_VALIDATION.md)，不声称 15 列全部可见或直接审核了用户数据库。
 - [x] 5A11 在最终留出误差计算前冻结 [两基线最终留出协议](docs/FINAL_HOLDOUT_BASELINE_PROTOCOL.md)：[公开冻结提交](https://github.com/quanchenginitial/retail-merchandising-analytics/commit/6d270efb8c06bc06632f6e3a400066cb11e3d626) 先于最终目标读取；依据已接受开发结果，全局选定 WEEKDAY4，保留 SNAIVE7 为固定参考；只在两种已实现基线中选择，不按商品、部门或门店事后换模型。
 - [x] 助手已完成 SQL43 最终留出独立预检：7 个用例族、14 个子用例通过，2 行 × 12 列全部匹配并 PASS；1,707,440 条最终误差 × 12 字段及 60,980 条序列诊断 × 16 字段按声明规则核对。两方法均 30,490 有效尺度/0 未定义；112 个固定依赖、来源及已存预测未变，临时私有文件已清理。见 [预检记录](data/final_holdout_baselines_preflight.json) 与 [最终留出方法](docs/FINAL_HOLDOUT_BASELINES_VALIDATION.md)。
-- [ ] 5A11 用户执行并验收 SQL43 最终留出比较：训练截至 d1913（2016-04-24），只评分 d1914–d1941（2016-04-25..2016-05-22），保留全部 30,490 序列，两方法各 853,720 个位置；只读返回 2 行、12 列。助手预检已通过、用户尚未执行；WEEKDAY4 的 MAE/macro RMSSE 为 1.103654/0.828159，SNAIVE7 为 1.243972/0.997242。
-- [ ] 5 时间切分、预测基线、滚动验证与一次最终留出评估完成。
+- [x] 5A11 用户于 2026-10-30 截图验收 SQL43 最终留出比较：2 行 × 12 列完整可见，两个 PASS 及全部 24 个字段值匹配历史预检与规范报告指纹；保留全部 30,490 序列，每方法 853,720 个位置。WEEKDAY4 的 MAE/macro RMSSE 为 1.103654/0.828159，SNAIVE7 为 1.243972/0.997242；按显示值计算约降低 11.28%/16.96%，WEEKDAY4 总预测仍低于实际 48,138 件。见 [聚合验收](data/final_holdout_baselines_learner_acceptance.json) 与 [最终留出验收](docs/FINAL_HOLDOUT_BASELINES_VALIDATION.md)；截图验收与助手私有逐行预检分开记录。
+- [x] 5 基线预测里程碑：时间切分、两种基线、开发比较与一次冻结最终留出评估已验收；见 [阶段结果](docs/STAGE05_BASELINE_FORECAST_FINDINGS.md)。仅完成基线范围，树模型尚未实现，整体项目未完成。
+- [x] 6A 助手独立预检 [SQL44 商品门店周价格基础表](sql/44_build_item_store_weekly_prices.sql)：8 个用例族、33 个子用例通过，365,880 行 × 12 字段与独立来源参考精确一致，13 行 × 12 列报告全部 PASS；2,561,160 条日记录 × 6 字段、365,864 条价格 × 4 字段、36,588 条原商品周记录 × 8 字段全部匹配。总量 3,536,539 件、69,538 个零销量商品门店周；16 个缺价位置（前两周各 8 个）全部零销量，正销量缺价为 0。7 个输入投影、3 份来源及 42 份历史预检未变，私有文件已清理；见 [机器记录](data/item_store_weekly_prices_preflight.json)、[协议](docs/ITEM_STORE_WEEKLY_PRICES_PROTOCOL.md) 与 [方法](docs/ITEM_STORE_WEEKLY_PRICES_VALIDATION.md)。此处仍是助手预检，不是用户建表验收或价格效果结论。
+- [ ] 6A 用户执行并验收 SQL44；当前用户尚未执行。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
 - [ ] 9 干净环境复跑、英文结论、中文讲解和最终作品集检查完成。
 
-以上空框均表示未完成；创建文档不等于用户已完成练习。阶段 4 描述性里程碑及试点/全目录开发比较、部门与门店汇总均已验收，不声称已独立测试用户的概念理解。两种已实现基线中的全局选择已冻结，最终留出助手预检已通过、等待用户验收；树模型仍未实现，价格因果和后续项目交付尚未完成。
+以上空框均表示未完成；创建文档不等于用户已完成练习。阶段 4 描述性里程碑与阶段 5 基线预测里程碑已验收，不声称已独立测试用户的概念理解。WEEKDAY4 在最终评分前已全局选定，SNAIVE7 保留为固定参考，最终结果没有改变选择。树模型、阶段 6 价格关联与异常排查、后续项目交付仍未完成；未来模型不能把已暴露的最终留出期当作新的独立测试。
 
 ## 下一次对话从这里继续
 
-执行 [当前一步](docs/FIRST_STEP_ZH.md)：[SQL43](sql/43_evaluate_final_holdout_baselines.sql) 检验开发阶段选定的 WEEKDAY4 在保留的最后 28 天表现如何，同时完整保留 SNAIVE7 参考结果。依据 [冻结协议](docs/FINAL_HOLDOUT_BASELINE_PROTOCOL.md)，训练与尺度仅用 d1–d1913，实际目标仅进入 d1914–d1941 的误差计算；已有预测不重训、不用目标更新、不按最终结果改选择。新建编辑器粘贴全文件，用执行 SQL 脚本（默认 Alt+X），按 [最终留出方法](docs/FINAL_HOLDOUT_BASELINES_VALIDATION.md) 核对 2 行、12 列及明确的有效/未定义覆盖。助手预检已通过（7 个用例族、14 个子用例及 2×12 报告），用户尚未执行；PASS 只证明完整性与计算检查通过，不保证所选基线胜出。此后若开发树模型，不能把已经暴露的这一留出期当作新的独立最终测试。先说明目的，再执行一个小步骤、验收并更新 GitHub。
+接下来按 [当前一步](docs/FIRST_STEP_ZH.md) 执行已通过助手预检的 [SQL44](sql/44_build_item_store_weekly_prices.sql)，将同一商品在同一门店的十二个完整周保留下来，为后续价格与销量关联提供基础；本步只建表、核对覆盖和对账，不推断因果或标记缺货。全部 30,490 个组合、365,880 个商品门店周位置均须保留，缺价保持 NULL。用户执行与验收仍待完成，需核对 13 行、12 列实际输出；详见 [协议](docs/ITEM_STORE_WEEKLY_PRICES_PROTOCOL.md) 与 [方法](docs/ITEM_STORE_WEEKLY_PRICES_VALIDATION.md)。先说明目的，再执行一个小步骤、验收并更新 GitHub。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

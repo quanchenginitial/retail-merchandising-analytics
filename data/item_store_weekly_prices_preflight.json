@@ -1,0 +1,491 @@
+{
+  "checked_at_utc": "2026-10-29T15:09:20.653171+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/44_build_item_store_weekly_prices.sql",
+  "script_sha256": "a57ff1b0246879dd33a1e3f45c2f6405f3c1474975300172f25b93cc5d906d64",
+  "validator": "validation/preflight_item_store_weekly_prices.py",
+  "validator_sha256": "127ab0312b8d597eb5268340e4c936adcb74a38a80f15c6d939d892e610d4521",
+  "protocol": "docs/ITEM_STORE_WEEKLY_PRICES_PROTOCOL.md",
+  "protocol_sha256": "3fcf8b110d8f67b8c79f8a8404a2517a2848344c03012ec800b7e8fbd80d4630",
+  "table": "mart.m5_item_store_weekly_prices_12w",
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "days": 84,
+    "retail_weeks": [
+      11601,
+      11602,
+      11603,
+      11604,
+      11605,
+      11606,
+      11607,
+      11608,
+      11609,
+      11610,
+      11611,
+      11612
+    ],
+    "series": 30490
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+  },
+  "source_hashes_unchanged": true,
+  "source_controls": {
+    "source_series": 30490,
+    "source_products": 3049,
+    "source_stores": 10,
+    "calendar_rows": 1969,
+    "window_daily_cells": 2561160,
+    "source_price_rows": 365864,
+    "window_units": 3536539
+  },
+  "independent_reference": "Python csv reads original sales columns d_1828..d_1911, original calendar mapping and original weekly prices with Decimal exact cents; all expected pair/week membership comes from original CSVs, not SQL44 output.",
+  "preflight_strategy": "Private database contains only 84 sales day columns, their 2,561,160 daily cells, complete small calendar/dimensions and 12 price weeks. Unchanged SQL09 build stages scoped prices; unchanged SQL23 build establishes the accepted pooled dependency. No forecast or ABC pipeline is rerun; learner database is never opened.",
+  "independent_source_read_seconds": 22.637,
+  "setup_seconds": 8.331,
+  "build_seconds": 2.099,
+  "validation_seconds": 2.294,
+  "timing_scope": "One-run elapsed times; CLI timings exclude Python comparisons and hashing. DuckDB memory_limit is not a total-process memory cap.",
+  "daily_rows_compared": 2561160,
+  "daily_fields_compared": 6,
+  "price_rows_compared": 365864,
+  "price_fields_compared": 4,
+  "pooled_rows_compared": 36588,
+  "pooled_fields_compared": 8,
+  "pooled_independent_rows_sha256": "587910052a8d844e77489e435010aee73937cc650e9068aff25a9b01178eabad",
+  "pooled_exact_field_mismatches": 0,
+  "stored_rows_compared": 365880,
+  "stored_fields_compared": 12,
+  "exact_stored_field_mismatches": 0,
+  "stored_rows_sha256": "80fd6a2cc1d3842d6be6a44ac11e7266217204bb7813224dc0c5d51a29c1dabd",
+  "independent_rows_sha256": "80fd6a2cc1d3842d6be6a44ac11e7266217204bb7813224dc0c5d51a29c1dabd",
+  "fingerprint_contract": "SHA-256 over sorted item/store/week rows encoded as compact JSON arrays plus LF; exact price cents are two-decimal strings, missing price null, has_price boolean.",
+  "pooled_dependency_script": "sql/23_build_product_weekly.sql",
+  "pooled_dependency_sha256": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+  "price_dependency_script": "sql/09_stage_prices.sql",
+  "price_dependency_sha256": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+  "accepted_product_week_evidence": "data/product_weekly_learner_acceptance.json",
+  "accepted_product_week_evidence_sha256": "50ba08f4f5122b95b2da79e5c377f95ad1d61d98acf0e6c1d216f5d15ec87826",
+  "accepted_weekly_units_and_daily_counts_matched": true,
+  "scoped_input_sha256_before": {
+    "source_wide_84d": "c5c27b2687c4f8cbf25cc58dc11d30fbad50369c670b1ee1fed1883cc4cd6ce9",
+    "daily_84d": "a27f56f987b044effd3428bfedf2b81ed27c3cb7d43fbe619e0a8c7099da0a07",
+    "calendar": "4b5b587a2bc673b8b3b730198eb7523ccbc1ece1fa5714b88804773fe06590ac",
+    "products": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "stores": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "prices_12w": "8308eb365af2030e569c76b0584c070bc041175bad85459554b59b23ff771646",
+    "accepted_product_weekly": "888206a6471fa74db7526d072c561e970e5394f79b28d79151d3837c04c89c3f"
+  },
+  "scoped_input_sha256_after": {
+    "source_wide_84d": "c5c27b2687c4f8cbf25cc58dc11d30fbad50369c670b1ee1fed1883cc4cd6ce9",
+    "daily_84d": "a27f56f987b044effd3428bfedf2b81ed27c3cb7d43fbe619e0a8c7099da0a07",
+    "calendar": "4b5b587a2bc673b8b3b730198eb7523ccbc1ece1fa5714b88804773fe06590ac",
+    "products": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "stores": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "prices_12w": "8308eb365af2030e569c76b0584c070bc041175bad85459554b59b23ff771646",
+    "accepted_product_weekly": "888206a6471fa74db7526d072c561e970e5394f79b28d79151d3837c04c89c3f"
+  },
+  "scoped_inputs_unchanged": true,
+  "historical_preflight_files_unchanged": 42,
+  "temporary_database_removed": true,
+  "temporary_database_bytes_after_close": 28323840,
+  "fixture_family_count": 8,
+  "fixture_subcase_count": 33,
+  "fixture_cases": [
+    {
+      "family": "valid_zero_and_missing_price_semantics",
+      "case": "priced_zeros_unpriced_zeros_and_internal_gaps",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "family": "valid_zero_and_missing_price_semantics",
+      "case": "all_zero_all_prices_absent",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "family": "valid_zero_and_missing_price_semantics",
+      "case": "input_order_irrelevant",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "family": "daily_completeness_and_values",
+      "case": "duplicate_replaces_missing_day",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "daily_completeness_and_values",
+      "case": "missing_series",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "daily_completeness_and_values",
+      "case": "null_units",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "daily_completeness_and_values",
+      "case": "negative_units",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "daily_completeness_and_values",
+      "case": "wrong_units_type",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "calendar_and_boundaries",
+      "case": "fact_wrong_week",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "calendar_and_boundaries",
+      "case": "calendar_duplicate_day",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "calendar_and_boundaries",
+      "case": "full_week_cannot_be_clipped",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "dimension_and_pair_mapping",
+      "case": "duplicate_product",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "dimension_and_pair_mapping",
+      "case": "valid_but_wrong_department",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "dimension_and_pair_mapping",
+      "case": "wrong_store_state",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "dimension_and_pair_mapping",
+      "case": "duplicate_raw_pair",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "duplicate_equal_price",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "orphan_item",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "null_week",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "invalid_null_price_at_zero_sales",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "invalid_zero_price_at_zero_sales",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "wrong_price_type",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "price_keys_values_and_coverage",
+      "case": "cannot_borrow_other_store_or_week",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "accepted_product_week_reconciliation",
+      "case": "accepted_pooled_units_changed",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "accepted_product_week_reconciliation",
+      "case": "accepted_pooled_duplicate",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "accepted_product_week_reconciliation",
+      "case": "accepted_pooled_schema_changed",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "exact_stored_fields_and_schema",
+      "case": "total_preserving_unit_redistribution",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "exact_stored_fields_and_schema",
+      "case": "prices_swapped_between_stores",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "exact_stored_fields_and_schema",
+      "case": "missing_price_imputed_zero",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "exact_stored_fields_and_schema",
+      "case": "coverage_flag_changed",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "exact_stored_fields_and_schema",
+      "case": "stored_schema_changed",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "exact_stored_fields_and_schema",
+      "case": "stored_week_missing",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "family": "rerun_and_scope_preservation",
+      "case": "validation_repeat_and_existing_target_refusal",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "family": "rerun_and_scope_preservation",
+      "case": "outside_window_and_unused_daily_fields",
+      "passed": true,
+      "expected_rejection": false
+    }
+  ],
+  "report_rows": 13,
+  "report_columns": 12,
+  "report_sha256": "ecf14a9fdf423410c9118114ee6a0f0693c12ffeca1f1ae020b95a657efd3d18",
+  "results": [
+    {
+      "retail_week": "11601",
+      "week_start": "2016-01-30",
+      "week_end": "2016-02-05",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 291534,
+      "zero_sales_series_weeks": 6378,
+      "priced_series_weeks": 30482,
+      "missing_price_series_weeks": 8,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 291534,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11602",
+      "week_start": "2016-02-06",
+      "week_end": "2016-02-12",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 305409,
+      "zero_sales_series_weeks": 6333,
+      "priced_series_weeks": 30482,
+      "missing_price_series_weeks": 8,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 305409,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11603",
+      "week_start": "2016-02-13",
+      "week_end": "2016-02-19",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 299279,
+      "zero_sales_series_weeks": 6262,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 299279,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11604",
+      "week_start": "2016-02-20",
+      "week_end": "2016-02-26",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 280579,
+      "zero_sales_series_weeks": 6329,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 280579,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11605",
+      "week_start": "2016-02-27",
+      "week_end": "2016-03-04",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 291839,
+      "zero_sales_series_weeks": 6040,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 291839,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11606",
+      "week_start": "2016-03-05",
+      "week_end": "2016-03-11",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 304015,
+      "zero_sales_series_weeks": 5942,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 304015,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11607",
+      "week_start": "2016-03-12",
+      "week_end": "2016-03-18",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 297551,
+      "zero_sales_series_weeks": 5737,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 297551,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11608",
+      "week_start": "2016-03-19",
+      "week_end": "2016-03-25",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 281241,
+      "zero_sales_series_weeks": 5772,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 281241,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11609",
+      "week_start": "2016-03-26",
+      "week_end": "2016-04-01",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 282697,
+      "zero_sales_series_weeks": 5529,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 282697,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11610",
+      "week_start": "2016-04-02",
+      "week_end": "2016-04-08",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 309668,
+      "zero_sales_series_weeks": 5116,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 309668,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11611",
+      "week_start": "2016-04-09",
+      "week_end": "2016-04-15",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 306203,
+      "zero_sales_series_weeks": 5102,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 306203,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11612",
+      "week_start": "2016-04-16",
+      "week_end": "2016-04-22",
+      "series_week_rows": 30490,
+      "source_daily_rows": 213430,
+      "units": 286524,
+      "zero_sales_series_weeks": 4998,
+      "priced_series_weeks": 30490,
+      "missing_price_series_weeks": 0,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 286524,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "TOTAL",
+      "week_start": "2016-01-30",
+      "week_end": "2016-04-22",
+      "series_week_rows": 365880,
+      "source_daily_rows": 2561160,
+      "units": 3536539,
+      "zero_sales_series_weeks": 69538,
+      "priced_series_weeks": 365864,
+      "missing_price_series_weeks": 16,
+      "missing_price_positive_sales_weeks": 0,
+      "priced_units": 3536539,
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Assistant independent preflight only; learner SQL44 execution pending. Missing prices remain NULL and zero-sales series/weeks remain present. No price-change association, anomaly finding, causal elasticity, promotion or stockout identification is claimed. Public evidence contains aggregate results and fingerprints only."
+}
