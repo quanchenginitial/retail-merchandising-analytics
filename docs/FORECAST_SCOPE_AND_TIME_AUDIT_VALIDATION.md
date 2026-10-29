@@ -2,7 +2,7 @@
 
 ## Purpose and status
 
-[SQL33](../sql/33_forecast_scope_and_time_audit.sql) prepares the existing [28-day forecast protocol](EVALUATION_PLAN.md). Before generating predictions, it fixes the learning population and checks that each series has complete historical inputs at each origin. It is a read-only audit, not a forecast or an evaluation result. Learner execution remains pending; assistant verification is recorded separately in [preflight evidence](../data/forecast_scope_and_time_audit_preflight.json).
+[SQL33](../sql/33_forecast_scope_and_time_audit.sql) prepares the existing [28-day forecast protocol](EVALUATION_PLAN.md). Before generating predictions, it fixes the learning population and checks that each series has complete historical inputs at each origin. It is a read-only audit, not a forecast or an evaluation result. On 29 October 2026, the learner screenshot confirmed all four rows and thirteen columns PASS, with canonical report fingerprint matching historical preflight. [Learner acceptance](../data/forecast_scope_and_time_audit_learner_acceptance.json) records the four public aggregate rows; independent source verification remains separate in [preflight evidence](../data/forecast_scope_and_time_audit_preflight.json).
 
 ## Population fixed without sales-based selection
 
@@ -49,7 +49,7 @@ Executed results on DuckDB v1.5.5:
 - **33 targeted cases passed:** five valid cases and 28 expected rejections. Valid cases include zero-only training series, shuffled metadata, absent final-holdout observations and altered final-holdout values. Rejections cover balanced missing/duplicate days, malformed extra training keys, invalid units, changed membership even at the same count, source/dimension disagreement and damaged calendar boundaries.
 - Both used source-file hashes, historical preflights and five deterministic input projections remain unchanged. Private databases and row-level exports were removed. No actual source product identifiers, training vectors or final-holdout unit values are published.
 
-The four-row audit took 1.153 seconds in this private run; source reconstruction and initial export took 14.598 seconds. These timings do not predict performance against the learner's full fact table. The evidence records exact timing scopes and excludes remaining Python comparisons and hashing. A separate read-only review found the implemented scope, boundaries and executed evidence consistent. Learner screenshot acceptance remains pending.
+The four-row audit took 1.153 seconds in this private run; source reconstruction and initial export took 14.598 seconds. These timings do not predict performance against the learner's full fact table. The evidence records exact timing scopes and excludes remaining Python comparisons and hashing. A separate read-only review found the implemented scope, boundaries and executed evidence consistent. The learner has now accepted the displayed four-row audit by screenshot; the source reconstruction and fixtures remain assistant evidence.
 
 To reproduce the assistant preflight from the repository root on the documented local environment:
 
@@ -59,6 +59,12 @@ To reproduce the assistant preflight from the repository root on the documented 
 
 The runner expects original files under `D:/database/m5-forecasting-accuracy` and verifies their hashes against the source registry. Adjust environment paths when reproducing elsewhere; keep rerun evidence separate from the published historical record. It tokenizes complete CSV records but only inspects selected training unit fields through d_1913, discarding final-holdout unit cells without conversion or evaluation.
 
+## Learner acceptance
+
+The four-row screenshot was transcribed with integer counts and ISO dates, preserving origin order and all thirteen columns. Its SHA-256 matches `c1df269f32ca8f9e5e680780796a6b385e97c89303719d6ac33beb6209aa54b0` exactly. Scope labels FOODS_1 / CA_1 and the four aggregate origins are safe to publish; no product identifiers, membership list, row-level observations or screenshot are saved.
+
+The accepted report confirms 216 series per origin, 1,512 last-seven-day records, 6,048 last-28-day records and 28 forecast calendar dates. Expanding training counts overlap and are not summed. The screenshot establishes these displayed results and learner execution; it is not a separate direct audit of the learner database, every training value or target observation. Source comparisons, frozen-membership checks and final-holdout access boundaries remain the independently documented SQL/preflight evidence. This is an input/time audit, not a forecast-skill result or an independent test of the learner's conceptual understanding.
+
 ## Subsequent work
 
-After learner acceptance, generate the complete 28-day last-seven-day-pattern baseline at each origin without updating it with actual target outcomes. Compare the previous-four-same-weekday mean under the same scope and windows, then evaluate development MAE, signed error and training-scaled RMSSE under the evaluation plan. Freeze method choices before final-holdout evaluation. None of those forecast results is claimed by this preparation step.
+With the scope/time audit accepted, the next step is to generate the complete 28-day last-seven-day-pattern baseline at each origin without updating it with actual target outcomes. Compare the previous-four-same-weekday mean under the same scope and windows, then evaluate development MAE, signed error and training-scaled RMSSE under the evaluation plan. Freeze method choices before final-holdout evaluation. None of those forecast results is claimed by this preparation step.

@@ -33,6 +33,14 @@ The already accepted April ABC/XYZ labels include observations occurring after t
 
 Next, generate all 28 forecasts at each origin from the last seven observed days without updating from target outcomes; compare the previous-four-same-weekday mean under the same origins and scope. Model choice will use development results only. Final-holdout evaluation remains pending until choices are frozen. Neither a single slice nor successful data checks establish full-dataset forecasting ability.
 
+### First candidate: weekly seasonal naive (SQL34)
+
+Generate the first candidate under the frozen scope and all four origins using [SQL34](../sql/34_build_seasonal_naive_forecasts.sql). For training cutoff T and horizon h = 1,...,28, predict the observed units at day `T - 6 + ((h - 1) % 7)`. This repeats the final observed seven-day pattern four times, preserving the weekday alignment. Forecast every scoped series, including zero predictions. All 28 values are fixed using information available at the origin; never update weeks two through four with actual observations from the first forecast week.
+
+Persist the candidate as `mart.m5_forecast_snaive7_28d` with model tag `SNAIVE7`, explicit origin, source day and target day. There are 216 × 28 = 6,048 predictions per origin and 24,192 across all four origins. The four origins have different information cutoffs even though they are constructed in one script. A later origin may legitimately use observations that were future outcomes at an earlier origin.
+
+Generation and correctness checks do not evaluate accuracy. The final-origin baseline is an unscored candidate, not a declaration of the selected final model. Do not join final-holdout actuals or compute their errors during construction. Subsequent steps will compare development results under the same scope and metrics, document model choices, and only then evaluate the final holdout. No accuracy, improvement or business benefit is claimed by saving this baseline.
+
 ## Behaviour and recommendation
 
 Choose chronological training/development/holdout boundaries after observing only source coverage. Apply all feature construction to events known at the prediction cutoff. Define a complete outcome window and exclude/censor immature episodes consistently. Split or cluster evaluation by visitor as needed to avoid treating repeated events as independent people.
