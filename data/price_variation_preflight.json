@@ -1,0 +1,313 @@
+{
+  "checked_at_utc": "2026-10-29T16:11:22.090287+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/45_audit_price_variation.sql",
+  "script_sha256": "3d5775f5bc237a422db7dfe626c2ccabf0caae76ba5315c531ccf9d92e8b916d",
+  "validator": "validation/preflight_price_variation.py",
+  "validator_sha256": "8a8a1918f442535ba7bdf0b47bbcdf00253737f6e1743b472dbdd2414c1e9c46",
+  "protocol": "docs/PRICE_VARIATION_PROTOCOL.md",
+  "protocol_sha256": "6f2f1e11f0467c4cd0337ae93b3a7a867a5412c525f54667bc203968d33ebba4",
+  "code_and_dependency_sha256": {
+    "sql/45_audit_price_variation.sql": "3d5775f5bc237a422db7dfe626c2ccabf0caae76ba5315c531ccf9d92e8b916d",
+    "validation/preflight_price_variation.py": "8a8a1918f442535ba7bdf0b47bbcdf00253737f6e1743b472dbdd2414c1e9c46",
+    "docs/PRICE_VARIATION_PROTOCOL.md": "6f2f1e11f0467c4cd0337ae93b3a7a867a5412c525f54667bc203968d33ebba4",
+    "sql/09_stage_prices.sql": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/44_build_item_store_weekly_prices.sql": "a57ff1b0246879dd33a1e3f45c2f6405f3c1474975300172f25b93cc5d906d64",
+    "validation/preflight_item_store_weekly_prices.py": "127ab0312b8d597eb5268340e4c936adcb74a38a80f15c6d939d892e610d4521"
+  },
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+  },
+  "source_hashes_unchanged": true,
+  "source_controls": {
+    "source_series": 30490,
+    "source_products": 3049,
+    "source_stores": 10,
+    "calendar_rows": 1969,
+    "window_daily_cells": 2561160,
+    "source_price_rows": 365864,
+    "window_units": 3536539
+  },
+  "input_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "weeks": 12,
+    "pairs": 30490
+  },
+  "report_window": {
+    "first_current_week": 11602,
+    "last_current_week": 11612,
+    "start_date": "2016-02-06",
+    "end_date": "2016-04-22"
+  },
+  "independent_reference": "Reused SQL44 Python csv/Decimal readers derive complete pair membership and exact weekly values from original files. Direct previous/current week lookups independently classify all 335,390 adjacent positions and distinct pair sets; every report field and order is compared.",
+  "preflight_strategy": "Only 84 sales columns and twelve price weeks are staged privately. Unchanged SQL09/23/44 builds establish the input; their historical test suites and the forecasting pipeline are not rerun. SQL45 reads weekly input, metadata, calendar, pooled checks and staging prices; no daily-fact scan.",
+  "weekly_input_rows_compared": 365880,
+  "weekly_input_fields_compared": 12,
+  "weekly_input_exact_mismatches": 0,
+  "weekly_input_rows_sha256": "80fd6a2cc1d3842d6be6a44ac11e7266217204bb7813224dc0c5d51a29c1dabd",
+  "accepted_sql44_input_fingerprint_matched": true,
+  "pooled_rows_compared": 36588,
+  "pooled_fields_compared": 8,
+  "pooled_rows_sha256": "587910052a8d844e77489e435010aee73937cc650e9068aff25a9b01178eabad",
+  "price_rows_compared": 365864,
+  "price_fields_compared": 4,
+  "transition_positions_evaluated": 335390,
+  "scoped_input_sha256_before": {
+    "weekly_input": "f39e060afdf364d39794e37f812d4d4c1f9427e73140af889ed1dcc20d50d495",
+    "pooled_input": "888206a6471fa74db7526d072c561e970e5394f79b28d79151d3837c04c89c3f",
+    "raw_metadata": "16e2a35d176e3fcd89a126b49a3b0a0ca7dea6ef0528fcba91c583c32047c858",
+    "calendar_date_week_projection": "4b5b587a2bc673b8b3b730198eb7523ccbc1ece1fa5714b88804773fe06590ac",
+    "products": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "stores": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "prices_12w": "8308eb365af2030e569c76b0584c070bc041175bad85459554b59b23ff771646"
+  },
+  "scoped_input_sha256_after": {
+    "weekly_input": "f39e060afdf364d39794e37f812d4d4c1f9427e73140af889ed1dcc20d50d495",
+    "pooled_input": "888206a6471fa74db7526d072c561e970e5394f79b28d79151d3837c04c89c3f",
+    "raw_metadata": "16e2a35d176e3fcd89a126b49a3b0a0ca7dea6ef0528fcba91c583c32047c858",
+    "calendar_date_week_projection": "4b5b587a2bc673b8b3b730198eb7523ccbc1ece1fa5714b88804773fe06590ac",
+    "products": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "stores": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "prices_12w": "8308eb365af2030e569c76b0584c070bc041175bad85459554b59b23ff771646"
+  },
+  "scoped_inputs_unchanged": true,
+  "historical_preflight_files_unchanged": 43,
+  "temporary_database_removed": true,
+  "temporary_database_bytes_after_close": 26226688,
+  "fixture_case_count": 9,
+  "fixture_cases": [
+    {
+      "case": "mixed_adjacent_boundaries_exact_cents_return_zero_sales_store_separation",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "case": "all_unchanged_different_store_prices",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "case": "all_missing_zero_sales",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "case": "reversed_input_order",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "case": "empty_input_rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "case": "duplicate_replaces_missing_week_rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "case": "stored_price_mismatch_rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "case": "weekly_price_type_rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "case": "invalid_present_price_at_zero_sales_rejected",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "independent_source_read_seconds": 22.823,
+  "setup_seconds": 10.231,
+  "audit_seconds": 0.766,
+  "timing_scope": "One-run elapsed seconds; CLI timings exclude hashing/Python comparisons. DuckDB memory_limit is not a total-process memory cap.",
+  "report_rows": 12,
+  "report_columns": 12,
+  "report_sha256": "417d051dbcdd4c28eae74a72e692e1b5f33e73de36ba6d66f10542543a24880b",
+  "report_fingerprint_contract": "SHA-256 over ordered report rows as compact JSON arrays plus LF; counts are integers, dates are ISO strings.",
+  "results": [
+    {
+      "retail_week": "11602",
+      "week_start": "2016-02-06",
+      "week_end": "2016-02-12",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30482,
+      "missing_endpoint_transitions": 8,
+      "price_up_transitions": 218,
+      "price_down_transitions": 418,
+      "unchanged_price_transitions": 29846,
+      "comparable_pairs": 30482,
+      "changed_pairs": 636,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11603",
+      "week_start": "2016-02-13",
+      "week_end": "2016-02-19",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30482,
+      "missing_endpoint_transitions": 8,
+      "price_up_transitions": 138,
+      "price_down_transitions": 177,
+      "unchanged_price_transitions": 30167,
+      "comparable_pairs": 30482,
+      "changed_pairs": 315,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11604",
+      "week_start": "2016-02-20",
+      "week_end": "2016-02-26",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 69,
+      "price_down_transitions": 101,
+      "unchanged_price_transitions": 30320,
+      "comparable_pairs": 30490,
+      "changed_pairs": 170,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11605",
+      "week_start": "2016-02-27",
+      "week_end": "2016-03-04",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 207,
+      "price_down_transitions": 164,
+      "unchanged_price_transitions": 30119,
+      "comparable_pairs": 30490,
+      "changed_pairs": 371,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11606",
+      "week_start": "2016-03-05",
+      "week_end": "2016-03-11",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 576,
+      "price_down_transitions": 265,
+      "unchanged_price_transitions": 29649,
+      "comparable_pairs": 30490,
+      "changed_pairs": 841,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11607",
+      "week_start": "2016-03-12",
+      "week_end": "2016-03-18",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 236,
+      "price_down_transitions": 198,
+      "unchanged_price_transitions": 30056,
+      "comparable_pairs": 30490,
+      "changed_pairs": 434,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11608",
+      "week_start": "2016-03-19",
+      "week_end": "2016-03-25",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 213,
+      "price_down_transitions": 83,
+      "unchanged_price_transitions": 30194,
+      "comparable_pairs": 30490,
+      "changed_pairs": 296,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11609",
+      "week_start": "2016-03-26",
+      "week_end": "2016-04-01",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 123,
+      "price_down_transitions": 119,
+      "unchanged_price_transitions": 30248,
+      "comparable_pairs": 30490,
+      "changed_pairs": 242,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11610",
+      "week_start": "2016-04-02",
+      "week_end": "2016-04-08",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 108,
+      "price_down_transitions": 84,
+      "unchanged_price_transitions": 30298,
+      "comparable_pairs": 30490,
+      "changed_pairs": 192,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11611",
+      "week_start": "2016-04-09",
+      "week_end": "2016-04-15",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 92,
+      "price_down_transitions": 64,
+      "unchanged_price_transitions": 30334,
+      "comparable_pairs": 30490,
+      "changed_pairs": 156,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "11612",
+      "week_start": "2016-04-16",
+      "week_end": "2016-04-22",
+      "potential_transitions": 30490,
+      "comparable_transitions": 30490,
+      "missing_endpoint_transitions": 0,
+      "price_up_transitions": 80,
+      "price_down_transitions": 63,
+      "unchanged_price_transitions": 30347,
+      "comparable_pairs": 30490,
+      "changed_pairs": 143,
+      "check_status": "PASS"
+    },
+    {
+      "retail_week": "TOTAL",
+      "week_start": "2016-02-06",
+      "week_end": "2016-04-22",
+      "potential_transitions": 335390,
+      "comparable_transitions": 335374,
+      "missing_endpoint_transitions": 16,
+      "price_up_transitions": 2060,
+      "price_down_transitions": 1736,
+      "unchanged_price_transitions": 331578,
+      "comparable_pairs": 30490,
+      "changed_pairs": 3361,
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Assistant independent preflight only; learner SQL45 execution pending. Distinct TOTAL pair counts are nonadditive. All zero-sales positions remain included. No price effect, causal elasticity, promotion mechanism or anomaly is estimated. Public output contains aggregates and fingerprints only."
+}

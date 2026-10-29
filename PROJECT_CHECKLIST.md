@@ -112,7 +112,9 @@
 - [x] 5A11 用户于 2026-10-30 截图验收 SQL43 最终留出比较：2 行 × 12 列完整可见，两个 PASS 及全部 24 个字段值匹配历史预检与规范报告指纹；保留全部 30,490 序列，每方法 853,720 个位置。WEEKDAY4 的 MAE/macro RMSSE 为 1.103654/0.828159，SNAIVE7 为 1.243972/0.997242；按显示值计算约降低 11.28%/16.96%，WEEKDAY4 总预测仍低于实际 48,138 件。见 [聚合验收](data/final_holdout_baselines_learner_acceptance.json) 与 [最终留出验收](docs/FINAL_HOLDOUT_BASELINES_VALIDATION.md)；截图验收与助手私有逐行预检分开记录。
 - [x] 5 基线预测里程碑：时间切分、两种基线、开发比较与一次冻结最终留出评估已验收；见 [阶段结果](docs/STAGE05_BASELINE_FORECAST_FINDINGS.md)。仅完成基线范围，树模型尚未实现，整体项目未完成。
 - [x] 6A 助手独立预检 [SQL44 商品门店周价格基础表](sql/44_build_item_store_weekly_prices.sql)：8 个用例族、33 个子用例通过，365,880 行 × 12 字段与独立来源参考精确一致，13 行 × 12 列报告全部 PASS；2,561,160 条日记录 × 6 字段、365,864 条价格 × 4 字段、36,588 条原商品周记录 × 8 字段全部匹配。总量 3,536,539 件、69,538 个零销量商品门店周；16 个缺价位置（前两周各 8 个）全部零销量，正销量缺价为 0。7 个输入投影、3 份来源及 42 份历史预检未变，私有文件已清理；见 [机器记录](data/item_store_weekly_prices_preflight.json)、[协议](docs/ITEM_STORE_WEEKLY_PRICES_PROTOCOL.md) 与 [方法](docs/ITEM_STORE_WEEKLY_PRICES_VALIDATION.md)。此处仍是助手预检，不是用户建表验收或价格效果结论。
-- [ ] 6A 用户执行并验收 SQL44；当前用户尚未执行。
+- [x] 6A 用户于 2026-10-30 截图验收 SQL44：13 行 × 12 列全部可见，13 个 PASS 和全部 156 个字段值匹配冻结预检。365,880 个商品门店周、2,561,160 个日位置、3,536,539 件完整保留；16 个缺价周全部零销量。截图验收与助手逐行预检分开记录；见 [聚合验收](data/item_store_weekly_prices_learner_acceptance.json) 和 [验收说明](docs/ITEM_STORE_WEEKLY_PRICES_VALIDATION.md)。
+- [x] 6B 助手独立预检 [SQL45 相邻周价格变化审计](sql/45_audit_price_variation.sql)：12 行 × 12 列全部 PASS，335,390 个潜在相邻周比较中，335,374 个两端有价、16 个至少一端缺价；涨价 2,060 次、降价 1,736 次、不变 331,578 次。全窗 3,361 个不同商品门店组合至少发生一次可比较调价。完整原始来源参考、输入保留和针对性验证见 [机器证据](data/price_variation_preflight.json) 与 [方法](docs/PRICE_VARIATION_VALIDATION.md)。本步不计算价格效果，用户 SQL45 尚待验收。
+- [ ] 6B 用户执行 SQL45 并提交 12 行、12 列截图验收。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
@@ -123,6 +125,6 @@
 
 ## 下一次对话从这里继续
 
-接下来按 [当前一步](docs/FIRST_STEP_ZH.md) 执行已通过助手预检的 [SQL44](sql/44_build_item_store_weekly_prices.sql)，将同一商品在同一门店的十二个完整周保留下来，为后续价格与销量关联提供基础；本步只建表、核对覆盖和对账，不推断因果或标记缺货。全部 30,490 个组合、365,880 个商品门店周位置均须保留，缺价保持 NULL。用户执行与验收仍待完成，需核对 13 行、12 列实际输出；详见 [协议](docs/ITEM_STORE_WEEKLY_PRICES_PROTOCOL.md) 与 [方法](docs/ITEM_STORE_WEEKLY_PRICES_VALIDATION.md)。先说明目的，再执行一个小步骤、验收并更新 GitHub。
+SQL44 已验收。接下来按 [当前一步](docs/FIRST_STEP_ZH.md) 执行已通过助手预检的 [SQL45](sql/45_audit_price_variation.sql)，检查同一商品、同一门店的相邻两周是否都有价格，以及实际调价覆盖。这是只读查询，保留零销量周，不跨缺价周补比较。返回 11 个后端周加 TOTAL，共 12 行、12 列；用户 SQL45 执行与验收仍待完成。先说明目的，再执行一个小步骤、验收并更新 GitHub。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

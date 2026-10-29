@@ -62,7 +62,7 @@ Focused tests address valid zero and missing-price cases, observation-window bou
 
 The executed [machine evidence](../data/item_store_weekly_prices_preflight.json) records **365,880 stored rows × twelve exact fields**, all matching the independent original-source reference, and **thirteen report rows × twelve fields, all PASS**. All **8 focused test families / 33 executed subcases** passed. The preflight compared all 2,561,160 selected daily rows across six fields, 365,864 scoped price rows across four fields, and all 36,588 original pooled rows across eight fields.
 
-The exact item/week rollup and the historical SQL23 weekly controls matched. All seven relevant input snapshots, source hashes, the prior pooled table and historical preflight files stayed unchanged; private databases and detail exports were removed. Existing-target refusal and validation-only rerun behavior were verified. **Learner SQL44 execution remains pending.**
+The exact item/week rollup and the historical SQL23 weekly controls matched. All seven relevant input snapshots, source hashes, the prior pooled table and historical preflight files stayed unchanged; private databases and detail exports were removed. Existing-target refusal and validation-only rerun behavior were verified. **The learner subsequently accepted the SQL44 report on 2026-10-30**, as recorded separately below; the historical preflight evidence remains unchanged.
 
 ### Selected fields from the measured report
 
@@ -86,8 +86,12 @@ Every week retains 30,490 item/store observations and 213,430 daily records; the
 
 These are weekly positions, not unique products or evidence of stockouts. Table construction does not establish any price–sales association. Ordered report SHA256: `ecf14a9fdf423410c9118114ee6a0f0693c12ffeca1f1ae020b95a657efd3d18`.
 
-## Learner action and next question
+## Learner acceptance and next question — 2026-10-30
 
-Run the entire SQL44 file once in a new editor under the retail_merchandising DBeaver connection. It creates a new analysis table and does not overwrite an existing object. If the target already exists, execute only the complete query after `-- VALIDATION:`; do not drop the table just to rerun the checks. Return all 13 report rows and twelve columns, including check_status.
+The learner's DBeaver screenshot shows **all thirteen rows and twelve fields, including thirteen complete PASS values**. All **156 displayed values** match the frozen preflight report after removing thousands separators and preserving week/date/status strings. The [learner acceptance record](../data/item_store_weekly_prices_learner_acceptance.json) reproduces report SHA256 `ecf14a9fdf423410c9118114ee6a0f0693c12ffeca1f1ae020b95a657efd3d18`, using the ordered twelve-field row arrays encoded as compact JSON with one LF after each row.
 
-After acceptance, investigate usable price coverage and actual price variation within each pair before choosing an association statistic. Do not interpret cross-product price differences as price response, or claim causal elasticity, inventory savings, profit or a live promotion effect from this construction.
+TOTAL retains **365,880 item/store/week positions**, **2,561,160 daily records** and **3,536,539 units**. There are **69,538 zero-sales positions**, **365,864 priced positions** and **16 missing-price positions**, with eight missing in each of weeks 11601 and 11602. Missing-price positive-sales positions are zero, and priced units equal all units. These counts describe weekly observations, not distinct products or stores; they do not establish stockouts or a price effect.
+
+This is screenshot-based acceptance of the aggregate report. The assistant did not open the learner's database or rerun SQL/full-data preflight for this acceptance. The screenshot does not distinguish first-time construction from a validation-only rerun or independently prove every stored field; detailed source and stored-row checks remain the separate assistant evidence above. Frozen code, protocol and historical evidence remain unchanged, and no screenshot or individual weekly observations are published. For later reproduction, an existing target requires only the complete query after `-- VALIDATION:`; do not drop it to repeat the checks.
+
+Next, investigate usable same-series adjacent-week price coverage and actual price variation before choosing an association statistic. Do not interpret cross-product price differences as price response, or claim causal elasticity, inventory savings, profit or a live promotion effect from this construction.
