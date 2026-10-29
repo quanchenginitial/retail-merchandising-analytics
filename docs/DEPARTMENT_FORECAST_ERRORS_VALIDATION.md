@@ -4,7 +4,7 @@
 
 SQL40's full-catalog paired report is learner accepted. WEEKDAY4 improves a majority of series in each metric/window, while many ties and SNAIVE7 wins remain. [SQL41](../sql/41_compare_department_forecast_errors.sql) checks whether each department shares the aggregate improvement and whether its forecasts tend to be too high or too low.
 
-This is a descriptive follow-up using all seven source-defined departments, all ten stores and the same 30,490 product-store series. The [fixed protocol](DEPARTMENT_FORECAST_ERRORS_PROTOCOL.md) is recorded before inspecting department results. No favorable subgroup is selected, and no final model or department-specific forecasting policy is chosen. Department labels are anonymous codes; do not attach invented real-world product meanings to them.
+This is a descriptive follow-up using all seven source-defined departments, all ten stores and the same 30,490 product-store series. The [fixed protocol](DEPARTMENT_FORECAST_ERRORS_PROTOCOL.md) is recorded before inspecting department results. No favorable subgroup is selected, and no final model or department-specific forecasting policy is chosen. Department labels are anonymous codes; do not attach invented real-world product meanings to them. On 29 October 2026 (Australia/Sydney), the learner accepted all 21 report rows and fourteen field positions; the canonical report fingerprint matches historical assistant preflight.
 
 ## One row per department and development window
 
@@ -44,7 +44,7 @@ Focused fixtures cover new assignment, weighting, NULL-scale, bias and rounding 
 
 The executed [machine evidence](../data/department_forecast_errors_preflight.json) records **21 rows × 14 columns, all PASS**, and **8 focused fixtures passed**. All 182,940 assigned diagnostics, 91,470 preserved pairs, 42 internal model totals and 21 department-pair controls match the independent source reference under the declared exact/numeric comparison rules. Department integer totals and the distinct all-series/valid-series weighted means reconcile to the accepted global reports.
 
-Original history, complete mappings/calendar and saved candidates also passed their full checks. SQL38/39/40 reports, base diagnostic and pair fingerprints, and overlapping pilot evidence reproduce unchanged. Sources, saved candidates, relevant inputs and historical dependencies remain unchanged; private detail exports and databases were removed. **Learner SQL41 execution remains pending.**
+Original history, complete mappings/calendar and saved candidates also passed their full checks. SQL38/39/40 reports, base diagnostic and pair fingerprints, and overlapping pilot evidence reproduce unchanged. Sources, saved candidates, relevant inputs and historical dependencies remain unchanged; private detail exports and databases were removed. **Learner SQL41 screenshot acceptance is now recorded separately below.**
 
 ### Selected fields from the verified report
 
@@ -74,7 +74,7 @@ The machine evidence retains all fourteen fields. This table highlights departme
 | DEVELOPMENT_3 | HOUSEHOLD_1 | 5320 | 0 | -0.149047 | -0.099288 | 0.001289 | -0.163381 |
 | DEVELOPMENT_3 | HOUSEHOLD_2 | 5150 | 0 | -0.047965 | -0.013717 | -0.020118 | -0.185879 |
 
-These are assistant development preflight results, awaiting learner screenshot acceptance.
+These development aggregates are also accepted from the learner screenshot; detailed source and assigned-diagnostic comparisons remain separate assistant evidence.
 
 WEEKDAY4 has lower MAE and macro RMSSE in all 21 department/window comparisons. Its absolute mean signed error is closer to zero in eleven comparisons and farther from zero in ten; lower average error magnitude does not imply uniformly improved bias. For example, DEVELOPMENT_1 HOUSEHOLD_1 MAE falls from 1.326101 to 1.146664, while mean error changes from −0.065199 to −0.133882, indicating greater average underprediction. These descriptive results support examining bias alongside error magnitude, not applying an untested bias correction or selecting a different method retrospectively for each department.
 
@@ -87,3 +87,17 @@ Ordered report SHA256: `7f5af82dce08cd2dc28c5bfdac8da4a35a3e804c1543abb5503ac102
 Execute the full SQL41 file in a new editor under the `retail_merchandising` DBeaver connection. It is read-only and creates no table. Full-history checks remain part of this query, so wait for completion before repeating it. Return all 21 rows and fourteen columns; split screenshots if necessary while keeping each row identifiable by origin and department.
 
 Compare methods within a department/window. Departments differ in unit volumes, so a larger absolute MAE alone does not rank forecasting quality across departments. A favorable department average does not prove that every store or product improves, nor does it give a department-specific win percentage. Store comparisons and subsequent selection remain separate work. SQL41 does not read or score final-holdout actual quantities. Earlier full-snapshot engineering audits included observed-day totals; this is an analytical-step boundary, not a claim that the period is wholly unseen. No significance, causality or deployed business benefit is claimed.
+
+## Learner acceptance — 29 October 2026
+
+The [learner acceptance record](../data/department_forecast_errors_learner_acceptance.json) transcribes all 21 rows and fourteen field positions after visual inspection of the supplied screenshot. Counts have their thousands separators removed and metrics/deltas are normalized to six-decimal strings, restoring omitted trailing zeros. Applying the SQL41 column contract, `six(Decimal)` formatting and canonical JSON hash reproduces `7f5af82dce08cd2dc28c5bfdac8da4a35a3e804c1543abb5503ac102fd303a4c`.
+
+The screenshot's final column header is truncated. Its position is identified as `check_status` from the accepted SQL41 fourteen-column contract, and all 21 PASS values are visible; this is not a claim that the complete final header text appears in the image. Origin/department order, all counts and all eight metric fields per row match historical preflight. The visible first-window undefined allocation is FOODS_3 two and HOUSEHOLD_1 eight; other department/windows show zero. Counts are product-store series, not unique products. The underlying no-positive-training reason remains prior source-verification evidence.
+
+This accepts the displayed aggregate results, not a direct learner-database read or an independent inspection of every private calculation. Source history and mappings, assigned diagnostics, preserved pairs, internal department totals and controls, high-precision reconciliation, eight focused cases, immutable dependencies and cleanup remain separate assistant preflight evidence. No new direct daily-error export is attributed to this step. Product identifiers, individual diagnostic rows, vectors and screenshot are not published.
+
+Assistant interpretation remains unchanged: WEEKDAY4 has lower MAE and macro RMSSE in all 21 department/windows, but absolute mean signed error is closer to zero in eleven and farther in ten. A department average does not prove every product/store improves or provide a department win percentage. No final-holdout score, significance, final model choice, causal mechanism or business benefit is established. Conceptual understanding has not been independently tested.
+
+## Next store comparison
+
+[SQL42](../sql/42_compare_store_forecast_errors.sql) will compare all ten stores across the same three development windows, retaining every one of the 3,049 products at each store. The 30-row, fifteen-column report will show both candidates' metrics, differences and eligibility with source state identifiers as context. Follow the [store method](STORE_FORECAST_ERRORS_VALIDATION.md); no store findings or undefined-scale allocation are inferred from department averages. Final-holdout actuals and final selection remain excluded.
