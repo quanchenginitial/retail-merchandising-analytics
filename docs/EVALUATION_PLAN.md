@@ -23,6 +23,16 @@ For each origin, let s be the first strictly positive training observation and T
 
 Official M5 WRMSSE is a later optional implementation requiring the complete hierarchy, correct revenue weights, scaling and independent parity checks. A bottom-level RMSSE average must not be labelled official WRMSSE. Retain a simpler model if a more complex one does not improve robustly; no improvement target is promised.
 
+### Initial learning-slice protocol (2026-10-29)
+
+The initial scope is all products in the lexicographically first department at the lexicographically first store in the accepted dimensions: **FOODS_1 at CA_1**. Scope selection uses dimension identifiers, not unit sales, ABC/XYZ labels, price changes or forecast errors. Retain every product in that department, including all-zero training series. SQL33 verifies this scope and temporal coverage; its independent preflight records the exact ordered membership fingerprint without publishing the product list. This is a fixed retrospective benchmark roster from the released catalog, not a reconstruction of the assortment known to be active at each historical origin.
+
+Each origin uses an expanding training window beginning at d_1. Keep the four origin/horizon boundaries above unchanged. [SQL33](../sql/33_forecast_scope_and_time_audit.sql) reads selected-scope sales only through d_1913 and uses calendar fields to establish forecast dates. Earlier development target dates legitimately become training history at later origins; each origin's input counts remain bounded by its own cutoff. The audit does not inspect final-holdout unit values (d_1914–d_1941), produce forecasts, compute target-period errors, or establish final-holdout observation coverage. Its audit is the preparation step, not a baseline evaluation.
+
+The already accepted April ABC/XYZ labels include observations occurring after the earlier development origins. Do not use those labels as origin-known features, filters or tuning signals for February/March folds. If such features are introduced later, recompute them from each origin's training data. Descriptive April labels may only be used for clearly labelled retrospective reporting, not as evidence that the same grouping was available when earlier forecasts were issued.
+
+Next, generate all 28 forecasts at each origin from the last seven observed days without updating from target outcomes; compare the previous-four-same-weekday mean under the same origins and scope. Model choice will use development results only. Final-holdout evaluation remains pending until choices are frozen. Neither a single slice nor successful data checks establish full-dataset forecasting ability.
+
 ## Behaviour and recommendation
 
 Choose chronological training/development/holdout boundaries after observing only source coverage. Apply all feature construction to events known at the prediction cutoff. Define a complete outcome window and exclude/censor immature episodes consistently. Split or cluster evaluation by visitor as needed to avoid treating repeated events as independent people.

@@ -1,6 +1,6 @@
 # Weekly price context for the accepted A × Z product case
 
-29 October 2026. SQL31's eleven-row store comparison is accepted from the learner screenshot, with the canonical report fingerprint matching independent preflight. [SQL32](../sql/32_az_leading_product_price_context.sql) adds published weekly price context for the same product. Assistant preflight passed; learner execution remains pending.
+29 October 2026. The learner's SQL32 screenshot confirms all twelve price-context rows and twelve columns PASS. The ordered canonical report fingerprint matches the historical assistant preflight and independent reference, including price precision and first-week comparison NULLs. [SQL32](../sql/32_az_leading_product_price_context.sql) adds published weekly price context for the same selected product; [learner acceptance](../data/az_leading_product_price_context_learner_acceptance.json) publishes aggregates and a fingerprint only.
 
 ## Purpose and frozen scope
 
@@ -45,9 +45,9 @@ Original sales/calendar data independently establish all product labels, selecte
 
 Verify registered hashes of all three original CSVs before/after, preserve historical preflight records, and compare the five complete analytical snapshots plus the relevant daily/store/price projections before/after the query. These scoped checks do not claim full-history fact/price-table equality. Remove the private temporary database after verification.
 
-Publish aggregates and SHA-256 fingerprints only. Real item/store identifiers, store prices, weekly rows, raw arrays and screenshots are not published. Keep [SQL31 learner acceptance](../data/az_leading_product_store_comparison_learner_acceptance.json) distinct from new assistant preflight.
+Publish aggregates and SHA-256 fingerprints only. Real item/store identifiers, store prices, weekly rows, raw arrays and screenshots are not published. [SQL31 learner acceptance](../data/az_leading_product_store_comparison_learner_acceptance.json) establishes the preceding store comparison; [SQL32 learner acceptance](../data/az_leading_product_price_context_learner_acceptance.json) now confirms the displayed price report. Both remain distinct from independent assistant source checks.
 
-## Preflight results
+## Independent preflight and accepted price aggregates
 
 All 3,049 combined products across twenty-two fields matched independent references, as did 840 selected daily rows across six fields and the accepted store-report fingerprint. All 120 relevant original price rows across four fields matched the independently staged projection at exact cent precision. The independent reference covers all 120 store/week positions and every field of the twelve-row, twelve-column output, including chronological order, price extrema, counts and first-week NULLs. The evidence distinguishes grid positions covered from the directly compared source price/daily rows and final report fields.
 
@@ -60,7 +60,7 @@ All 3,049 combined products across twenty-two fields matched independent referen
 | Price increases / decreases / unchanged transitions | 2 / 1 / 107 |
 | First-week comparable/up/down fields | NULL / NULL / NULL |
 
-The 110 transitions represent ten stores each compared across eleven adjacent-week pairs, not 110 distinct stores. The whole-window price range combines observations across stores and time; it is not a claim that every store moved from USD 2.00 to USD 2.68. Most observed adjacent-week prices were unchanged, but this descriptive count cannot quantify how much of the sales pattern is attributable to price.
+All aggregate controls in the table also match the learner screenshot. The 110 transitions represent ten stores each compared across eleven adjacent-week pairs, not 110 distinct stores. The whole-window price range combines observations across stores and time; it is not a claim that every store moved from USD 2.00 to USD 2.68. Assistant interpretation: most observed adjacent-week prices were unchanged, but this descriptive count cannot quantify how much of the sales pattern is attributable to price.
 
 All 36 targeted cases passed: eight valid cases and twenty-eight expected rejections. Valid cases cover exact-cent changes and equal prices, reverse input ordering, missing-price gaps and returns, an entirely unpriced zero-sales week, first-week NULL behavior with missing prices, valid empty cohorts, unused daily price fields and out-of-scope records. Rejection cases cover malformed price schema, duplicate/null/orphan/nonpositive price keys or values, missing positive-sales prices, invalid empty mappings, and retained daily completeness, store-mapping and upstream snapshot guards.
 
@@ -69,3 +69,11 @@ The five full analysis snapshots and four relevant projections (selected daily r
 ## Interpretation limits
 
 A movement in the cross-store min/max range may reflect changed price coverage or store composition; same-store adjacent comparisons provide more specific descriptive evidence. An unchanged weekly price does not rule out unobserved transaction-level discounts or non-price factors. A lower price is not itself a documented promotion, and missing price is not proof of inventory unavailability. A short selected-product case cannot identify causal demand response or justify replenishment quantities.
+
+## Learner acceptance and next checkpoint
+
+On 29 October 2026, the twelve screenshot rows were transcribed only in memory, integer counts and two-decimal prices were normalized, and the first week's three comparison fields were preserved as NULL. The full ordered twelve-column report fingerprint matched the historical preflight exactly. Aggregate checks confirm twelve weeks, 2,730 units, 120 priced store/weeks with no missing prices, and 110 comparable same-store transitions comprising two increases, one decrease and 107 unchanged observations. Real product identifiers, weekly rows, store prices, vectors and the screenshot are excluded from the public acceptance record.
+
+This accepts learner execution and the displayed output. The underlying 840 daily records, 120 original price rows, all-product baseline fields, grid-coverage checks, thirty-six targeted cases and scoped fingerprints remain separate assistant preflight evidence. No direct inspection of the learner database took place. The interpretation is the assistant's, not a claim that the learner has explained the metrics.
+
+The next planned checkpoint consolidates these accepted business observations and prepares the forecasting scope. Price movements occurring alongside recorded-sales changes remain descriptive; no causal price effect, promotion mechanism or inventory explanation has been identified. No forecast baseline has yet been run or evaluated.

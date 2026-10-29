@@ -1,0 +1,400 @@
+{
+  "checked_at_utc": "2026-10-29T02:07:50.672934+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/33_forecast_scope_and_time_audit.sql",
+  "script_sha256": "3a3c62c0b1e4a399453b30b2da97998d7ba24e4a880a12393d856699e7caf292",
+  "prerequisite_script_sha256": {
+    "sql/08_stage_calendar.sql": "615f193ca97e6d125fdd16d5f7435bbb293318cfabc30576550240075200ee92",
+    "sql/12_build_product_dimension.sql": "30506a8faf3141dfc1b8b0575a0ee2d725fa40903142e8c216cd5ef690e43a90",
+    "sql/13_build_store_dimension.sql": "d15fc515f5813914d46056bf6450d8e2275126439b9e77b2f7163c30bfc6b630",
+    "sql/14_build_calendar_dimension.sql": "7d3541ca678ece969b57a57645c22a3651fc17c69690ede8b39131e9fad27ff9"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+  },
+  "source_hashes_unchanged": true,
+  "historical_preflight_sha256": {
+    "data/abc_threshold_sensitivity_preflight.json": "a11053f48b59f09d94b890d4eb83f9b75210482ea5b2391f9588d1f6e56de339",
+    "data/abc_xyz_contribution_preflight.json": "cce56e1a9a0746936b40fd640cee32a0ec2b6f40bd92a825cbcf9641c2194007",
+    "data/az_leading_product_price_context_preflight.json": "d7b41755449aebafb2f6c4e41bf464cab60cf99e05a15b994403c50a06487026",
+    "data/az_leading_product_store_comparison_preflight.json": "6a03d2310665442559629455d45c7f80d9099be5fa007b9b26bf774f02b0df27",
+    "data/az_leading_product_weekly_preflight.json": "03567ad5e63d5c161b3d808b082c839af73375124c2b2601364732e4962544f9",
+    "data/az_product_drilldown_preflight.json": "2b48b5473b9fcd34de19ee2e4f1049bf7a9beea9347e1076881c8199024dd56c",
+    "data/calendar_audit_preflight.json": "76a2e40ac54597acee84aa5d7a6dd112b19b58412c2b1acaa860d150ffdd9f90",
+    "data/calendar_dimension_preflight.json": "ac9e379e2838f698de5f858a3006fc398604b17a9bf55b61c560ba28658c416b",
+    "data/calendar_import_preflight.json": "72a6191620ef88df12d4a2012cb204701f3b2833f242e01e0e6c28a6d3f83e87",
+    "data/calendar_staging_preflight.json": "67f07e4bf89c18edaaf0bd87089d98d12d768b75e768d4e81da8c43b0f461c18",
+    "data/category_contribution_preflight.json": "e66d6e4832833746abd9555755ea52ff324592c2e49ac8caf957dabf6462f37f",
+    "data/department_contribution_preflight.json": "31db61d17130a6e730ea15e04b2f652a267a41e0f2674448ba62d1f81457d07f",
+    "data/dimension_joins_preflight.json": "4df748b6c343dc8c513a07e3fb318bcd696b7e5cf9eedffd056bb4df10a65ae9",
+    "data/price_audit_preflight.json": "e2fbe41f0b22dd103c40e6811ba8b78b27980b257636865f7f6f8386c307a30c",
+    "data/price_coverage_preflight.json": "ef2bc88c3466b958c3c6832f52125835d46ec3f7a31ffe1b3d4b9d4d1149660a",
+    "data/price_import_preflight.json": "04b00ec67ab53d9b8a695496dc691e2f893afe6bae61bfffbb1450b3c95edbf8",
+    "data/price_staging_preflight.json": "a24bb94f812c97e55f273dde4a99f657057014a7a807b9544bd8021dbd452ec5",
+    "data/product_abc_units_preflight.json": "33c525addcd588045b132ffe6d66faaaf1c9e9d197567293cc71a3312c21503a",
+    "data/product_abc_xyz_preflight.json": "a23167c247c46e02e1401dbc0a0767029b2d1dd73c5eba8efd7365828e2d30b1",
+    "data/product_dimension_preflight.json": "f80f785795bdbc6e51c362dfe3bc5b0a0ea2c4853eaad33d9a416801c63d1406",
+    "data/product_unit_concentration_preflight.json": "7582aefa60ad95879647c7e221343e7296ac90cd2cb908bee52fc7cd6d014849",
+    "data/product_variability_preflight.json": "34fe40f85839374ce8112f37593fa9c0467529995c53488853bf716948ad0dba",
+    "data/product_weekly_preflight.json": "fa6aecbe040ee997dd6f69d3c430ddcff7ac2e19d11073c261fb2d82845b8286",
+    "data/product_xyz_preflight.json": "44fada6977a90ac31beb113e62980c559223da1f7fa18c67b8dcef2608f1e341",
+    "data/sales_audit_preflight.json": "571df148f470f287316b7d1ab4b280f0ef3358e7816983a3fc6c902df7797e31",
+    "data/sales_daily_preflight.json": "7715d083bd2b6c6b569c127a9e75ae3c9cd24e0eaacd1f87e7e5dcfff56e34c4",
+    "data/sales_fact_preflight.json": "15c56fc13ca89e46fdc4fcc0c35afa746874506d9f9577be4bfb0fc72f4f2d01",
+    "data/sales_import_preflight.json": "455d51237689f9853b7d06d8bfd148ee4a94cf60d0750356974f3e658d320036",
+    "data/sales_reconciliation_preflight.json": "00857bd0778673309a1ada13bec9a57ae8248fba69d5e6a2d8cf4b89ab49bbb8",
+    "data/store_dimension_preflight.json": "beaa6fdee6ed71a6f78f20ecb2c44998d8dbd4a35217b27d4c0c381f5c0cd20d",
+    "data/xyz_threshold_sensitivity_preflight.json": "17c37f0d09894160bb856f7e46dbcbedff77a400d7e56e3739d5d5972ceea942"
+  },
+  "historical_preflights_unchanged": true,
+  "baseline_database": "Private temporary DuckDB and row-level CSV exports under ignored repository tmp; resolved containment checked; all removed after verification. Learner database never opened.",
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 12070912,
+  "selection_policy": "Lexicographically first department and first store from validated source-backed dimensions. Frozen retrospective released-catalog benchmark roster; no observed-sales eligibility filter and no claim of origin-time active assortment.",
+  "frozen_scope": {
+    "dept_id": "FOODS_1",
+    "store_id": "CA_1",
+    "series_count": 216,
+    "series_membership_sha256": "6cabe9ae29616ce129fdf89fb02fec1cffd31ccb8194c4694b8bdf0ed85e622f"
+  },
+  "membership_fingerprint_method": "SHA256 of UTF-8 item_id|store_id lines sorted by item_id and store_id, LF separator, no trailing LF. Alphanumeric/underscore codes cannot contain separators. SQL runtime and independent Python hashes both match the frozen value.",
+  "training_start": {
+    "day": "d_1",
+    "date": "2011-01-29"
+  },
+  "maximum_training_day": 1913,
+  "selected_training_rows_compared": 413208,
+  "selected_training_columns_compared": 6,
+  "selected_training_field_mismatches": 0,
+  "metadata_and_calendar_source_projection_mismatches": 0,
+  "final_holdout_unit_values_inspected": false,
+  "forecasts_computed": false,
+  "forecast_errors_computed": false,
+  "calendar_coverage_is_target_observation_coverage": false,
+  "schema_scope": "Full product/store column names and types; required raw metadata, four calendar and six daily field names/types. Unused calendar, event, price/value fields are not re-audited.",
+  "independent_reference": "Python csv reads original metadata and calendar, independently selects and hashes membership, validates canonical dates, parses selected training integers, and compares every one of 413208 six-field daily records through private streamed CSV exports. No holdout unit value is accessed or converted. Expected four report rows are derived independently from source calendar mappings and the complete series/day roster.",
+  "timings": {
+    "independent_python_csv_reference_seconds": 3.751,
+    "private_setup_and_input_export_seconds": 14.598,
+    "scope_time_audit_query_seconds": 1.153,
+    "unchanged_input_export_seconds": 0.383
+  },
+  "timing_scope": "Named Python CSV reference and DuckDB process/export timings; remaining Python comparisons and hashing excluded.",
+  "result_rows": 4,
+  "result_columns": 13,
+  "rows_with_pass_status": 4,
+  "output_columns": [
+    "origin",
+    "dept_id",
+    "store_id",
+    "series_count",
+    "train_end_day",
+    "train_end",
+    "forecast_start",
+    "forecast_end",
+    "training_rows",
+    "last7_rows",
+    "last28_rows",
+    "forecast_calendar_days",
+    "check_status"
+  ],
+  "result_field_mismatches": 0,
+  "origin_order_verified": true,
+  "results": [
+    {
+      "origin": "DEVELOPMENT_1",
+      "dept_id": "FOODS_1",
+      "store_id": "CA_1",
+      "series_count": 216,
+      "train_end_day": 1829,
+      "train_end": "2016-01-31",
+      "forecast_start": "2016-02-01",
+      "forecast_end": "2016-02-28",
+      "training_rows": 395064,
+      "last7_rows": 1512,
+      "last28_rows": 6048,
+      "forecast_calendar_days": 28,
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_2",
+      "dept_id": "FOODS_1",
+      "store_id": "CA_1",
+      "series_count": 216,
+      "train_end_day": 1857,
+      "train_end": "2016-02-28",
+      "forecast_start": "2016-02-29",
+      "forecast_end": "2016-03-27",
+      "training_rows": 401112,
+      "last7_rows": 1512,
+      "last28_rows": 6048,
+      "forecast_calendar_days": 28,
+      "check_status": "PASS"
+    },
+    {
+      "origin": "DEVELOPMENT_3",
+      "dept_id": "FOODS_1",
+      "store_id": "CA_1",
+      "series_count": 216,
+      "train_end_day": 1885,
+      "train_end": "2016-03-27",
+      "forecast_start": "2016-03-28",
+      "forecast_end": "2016-04-24",
+      "training_rows": 407160,
+      "last7_rows": 1512,
+      "last28_rows": 6048,
+      "forecast_calendar_days": 28,
+      "check_status": "PASS"
+    },
+    {
+      "origin": "FINAL_HOLDOUT",
+      "dept_id": "FOODS_1",
+      "store_id": "CA_1",
+      "series_count": 216,
+      "train_end_day": 1913,
+      "train_end": "2016-04-24",
+      "forecast_start": "2016-04-25",
+      "forecast_end": "2016-05-22",
+      "training_rows": 413208,
+      "last7_rows": 1512,
+      "last28_rows": 6048,
+      "forecast_calendar_days": 28,
+      "check_status": "PASS"
+    }
+  ],
+  "ordered_result_sha256": "c1df269f32ca8f9e5e680780796a6b385e97c89303719d6ac33beb6209aa54b0",
+  "input_projection_row_counts": {
+    "product_dimension": 3049,
+    "store_dimension": 10,
+    "calendar_projection": 1969,
+    "raw_metadata_projection": 30490,
+    "selected_training_projection": 413208
+  },
+  "input_projection_sha256_before": {
+    "product_dimension": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "store_dimension": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "calendar_projection": "6689d88c4200572933431d015c56d76066f290ce97ca6ebcb552b4c20d72a549",
+    "raw_metadata_projection": "63412b3d524f0ec6dd4090e5f8290a1f20396f4d4fb2d4e8f48e1c2893852ca2",
+    "selected_training_projection": "7062d28d233890641cd5acdf78c5a5e01edb8a4374ecd1f9d64fb2c4f69be40d"
+  },
+  "input_projection_sha256_after": {
+    "product_dimension": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "store_dimension": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "calendar_projection": "6689d88c4200572933431d015c56d76066f290ce97ca6ebcb552b4c20d72a549",
+    "raw_metadata_projection": "63412b3d524f0ec6dd4090e5f8290a1f20396f4d4fb2d4e8f48e1c2893852ca2",
+    "selected_training_projection": "7062d28d233890641cd5acdf78c5a5e01edb8a4374ecd1f9d64fb2c4f69be40d"
+  },
+  "scoped_input_projections_unchanged": true,
+  "input_fingerprint_method": "SHA256 of deterministic UTF-8 DuckDB CSV exports with header and fixed column/row order. Row-level files remain private and are deleted with the temporary directory.",
+  "fixture_cases_passed": 33,
+  "fixture_cases": [
+    {
+      "case": "metadata_order_independent_and_zero_series_retained",
+      "passed": true,
+      "rejected": false,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "all_training_units_zero_still_retains_every_series",
+      "passed": true,
+      "rejected": false,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "holdout_negative_null_units_and_changed_dates_ignored",
+      "passed": true,
+      "rejected": false,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "holdout_observations_absent_calendar_still_available",
+      "passed": true,
+      "rejected": false,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "unselected_series_bad_units_ignored",
+      "passed": true,
+      "rejected": false,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "missing_zero_training_day",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "balanced_duplicate_and_missing_training_day",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "swapped_training_dates",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "noncanonical_training_day_label",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "extra_malformed_training_record_not_silently_dropped",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "training_key_moved_beyond_cutoff",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "null_training_units",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "negative_training_units",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "fractional_training_column_rejected",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "changed_training_retail_week",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "selected_training_store_changed",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "entire_training_input_empty_errors_instead_of_no_rows",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "empty_product_dimension_errors_instead_of_no_rows",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_product_key",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "product_source_mapping_changed",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "same_count_membership_changed_consistently_in_all_tables",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "frozen_department_changed_consistently",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "selected_raw_series_missing",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_selected_raw_series",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "store_state_mapping_changed",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "missing_calendar_training_date",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "balanced_duplicate_and_missing_calendar_day",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "altered_forecast_calendar_boundary",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "missing_final_forecast_calendar_day",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "calendar_derived_day_number_corrupted",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "future_calendar_key_reassigned_to_training_day",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "calendar_day_number_wrong_type",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    },
+    {
+      "case": "extra_product_schema_column",
+      "passed": true,
+      "rejected": true,
+      "scoped_input_projections_unchanged": true
+    }
+  ],
+  "real_product_identifiers_published": false,
+  "individual_series_rows_published": false,
+  "daily_or_target_vectors_published": false,
+  "scope": "Assistant preflight only; learner SQL33 execution pending. Public output contains four scope/time aggregates, frozen scope labels and fingerprints, with no product membership list, daily records, target-unit values or forecasts. Every training window starts at d1 and retains zero observations. The forecast windows contain 28 calendar dates each; this does not audit target sales-record coverage. Earlier engineering reconciliation observed full-snapshot totals; this step does not claim wholly unseen holdout data or use ABC/XYZ/price features."
+}
