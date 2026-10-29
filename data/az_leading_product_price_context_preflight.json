@@ -1,0 +1,471 @@
+{
+  "checked_at_utc": "2026-10-29T01:39:26.655765+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "baseline_database": "Private temporary on-disk DuckDB under ignored repository tmp; resolved paths checked for containment; removed after verification.",
+  "temporary_baseline_removed": true,
+  "temporary_database_bytes_after_close": 24129536,
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "script": "sql/32_az_leading_product_price_context.sql",
+  "script_sha256": "b5ded26463f0f6da65afc2d80a66499ce58109827dd874c2d6758fcf646d7b2b",
+  "prerequisite_script_sha256": {
+    "sql/09_stage_prices.sql": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+    "sql/21_build_product_abc_units.sql": "e024e3ccf71f047181c16b00fde033442ce62cae030f2058c14fd007a5427c05",
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/24_build_product_variability.sql": "9978038deb932afbbb087a3079e9b2475c4d21a78da6db23647c7a136a458329",
+    "sql/25_build_product_xyz.sql": "a8f8fe7d179b30b8b157aa89585d0ef3b4309253aeee5fd491588e6a88b1b87b",
+    "sql/27_build_product_abc_xyz.sql": "9676263b8cff302baf5bb8c856624ab00ab7ef0538ac13f527566aeb4388e826",
+    "sql/30_az_leading_product_weekly.sql": "ca6975477675c5efe713c4f3e4d59f99a381811a300cc7403c7d7088d4b37104",
+    "sql/31_az_leading_product_store_comparison.sql": "d25a65b0f7e8884458cf7909b2fac0962d0f7629d08997a178b941b0c24d6dc9"
+  },
+  "reference_helper_sha256": {
+    "validation/preflight_product_abc_xyz.py": "3ee2d4e0600183b827227134462a84f28d9ada8a3f8219bfaab8a8a68a845be7",
+    "validation/preflight_abc_xyz_contribution.py": "9de1944ffa3ba28c96d2111dd1508f5a7c512f8220a87a3604f89bc4c9f6812e",
+    "validation/preflight_az_product_drilldown.py": "6ba1bdce195cab3abdbcd9ea1ddab8743f8378832325978b32eae838ddfd8880",
+    "validation/preflight_az_leading_product_weekly.py": "70cc33fac05e58fb26efb2fa4b2a79ca3c82b8cea3609be297af9611f78e76dd",
+    "validation/preflight_abc_threshold_sensitivity.py": "ba90401f6b802b81bd4127fb698421ad0137fb6bdce91df15d486fa153b567bd",
+    "validation/preflight_product_variability.py": "5682ab1a997ef82c66be04092fc7fbc9156725637f2f17e77dff6baf162ae072",
+    "validation/preflight_product_xyz.py": "9cd9f7f543d619e91052e87db78af498c0c08a8f3b33228f5fc0632d0c9bd404",
+    "validation/preflight_xyz_threshold_sensitivity.py": "8b63508b94d2cc4de8ebfa765be2f9914d00a0197832c2aba02ac050a0625a55",
+    "validation/preflight_az_leading_product_store_comparison.py": "b5bc7f4599da24e3bd9172808b83abd532e9e9f039fc7f71d8bf59cb205780de"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+  },
+  "source_hashes_unchanged": true,
+  "historical_preflight_sha256": {
+    "data/abc_threshold_sensitivity_preflight.json": "a11053f48b59f09d94b890d4eb83f9b75210482ea5b2391f9588d1f6e56de339",
+    "data/abc_xyz_contribution_preflight.json": "cce56e1a9a0746936b40fd640cee32a0ec2b6f40bd92a825cbcf9641c2194007",
+    "data/az_leading_product_store_comparison_preflight.json": "6a03d2310665442559629455d45c7f80d9099be5fa007b9b26bf774f02b0df27",
+    "data/az_leading_product_weekly_preflight.json": "03567ad5e63d5c161b3d808b082c839af73375124c2b2601364732e4962544f9",
+    "data/az_product_drilldown_preflight.json": "2b48b5473b9fcd34de19ee2e4f1049bf7a9beea9347e1076881c8199024dd56c",
+    "data/calendar_audit_preflight.json": "76a2e40ac54597acee84aa5d7a6dd112b19b58412c2b1acaa860d150ffdd9f90",
+    "data/calendar_dimension_preflight.json": "ac9e379e2838f698de5f858a3006fc398604b17a9bf55b61c560ba28658c416b",
+    "data/calendar_import_preflight.json": "72a6191620ef88df12d4a2012cb204701f3b2833f242e01e0e6c28a6d3f83e87",
+    "data/calendar_staging_preflight.json": "67f07e4bf89c18edaaf0bd87089d98d12d768b75e768d4e81da8c43b0f461c18",
+    "data/category_contribution_preflight.json": "e66d6e4832833746abd9555755ea52ff324592c2e49ac8caf957dabf6462f37f",
+    "data/department_contribution_preflight.json": "31db61d17130a6e730ea15e04b2f652a267a41e0f2674448ba62d1f81457d07f",
+    "data/dimension_joins_preflight.json": "4df748b6c343dc8c513a07e3fb318bcd696b7e5cf9eedffd056bb4df10a65ae9",
+    "data/price_audit_preflight.json": "e2fbe41f0b22dd103c40e6811ba8b78b27980b257636865f7f6f8386c307a30c",
+    "data/price_coverage_preflight.json": "ef2bc88c3466b958c3c6832f52125835d46ec3f7a31ffe1b3d4b9d4d1149660a",
+    "data/price_import_preflight.json": "04b00ec67ab53d9b8a695496dc691e2f893afe6bae61bfffbb1450b3c95edbf8",
+    "data/price_staging_preflight.json": "a24bb94f812c97e55f273dde4a99f657057014a7a807b9544bd8021dbd452ec5",
+    "data/product_abc_units_preflight.json": "33c525addcd588045b132ffe6d66faaaf1c9e9d197567293cc71a3312c21503a",
+    "data/product_abc_xyz_preflight.json": "a23167c247c46e02e1401dbc0a0767029b2d1dd73c5eba8efd7365828e2d30b1",
+    "data/product_dimension_preflight.json": "f80f785795bdbc6e51c362dfe3bc5b0a0ea2c4853eaad33d9a416801c63d1406",
+    "data/product_unit_concentration_preflight.json": "7582aefa60ad95879647c7e221343e7296ac90cd2cb908bee52fc7cd6d014849",
+    "data/product_variability_preflight.json": "34fe40f85839374ce8112f37593fa9c0467529995c53488853bf716948ad0dba",
+    "data/product_weekly_preflight.json": "fa6aecbe040ee997dd6f69d3c430ddcff7ac2e19d11073c261fb2d82845b8286",
+    "data/product_xyz_preflight.json": "44fada6977a90ac31beb113e62980c559223da1f7fa18c67b8dcef2608f1e341",
+    "data/sales_audit_preflight.json": "571df148f470f287316b7d1ab4b280f0ef3358e7816983a3fc6c902df7797e31",
+    "data/sales_daily_preflight.json": "7715d083bd2b6c6b569c127a9e75ae3c9cd24e0eaacd1f87e7e5dcfff56e34c4",
+    "data/sales_fact_preflight.json": "15c56fc13ca89e46fdc4fcc0c35afa746874506d9f9577be4bfb0fc72f4f2d01",
+    "data/sales_import_preflight.json": "455d51237689f9853b7d06d8bfd148ee4a94cf60d0750356974f3e658d320036",
+    "data/sales_reconciliation_preflight.json": "00857bd0778673309a1ada13bec9a57ae8248fba69d5e6a2d8cf4b89ab49bbb8",
+    "data/store_dimension_preflight.json": "beaa6fdee6ed71a6f78f20ecb2c44998d8dbd4a35217b27d4c0c381f5c0cd20d",
+    "data/xyz_threshold_sensitivity_preflight.json": "17c37f0d09894160bb856f7e46dbcbedff77a400d7e56e3739d5d5972ceea942"
+  },
+  "historical_preflights_unchanged": true,
+  "preflight_strategy": "Original sales/calendar CSVs feed a private 90-day six-column daily table and actual SQL21,23,24,25,27. Original selected price rows for the displayed twelve weeks pass the unmodified SQL09 staging conversion. Read-only SQL30 anchors the accepted trajectory; SQL32 supplies the price report. No learner database is opened.",
+  "independent_reference": "Original wide arrays independently define all product ABC/XYZ fields and select the leading A x Z product. Ten original 84-day store arrays supply every one of 840 reference daily cells and all weekly/store sums. A separate Python csv/Decimal stream of original sell_prices.csv checks the selected rows, unique known-store keys, positive exact cents and computes every weekly price field without SQL window functions.",
+  "price_source_scope": "Selected product only, retail weeks 11601 through 11612. Source file hashes identify the complete supplied files; price row comparisons do not re-audit all 6.8 million price rows or the full 59-million-cell sales history.",
+  "analysis_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "weeks": 12,
+    "days": 84
+  },
+  "selection_policy": "Same accepted highest-90-day-unit A x Z product, item_id ascending tie-break; no hard-coded source identifier.",
+  "price_policy": "Same-store prices are compared only with the immediately preceding displayed week when both records exist. First-week comparable/up/down counts are NULL. Missing zero-sales store/week prices remain unknown and are not zero-filled or bridged; missing prices with positive recorded units fail. Min/max use observed prices only.",
+  "timings": {
+    "window_setup_seconds": 6.772,
+    "sql21_build_seconds": 0.375,
+    "sql21_validation_seconds": 0.411,
+    "sql23_build_seconds": 0.91,
+    "sql23_validation_seconds": 0.93,
+    "sql24_build_seconds": 0.194,
+    "sql24_validation_seconds": 0.201,
+    "sql25_build_seconds": 0.237,
+    "sql25_validation_seconds": 0.254,
+    "sql27_build_seconds": 0.306,
+    "sql27_validation_seconds": 0.366,
+    "independent_wide_vector_query_seconds": 0.559,
+    "independent_store_day_arrays_query_seconds": 0.131,
+    "independent_python_price_csv_stream_seconds": 9.15,
+    "selected_price_csv_staging_seconds": 0.881,
+    "accepted_trajectory_query_seconds": 0.411,
+    "price_context_query_seconds": 0.528
+  },
+  "timing_scope": "DuckDB CLI process timings and the explicitly named independent Python price CSV stream; other Python comparisons and hashing excluded.",
+  "combined_product_rows_compared": 3049,
+  "combined_columns_compared": 22,
+  "combined_field_mismatches": 0,
+  "combined_float_error_summary": {
+    "mean_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.666666666666666666666666667E-13",
+      "max_error_to_tolerance_ratio": "1.297858533419857235561323816E-7",
+      "max_allowed_tolerance": "0.000003853333333333333333333333333"
+    },
+    "stddev_weekly_units": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "1.268426587277874278586383756E-13",
+      "max_error_to_tolerance_ratio": "9.842430058565408268408532243E-7",
+      "max_allowed_tolerance": "7.101692861291222677628880905E-7"
+    },
+    "cv_weekly": {
+      "nonnull_values_compared": 3042,
+      "null_values_compared": 7,
+      "max_absolute_error": "7.811113766865144953989633802E-16",
+      "max_error_to_tolerance_ratio": "1.890458410519201328202904339E-7",
+      "max_allowed_tolerance": "4.316624790355399849114932737E-9"
+    },
+    "zero_week_share": {
+      "nonnull_values_compared": 3049,
+      "null_values_compared": 0,
+      "max_absolute_error": "6.666666666666666666666666667E-17",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526317E-8",
+      "max_allowed_tolerance": "2E-9"
+    },
+    "mean_positive_gap_weeks": {
+      "nonnull_values_compared": 3032,
+      "null_values_compared": 17,
+      "max_absolute_error": "1.666666666666666666666666667E-16",
+      "max_error_to_tolerance_ratio": "4.210526315789473684210526316E-8",
+      "max_allowed_tolerance": "1.1E-8"
+    }
+  },
+  "selected_daily_rows_compared": 840,
+  "daily_projection_columns_compared": 6,
+  "selected_daily_cell_mismatches": 0,
+  "stores_compared": 10,
+  "distinct_days_per_store": 84,
+  "store_week_grid_positions_covered": 120,
+  "original_store_state_mapping_matched": true,
+  "original_twelve_week_vector_matched": true,
+  "selected_price_source_rows_compared": 120,
+  "price_projection_columns_compared": 4,
+  "selected_price_field_mismatches": 0,
+  "selected_price_keys_unique": true,
+  "selected_source_prices_positive_exact_cents": true,
+  "missing_positive_sales_price_cells": 0,
+  "accepted_trajectory_fingerprints_matched": true,
+  "accepted_baseline_evidence": "data/az_leading_product_weekly_learner_acceptance.json",
+  "accepted_baseline_evidence_sha256": "f5f4643baa78a0f2952d905ce07ed058fa4531bcb00ab4126b656314ab88b817",
+  "accepted_store_report_fingerprint_matched": true,
+  "accepted_store_evidence": "data/az_leading_product_store_comparison_learner_acceptance.json",
+  "accepted_store_evidence_sha256": "05cde73b7a89d496e7af811bb54e7ead51ec1a85d4207ff87bd7c1c430d77088",
+  "reconstructed_store_report_sha256": "4b946b546384e2f5e78f094224b04b0b2a3699ad844232f4fdebf138b7f9842d",
+  "selected_product_sha256": "b35dc64487f2f30667034ad10c0e846194245f66785f4ff1c803dc91dec65d8a",
+  "reconstructed_trajectory_sha256": "5c7af6aaf2eb259692c144b39a88c104300ca07b04a955a517bf1eff437bf093",
+  "reconstructed_weekly_units_sha256": "e5f8046503d8a45a3c3307848f4185d58254e7e5d86b50f5d84218af435405d5",
+  "result_rows": 12,
+  "rows_with_pass_status": 12,
+  "result_columns": 12,
+  "output_columns": [
+    "item_id",
+    "week_start",
+    "week_end",
+    "units",
+    "priced_stores",
+    "missing_price_stores",
+    "min_price_usd",
+    "max_price_usd",
+    "comparable_stores",
+    "price_up_stores",
+    "price_down_stores",
+    "check_status"
+  ],
+  "result_field_mismatches": 0,
+  "column_names_and_order_verified": true,
+  "chronological_week_order_verified": true,
+  "price_context_aggregates": {
+    "week_count": 12,
+    "units_total": 2730,
+    "priced_store_weeks": 120,
+    "missing_price_store_weeks": 0,
+    "minimum_priced_stores_per_week": 10,
+    "maximum_priced_stores_per_week": 10,
+    "weeks_with_missing_prices": 0,
+    "weeks_without_any_price": 0,
+    "minimum_price_usd": "2.00",
+    "maximum_price_usd": "2.68",
+    "comparable_store_transitions": 110,
+    "price_up_store_transitions": 2,
+    "price_down_store_transitions": 1,
+    "unchanged_price_store_transitions": 107,
+    "weeks_with_price_up": 1,
+    "weeks_with_price_down": 1,
+    "first_week_comparison_fields_null": true,
+    "ordered_price_context_sha256": "165aaf0695e9489b46d93587206a71715623f963ecb90159c0f84212e07b24b0"
+  },
+  "independent_reference_price_report_sha256": "165aaf0695e9489b46d93587206a71715623f963ecb90159c0f84212e07b24b0",
+  "fingerprint_method": "SHA256 of UTF-8 compact JSON with sorted object keys and ensure_ascii=False. Report rows are chronological; units and counts are JSON integers, price extrema two-decimal strings or NULL, and first-week comparison counts NULL. Identifiers occur only in memory before hashing.",
+  "unchanged_input_scope": "Five complete accepted snapshots (ABC, weekly, variability, XYZ, combined), plus selected six-column 840-row daily projection, complete two-column core store mapping, distinct raw store/state mapping and selected four-column price projection. This is not a full-table daily/raw-wide/price equality audit.",
+  "five_snapshots_and_four_projections_unchanged": true,
+  "input_rows_sha256_before": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "850d21ab7baed55d9658bd73833e485466e794efe5ea15b0ba61ae0e176cdfb2",
+    "xyz": "c053dd1733853cb2fd457347a7552636d8a353a77f07290d4cc7edf693dba3c9",
+    "combined": "8bdb6d8a59b2eb0edc11cea278967bfc706543d63df892e07d700f25b5612e4e",
+    "selected_daily_84d": "1d6086b76b790c8e421e07aab669a1322866850f89506a2123f2561d88a0da09",
+    "core_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0",
+    "raw_distinct_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0",
+    "selected_price_projection": "7c099c7531ef1cf3dd062cbfdef062fac38622e04de39343cd00807d6066efbf"
+  },
+  "input_rows_sha256_after": {
+    "abc": "79bc9aab9515bbe789ae9878466fa239b59447b85ec36c5a39af2f8389e998ab",
+    "weekly": "941e96e2fe1a2640043c56d58ac9221dfabab564f11dfc6add2ec0211daba9d6",
+    "metrics": "850d21ab7baed55d9658bd73833e485466e794efe5ea15b0ba61ae0e176cdfb2",
+    "xyz": "c053dd1733853cb2fd457347a7552636d8a353a77f07290d4cc7edf693dba3c9",
+    "combined": "8bdb6d8a59b2eb0edc11cea278967bfc706543d63df892e07d700f25b5612e4e",
+    "selected_daily_84d": "1d6086b76b790c8e421e07aab669a1322866850f89506a2123f2561d88a0da09",
+    "core_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0",
+    "raw_distinct_store_mapping": "a1a1e0f590ef69ad3d33986ab02c9abe7e0240724a1dc457551d85564a1045e0",
+    "selected_price_projection": "7c099c7531ef1cf3dd062cbfdef062fac38622e04de39343cd00807d6066efbf"
+  },
+  "input_projection_row_counts": {
+    "abc": 3049,
+    "weekly": 36588,
+    "metrics": 3049,
+    "xyz": 3049,
+    "combined": 3049,
+    "selected_daily_84d": 840,
+    "core_store_mapping": 10,
+    "raw_distinct_store_mapping": 10,
+    "selected_price_projection": 120
+  },
+  "real_sku_identifiers_published": false,
+  "real_store_identifiers_published": false,
+  "store_detail_rows_published": false,
+  "daily_or_weekly_vectors_published": false,
+  "weekly_price_rows_published": false,
+  "fixture_cases_passed": 36,
+  "fixture_cases": [
+    {
+      "case": "exact_cent_changes_equal_prices_and_reversed_input",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "missing_zero_sales_price_then_return_does_not_bridge_gap",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "all_prices_missing_in_zero_sales_week_keep_null_extrema",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "missing_first_week_zero_sales_price_keeps_first_comparisons_null",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "valid_empty_positive_sources_have_eleven_null_fields",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "valid_empty_zero_sources_have_eleven_null_fields",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "unused_daily_price_columns_do_not_change_context",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "unrelated_product_and_outside_window_prices_are_out_of_scope",
+      "passed": true,
+      "rejected": false,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "invalid_empty_price_schema_still_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "invalid_empty_mapping_still_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "missing_price_with_positive_units",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_price_key",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "null_price_is_invalid_record_not_valid_missing_key",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "zero_price_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "negative_price_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "null_price_store_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "orphan_price_store_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "null_selected_price_week_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "price_double_type_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "price_week_bigint_type_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "extra_price_schema_column_rejected",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "missing_zero_day_cannot_be_filled_as_zero",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_and_missing_zero_day_preserve_count_and_units",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "incorrect_day_identifier",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "incorrect_retail_week",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "incorrect_daily_date",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "orphan_daily_store",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "core_state_mapping_disagrees_with_raw",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "conflicting_raw_store_state_mapping",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "missing_core_store",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "duplicate_core_store",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "null_daily_units_not_zero",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "negative_daily_units",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "daily_integer_contract_wrong_type",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "combined_copied_field_corruption",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    },
+    {
+      "case": "abc_class_corruption",
+      "passed": true,
+      "rejected": true,
+      "five_snapshots_and_four_projections_unchanged": true
+    }
+  ],
+  "scope": "Assistant preflight only; learner local price context pending. Public evidence contains aggregate controls and one-way fingerprints, never real item/store identifiers, row-level prices or day/week vectors. Published weekly sell_price is descriptive context and does not establish realised transaction prices, promotions, price causation, demand growth, availability, stockouts or replenishment needs."
+}

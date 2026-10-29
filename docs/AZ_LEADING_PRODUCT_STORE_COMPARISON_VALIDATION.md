@@ -1,6 +1,6 @@
 # Store comparison for the accepted A × Z product case
 
-29 October 2026. SQL30's twelve-week trajectory is accepted from the learner screenshot, with selected-product, ordered-trajectory and weekly-vector fingerprints matching preflight. [SQL31](../sql/31_az_leading_product_store_comparison.sql) compares the same selected product across every store. Assistant preflight passed; learner execution remains pending.
+29 October 2026. The learner's SQL31 screenshot confirms all eleven report rows and eleven columns PASS, with both comparison windows visible. The ordered canonical store-report fingerprint matches the historical assistant preflight and its independent reference. [SQL31](../sql/31_az_leading_product_store_comparison.sql) compares the same selected product across every store; [learner acceptance](../data/az_leading_product_store_comparison_learner_acceptance.json) publishes only aggregates and a report fingerprint.
 
 ## Purpose and fixed scope
 
@@ -50,9 +50,9 @@ Independently derive all product labels and the selected product from original w
 
 Before/after fingerprints cover the five accepted analysis snapshots plus the relevant selected daily projection and store mappings. These checks do not claim to re-audit every cell in the full-history daily fact. Prior accepted source-to-fact evidence remains the basis for that broader lineage. Preserve original CSVs and all historical preflight records; remove the private temporary database after verification.
 
-Publish aggregate controls and SHA-256 fingerprints only. Do not save real selected identifiers, store-level product results, daily rows or screenshots in public files. [SQL30 learner acceptance](../data/az_leading_product_weekly_learner_acceptance.json) remains distinct from the independent SQL31 preflight.
+Publish aggregate controls and SHA-256 fingerprints only. Do not save real selected identifiers, store-level product results, daily rows or screenshots in public files. [SQL30 learner acceptance](../data/az_leading_product_weekly_learner_acceptance.json) establishes the preceding trajectory. [SQL31 learner acceptance](../data/az_leading_product_store_comparison_learner_acceptance.json) now confirms the displayed store comparison and remains distinct from the independent SQL31 preflight.
 
-## Preflight results
+## Independent preflight and accepted store aggregates
 
 All 3,049 combined products across twenty-two fields matched the independent original-source reference. The selected-product and accepted SQL30 trajectory/vector fingerprints were reproduced. Every selected daily record matched its original CSV cell: 840 rows across six fields, with 84 dates per store and 42 dates in each half. Store/state mappings and all twelve weekly totals matched. All eleven result rows across eleven fields, including column names/order and TOTAL placement, matched the independent reference. Twenty targeted cases passed.
 
@@ -69,7 +69,7 @@ All 3,049 combined products across twenty-two fields matched the independent ori
 | Three largest stores' last-half units / share | 1,218 / 45.6522% |
 | Sum of displayed store shares / TOTAL share | 99.9999% / 100.0000% |
 
-All ten stores recorded higher units in the latter half, so the pooled difference spans the store set. This is an observed cross-store pattern, not evidence of a common cause. The three largest stores are ranked by last-half recorded units, not increment or profitability. The 99.9999% sum follows separate four-place rounding; TOTAL uses unrounded totals and is not adjusted to absorb rounding residuals. Do not add TOTAL to the ten-store amounts.
+The learner screenshot also confirms all aggregate values in this table. Assistant interpretation: all ten stores recorded higher units in the latter half, so the pooled difference spans the store set. This is an observed cross-store pattern, not evidence of a common cause. The three largest stores are ranked by last-half recorded units, not increment or profitability. The 99.9999% sum follows separate four-place rounding; TOTAL uses unrounded totals and is not adjusted to absorb rounding residuals. Do not add TOTAL to the ten-store amounts.
 
 Six valid fixtures test real zero stores with negative differences and reversed source order, an entirely zero last-window denominator, half-up shares and separately computed TOTAL, two valid empty-cohort cases, and the presence of unused price/value columns. Fourteen rejection cases test invalid empty mappings, missing zero days, duplicate/missing zero days preserving counts and units, invalid day/date/week keys, orphan stores, conflicting or missing/duplicate mappings, NULL/negative units, and the required INTEGER units contract.
 
@@ -78,3 +78,11 @@ Before/after hashes match for the five complete analysis snapshots, the selected
 ## Interpretation limits
 
 Compare observed units over equal lengths, and distinguish a broad store pattern from concentration in a few stores. These are historical recorded-sales differences for one selected product. They do not establish changes in unconstrained demand, inventory availability, launch timing, promotion effects or store performance. State labels support grouping but are not causal explanations. Operating recommendations still need stock, cost, lead-time and contextual evidence.
+
+## Learner acceptance and next step
+
+On 29 October 2026, all eleven screenshot rows were transcribed only in memory. Integer formatting and four-place percentage display were normalized, the TOTAL state was retained as NULL, and both comparison-window strings and row order were preserved. The full ordered eleven-column report fingerprint matched the historical preflight exactly, and all cross-store aggregates matched independently. Public acceptance contains no real selected product/store identifier, individual store row, daily or weekly vector, or screenshot.
+
+The accepted displayed totals are 62 and 2,668 units, a signed difference of 2,606 and a combined 84-day total of 2,730. All ten stores increase; six have zero units in the first half and none in the last. The independently rounded store shares sum to 99.9999%, while TOTAL is 100.0000%. These observations confirm the displayed report, not a new direct inspection of database values, raw mappings or all 840 daily cells; those checks remain separate assistant evidence. The interpretation is the assistant's, not a claim that the learner has explained these concepts.
+
+The next planned step reviews weekly price context for the same automatically selected product. That step has not yet been executed by the learner; price and recorded sales will be treated as descriptive context rather than evidence of a causal price effect.
