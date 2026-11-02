@@ -2,7 +2,7 @@
 
 ## Purpose and state
 
-The learner accepted [SQL52](WEEKLY_ANOMALY_TRIAGE_VALIDATION.md) on **2 November 2026**: all 96 visible values and eight PASS statuses match its frozen report. [SQL53](../sql/53_review_anomaly_case_histories.sql) moves directly from that overview to three concrete twelve-week histories. **Assistant preflight has passed; learner SQL53 execution and acceptance remain pending.** Operational cause verification and detection-performance evaluation remain incomplete.
+The learner accepted [SQL52](WEEKLY_ANOMALY_TRIAGE_VALIDATION.md) on **2 November 2026**: all 96 visible values and eight PASS statuses match its frozen report. [SQL53](../sql/53_review_anomaly_case_histories.sql) moves directly from that overview to three concrete twelve-week histories. **Assistant preflight passed; learner screenshot reproduction was accepted on 2 November 2026 after all 432 visible fields and thirty-six complete PASS statuses matched the frozen private reference.** Operational cause verification and detection-performance evaluation remain incomplete.
 
 The [case protocol](ANOMALY_CASE_HISTORIES_PROTOCOL.md) fixes selection, context and publication before examining new selected-case outcomes. This choice follows previously observed aggregate results; it is not a preregistered population hypothesis test, random sample or new prospective forecast evaluation. Original classification thresholds and all accepted source observations remain unchanged.
 
@@ -36,7 +36,7 @@ The public evidence contains only selection/coverage aggregates, validation stat
 
 Canonical report SHA256: `ab5ee45befcb93eb0b260b3f3881829bd71568975ac20a9d4f3af871a42241b0`. Canonical rows are ordered compact JSON arrays with LF: string case/class/week/date/role/status values, integer relative weeks and units, fixed-two-place baseline and price strings or null, and boolean has_price. This fingerprint validates agreement; it does not itself publish the detailed reference or establish an underlying business cause.
 
-## Public coverage summary — detailed learner reproduction pending
+## Public coverage summary — learner reproduction accepted
 
 | Case | Selected class | Pool positions | Selected rank | Cases | Context rows | Baseline rows | Target rows | Warm-up rows | Eligible rows | Status |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -44,10 +44,18 @@ Canonical report SHA256: `ab5ee45befcb93eb0b260b3f3881829bd71568975ac20a9d4f3af8
 | CASE_2 | LARGE_INCREASE | 6118 | 3059 | 1 | 12 | 4 | 1 | 4 | 8 | PASS |
 | CASE_3 | LARGE_DECREASE | 5327 | 2664 | 1 | 12 | 4 | 1 | 4 | 8 | PASS |
 
-The table above is aggregate coverage evidence, **not the learner's 36-row SQL output**. Follow the [Chinese guide](FIRST_STEP_ZH.md), execute SQL53 and return all twelve fields for each case. A three-part screenshot is acceptable, with twelve rows per case and all status values visible. User screenshot acceptance will be recorded separately without publishing its detailed case values.
+The table above remains aggregate coverage evidence; the learner's detailed 36-row output is not published. The screenshot now matches the private reference in every field. See the [aggregate acceptance record](../data/anomaly_case_histories_learner_acceptance.json) and the [current Chinese guide](FIRST_STEP_ZH.md).
+
+## Learner screenshot acceptance — 2 November 2026
+
+The screenshot shows **36 rows × 12 columns = 432 visible fields**, all twelve headers and thirty-six complete PASS statuses, with no visibility caveat. Each case contributes twelve rows and 144 verified fields, including four BASELINE rows, one TARGET row, four WARMUP rows and eight eligible rows. Checked price boxes were transcribed as true, displayed NULLs as null, and omitted decimal trailing zeros restored to two places.
+
+The complete screenshot was independently transcribed before comparison with the private expected report. All 432 fields match, with zero mismatches and the same canonical report fingerprint shown above. The separate normalized transcription is retained only at the ignored local path exports/private/sql53_case_histories_learner_transcription.json. Its fingerprint and the unchanged original-reference fingerprint appear in the public acceptance record; neither file belongs to the public release. Actual case values, selected weeks, source keys and screenshots remain excluded from public documentation.
+
+This is visual reproduction acceptance, not a new source-data or learner-database audit, a new full-pool selection check, or an independent assessment of conceptual understanding. No learner database was opened and no SQL, source preflight, fixture or historical analysis was rerun. The earlier source checks and temporary-file cleanup remain separate historical evidence; retaining the expected report and learner transcription is deliberate. SQL53, its validator, both frozen protocols, preflight and prior acceptance evidence remain unchanged. The original preflight retains its historical learner-pending state; this later record establishes learner acceptance.
 
 ## Interpretation limits and next action
 
 First reproduce the selected target's mean and rule from its four marked history weeks, then describe the surrounding actual pattern without assuming its cause. A temporary zero, sustained rise or later recovery can suggest questions, but none confirms inventory availability, stockouts, a promotion effect, latent demand or a data-entry error. Independent inventory, assortment, promotion, replenishment or transaction records are needed to distinguish explanations.
 
-Selection on observed gap size and overlapping histories preclude population-level performance claims from three cases. No precision/recall, true-anomaly rate, causal effect, lost-sales estimate or financial benefit follows. The previously explored historical window remains retrospective. Learner case reproduction and interpretation, operational verification, full Stage 6 and the overall portfolio remain incomplete.
+Selection on observed gap size and overlapping histories preclude population-level performance claims from three cases. No precision/recall, true-anomaly rate, causal effect, lost-sales estimate or financial benefit follows. The previously explored historical window remains retrospective. Learner case reproduction is accepted; learner conceptual understanding remains untested. The assistant interpretation and investigation framework are now documented in [Stage 6 anomaly review findings](STAGE06_ANOMALY_REVIEW_FINDINGS.md). The implemented Stage 6 descriptive, screening and illustrative review scope is complete. Operational causes and detection performance remain unassessed, and the overall portfolio remains incomplete. The next step is an independent Retailrocket intake.
