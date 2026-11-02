@@ -115,9 +115,12 @@
 - [x] 6A 用户于 2026-10-30 截图验收 SQL44：13 行 × 12 列全部可见，13 个 PASS 和全部 156 个字段值匹配冻结预检。365,880 个商品门店周、2,561,160 个日位置、3,536,539 件完整保留；16 个缺价周全部零销量。截图验收与助手逐行预检分开记录；见 [聚合验收](data/item_store_weekly_prices_learner_acceptance.json) 和 [验收说明](docs/ITEM_STORE_WEEKLY_PRICES_VALIDATION.md)。
 - [x] 6B 助手独立预检 [SQL45 相邻周价格变化审计](sql/45_audit_price_variation.sql)：12 行 × 12 列全部 PASS，335,390 个潜在相邻周比较中，335,374 个两端有价、16 个至少一端缺价；涨价 2,060 次、降价 1,736 次、不变 331,578 次。全窗 3,361 个不同商品门店组合至少发生一次可比较调价。完整原始来源参考、输入保留和针对性验证见 [机器证据](data/price_variation_preflight.json) 与 [方法](docs/PRICE_VARIATION_VALIDATION.md)。本步不计算价格效果；用户验收另记如下。
 - [x] 6B 用户于 2026-11-02 截图验收 SQL45：12 行 × 12 列全部可见，12 个 PASS 和全部 144 个字段值匹配冻结报告指纹。TOTAL 为 335,390 个潜在比较、335,374 个可比较、16 个缺端点；2,060 次涨价、1,736 次降价、331,578 次不变；30,490 个可比较组合中有 3,361 个不同组合调价。不同组合数不按周相加；见 [聚合验收](data/price_variation_learner_acceptance.json) 与 [验收说明](docs/PRICE_VARIATION_VALIDATION.md)。截图核对与助手独立预检分开记录。
-- [x] 6C 助手独立预检 [SQL46 价格方向与销量件数变化](sql/46_price_sales_association.sql)：按 UP/DOWN/UNCHANGED/MISSING_ENDPOINT/TOTAL 返回 5 行、12 列，保留全部相邻比较及零销量，描述本周减上周的件数差、均值/中位数和销量升降不变占比。SQL46 助手预检已通过，用户执行与验收仍待完成。不以零基期作除数，也不把价格不变组当作因果对照；见 [协议](docs/PRICE_SALES_ASSOCIATION_PROTOCOL.md) 与 [方法](docs/PRICE_SALES_ASSOCIATION_VALIDATION.md)。
+- [x] 6C 助手独立预检 [SQL46 价格方向与销量件数变化](sql/46_price_sales_association.sql)：按 UP/DOWN/UNCHANGED/MISSING_ENDPOINT/TOTAL 返回 5 行、12 列，保留全部相邻比较及零销量，描述本周减上周的件数差、均值/中位数和销量升降不变占比。SQL46 助手预检已通过，用户验收另记如下。不以零基期作除数，也不把价格不变组当作因果对照；见 [协议](docs/PRICE_SALES_ASSOCIATION_PROTOCOL.md) 与 [方法](docs/PRICE_SALES_ASSOCIATION_VALIDATION.md)。
 - [x] SQL46 实际独立预检：3 个针对性用例通过，365,880 条周记录 × 12 字段与原始来源参考精确匹配；36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段核对通过；已验收 SQL45 的 12×12 报告保持一致，SQL46 的 5×12 输出逐字段匹配。7 个输入投影、来源及依赖指纹、44 份历史预检未变，私有文件已清理。TOTAL 前端/后端销量为 3,250,015/3,245,005 件，差值 −5,010 件；这是相邻比较端点口径。见 [机器记录](data/price_sales_association_preflight.json)。仅为助手预检，用户验收另行记录。
-- [ ] 6C 用户执行 SQL46 并提交 5 行、12 列截图验收。
+- [x] 6C 用户于 2026-11-02 截图验收 SQL46：5 行 × 12 列全部可见，5 个 PASS 和全部 60 个字段值匹配冻结报告；仅恢复均值/中位数六位、百分比四位的尾随零。涨价与降价组的平均件数差均为正，但不说明调价效果；见 [聚合验收](data/price_sales_association_learner_acceptance.json) 与 [验收说明](docs/PRICE_SALES_ASSOCIATION_VALIDATION.md)。截图核对与助手独立预检分开记录。
+- [x] 6D 助手独立预检 [SQL47 按周价格与销量变化](sql/47_weekly_price_sales_association.sql)：因 SQL46 两个调价组的均值均为正，现选择逐周拆分检查时间集中情况；不是原始报告预先指定的验证。返回 11 行 × 12 列、无 TOTAL 行，三类有价方向的次数/平均件数差并列，同时保留缺端点次数和全周总次数/件数差。内部保留 44 个周/方向单元，零销量和缺价比较均不排除。SQL47 助手预检已通过，用户执行与验收仍待完成。 见 [协议](docs/WEEKLY_PRICE_SALES_ASSOCIATION_PROTOCOL.md) 与 [方法](docs/WEEKLY_PRICE_SALES_ASSOCIATION_VALIDATION.md)。
+- [x] SQL47 实际独立预检：4 个针对性用例通过，365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段均匹配原始来源参考；44 个内部周度分组 × 14 字段及 11×12 展示逐值核对通过。SQL45/SQL46 已验收报告保持一致，各周件数差合计 −5,010 件，各方向总体均值按精确合计/次数还原。7 个输入投影、来源及依赖指纹、45 份历史预检未变，私有文件已清理。见 [机器记录](data/weekly_price_sales_association_preflight.json)。仅为助手预检，用户验收另行记录。
+- [ ] 6D 用户执行 SQL47 并提交 11 行、12 列截图验收。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
@@ -128,6 +131,6 @@
 
 ## 下一次对话从这里继续
 
-SQL45 已于 2026-11-02 验收。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 准备 [SQL46](sql/46_price_sales_association.sql)，描述同一商品门店相邻周的销量件数差在不同价格方向下怎样分布。返回五组、12 列，缺端点及零销量比较仍保留；不计算逐条销量增长率。SQL46 助手预检已通过，用户执行与验收仍待完成。组别构成不同，重复相邻周也并非独立观察；只能作初步描述，不能直接推断价格或促销效果。
+SQL46 已于 2026-11-02 验收。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 准备 [SQL47](sql/47_weekly_price_sales_association.sql)，查看已观察到的涨价、降价组正平均件数差是否集中在某些周。报告为 11 个后端周、12 列，无 TOTAL；缺端点次数可见，其销量变化仍计入全周总差值。SQL47 助手预检已通过，用户执行与验收仍待完成。 同周组别仍可能来自不同商品和门店，不能当作因果对照或据此估计弹性。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -2,7 +2,7 @@
 
 更新日期：2026-11-02（Australia/Sydney）。
 
-**当前状态：SQL45 相邻周价格变化审计已于 2026-11-02 验收；下一步是 SQL46 价格方向与销量件数变化的描述性比较。** SQL45 的 12 行、12 列及全部 144 个字段值与冻结报告匹配，见 [验收记录](../data/price_variation_learner_acceptance.json)。SQL46 助手预检已通过，用户执行与验收仍待完成。 阶段 5 基线里程碑及 SQL44 仍保持已验收；最终评分前选定的 WEEKDAY4、SNAIVE7 参考和 [预测结果](STAGE05_BASELINE_FORECAST_FINDINGS.md)不变。树模型尚未实现，整体项目未完成。
+**当前状态：SQL46 价格方向与销量变化比较已于 2026-11-02 验收；下一步是 SQL47 按周拆分。** SQL46 的 5 行、12 列和全部 60 个可见字段值与冻结报告匹配，见 [验收记录](../data/price_sales_association_learner_acceptance.json)。因涨价、降价组平均件数差均为正，现选择逐周查看时间集中情况，不把这次选择写成原始报告预先指定。SQL47 助手预检已通过，用户执行与验收仍待完成。 已验收预测及 SQL44/45 结果保持不变，树模型尚未实现，整体项目未完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，准备 [SQL46](../sql/46_price_sales_association.sql)。保留同一商品门店的全部相邻周及零销量比较，按 UP、DOWN、UNCHANGED、MISSING_ENDPOINT、TOTAL 返回 5 行、12 列；观察本周减上周的销量件数差、均值/中位数，以及组内销量升降不变占比。不计算逐条销量增长率，因此上周为零也无需排除。SQL46 助手预检已通过，用户执行与验收仍待完成。 价格不变组不是因果对照，组别构成及重叠周会影响解释；见 [固定口径](PRICE_SALES_ASSOCIATION_PROTOCOL.md) 与 [方法](PRICE_SALES_ASSOCIATION_VALIDATION.md)。
+阅读 [当前一步](FIRST_STEP_ZH.md)，准备 [SQL47](../sql/47_weekly_price_sales_association.sql)。返回 11 个后端周、12 列，无 TOTAL 行；将涨价、降价和价格不变的次数及平均件数差放在同一周对照，同时显示缺端点次数、全周总次数和总件数差。内部仍保留全部 44 个周/方向单元，零销量和缺价比较均保留；紧凑显示不等于排除观察。SQL47 助手预检已通过，用户执行与验收仍待完成。 同周组别也可能含有不同商品和门店，不能当作因果对照。见 [固定口径](WEEKLY_PRICE_SALES_ASSOCIATION_PROTOCOL.md) 与 [方法](WEEKLY_PRICE_SALES_ASSOCIATION_VALIDATION.md)。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。
