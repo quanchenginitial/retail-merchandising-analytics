@@ -2,7 +2,7 @@
 
 更新日期：2026-11-02（Australia/Sydney）。
 
-**当前状态：SQL50 已于 2026-11-02 验收；下一步是 SQL51 异常候选分类。** SQL50 全部 96 个字段值和八个 PASS 匹配冻结报告，见 [验收记录](../data/anomaly_baseline_scope_learner_acceptance.json)。价格关联描述性里程碑保持完成，见 [小结](STAGE06_PRICE_ASSOCIATION_FINDINGS.md)。SQL51 将在同一 243,920 个目标上应用不变的冻结规则，准备四个互斥类别与 TOTAL 的 5×12 汇总。SQL51 助手预检已通过，用户执行与验收仍待完成。 候选仍是无真实标签的回顾性线索，不证明缺货、原因或识别准确率。预测结果及历史证据不变，完整阶段 6 和整体项目仍未完成。
+**当前状态：SQL51 已于 2026-11-02 验收；下一步是 SQL52 八周候选概览。** 全部 60 个字段值与五个 PASS 匹配冻结报告，见 [验收记录](../data/anomaly_candidates_learner_acceptance.json)。三类候选共 12,347 / 243,920，约 5.0619%，只是回顾性核查线索，不代表真实异常或缺货。SQL52 准备一次时间概览，之后进入覆盖完整类别的确定性代表历史核查。SQL52 助手预检已通过，用户执行与验收仍待完成。 价格关联与预测成果保持不变，候选调查、性能评价、完整阶段 6 和整体项目仍未完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，准备 [SQL51](../sql/51_screen_anomaly_candidates.sql)。目标范围仍是 11605–11612（2016-02-27 至 2016-04-22）的 243,920 个商品门店周，各自基线只取严格此前四个实际周。按冻结优先级分类为 SUDDEN_ZERO、LARGE_INCREASE、LARGE_DECREASE、NONE，另加 TOTAL，共 5 行、12 列。所有占比都以全部目标为分母，包含 NONE；不同序列数不可跨类相加。SQL51 助手预检已通过，用户执行与验收仍待完成。 NONE 仅表示规则未触发，件数差不等于损失销量。见 [不变筛查规则](ANOMALY_SCREENING_PROTOCOL.md)、[输出协议](ANOMALY_CANDIDATES_PROTOCOL.md) 与 [方法](ANOMALY_CANDIDATES_VALIDATION.md)。候选调查、外部标签与性能评估仍待完成。
+阅读 [当前一步](FIRST_STEP_ZH.md)，准备 [SQL52](../sql/52_weekly_anomaly_triage.sql)。仍覆盖 11605–11612 的全部八周，预计返回 8 行、12 列，无 TOTAL。每周四类次数完整保留，三类候选占比以全部 30,490 个目标为分母，包含 NONE。上行缺口只取 LARGE_INCREASE 的正向差；下行缺口取 SUDDEN_ZERO 与 LARGE_DECREASE 的反向正幅度，精确四分之一件、显示两位。二者之差排除了 NONE，不等于总体净变化，也不是损失销量。SQL52 助手预检已通过，用户执行与验收仍待完成。 见 [协议](WEEKLY_ANOMALY_TRIAGE_PROTOCOL.md) 与 [方法](WEEKLY_ANOMALY_TRIAGE_VALIDATION.md)。这次概览后按确定性规则选取完整类别的代表历史，不仅挑峰值周；目前不宣称任何新的周度结果。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

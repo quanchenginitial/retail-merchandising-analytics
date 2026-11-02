@@ -131,9 +131,12 @@
 - [x] 6G 助手独立预检 [SQL50 异常基线范围审计](sql/50_audit_anomaly_baseline_scope.sql)：沿用十二周输入，前四周作历史，目标周 11605–11612（2016-02-27 至 2016-04-22），预期 30,490 × 8 = 243,920 个商品门店周；每个目标只使用严格此前四个实际周。返回 8 行 × 12 列、无 TOTAL，只核对基线与覆盖，不产生异常标记。SQL50 助手预检已通过，用户验收另记如下。 见 [筛查协议](docs/ANOMALY_SCREENING_PROTOCOL.md) 与 [审计方法](docs/ANOMALY_BASELINE_SCOPE_VALIDATION.md)。
 - [x] SQL50 实际独立预检：2 个针对性用例通过，365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段均匹配原始来源参考；243,920 个目标位置 × 18 字段和 8×12 展示逐值核对通过，四个历史周严格早于目标周，参考值使用精确四分之一件；SQL44 周度总量与已验收输入指纹一致。7 个输入投影、来源及依赖指纹、48 份历史预检未变，私有文件已清理。见 [机器记录](data/anomaly_baseline_scope_preflight.json)。本次不生成异常候选；用户验收另行记录。
 - [x] 6G 用户于 2026-11-02 截图验收 SQL50：8 行 × 12 列的全部 96 个字段值及八个 PASS 匹配冻结报告，仅恢复基线尾随零至两位。243,920 个目标位置与 975,680 次重叠历史引用不是异常标记或独立交易；见 [聚合验收](data/anomaly_baseline_scope_learner_acceptance.json) 与 [验收说明](docs/ANOMALY_BASELINE_SCOPE_VALIDATION.md)。
-- [x] 6H 助手独立预检 [SQL51 异常候选分类](sql/51_screen_anomaly_candidates.sql)：按不变的 [筛查规则](docs/ANOMALY_SCREENING_PROTOCOL.md) 顺序互斥分类，返回 SUDDEN_ZERO、LARGE_INCREASE、LARGE_DECREASE、NONE、TOTAL 共 5 行 × 12 列。比例分母为全部 243,920 个目标（包含 NONE），不同序列数不能跨类相加；NONE 仅表示未触发规则。SQL51 助手预检已通过，用户执行与验收仍待完成。 见 [输出协议](docs/ANOMALY_CANDIDATES_PROTOCOL.md) 与 [方法](docs/ANOMALY_CANDIDATES_VALIDATION.md)，件数差不等于损失销量。
+- [x] 6H 助手独立预检 [SQL51 异常候选分类](sql/51_screen_anomaly_candidates.sql)：按不变的 [筛查规则](docs/ANOMALY_SCREENING_PROTOCOL.md) 顺序互斥分类，返回 SUDDEN_ZERO、LARGE_INCREASE、LARGE_DECREASE、NONE、TOTAL 共 5 行 × 12 列。比例分母为全部 243,920 个目标（包含 NONE），不同序列数不能跨类相加；NONE 仅表示未触发规则。SQL51 助手预检已通过，用户验收另记如下。 见 [输出协议](docs/ANOMALY_CANDIDATES_PROTOCOL.md) 与 [方法](docs/ANOMALY_CANDIDATES_VALIDATION.md)，件数差不等于损失销量。
 - [x] SQL51 实际独立预检：4 个针对性用例通过，365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段均匹配原始来源参考；243,920 个目标的 18 字段历史特征重现 SQL50 指纹，20 字段分类及 5×12 汇总逐值匹配。相对与绝对边界、分类优先级和精确四分之一件差值经独立参考核对，SQL50 全部 8×12 展示保持一致。7 个输入投影、来源及依赖指纹、49 份历史预检未变，私有文件已清理。见 [机器记录](data/anomaly_candidates_preflight.json)。候选不代表已核实异常；用户验收另行记录。
-- [ ] 6H 用户执行 SQL51 并提交 5 行、12 列截图验收。
+- [x] 6H 用户于 2026-11-02 截图验收 SQL51：5 行 × 12 列全部 60 个字段值与五个 PASS 匹配冻结报告，按既定四位比例、两位合计、六位均值恢复尾随零。三类候选 902 / 6,118 / 5,327，共 12,347 / 243,920 = 约 5.0619%；不同序列数不可跨类相加，候选不代表真实异常或缺货。见 [聚合验收](data/anomaly_candidates_learner_acceptance.json) 与 [验收说明](docs/ANOMALY_CANDIDATES_VALIDATION.md)。
+- [x] 6I 助手独立预检 [SQL52 按周候选概览](sql/52_weekly_anomaly_triage.sql)：沿用冻结分类和全部八个目标周，返回 8 行 × 12 列、无 TOTAL；四类次数完整保留，候选占比的分母是每周全部 30,490 个目标（含 NONE）。上行缺口只汇总 LARGE_INCREASE 的正向差，下行缺口汇总 SUDDEN_ZERO 与 LARGE_DECREASE 的反向正幅度，均为精确四分之一件、显示两位小数。SQL52 助手预检已通过，用户执行与验收仍待完成。 见 [协议](docs/WEEKLY_ANOMALY_TRIAGE_PROTOCOL.md) 与 [方法](docs/WEEKLY_ANOMALY_TRIAGE_VALIDATION.md)。
+- [x] SQL52 实际独立预检：2 个针对性用例通过；365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段与原始来源参考一致；243,920 个目标 × 20 分类字段与独立参考精确匹配，并重现 SQL51 分类及 SQL50 的 18 字段历史特征指纹。8×12 周汇总逐值核对通过，各类次数、向上和向下件数差分别对账 SQL51 已验收结果；独立参考重现 SQL51 全部 5×12 汇总，无需重跑其 SQL 或边界用例。7 个输入投影、来源及依赖指纹、50 份历史预检未变，私有文件已清理。见 [机器记录](data/weekly_anomaly_triage_preflight.json)。用户验收另行记录。
+- [ ] 6I 用户执行 SQL52 并提交 8 行、12 列截图验收；之后按确定性规则选取覆盖完整类别的代表历史，不仅选择峰值周。
 - [ ] 异常候选调查与外部标签核查；尚不能评价真实缺货、原因或识别准确率。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
@@ -145,6 +148,6 @@
 
 ## 下一次对话从这里继续
 
-SQL50 已于 2026-11-02 验收，价格关联描述性里程碑及异常基线范围审计保持完成。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 准备 [SQL51](sql/51_screen_anomaly_candidates.sql)，在相同 243,920 个目标上应用不变的冻结规则。预期返回四个互斥类别及 TOTAL 共 5 行、12 列；比例包含 NONE，distinct_series 不可跨类相加。SQL51 助手预检已通过，用户执行与验收仍待完成。 NONE 不代表已证实正常，件数差不是损失销量；后续人工调查与性能评估、完整阶段 6 和整体项目仍未完成。
+SQL51 已于 2026-11-02 验收。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 准备 [SQL52](sql/52_weekly_anomaly_triage.sql)，先做一次八周时间概览，再进入覆盖完整类别的确定性代表历史核查。预期 8 行、12 列，无 TOTAL；每周候选比例都含 NONE 作分母，两种候选缺口不是损失销量，上行减下行不包含 NONE，不能当作总体净变化。SQL52 助手预检已通过，用户执行与验收仍待完成。 不调整冻结阈值，不声称真实异常、缺货或识别准确率；完整阶段 6 和整体项目仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

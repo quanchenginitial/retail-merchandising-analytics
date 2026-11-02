@@ -2,7 +2,7 @@
 
 ## Purpose and state
 
-The learner accepted [SQL50's baseline scope](ANOMALY_BASELINE_SCOPE_VALIDATION.md) on **2 November 2026**: all 96 visible values and eight PASS statuses match frozen evidence. [SQL51](../sql/51_screen_anomaly_candidates.sql) now applies the already-fixed rules to identify retrospective review candidates. **Assistant preflight has passed; learner SQL51 execution and acceptance remain pending.** Candidate investigation and detection-performance evaluation are not complete.
+The learner accepted [SQL50's baseline scope](ANOMALY_BASELINE_SCOPE_VALIDATION.md) on **2 November 2026**: all 96 visible values and eight PASS statuses match frozen evidence. [SQL51](../sql/51_screen_anomaly_candidates.sql) now applies the already-fixed rules to identify retrospective review candidates. **Assistant preflight passed; the learner screenshot was accepted on 2 November 2026 with all 60 displayed values and five complete PASS statuses matching the frozen report.** Candidate investigation and detection-performance evaluation are not complete.
 
 The original [screening protocol](ANOMALY_SCREENING_PROTOCOL.md) was published before this classification work and remains unchanged. The separate [candidate report protocol](ANOMALY_CANDIDATES_PROTOCOL.md) fixes output, rounding and validation. Neither thresholds nor scope were selected from the resulting candidate counts.
 
@@ -39,7 +39,7 @@ The run passed **4 focused cases**. The [machine evidence](../data/anomaly_candi
 
 Only aggregate results and fingerprints are published. The private twenty-field classification and its real item/store identifiers are not included in the repository. Report SHA256: `530ad26f7eb84ce5521bbdc522a712a22fbce3f1cb37042d4cb97233f164c550`. Canonical rows are compact JSON arrays in fixed column order followed by LF: integers for counts and observed units, fixed two-place strings for baseline/difference, four-place shares, six-place means (or null), and string labels/statuses. Canonical rounded zero is positive zero.
 
-## Measured assistant report — learner reproduction pending
+## Measured report — learner accepted 2 November 2026
 
 | Class | Target rows | Share % | Distinct pairs | Baseline units | Observed units | Signed difference | Mean signed difference | Zero observed | Zero baseline | Missing price | Status |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -49,10 +49,18 @@ Only aggregate results and fingerprints are published. The private twenty-field 
 | NONE | 231573 | 94.9381 | 30488 | 2155178.00 | 2165072 | 9894.00 | 0.042725 | 42711 | 17100 | 0 | PASS |
 | TOTAL | 243920 | 100.0000 | 30490 | 2348679.75 | 2359738 | 11058.25 | 0.045336 | 44236 | 17521 | 0 | PASS |
 
-This is a reproducibility reference, not an accepted learner result or a claim of true-anomaly prevalence. The group totals reconcile to the SQL50 target population and sales/baseline totals.
+The historical independent reference and the learner screenshot agree in every displayed field. The group totals reconcile to the SQL50 target population and sales/baseline totals. This accepted output does not estimate true-anomaly prevalence.
+
+## Learner screenshot acceptance — 2 November 2026
+
+All **5 rows × 12 fields = 60 values** are visible, including five complete PASS statuses. Independent visual transcription matches the frozen report in every position: 30 integer values, five shares, ten baseline/difference sums, five means, five class labels and five statuses. Only thousands separators and omitted trailing zeros were normalized, preserving shares to four decimals, baseline/difference sums to two and means to six. The ordered row-array/LF fingerprint remains 530ad26f7eb84ce5521bbdc522a712a22fbce3f1cb37042d4cb97233f164c550. See the [aggregate learner acceptance](../data/anomaly_candidates_learner_acceptance.json).
+
+The three candidate classes contain **902 + 6,118 + 5,327 = 12,347 flagged target positions**, approximately **5.0619% of all 243,920 targets**, calculated from exact counts with NONE included in the denominator. The four class counts and additive unit/coverage totals reconcile to TOTAL. Distinct-series counts **898 / 4,636 / 3,983 / 30,488** are nonadditive; TOTAL independently contains 30,490 pairs, and the unique flagged-series union cannot be inferred by adding class counts. NONE is unflagged by these rules, not verified normal. Signed baseline differences do not measure lost sales.
+
+This is visual aggregate-report acceptance, not a direct audit of the learner database or a new verification of all individual histories and classifications. The full-row source comparisons, rule checks and preservation results above remain separate historical assistant evidence. No learner database was opened and no SQL, source preflight, fixture or historical analysis was rerun for acceptance. The preflight JSON retains its historical pending status; the new record establishes subsequent learner acceptance. SQL51, its validator, both frozen protocols and the preflight remain unchanged; no screenshot or candidate-level records are published.
 
 ## Next review and limits
 
-Run the full SQL51 in the learner's retail_merchandising connection and submit its five-row/twelve-column result, including check_status; see the [Chinese guide](FIRST_STEP_ZH.md). After acceptance, inspect representative candidates' histories and available calendar/price context before choosing further operational evidence to request.
+With SQL51 accepted, the next review will examine candidate timing across the eight weeks, followed by representative histories and available calendar/price context; see the [current Chinese guide](FIRST_STEP_ZH.md). Candidate investigation and detection-performance evaluation remain incomplete.
 
 The historical window has already been explored; past-only baseline construction prevents within-query look-ahead but does not create a new prospective test. Four-week averages need not represent normal demand. Seasonality, trends, changing availability, promotions and reporting can all produce flagged changes. Zero sales alone do not prove stockouts. No independent human labels, inventory or availability evidence establish precision, recall, true-anomaly counts, causal effects or financial benefits. The accepted forecasting and price-association milestones remain unchanged; candidate investigation, the full Stage 6 and the overall portfolio remain incomplete.
