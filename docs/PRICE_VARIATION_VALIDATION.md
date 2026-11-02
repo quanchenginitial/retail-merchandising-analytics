@@ -4,7 +4,7 @@
 
 SQL44 was learner-accepted on **30 October 2026**: all thirteen rows and twelve fields match its frozen report. See the [acceptance record](../data/item_store_weekly_prices_learner_acceptance.json). [SQL45](../sql/45_audit_price_variation.sql) now asks how many usable adjacent-week comparisons and actual price changes exist within the same item/store pair. This establishes data support before choosing a later price–sales association method.
 
-The [protocol](PRICE_VARIATION_PROTOCOL.md) was fixed before computing these new variation counts. SQL45 is a read-only query. **Assistant preflight passed; learner SQL45 execution and screenshot acceptance remain pending.** Forecast selection and the accepted final report remain unchanged.
+The [protocol](PRICE_VARIATION_PROTOCOL.md) was fixed before computing these new variation counts. SQL45 is a read-only query. **Assistant preflight passed; the learner accepted all twelve report rows and twelve fields on 2 November 2026.** Screenshot acceptance is recorded separately below; historical preflight evidence, forecast selection and the accepted final report remain unchanged.
 
 ## Observation and comparison units
 
@@ -51,8 +51,16 @@ The sixteen missing-price weekly positions accepted in SQL44 and SQL45's missing
 
 Ordered report SHA256: `417d051dbcdd4c28eae74a72e692e1b5f33e73de36ba6d66f10542543a24880b`. Its canonical contract is the fixed field-order row arrays, compact JSON and one LF per row, with integer counts and string week/date/status values. Only aggregates and fingerprints are published; private per-pair records and screenshots are excluded.
 
-## Interpretation and next learner step
+## Learner acceptance — 2026-11-02
+
+The learner's DBeaver screenshot shows **all twelve rows and twelve fields, including twelve complete PASS values**. All **144 displayed values** match the frozen preflight report after removing thousands separators and preserving week/date/status strings. The [learner acceptance record](../data/price_variation_learner_acceptance.json) reproduces report SHA256 `417d051dbcdd4c28eae74a72e692e1b5f33e73de36ba6d66f10542543a24880b`, using the ordered twelve-field row arrays encoded as compact JSON with one LF after each row.
+
+The displayed TOTAL contains **335,390 potential transitions**, **335,374 comparable transitions** and **16 missing-endpoint transitions**. Among comparable transitions, **2,060 are price increases**, **1,736 decreases** and **331,578 unchanged**. The two distinct-pair totals are **30,490 comparable pairs** and **3,361 changed pairs**. The six transition counts add across weeks; the pair totals require full-window deduplication and cannot be reconstructed by summing weekly pair counts. The 3,796 up/down transitions are therefore not 3,796 distinct changed pairs.
+
+This accepts the displayed aggregate report. The assistant did not open the learner's database or rerun SQL/full-data preflight for acceptance. Exact source/input comparisons, the independent distinct-pair sets, nine focused cases and preservation/cleanup checks remain the separate historical assistant evidence above. Frozen code, protocol and preflight remain unchanged; no screenshot, real product identifier or individual pair/transition record is published.
+
+## Interpretation and next question
 
 Price variation is a necessary observation condition for within-pair comparisons, not evidence that a price change caused a sales change. Repeated overlapping weekly comparisons are not independent experiments. Calendar effects, availability and other unobserved drivers remain potential alternative explanations. A lower published price is not automatically a documented promotion. This short window supports descriptive investigation and does not establish elasticity, profit, inventory savings or stockouts.
 
-Execute the entire SQL45 query in a new DBeaver editor connected to **retail_merchandising**, then return **twelve rows and twelve columns**, including check_status. See [the Chinese current-step guide](FIRST_STEP_ZH.md). After screenshot acceptance, these measured counts can guide the next descriptive analysis; this audit has not yet computed a price–sales relationship.
+The accepted counts can now guide the next descriptive analysis; this audit has not yet computed a price–sales relationship. See [the Chinese current-step guide](FIRST_STEP_ZH.md) for the next single action.

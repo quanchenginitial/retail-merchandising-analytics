@@ -1,46 +1,47 @@
-# 当前一步：确认可比较的调价记录
+# 当前一步：观察调价前后的周销量变化
 
-更新日期：2026-10-30（Australia/Sydney）。
+更新日期：2026-11-02（Australia/Sydney）。
 
-**这一步为了什么：确认同一商品在同一门店有多少次真实记录的相邻周价格变化，判断后续价格与销量分析有多少可用观察。**
+**这一步为了什么：观察同一商品、同一门店发生涨价、降价或价格不变时，相邻两周销量通常怎样变化，为后续调查形成线索。**
 
-SQL44 的 13 行、12 列已验收，全部 PASS。365,880 条商品门店周记录保留了 3,536,539 件销量，16 条缺价记录全部零销量。见 [验收记录](../data/item_store_weekly_prices_learner_acceptance.json)。
+SQL45 的 12 行、12 列已验收，全部 PASS。在 335,390 次潜在比较中，335,374 次两端有价，16 次至少一端缺价；涨价 2,060 次、降价 1,736 次，共涉及 3,361 个不同商品门店组合。见 [验收记录](../data/price_variation_learner_acceptance.json)。
 
-价格表连接成功，只说明能够找到价格。若某个商品门店一直没有调价，就无法靠这段记录观察它调价前后的销量差异。因此先统计价格是否变化，再选择分析方法。
+之前确认了价格是否变化；SQL46 开始同时观察销量，但本步只做描述性比较。三个价格组中的商品、门店和日期构成可能不同，不能直接将组间差异解释为调价效果。
 
-## 本步怎样比较
+## 本步怎样计算
 
-沿用 2016-01-30 至 2016-04-22 的十二个完整零售周，在同一商品、同一门店内部比较相邻两周：
+沿用同一个十二周窗口，在同一商品、同一门店内比较相邻两周：
 
-- 前后两周都有价格：归为涨价、降价或不变，三类互斥。
-- 任意一周缺价：保留为缺端点比较，不补价，也不跨过缺价周去找更早的价格。
-- 零销量周仍保留；本步不根据销量挑选有利的价格样本。
+`销量变化件数 = 本周销量 − 上周销量`
 
-十二周只有十一组相邻比较，因此最多是 **30,490 × 11 =335,390 次**。首周只提供前一期价格，所以报告从第二周（2016-02-06）开始；没有漏掉第一周数据。
+例如从 10 件到 13 件，变化为 +3 件；从 0 件到 5 件，变化为 +5 件。零销量周也参与统计。本步没有除以上周销量，因此不会把零基数变化写成无限增长率。
 
-## 这次执行 SQL45
+按价格变化分成 UP（涨价）、DOWN（降价）、UNCHANGED（不变）、MISSING_ENDPOINT（至少一端缺价），另加 TOTAL。缺价记录单独列示，不补价、不跨过缺价周，也不当作价格不变。
 
-1. 打开 [45_audit_price_variation.sql](../sql/45_audit_price_variation.sql)，复制全文。
-2. 在 DBeaver 的 **retail_merchandising** 连接中新建编辑器，粘贴后选择 **执行 SQL 脚本 / Execute SQL Script（默认 Alt+X）**。
-3. 发回 **12 行、12 列**的结果截图：十一周加 TOTAL，包含最右侧 check_status。
+## 这次执行 SQL46
 
-这是只读查询，不新增分析表。检查失败时保留错误信息，不修改数据来迎合预期值。
+1. 打开 [46_price_sales_association.sql](../sql/46_price_sales_association.sql)，复制全文。
+2. 在 DBeaver 的 **retail_merchandising** 连接中新建编辑器，粘贴并使用 **执行 SQL 脚本 / Execute SQL Script（默认 Alt+X）**。
+3. 发回 **5 行、12 列**结果截图，包含最右侧 check_status。
+
+本步是只读查询，不新增分析表。助手独立预检已通过，用户 SQL46 仍待执行与截图验收。
 
 ## 怎样读结果
 
 | 字段 | 含义 |
 | --- | --- |
-| retail_week / week_start / week_end | 比较中后一个周的编号及起止日；TOTAL 为所有后端周的范围 |
-| potential_transitions | 潜在相邻周比较次数，每周 30,490 |
-| comparable_transitions | 两端都有价格，可以判断涨跌的次数 |
-| missing_endpoint_transitions | 至少一端缺价的次数，不是缺价周记录数 |
-| price_up_transitions / price_down_transitions / unchanged_price_transitions | 可比较记录中的涨价、降价、不变次数 |
-| comparable_pairs | 至少有一次可比较记录的不同商品门店组合数 |
-| changed_pairs | 至少有一次可比较调价的不同商品门店组合数 |
-| check_status | 数据完整性和统计恒等式是否通过 |
+| price_direction | 价格变化组；TOTAL 为所有比较 |
+| transitions | 该组相邻周比较次数 |
+| distinct_pairs | 该组涉及的不同商品门店组合数 |
+| previous_units / current_units | 各次比较的上周 / 本周销量之和 |
+| unit_difference | 本周销量合计减上周销量合计，单位为件 |
+| mean_unit_change | 每次比较平均增减多少件；不是每个商品平均，也不是增长率 |
+| median_unit_change | 每次销量变化件数的中位数，帮助判断均值是否被少数大变化带动 |
+| sales_up_pct / sales_down_pct / sales_unchanged_pct | 该组中销量增加 / 减少 / 不变的比较次数占比，包含零销量记录 |
+| check_status | 数据和计算检查是否通过 |
 
-**TOTAL 的两个 pairs 字段需要全窗口去重，不能直接相加每周值。** 同一商品在同一家门店多次调价，可以贡献多次 transitions，但只贡献一个 changed_pair。缺价周也可能影响前后两组比较，因此 SQL44 的缺价周数量与本步缺端点比较数量不是同一个指标。
+先看 transitions 和 distinct_pairs 了解覆盖，再结合均值、中位数和三个比例解读。三个比例以本组全部比较次数为分母；独立四舍五入后合计可能略偏离 100%。空组保留一行，次数和合计为 0，均值、中位数、比例为 NULL。
 
-助手预检已完成，12 行报告均 PASS。预检 TOTAL 为：可比较 335,374 次、缺端点 16 次；涨价 2,060、降价 1,736、不变 331,578 次；发生可比较调价的不同组合为 3,361 个。**用户 SQL45 仍待截图验收。** 见 [验证说明](PRICE_VARIATION_VALIDATION.md) 与 [固定口径](PRICE_VARIATION_PROTOCOL.md)。
+**TOTAL 的 distinct_pairs 不能直接相加各组。** 同一商品门店可能先涨价、再降价，出现在多个组中。相邻比较也共享中间周：previous_units 和 current_units 是比较端点合计，不是十二周销量的重新计数，不能相加当作新的总销量。
 
-本步确认观察条件，尚未计算价格与销量的关系；一次降价也不能直接标记为促销活动或认定带来了销量增长。
+价格不变组只是描述性参照，不是随机对照组。即使降价组销量平均上升，也还需要检查日期、商品构成、节假日及供货等替代解释，不能立即写成“降价带来增长”。见 [方法与预检结果](PRICE_SALES_ASSOCIATION_VALIDATION.md) 和 [固定口径](PRICE_SALES_ASSOCIATION_PROTOCOL.md)。

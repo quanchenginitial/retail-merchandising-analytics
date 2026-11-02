@@ -1,0 +1,193 @@
+{
+  "checked_at_utc": "2026-11-02T03:40:50.180430+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/46_price_sales_association.sql",
+  "script_sha256": "101f7e81a1d750c539ab3ba66a0ff40aff7073e1e8c2959023eebb11ea0c2cf6",
+  "validator": "validation/preflight_price_sales_association.py",
+  "validator_sha256": "80e468b5c0d83a6f2efc7a7bfa1a5eea464b282e84243c449d4e8f78120eca0a",
+  "protocol": "docs/PRICE_SALES_ASSOCIATION_PROTOCOL.md",
+  "protocol_sha256": "f397cabcbf294ffc024ed88be5c777ab4ba18531db349d441f14e68ffb32119b",
+  "code_and_dependency_sha256": {
+    "sql/46_price_sales_association.sql": "101f7e81a1d750c539ab3ba66a0ff40aff7073e1e8c2959023eebb11ea0c2cf6",
+    "validation/preflight_price_sales_association.py": "80e468b5c0d83a6f2efc7a7bfa1a5eea464b282e84243c449d4e8f78120eca0a",
+    "docs/PRICE_SALES_ASSOCIATION_PROTOCOL.md": "f397cabcbf294ffc024ed88be5c777ab4ba18531db349d441f14e68ffb32119b",
+    "sql/09_stage_prices.sql": "3860e59bf91cd666aa5b3ab7de5e586c3bd79da4d9c02f8631d0dcd85cbac80a",
+    "sql/23_build_product_weekly.sql": "dfb0d5b4f9cf134937a31752454f5e3a1d21756a1354bd6bb25e2d2803d81488",
+    "sql/44_build_item_store_weekly_prices.sql": "a57ff1b0246879dd33a1e3f45c2f6405f3c1474975300172f25b93cc5d906d64",
+    "validation/preflight_item_store_weekly_prices.py": "127ab0312b8d597eb5268340e4c936adcb74a38a80f15c6d939d892e610d4521",
+    "sql/45_audit_price_variation.sql": "3d5775f5bc237a422db7dfe626c2ccabf0caae76ba5315c531ccf9d92e8b916d",
+    "validation/preflight_price_variation.py": "8a8a1918f442535ba7bdf0b47bbcdf00253737f6e1743b472dbdd2414c1e9c46",
+    "docs/PRICE_VARIATION_PROTOCOL.md": "6f2f1e11f0467c4cd0337ae93b3a7a867a5412c525f54667bc203968d33ebba4",
+    "data/price_variation_preflight.json": "6e667bfd6a16664871ee9ae30bd4fe8dda011ef0c6e04a1297887585de3f5af5",
+    "data/item_store_weekly_prices_preflight.json": "36d39cea3a6363daa0444f3b7eaa8775ca5fbb8230684678cca072a845da7c1c"
+  },
+  "settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "source_sha256": {
+    "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+    "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5",
+    "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef"
+  },
+  "source_hashes_unchanged": true,
+  "source_controls": {
+    "source_series": 30490,
+    "source_products": 3049,
+    "source_stores": 10,
+    "calendar_rows": 1969,
+    "window_daily_cells": 2561160,
+    "source_price_rows": 365864,
+    "window_units": 3536539
+  },
+  "input_window": {
+    "start_date": "2016-01-30",
+    "end_date": "2016-04-22",
+    "weeks": 12,
+    "pairs": 30490
+  },
+  "report_window": {
+    "first_current_week": 11602,
+    "last_current_week": 11612,
+    "start_date": "2016-02-06",
+    "end_date": "2016-04-22"
+  },
+  "independent_reference": "Original-source Python csv/Decimal SQL44 helpers derive the complete weekly input. Direct adjacent weekly unit and exact-price lookups independently classify every transition; sorted integer changes determine medians, Decimal arithmetic determines means and percentages, and ROUND_HALF_UP fixes final 6/4 decimal strings. Every report field and order compares exactly.",
+  "preflight_strategy": "One private bounded database stages only 84 sales columns and twelve price weeks through unchanged SQL09/23/44. Unchanged SQL45 is reconciled in full to its published evidence. Historical guard suites and forecasting are not rerun; learner persistent database is never opened.",
+  "weekly_input_rows_compared": 365880,
+  "weekly_input_fields_compared": 12,
+  "weekly_input_exact_mismatches": 0,
+  "weekly_input_rows_sha256": "80fd6a2cc1d3842d6be6a44ac11e7266217204bb7813224dc0c5d51a29c1dabd",
+  "accepted_sql44_input_fingerprint_matched": true,
+  "pooled_rows_compared": 36588,
+  "pooled_fields_compared": 8,
+  "pooled_rows_sha256": "587910052a8d844e77489e435010aee73937cc650e9068aff25a9b01178eabad",
+  "price_rows_compared": 365864,
+  "price_fields_compared": 4,
+  "transition_positions_evaluated": 335390,
+  "sql45_rows_reconciled": 12,
+  "sql45_fields_reconciled": 12,
+  "sql45_accepted_report_matched": true,
+  "sql45_input_guard_prefix_unchanged": true,
+  "endpoint_totals_reconciled_to_first_last_weeks": true,
+  "scoped_input_sha256_before": {
+    "weekly_input": "f39e060afdf364d39794e37f812d4d4c1f9427e73140af889ed1dcc20d50d495",
+    "pooled_input": "888206a6471fa74db7526d072c561e970e5394f79b28d79151d3837c04c89c3f",
+    "raw_metadata": "16e2a35d176e3fcd89a126b49a3b0a0ca7dea6ef0528fcba91c583c32047c858",
+    "calendar_date_week_projection": "4b5b587a2bc673b8b3b730198eb7523ccbc1ece1fa5714b88804773fe06590ac",
+    "products": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "stores": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "prices_12w": "8308eb365af2030e569c76b0584c070bc041175bad85459554b59b23ff771646"
+  },
+  "scoped_input_sha256_after": {
+    "weekly_input": "f39e060afdf364d39794e37f812d4d4c1f9427e73140af889ed1dcc20d50d495",
+    "pooled_input": "888206a6471fa74db7526d072c561e970e5394f79b28d79151d3837c04c89c3f",
+    "raw_metadata": "16e2a35d176e3fcd89a126b49a3b0a0ca7dea6ef0528fcba91c583c32047c858",
+    "calendar_date_week_projection": "4b5b587a2bc673b8b3b730198eb7523ccbc1ece1fa5714b88804773fe06590ac",
+    "products": "89bb5484ea4d995c1540a1f4bd9f0d5012e00ddd7fd66823731d771b538ecf87",
+    "stores": "4bb01482085b9710183496de0b667d4cfb432bd94f9ba6eb8342ca0af1f6899f",
+    "prices_12w": "8308eb365af2030e569c76b0584c070bc041175bad85459554b59b23ff771646"
+  },
+  "scoped_inputs_unchanged": true,
+  "historical_preflight_files_unchanged": 44,
+  "temporary_database_removed": true,
+  "temporary_database_bytes_after_close": 28323840,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "zero_endpoints_signed_half_medians_missing_gaps_store_separation_nonadditive_pairs",
+      "passed": true
+    },
+    {
+      "case": "all_zero_unchanged_with_three_empty_categories",
+      "passed": true
+    },
+    {
+      "case": "production_aggregates_exact_positive_negative_mean_and_percentage_half_rounding",
+      "passed": true
+    }
+  ],
+  "independent_source_read_seconds": 20.805,
+  "setup_seconds": 10.234,
+  "sql45_reconciliation_seconds": 0.807,
+  "audit_seconds": 0.786,
+  "timing_scope": "One-run elapsed seconds; CLI timings exclude hashing/Python comparisons. DuckDB memory_limit is not a total-process cap.",
+  "report_rows": 5,
+  "report_columns": 12,
+  "report_sha256": "3847090d8a225e57ac78af9346538f1352741689198b68fd65b9ac95f5263562",
+  "report_fingerprint_contract": "SHA-256 over ordered compact JSON arrays plus LF; counts/unit sums are integers, mean/median are fixed-six-place strings, percentages are fixed-four-place strings, empty statistics are null.",
+  "results": [
+    {
+      "price_direction": "UP",
+      "transitions": 2060,
+      "distinct_pairs": 2014,
+      "previous_units": 19448,
+      "current_units": 26029,
+      "unit_difference": 6581,
+      "mean_unit_change": "3.194660",
+      "median_unit_change": "1.000000",
+      "sales_up_pct": "64.8058",
+      "sales_down_pct": "27.3301",
+      "sales_unchanged_pct": "7.8641",
+      "check_status": "PASS"
+    },
+    {
+      "price_direction": "DOWN",
+      "transitions": 1736,
+      "distinct_pairs": 1711,
+      "previous_units": 12246,
+      "current_units": 15140,
+      "unit_difference": 2894,
+      "mean_unit_change": "1.667051",
+      "median_unit_change": "1.000000",
+      "sales_up_pct": "70.1037",
+      "sales_down_pct": "22.0622",
+      "sales_unchanged_pct": "7.8341",
+      "check_status": "PASS"
+    },
+    {
+      "price_direction": "UNCHANGED",
+      "transitions": 331578,
+      "distinct_pairs": 30490,
+      "previous_units": 3218321,
+      "current_units": 3203784,
+      "unit_difference": -14537,
+      "mean_unit_change": "-0.043842",
+      "median_unit_change": "0.000000",
+      "sales_up_pct": "39.1353",
+      "sales_down_pct": "39.4697",
+      "sales_unchanged_pct": "21.3950",
+      "check_status": "PASS"
+    },
+    {
+      "price_direction": "MISSING_ENDPOINT",
+      "transitions": 16,
+      "distinct_pairs": 8,
+      "previous_units": 0,
+      "current_units": 52,
+      "unit_difference": 52,
+      "mean_unit_change": "3.250000",
+      "median_unit_change": "1.000000",
+      "sales_up_pct": "50.0000",
+      "sales_down_pct": "0.0000",
+      "sales_unchanged_pct": "50.0000",
+      "check_status": "PASS"
+    },
+    {
+      "price_direction": "TOTAL",
+      "transitions": 335390,
+      "distinct_pairs": 30490,
+      "previous_units": 3250015,
+      "current_units": 3245005,
+      "unit_difference": -5010,
+      "mean_unit_change": "-0.014938",
+      "median_unit_change": "0.000000",
+      "sales_up_pct": "39.4538",
+      "sales_down_pct": "39.3032",
+      "sales_unchanged_pct": "21.2430",
+      "check_status": "PASS"
+    }
+  ],
+  "scope": "Assistant independent preflight only; learner SQL46 execution pending. Descriptive association only; unchanged price is not a causal control, repeated adjacent observations overlap, group mix/calendar can confound comparisons. All zero sales and missing endpoints remain included. No causal effect, elasticity, regression, significance test, promotion or anomaly claim. Public output contains aggregates and fingerprints only."
+}
