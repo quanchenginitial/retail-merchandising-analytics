@@ -4,7 +4,7 @@
 
 The descriptive price-association milestone through SQL49 is learner-accepted on **2 November 2026**, with all 168 final report values and fourteen PASS statuses matching. Its [findings](STAGE06_PRICE_ASSOCIATION_FINDINGS.md) identify descriptive patterns and data gaps without claiming price effects. The next task prepares a retrospective anomaly-candidate screen.
 
-[SQL50](../sql/50_audit_anomaly_baseline_scope.sql) audits coverage and past-only weekly baselines. **Assistant preflight has passed; learner SQL50 execution and acceptance remain pending.** No anomaly scores, labels, candidate counts or detection accuracy are produced. Future SQL51 rules are fixed in the [screening protocol](ANOMALY_SCREENING_PROTOCOL.md) but are not implemented by this query.
+[SQL50](../sql/50_audit_anomaly_baseline_scope.sql) audits coverage and past-only weekly baselines. **Assistant preflight passed; the learner screenshot was accepted on 2 November 2026 with all 96 displayed values and eight complete PASS statuses matching the frozen report.** No anomaly scores, labels, candidate counts or detection accuracy are produced. Future SQL51 rules are fixed in the [screening protocol](ANOMALY_SCREENING_PROTOCOL.md) but are not implemented by this query.
 
 ## Fixed time and observation contract
 
@@ -47,4 +47,14 @@ Report SHA256: `15020474ebc9f0555091e86fa78d3c743fcfa4ec4b9258528727b03c097edb20
 | 11611 | 2016-04-09 | 30490 | 30490 | 121960 | 292789.25 | 306203 | 5102 | 1933 | 30490 | 0 | PASS |
 | 11612 | 2016-04-16 | 30490 | 30490 | 121960 | 294952.25 | 286524 | 4998 | 1819 | 30490 | 0 | PASS |
 
-Every report value matches the independent reference. Learner reproduction is pending. Run the full SQL50 and return eight rows and twelve columns including check_status; see the [Chinese current-step guide](FIRST_STEP_ZH.md). SQL51 candidate classification, anomaly investigation, the rest of Stage 6 and the overall portfolio remain incomplete.
+Every report value matched the independent reference during preflight. The learner screenshot subsequently matched all fields on **2 November 2026**.
+
+## Learner screenshot acceptance — 2 November 2026
+
+All **8 rows × 12 fields = 96 values** and eight complete PASS statuses are visible and match the frozen report: 64 integer values, eight baseline values, sixteen week/date values and eight statuses. Only displayed thousands separators and omitted baseline trailing zeros were normalized; baseline_units retains two decimal places. The ordered row-array/LF hash is unchanged: `15020474ebc9f0555091e86fa78d3c743fcfa4ec4b9258528727b03c097edb20`. See the [aggregate learner acceptance](../data/anomaly_baseline_scope_learner_acceptance.json).
+
+Each displayed week has 30,490 target positions and 121,960 referenced history observations. Across eight weeks, this is **243,920 item/store/week targets** and **975,680 history references**; neither count represents anomaly flags or independent transactions. All target positions have a recorded price in these eight report weeks. The displayed current units sum to 2,359,738; zero-current and zero-baseline counts sum to 44,236 and 17,521 target positions respectively. These counts do not establish abnormality, lost sales or stockouts.
+
+This acceptance compares the visible aggregate report; it is not a direct audit of the learner database or a new row-level check of all prior-week features. The historical preflight above independently established the exact four-prior-actual-week histories and baselines. No learner database was opened and no SQL, preflight, fixture or historical analysis was rerun for screenshot acceptance. The original preflight JSON retains its historical pending status; the new record establishes subsequent learner acceptance. SQL50, its validator, the screening protocol and preflight remain unchanged. No screenshot, individual targets or raw sources are published.
+
+SQL50 has not produced anomaly scores, flags or candidate counts. SQL51 candidate classification and investigation remain subsequent work; the full Stage 6 and overall portfolio are incomplete. See the [current Chinese guide](FIRST_STEP_ZH.md).

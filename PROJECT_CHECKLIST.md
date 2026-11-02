@@ -128,10 +128,13 @@
 - [x] SQL49 实际独立预检：3 个针对性用例通过，365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段均匹配原始来源参考；308 个内部周/部门/方向单元 × 16 字段及 14×12 展示逐值核对通过。独立有理数参考核对加权变化差、覆盖与舍入，SQL45–48 已验收报告和周/部门边际汇总一致；7 个输入投影、来源及依赖指纹、47 份历史预检未变，私有文件已清理。见 [机器记录](data/week_department_price_contrasts_preflight.json)。仅为助手预检，用户验收另行记录。
 - [x] 6F 用户于 2026-11-02 截图验收 SQL49：14 行 × 12 列的全部 168 个字段值与十四个 PASS 匹配冻结报告，仅恢复均值/差距尾随零至六位。全部 3,796 次涨价/降价比较均有同周同部门参照；FOODS_1 的加权差距为负，与多数周差距为正不矛盾。见 [聚合验收](data/week_department_price_contrasts_learner_acceptance.json) 与 [验收说明](docs/WEEK_DEPARTMENT_PRICE_CONTRASTS_VALIDATION.md)，不作因果解释。
 - [x] 6 价格关联描述性里程碑已验收（SQL44–49）；见 [发现与限制](docs/STAGE06_PRICE_ASSOCIATION_FINDINGS.md)。完整阶段 6 仍待异常候选及人工核查部分。
-- [x] 6G 助手独立预检 [SQL50 异常基线范围审计](sql/50_audit_anomaly_baseline_scope.sql)：沿用十二周输入，前四周作历史，目标周 11605–11612（2016-02-27 至 2016-04-22），预期 30,490 × 8 = 243,920 个商品门店周；每个目标只使用严格此前四个实际周。返回 8 行 × 12 列、无 TOTAL，只核对基线与覆盖，不产生异常标记。SQL50 助手预检已通过，用户执行与验收仍待完成。 见 [筛查协议](docs/ANOMALY_SCREENING_PROTOCOL.md) 与 [审计方法](docs/ANOMALY_BASELINE_SCOPE_VALIDATION.md)。
+- [x] 6G 助手独立预检 [SQL50 异常基线范围审计](sql/50_audit_anomaly_baseline_scope.sql)：沿用十二周输入，前四周作历史，目标周 11605–11612（2016-02-27 至 2016-04-22），预期 30,490 × 8 = 243,920 个商品门店周；每个目标只使用严格此前四个实际周。返回 8 行 × 12 列、无 TOTAL，只核对基线与覆盖，不产生异常标记。SQL50 助手预检已通过，用户验收另记如下。 见 [筛查协议](docs/ANOMALY_SCREENING_PROTOCOL.md) 与 [审计方法](docs/ANOMALY_BASELINE_SCOPE_VALIDATION.md)。
 - [x] SQL50 实际独立预检：2 个针对性用例通过，365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段均匹配原始来源参考；243,920 个目标位置 × 18 字段和 8×12 展示逐值核对通过，四个历史周严格早于目标周，参考值使用精确四分之一件；SQL44 周度总量与已验收输入指纹一致。7 个输入投影、来源及依赖指纹、48 份历史预检未变，私有文件已清理。见 [机器记录](data/anomaly_baseline_scope_preflight.json)。本次不生成异常候选；用户验收另行记录。
-- [ ] 6G 用户执行 SQL50 并提交 8 行、12 列截图验收。
-- [ ] 后续 SQL51 按冻结启发式规则形成回顾性候选；尚未实现或验收，不能视为真实缺货、原因或准确率标签。
+- [x] 6G 用户于 2026-11-02 截图验收 SQL50：8 行 × 12 列的全部 96 个字段值及八个 PASS 匹配冻结报告，仅恢复基线尾随零至两位。243,920 个目标位置与 975,680 次重叠历史引用不是异常标记或独立交易；见 [聚合验收](data/anomaly_baseline_scope_learner_acceptance.json) 与 [验收说明](docs/ANOMALY_BASELINE_SCOPE_VALIDATION.md)。
+- [x] 6H 助手独立预检 [SQL51 异常候选分类](sql/51_screen_anomaly_candidates.sql)：按不变的 [筛查规则](docs/ANOMALY_SCREENING_PROTOCOL.md) 顺序互斥分类，返回 SUDDEN_ZERO、LARGE_INCREASE、LARGE_DECREASE、NONE、TOTAL 共 5 行 × 12 列。比例分母为全部 243,920 个目标（包含 NONE），不同序列数不能跨类相加；NONE 仅表示未触发规则。SQL51 助手预检已通过，用户执行与验收仍待完成。 见 [输出协议](docs/ANOMALY_CANDIDATES_PROTOCOL.md) 与 [方法](docs/ANOMALY_CANDIDATES_VALIDATION.md)，件数差不等于损失销量。
+- [x] SQL51 实际独立预检：4 个针对性用例通过，365,880 条周输入 × 12 字段、36,588 条商品周汇总 × 8 字段、365,864 条价格 × 4 字段均匹配原始来源参考；243,920 个目标的 18 字段历史特征重现 SQL50 指纹，20 字段分类及 5×12 汇总逐值匹配。相对与绝对边界、分类优先级和精确四分之一件差值经独立参考核对，SQL50 全部 8×12 展示保持一致。7 个输入投影、来源及依赖指纹、49 份历史预检未变，私有文件已清理。见 [机器记录](data/anomaly_candidates_preflight.json)。候选不代表已核实异常；用户验收另行记录。
+- [ ] 6H 用户执行 SQL51 并提交 5 行、12 列截图验收。
+- [ ] 异常候选调查与外部标签核查；尚不能评价真实缺货、原因或识别准确率。
 - [ ] 6 价格关联、销售异常候选清单与人工核查规则完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
@@ -142,6 +145,6 @@
 
 ## 下一次对话从这里继续
 
-SQL49 已于 2026-11-02 验收，价格关联描述性里程碑完成。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 准备 [SQL50](sql/50_audit_anomaly_baseline_scope.sql)，先审计八个目标周和严格此前四周实际销量的基线覆盖。预期 243,920 个目标位置，返回 8 行、12 列，无 TOTAL；baseline_units 是逐序列四周均值的合计，保留两位小数，本步不标记异常。SQL50 助手预检已通过，用户执行与验收仍待完成。 后续 SQL51 仍为计划中的回顾性启发式筛查，没有真实异常标签，不声称缺货原因或识别准确率。阶段 6 和整体项目未完成。
+SQL50 已于 2026-11-02 验收，价格关联描述性里程碑及异常基线范围审计保持完成。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 准备 [SQL51](sql/51_screen_anomaly_candidates.sql)，在相同 243,920 个目标上应用不变的冻结规则。预期返回四个互斥类别及 TOTAL 共 5 行、12 列；比例包含 NONE，distinct_series 不可跨类相加。SQL51 助手预检已通过，用户执行与验收仍待完成。 NONE 不代表已证实正常，件数差不是损失销量；后续人工调查与性能评估、完整阶段 6 和整体项目仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
