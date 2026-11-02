@@ -4,7 +4,7 @@
 
 The learner accepted [SQL51](ANOMALY_CANDIDATES_VALIDATION.md) on **2 November 2026**, with all sixty visible fields and five PASS statuses matching its frozen report. Its three candidate classes contain 12,347 of 243,920 target positions, approximately 5.0619%. These are heuristic review positions, not independently verified events or unique products.
 
-[SQL52](../sql/52_weekly_anomaly_triage.sql) provides one chronological overview of workload and unit-change magnitude before deterministic candidate-history review. **Assistant preflight has passed; learner SQL52 execution and acceptance remain pending.** This descriptive follow-up was chosen after seeing SQL51's global candidate counts, rather than being presented as a preregistered hypothesis test. The [weekly report protocol](WEEKLY_ANOMALY_TRIAGE_PROTOCOL.md) fixes its grouping and measures before computing these weekly outcomes. The original classification rules and thresholds remain unchanged.
+[SQL52](../sql/52_weekly_anomaly_triage.sql) provides one chronological overview of workload and unit-change magnitude before deterministic candidate-history review. **Assistant preflight passed; the learner screenshot was accepted on 2 November 2026 with all 96 displayed values and eight complete PASS statuses matching the frozen report.** This descriptive follow-up was chosen after seeing SQL51's global candidate counts, rather than being presented as a preregistered hypothesis test. The [weekly report protocol](WEEKLY_ANOMALY_TRIAGE_PROTOCOL.md) fixes its grouping and measures before computing these weekly outcomes. The original classification rules and thresholds remain unchanged.
 
 ## Fixed population and measures
 
@@ -28,7 +28,7 @@ The run passed **2 focused cases** covering the new weekly reporting behavior, w
 
 Report SHA256: `02196fd34a1bfbd79a340b8df2b4afd8e715d231ee53f72e7cfc2f220a838aa1`. Canonical output is ordered compact JSON row arrays with one LF after each row: string week/date/status, integer counts, fixed-four-place share strings and fixed-two-place gap strings. Only aggregate results and fingerprints are published, with no real candidate identifiers or row-level features.
 
-## Measured assistant report — learner reproduction pending
+## Measured report — learner accepted 2 November 2026
 
 | Week | Week start | Targets | Sudden zero | Large increase | Large decrease | NONE | Candidates | Candidate % | Upward gap units | Downward gap units | Status |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -41,7 +41,15 @@ Report SHA256: `02196fd34a1bfbd79a340b8df2b4afd8e715d231ee53f72e7cfc2f220a838aa1
 | 11611 | 2016-04-09 | 30490 | 103 | 847 | 589 | 28951 | 1539 | 5.0476 | 13953.75 | 12329.75 | PASS |
 | 11612 | 2016-04-16 | 30490 | 57 | 623 | 713 | 29097 | 1393 | 4.5687 | 9550.00 | 12319.50 | PASS |
 
-The report is an assistant reproducibility reference; learner screenshot acceptance remains separate. Execute the full SQL52 and return eight rows and twelve fields including check_status; see the [Chinese guide](FIRST_STEP_ZH.md).
+The historical independent reference and the learner screenshot agree in every displayed field. Screenshot acceptance remains separate from the full-source verification described above.
+
+## Learner screenshot acceptance — 2 November 2026
+
+All **8 rows × 12 fields = 96 values** and eight complete PASS statuses are visible and match the frozen report. Independent visual transcription covers 48 integer counts, eight shares, sixteen gap values, sixteen week/date values and eight statuses. Only displayed thousands separators and omitted gap trailing zeros were normalized; shares retain four decimals and directional gaps two. The ordered row-array/LF fingerprint remains 02196fd34a1bfbd79a340b8df2b4afd8e715d231ee53f72e7cfc2f220a838aa1. See the [aggregate learner acceptance](../data/weekly_anomaly_triage_learner_acceptance.json).
+
+Each week contains **30,490 targets including NONE**. Weekly candidate counts are **1,497 / 1,588 / 1,535 / 1,691 / 1,503 / 1,601 / 1,539 / 1,393**, summing to **12,347**. The displayed class totals reconcile to SQL51's **902 / 6,118 / 5,327 / 231,573**. Upward and downward gaps sum to **105,974.00** and **104,809.75** units; their difference **1,164.25** excludes NONE, consistent with the earlier aggregate reconciliation. These are repeated target positions and descriptive baseline differences, not distinct incidents, verified anomalies or lost sales.
+
+This is a visual aggregate comparison, not a direct learner-database audit or a reconstruction of underlying targets, baselines or class membership. Historical independent preflight remains the evidence for complete source-row and classification checks. No learner database was opened and no SQL, source preflight, fixture or historical analysis was rerun for acceptance. The preflight JSON retains its historical pending status; this new record supplies subsequent learner acceptance. SQL52, its validator, protocol, preflight and all preserved SQL50/51 evidence remain unchanged. No screenshot or candidate-level records are published.
 
 ## Follow-up boundary
 
