@@ -16,7 +16,7 @@ Source: [Retailrocket's Kaggle release](https://www.kaggle.com/datasets/retailro
 
 The publisher documents 2,756,101 events over about 4.5 months and 20,275,902 item-property change records. Events contain timestamp, visitorid, event, itemid and transactionid. Meaningful disclosed properties include categoryid and available; other values cannot be assumed to represent money. Property joins must use values known at event time. A recorded transaction event is not necessarily a unique order, and an anonymous visitor identifier is not a verified person.
 
-Metadata and a four-byte range request confirmed an accessible ZIP signature without downloading the complete archive. This does not validate its contents, row counts, checksums or analytical suitability after cleaning. Record those in stage 1/behaviour-module audit when the files are acquired.
+Historical source research checked metadata and a four-byte ZIP signature. On 2 November 2026 the learner supplied four extracted CSVs; the [local source audit](RETAILROCKET_SOURCE_AUDIT.md) verified their headers, byte sizes, complete strict parsing, row counts and recorded local SHA-256 values. An [independent event/category check](../data/retailrocket_independent_checks.json) records parsed duplicates and key/empty-field diagnostics. Before/after hashes were unchanged. No publisher checksum, original archive or exact download timestamp was available for verification; observed sizes and counts are not proof of byte identity or download provenance. Attribute joins, category cycles, deduplication and behavioural definitions remain future checks.
 
 ## Optional extensions
 

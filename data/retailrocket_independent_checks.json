@@ -1,0 +1,214 @@
+{
+  "observed_at_utc": "2026-11-02T10:07:21.371883+00:00",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "database": "in-memory; no learner database opened",
+  "scope": [
+    "events.csv",
+    "category_tree.csv"
+  ],
+  "source_directory": "D:/database/retailrocket",
+  "source_files_read_only": true,
+  "csv_parsing": {
+    "header": true,
+    "all_columns": "VARCHAR",
+    "delimiter": ",",
+    "quote": "\"",
+    "escape": "\"",
+    "nullstr": "",
+    "strict_mode": true,
+    "ignore_errors": false
+  },
+  "headers": {
+    "events.csv": [
+      "timestamp",
+      "visitorid",
+      "event",
+      "itemid",
+      "transactionid"
+    ],
+    "category_tree.csv": [
+      "categoryid",
+      "parentid"
+    ]
+  },
+  "source_before": {
+    "events.csv": {
+      "bytes": 94237913,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    },
+    "category_tree.csv": {
+      "bytes": 14454,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "bytes": 94237913,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    },
+    "category_tree.csv": {
+      "bytes": 14454,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_unchanged": true,
+  "resource_limits": {
+    "threads": 2,
+    "memory_limit": "512MB",
+    "timeout_seconds": 180
+  },
+  "temporary_spill_files_removed": true,
+  "raw_ids_or_rows_exported": false,
+  "interpretation_limits": [
+    "Timestamp bounds are UTC interpretations of integer Unix milliseconds.",
+    "Anonymous visitor IDs are not verified persons.",
+    "Transaction-event rows and unique transaction IDs are distinct counts; neither is assumed to represent validated orders.",
+    "Exact duplicates are counted, not deleted.",
+    "Blank category parent IDs are reported as root candidates; hierarchy cycle checks are not part of this bounded audit.",
+    "No item-property records were scanned or joined."
+  ],
+  "events": {
+    "rows": 2756101,
+    "distinct_visitor_ids": 1407580,
+    "distinct_item_ids": 235061,
+    "distinct_event_types": 3,
+    "timestamp_blank_rows": 0,
+    "visitorid_blank_rows": 0,
+    "event_blank_rows": 0,
+    "itemid_blank_rows": 0,
+    "transactionid_blank_rows": 2733644,
+    "timestamp_nonblank_invalid_integer_rows": 0,
+    "visitorid_nonblank_invalid_integer_rows": 0,
+    "itemid_nonblank_invalid_integer_rows": 0,
+    "transactionid_nonblank_invalid_integer_rows": 0,
+    "min_timestamp_ms": 1430622004384,
+    "max_timestamp_ms": 1442545187788,
+    "min_timestamp_utc": "2015-05-03 03:00:04.384",
+    "max_timestamp_utc": "2015-09-18 02:59:47.788",
+    "distinct_utc_dates": 139,
+    "unexpected_event_type_rows": 0,
+    "transaction_event_missing_transactionid_rows": 0,
+    "nontransaction_event_with_transactionid_rows": 0,
+    "transaction_id_present_rows": 22457,
+    "distinct_nonblank_transaction_ids": 17672
+  },
+  "event_type_counts": [
+    {
+      "event_type": "addtocart",
+      "rows": 69332,
+      "transaction_id_present_rows": 0,
+      "distinct_transaction_ids": 0,
+      "distinct_visitor_ids": 37722,
+      "distinct_item_ids": 23903
+    },
+    {
+      "event_type": "transaction",
+      "rows": 22457,
+      "transaction_id_present_rows": 22457,
+      "distinct_transaction_ids": 17672,
+      "distinct_visitor_ids": 11719,
+      "distinct_item_ids": 12025
+    },
+    {
+      "event_type": "view",
+      "rows": 2664312,
+      "transaction_id_present_rows": 0,
+      "distinct_transaction_ids": 0,
+      "distinct_visitor_ids": 1404179,
+      "distinct_item_ids": 234838
+    }
+  ],
+  "exact_event_duplicates": {
+    "group_count": 458,
+    "rows_in_duplicate_groups": 918,
+    "surplus_rows": 460,
+    "largest_multiplicity": 3
+  },
+  "exact_duplicate_counts_by_event": [
+    {
+      "event_type": "addtocart",
+      "group_count": 366,
+      "rows_in_duplicate_groups": 732,
+      "surplus_rows": 366
+    },
+    {
+      "event_type": "view",
+      "group_count": 92,
+      "rows_in_duplicate_groups": 186,
+      "surplus_rows": 94
+    }
+  ],
+  "transaction_id_groups": {
+    "distinct_nonblank_transaction_ids": 17672,
+    "ids_with_multiple_event_rows": 2710,
+    "ids_with_multiple_visitors": 0,
+    "ids_with_multiple_items": 2643,
+    "ids_with_multiple_timestamps": 1788,
+    "ids_with_multiple_event_types": 0,
+    "max_event_rows_per_id": 31
+  },
+  "categories": {
+    "rows": 1669,
+    "distinct_category_ids": 1669,
+    "categoryid_blank_rows": 0,
+    "parentid_blank_root_rows": 25,
+    "categoryid_nonblank_invalid_integer_rows": 0,
+    "parentid_nonblank_invalid_integer_rows": 0,
+    "self_parent_rows": 0
+  },
+  "category_duplicate_ids": {
+    "group_count": 0,
+    "surplus_rows": 0
+  },
+  "category_parent_orphans": {
+    "row_count": 0,
+    "distinct_parent_ids": 0
+  },
+  "execution_provenance": {
+    "status": "executed_after_portable_spill_path_update",
+    "public_query": "validation/retailrocket_source_check.sql",
+    "executed_query_sha256": "49ddbf6a352ceda20f4be7fe90483e9cb55a8f8caf833b10b783b77a57217478",
+    "public_query_sha256": "49ddbf6a352ceda20f4be7fe90483e9cb55a8f8caf833b10b783b77a57217478",
+    "public_query_is_exact_executed_text": true,
+    "execution_started_utc": "2026-11-02T10:07:18.456956+00:00",
+    "execution_completed_utc": "2026-11-02T10:07:21.372883+00:00",
+    "command_argv": [
+      "E:/DuckDB/duckdb.exe",
+      ":memory:",
+      "-json",
+      "-batch",
+      "-bail"
+    ],
+    "query_supplied_via": "standard input",
+    "working_directory": "repository root",
+    "external_source_directory": "D:/database/retailrocket",
+    "external_source_path_note": "Documented local source location; set the two read_csv paths to the immutable source directory on another machine.",
+    "temporary_spill_directory": "./tmp/retailrocket_source_check_spill",
+    "spill_directory_existed_before_run": false,
+    "spill_directory_created_during_run": false,
+    "spill_directory_absent_after_cleanup": true,
+    "cleanup_scope": "Only the newly created exact spill directory, if present and empty, after resolving it inside repository tmp; no recursive deletion.",
+    "expected_headers_checked_before_original_execution": true,
+    "source_sha256_recording": "Both scoped source files hashed before and after this affected rerun; original historical audit evidence retained unchanged.",
+    "csv_exact_duplicate_definition": "Equality across the five parsed VARCHAR event fields, with exact empty CSV values represented as NULL; not byte-identical physical source-line comparison.",
+    "publication_source_or_query_rerun": true,
+    "rerun_reason": "Only the absolute workspace spill path was changed to an ignored repository-relative path; executed once in memory from repository root.",
+    "only_sql_change_was_spill_path": true,
+    "all_aggregate_outputs_identical_to_original_execution": true,
+    "aggregate_sections_compared": 8,
+    "historical_execution": {
+      "query_sha256": "2c6e580f27e1604b3a7c7a99ed2d4643620371a2484e59e45b0eb85bbbb947ec",
+      "helper_sha256": "8bc29642b14a58cd286c88174b123df5de10767c8c19d8c34d9d84beb207a06a",
+      "private_aggregate_evidence_sha256": "f884df5d342fbf4ae8c33b7b021fd97a6259424e952da618523002746eda8c3e",
+      "original_observed_at_utc": "2026-11-02T10:02:19.452088+00:00",
+      "evidence_retained_unchanged": true
+    },
+    "rerun_local_helper_sha256": "45984d7ab3c392866a5b24e6901c640f517b902286a9712a10d5f4dcafe58592",
+    "learner_database_opened": false,
+    "item_property_files_scanned": false,
+    "public_artifacts": [
+      "data/retailrocket_independent_checks.json",
+      "validation/retailrocket_source_check.sql"
+    ]
+  }
+}

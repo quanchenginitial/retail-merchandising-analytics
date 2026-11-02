@@ -8,7 +8,7 @@
 - [x] 助手查阅 M5、Retailrocket、Criteo、dunnhumby/completejourney、GA4 的发布方或维护方资料。
 - [x] 确定 M5 主线、Retailrocket 独立行为模块；Criteo 为后续实验扩展。
 - [x] 整理数据来源、问题覆盖、指标口径、模型验证方案、学习路线。
-- [x] 助手验证 Retailrocket 官方元数据及 ZIP 开头四字节可访问；没有下载完整档案。
+- [x] 来源发现阶段曾验证 Retailrocket 官方元数据及 ZIP 开头四字节；当时未下载完整档案。用户后续提供四份已解压文件，实测审计见阶段 7；原压缩包尚未核验。
 - [x] 用户建立 GitHub Public 仓库；连接器确认 main 上有初始 README。
 - [x] 阶段 0 的 12 份文件已上传 main；逐份远端读取与本地准备内容一致。研究提交：[994cdb7](https://github.com/quanchenginitial/retail-merchandising-analytics/commit/994cdb794b2734ddd5951b5523dee669162e77e5)。
 - [x] 文档内部链接和 JSON 格式通过检查；预测切分的五个截止日期已独立计算核对。此检查不属于数据分析或模型测试。
@@ -143,6 +143,10 @@
 - [x] 已提供示例历史解读及“假设—所需证据—调查动作”框架，见 [异常候选复核发现](docs/STAGE06_ANOMALY_REVIEW_FINDINGS.md)。输出验收不等于独立检验用户概念掌握。
 - [ ] 外部运营证据与真实标签核查：现有数据无法核实缺货、原因或识别准确率；保留为未验证事项，不作为公开数据描述性里程碑的完成声明。
 - [x] 6 已实现范围完成：价格关联、固定规则候选筛查、周度概览、三个示例历史复核及人工调查框架。尚未验证运营原因、检测性能或干预收益。
+- [x] 7A 用户提供 D:/database/retailrocket 中四份原始 CSV；助手逐文件只读扫描，38/38 结构与字段检查通过，四份文件前后 SHA-256 和元数据未变。事件 2,756,101 行，属性 10,999,999 + 9,275,903 行，类别 1,669 行；见 [来源审计](docs/RETAILROCKET_SOURCE_AUDIT.md) 和 [机器记录](data/retailrocket_source_audit.json)。本地指纹不等于官方校验和。
+- [x] 7A 独立 DuckDB 内存核验事件与类别：事件类型、时间范围、必填字段及交易编号空值模式一致；记录五字段相同的 460 条重复冗余行、25 个空父类别根候选。重复先保留，交易事件数不当作订单数；类别环路、属性时点连接及业务定义待后续处理。见 [独立证据](data/retailrocket_independent_checks.json)。
+- [x] 7B 助手准备并独立预检 [SQL54](sql/54_import_retailrocket_events.sql)：只建立 rr_raw.events，原五列保留 VARCHAR，保留全部重复记录，空交易编号为 NULL；18 行检查覆盖行数、字段、事件数量、空值与双向 EXCEPT ALL 对账。既有表不覆盖；见 [导入验证](docs/RETAILROCKET_EVENTS_IMPORT_VALIDATION.md)。未打开用户数据库。
+- [ ] 7B 用户在 retail_merchandising 连接执行 SQL54，提供 18 行、5 列完整检查结果；助手预检不替代用户导入验收。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -152,6 +156,6 @@
 
 ## 下一次对话从这里继续
 
-SQL53 已于 2026-11-02 验收，36 行 × 12 列及 36 个 PASS 全部匹配。阶段 6 已实现的描述性分析、候选筛查与示例复核收束；外部运营原因、检测性能未验证，整体项目仍在进行。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 接入独立 Retailrocket 行为数据，先核验来源、文件和事件粒度，再写加载与分析 SQL。M5 与 Retailrocket 不连接商品或用户编号。
+SQL53 已验收，阶段 6 的已实现描述性范围收束。Retailrocket 四份来源文件现已完成只读结构审计，独立事件/类别核验已记录；下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在原 retail_merchandising 连接运行 [SQL54](sql/54_import_retailrocket_events.sql)，只导入事件原始表 rr_raw.events，并核对 18 行检查。用户执行仍待完成。两份属性和类别表尚未导入，行为指标、去重策略、时点属性连接与整体项目仍未完成；不连接 M5 与 Retailrocket 的编号。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

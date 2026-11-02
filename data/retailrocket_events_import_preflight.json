@@ -1,0 +1,219 @@
+{
+  "checked_at_utc": "2026-11-02T10:09:37.420922+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/54_import_retailrocket_events.sql",
+  "script_sha256": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+  "validator": "validation/preflight_retailrocket_events_import.py",
+  "validator_sha256": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+  "code_and_dependency_sha256": {
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "scripts/audit_retailrocket_sources.py": "0ff594d815cd17aca97036dc90627bd916d8bed201e0c34fa8ad4ca376d6b170",
+    "data/retailrocket_independent_checks.json": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+    "validation/retailrocket_source_check.sql": "49ddbf6a352ceda20f4be7fe90483e9cb55a8f8caf833b10b783b77a57217478"
+  },
+  "source_audit": "data/retailrocket_source_audit.json",
+  "source_audit_sha256": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+  "independent_source_checks": "data/retailrocket_independent_checks.json",
+  "independent_source_checks_sha256": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+  "source_file": "events.csv",
+  "source_bytes": 94237913,
+  "source_sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7",
+  "source_hash_unchanged": true,
+  "source_header": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "database": ":memory:",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB"
+  },
+  "table": "rr_raw.events",
+  "raw_fields": 5,
+  "raw_types": [
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR"
+  ],
+  "import_semantics": "Preserve all observations and exact field strings, including duplicates and leading zeros; only exact-empty transactionid becomes SQL NULL. No timestamp conversion, trim, filter, deduplication or replacement.",
+  "full_source_multiset_comparison": "Both directions use EXCEPT ALL on all five raw fields with identical documented NULL parsing; zero difference rows preserves multiplicity, including NULL-bearing duplicate rows.",
+  "source_rows_compared": 2756101,
+  "source_fields_compared": 5,
+  "source_only_rows": 0,
+  "table_only_rows": 0,
+  "duplicate_surplus_rows_preserved": 460,
+  "duplicate_surplus_definition": "Total rows minus distinct full five-field tuples; retained, not treated as an automatic defect.",
+  "expected_report_basis": "Frozen local source audit row/type/missingness counts plus independently observed 460 duplicate surplus; complete CSV/table multiset checks and targeted synthetic preservation/detection cases.",
+  "report_rows": 18,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 18,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "invalid_timestamp_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_visitorid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_itemid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "invalid_transactionid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "unexpected_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "view_event_rows",
+      "actual": 2664312,
+      "expected": 2664312,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "addtocart_event_rows",
+      "actual": 69332,
+      "expected": 69332,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "transaction_event_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "transactions_missing_id",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "null_transactionid_rows",
+      "actual": 2733644,
+      "expected": 2733644,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "duplicate_surplus_rows_preserved",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "33da069bbaabe2936c14f08dce19a1eacf6322bc79a2d11cd001b3f06ec3bafb",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output_columns order, each followed by LF; counts/order are integers, labels/status are strings.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "preserve_duplicate_null_and_leading_zero_strings_reject_reimport_detect_lost_multiplicity",
+      "passed": true
+    },
+    {
+      "case": "retain_whitespace_and_required_empty_strings_but_flag_invalid_fields",
+      "passed": true
+    },
+    {
+      "case": "strict_csv_rejects_extra_field_without_skipping_row",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "source_records_or_identifiers_exported_or_logged": false,
+  "learner_database_opened": false,
+  "m5_queries_or_historical_suites_rerun": false,
+  "historical_preflight_files_unchanged": 52,
+  "temporary_databases_and_spills_removed": true,
+  "elapsed_import_and_checks_seconds": 7.558,
+  "timing_scope": "One CLI execution includes import and all checks; excludes hashes and synthetic fixtures. memory_limit is not a total-process cap.",
+  "scope": "Assistant bounded raw import preflight passed; learner SQL54 execution and acceptance pending. No Retailrocket staging, deduplication policy, session/order definitions, as-of joins or behavioral metrics have been implemented. Raw records are not validated persons or orders; no M5 identity linkage."
+}
