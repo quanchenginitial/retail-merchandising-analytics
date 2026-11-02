@@ -2,7 +2,7 @@
 
 更新日期：2026-11-03（Australia/Sydney）。
 
-**当前状态：SQL56 属性原始表已验收，下一步运行 SQL57。** 截图 14 个 PASS 和全部可见数值匹配，66 个字段完全可见，4 个名称裁切后按固定契约确认；见 [验收记录](../data/retailrocket_properties_import_learner_acceptance.json)。两部分合计 20,275,902 条属性记录均保留。下一步区分完全重复、同键异值与跨文件重叠；SQL57 助手预检通过，用户执行待完成。清洗规则和时点关联仍需后续完成。
+**当前状态：SQL57 属性键审计已验收，下一步运行 SQL58。** 截图 100 个字段完整可见并匹配，10 个 PASS、10 个 INFO。已确认本快照在原始文本口径下无完全重复及同键异值，见 [验收记录](../data/retailrocket_property_keys_learner_acceptance.json)。下一步审计已知的类别和可用性属性，按原始文本核对类别引用；SQL58 助手预检通过，用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接执行 [SQL57](../sql/57_audit_retailrocket_property_keys.sql)。目的：在决定清洗规则前，量化属性历史中的重复与同键异值，防止后续关联放大或任意选择属性值。报告共 20 行、5 列：10 项完整性检查预期 PASS，另 10 项 INFO 为观测结果，其 expected 为 NULL。此处按原始文本比较，不修改原始表、不做去重，也不把审计结果当作事件时点覆盖率。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接执行 [SQL58](../sql/58_audit_retailrocket_named_properties.sql)。目的：核查 categoryid 和 available 的真实取值与类别引用，为后续清洗及按时点关联提供依据。报告共 22 行、5 列，预期 10 个 PASS、12 个 INFO；异常或未知值按观测计数，不静默删除、修正或当成 0。原始表保持不变，数值化编号、类型碰撞和事件时点覆盖率留待后续。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

@@ -152,7 +152,9 @@
 - [x] 7D 助手准备并预检 [SQL56 商品属性原始表](sql/56_import_retailrocket_properties.sql)：两文件 UNION ALL 纵向合并为 20,275,902 条历史属性记录，四个原始 VARCHAR 字段及新增 source_file 来源字段；14 行检查覆盖总量、分文件数量、字段、必填/编号格式、来源标记及逐文件完整双向多重集合对账。见 [验证说明](docs/RETAILROCKET_PROPERTIES_IMPORT_VALIDATION.md)。保留重复与文本原貌，未打开用户数据库；时点关联后续实现。
 - [x] 7D 用户于 2026-11-03 截图验收 SQL56：14 个 PASS、42 个整数值与 10 个完整名称匹配，共 66 个完整可见字段；第 11–14 行名称裁切，通过前缀、行号及固定契约识别。20,275,902 条属性记录和分文件来源完整保留，四项来源差异均为 0。见 [聚合验收](data/retailrocket_properties_import_learner_acceptance.json)。不声称全部 70 个字段完整可见。
 - [x] 7E 助手准备并预检 [SQL57 属性键审计](sql/57_audit_retailrocket_property_keys.sql)：在原始文本口径下区分完全重复、同键异值与跨文件重叠；20 行报告包含 10 项完整性检查和 10 项 INFO 观测，未预设重复或冲突必须为 0。见 [验证说明](docs/RETAILROCKET_PROPERTY_KEYS_VALIDATION.md)。未修改原始记录或实施去重、类型转换及关联。
-- [ ] 7E 用户执行 SQL57，提供 20 行、5 列报告；预期 10 项 PASS、10 项 INFO，INFO 的 expected 为 NULL，表示观测统计。
+- [x] 7E 用户于 2026-11-03 截图验收 SQL57：20 行 × 5 列、共 100 个字段完整匹配，包含 10 个 PASS、10 个 INFO 和 10 个 NULL 预期值；417,053 个商品编号、1,104 个属性名、12,003,814 个商品/属性组合。原始文本口径未发现完全重复、同键异值或跨文件共享键；见 [聚合验收](data/retailrocket_property_keys_learner_acceptance.json)。结论限定本快照及原始文本，不外推类型转换或时点关联安全性。
+- [x] 7F 助手准备并预检 [SQL58 已知属性审计](sql/58_audit_retailrocket_named_properties.sql)：只读核对 categoryid/available 的数量、取值、身份字段及类别表精确匹配，22 行报告含 10 项完整性检查与 12 项 INFO 观测。采用存在性检查防止类别引用放大；异常值保留并计数，未自动修正或清洗。见 [验证说明](docs/RETAILROCKET_NAMED_PROPERTIES_VALIDATION.md)。
+- [ ] 7F 用户执行 SQL58，提供 22 行、5 列报告；预期 10 项 PASS、12 项 INFO，观测行 expected 为 NULL。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -162,6 +164,6 @@
 
 ## 下一次对话从这里继续
 
-SQL56 已于 2026-11-03 截图验收：全部 14 个 PASS 与可见数值匹配，四个裁切名称由固定契约确认。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在现有 retail_merchandising 连接执行 [SQL57](sql/57_audit_retailrocket_property_keys.sql)，审计完全重复记录、同商品/属性/时间点多值及跨文件重叠。助手预检通过，用户执行待完成；20 行报告预期 10 个 PASS、10 个 INFO。类型化清洗、层级环路检查、时点连接和行为指标仍待后续，整体项目未完成。
+SQL57 已于 2026-11-03 截图验收：100 个字段完整匹配，10 个 PASS 和 10 个 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在现有 retail_merchandising 连接执行 [SQL58](sql/58_audit_retailrocket_named_properties.sql)，核查类别/可用性取值及原始文本类别匹配。助手预检通过，用户执行待完成；预期 22 行报告包含 10 个 PASS、12 个 INFO。类型转换、清洗决策、类别环路、时点关联及行为指标仍待后续，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

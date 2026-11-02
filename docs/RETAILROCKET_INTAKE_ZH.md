@@ -1,12 +1,12 @@
 # Retailrocket：独立来源接收与核验
 
-核对日期：2026-11-02（Australia/Sydney）。本页衔接 [数据集选择](DATASET_SELECTION_ZH.md) 与 [学习路线](ROADMAP_ZH.md)。用户已提供 D:/database/retailrocket 中四份 CSV，助手已完成全量只读结构审计，38/38 检查通过，见 [实测审计](RETAILROCKET_SOURCE_AUDIT.md)。文件均未修改；截至 2026-11-03，SQL54 事件、SQL55 类别及 SQL56 商品属性原始层均已由用户截图验收，下一步为 SQL57 属性键审计。
+核对日期：2026-11-02（Australia/Sydney）。本页衔接 [数据集选择](DATASET_SELECTION_ZH.md) 与 [学习路线](ROADMAP_ZH.md)。用户已提供 D:/database/retailrocket 中四份 CSV，助手已完成全量只读结构审计，38/38 检查通过，见 [实测审计](RETAILROCKET_SOURCE_AUDIT.md)。文件均未修改；截至 2026-11-03，三张原始表与 SQL57 属性键审计均已由用户截图验收，下一步为 SQL58 类别/可用性取值及类别引用审计。
 
-## 三张原始表已验收，下一步审计属性键
+## 属性键审计已验收，下一步核查已知属性
 
 用户已取得四份已解压文件。本次核验确认文件大小与此前官方版本 2 清单一致，实际行数与发布总数一致，扫描前后本地 SHA-256 未变。没有官方校验和对照，也未核验原压缩包或具体下载过程。[官方来源页面](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset) 保留用于来源追溯。
 
-SQL56 已于 2026-11-03 截图验收，见 [属性验收记录](../data/retailrocket_properties_import_learner_acceptance.json)：14 个 PASS 和全部可见数值匹配，4 个裁切名称已按固定契约确认。下一步按 [当前一步](FIRST_STEP_ZH.md) 执行 SQL57，在已导入的属性原始表上量化完全重复、同键异值和跨文件重叠；助手隔离预检通过，用户执行待完成。20,275,902 行为属性记录数，清洗策略、类型化模型、层级环路、时点连接及行为指标仍待各自审计和定义。
+SQL57 已于 2026-11-03 截图验收，见 [属性键验收记录](../data/retailrocket_property_keys_learner_acceptance.json)：20 行 × 5 列完整匹配，10 个 PASS 与 10 个 INFO。下一步按 [当前一步](FIRST_STEP_ZH.md) 执行 SQL58，审计已披露含义的 categoryid 和 available；类别引用按原始文本精确匹配，可用性按原始 0/1 代码及其他值分别统计。助手隔离预检通过，用户执行待完成。类型转换、清洗、层级环路、时点连接及行为指标仍待后续。
 
 ## 本次核对到的版本与清单
 

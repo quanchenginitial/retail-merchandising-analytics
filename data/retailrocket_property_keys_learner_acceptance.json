@@ -1,0 +1,215 @@
+{
+  "observed_date": "2026-11-03",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant independent visual transcription of a learner-supplied DBeaver aggregate screenshot; all twenty rows and five fields per row, including complete names, statuses and ten displayed NULL expectations, are visible. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/57_audit_retailrocket_property_keys.sql",
+  "script_sha256": "36a39e3f1bc47987587d0929636e9c7d921f26904d44c16c1d7b42b82c1ff88c",
+  "assistant_preflight": "data/retailrocket_property_keys_preflight.json",
+  "assistant_preflight_sha256": "6de681cb06d8263b1d60c8e3db69800dec6f1572bf45e9dacc1713a4778483f1",
+  "method_contract": "docs/RETAILROCKET_PROPERTY_KEYS_VALIDATION.md",
+  "method_contract_prefix_bytes": 7022,
+  "method_contract_prefix_sha256": "dd56b37a1ca2359634876f9985460ff7fdb19e40830a34616d32fa608944e5b0",
+  "method_before_acceptance_append_sha256": "37ed9189ae9af668a39a5e08575ce6c4307814e1f4e7b373cee3d09b9ec10eee",
+  "method_before_acceptance_append_bytes": 10719,
+  "read_only_query": true,
+  "input_table": "rr_raw.item_properties",
+  "result_rows": 20,
+  "result_columns": 5,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 100,
+  "visually_verified_integer_values": 50,
+  "visually_verified_null_expected_values": 10,
+  "visually_verified_complete_check_labels": 20,
+  "visually_verified_status_values": 20,
+  "rows_with_visually_verified_pass_status": 10,
+  "rows_with_visually_verified_info_status": 10,
+  "rows_with_pass_status": 10,
+  "rows_with_info_status": 10,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "longest_check_label_fully_visible": "exact_tuple_surplus_reconciled",
+  "cropped_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Transcribe displayed [NULL] in expected as JSON null, not zero or the string NULL. Preserve complete check names, INFO/PASS status text and row/column order; no label reconstruction is needed.",
+  "independent_visual_transcription_recorded_before_reference_comparison": true,
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "55278e85394b3706bd57e61b9982ca31d1892d47a8426586bc6bf8836f2f8823",
+  "fingerprint_method": "SHA-256 of twenty ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers, expected is integer or JSON null, and labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "part1_rows",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "part2_rows",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "missing_core_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_items",
+      "actual": 417053,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_property_names",
+      "actual": 1104,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_item_property_pairs",
+      "actual": 12003814,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 9,
+      "check_name": "candidate_keys",
+      "actual": 20275902,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_exact_tuples",
+      "actual": 20275902,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "exact_duplicate_surplus_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "conflicting_candidate_keys",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "rows_in_conflicting_keys",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "cross_part_exact_tuples",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "cross_part_candidate_keys",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "part_rows_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "tuple_rows_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "key_rows_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "exact_tuple_surplus_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "key_value_groups_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    }
+  ],
+  "info_expectations_are_null_not_zero_targets": true,
+  "candidate_key_definition": [
+    "itemid",
+    "property",
+    "timestamp"
+  ],
+  "exact_tuple_definition": [
+    "itemid",
+    "property",
+    "timestamp",
+    "value"
+  ],
+  "identity_scope": "Exact raw text; source_file excluded from content identity and retained for cross-part presence. Cross-part counts count shared groups once, not pairwise matches.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_identifiers_property_values_or_keyed_groups_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the complete visible aggregate reproduction, not a fresh direct audit of every learner-table row or source file. Historical assistant preflight and focused synthetic checks remain separate evidence. Ten INFO rows are observations with NULL expected values, not failed tests or preset zero targets. The observed raw-key uniqueness and zero exact repetition/conflict/shared-group counts apply only to this supplied snapshot under exact text identity; they do not establish typed-key uniqueness, disjoint date or item coverage, a universal key guarantee, an appropriate deduplication policy, usable latest state, or safe as-of joins. No cleaning, typed staging or business/monetary interpretation is accepted by this step. The frozen preflight and earlier method text retain their historical learner-pending statements; the appended acceptance records the later state. Learner conceptual understanding is not tested by an aggregate screenshot."
+}

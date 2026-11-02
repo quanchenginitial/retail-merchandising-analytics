@@ -87,3 +87,13 @@ DuckDB 1.5.5 reconstructed the accepted raw table in **37.127 seconds** and comp
 Both source hashes and metadata, all nine pinned code/evidence dependencies, and 55 historical preflight files remained unchanged. The private database and spills were removed. No learner database, other source CSV, SQL56 full-comparison rerun or historical suite was used; no real keyed groups or property values were exported or logged.
 
 The next learner action is to run SQL57 and return the complete 20-row report, preserving visible expected=NULL cells and distinguishing INFO from PASS. Typed staging and later time-aware joins remain separate steps; observed raw-key uniqueness alone does not complete their validation.
+
+## Learner screenshot acceptance — 3 November 2026
+
+The learner screenshot shows **20 rows × 5 columns = 100 complete fields**: fifty integer values, ten explicit NULL expectations, twenty complete check names and twenty complete statuses. All five headers and the full exact_tuple_surplus_reconciled label are visible. There are **10 PASS controls and 10 INFO observations**, with no FAIL or BLOCKED rows and no visibility caveat.
+
+The complete screenshot was independently transcribed before comparison with the frozen report. Numeric thousands separators were removed, and displayed [NULL] expectations were retained as JSON null; no label or value was reconstructed. Every field matches, with zero mismatches and the same report fingerprint shown above. The [learner acceptance record](../data/retailrocket_property_keys_learner_acceptance.json) contains the aggregate transcription, visibility counts and frozen fingerprints. INFO expectations remain NULL: the observed zeros are not success targets.
+
+This later record establishes learner acceptance and supersedes the earlier learner-pending status and run request for current progress. The 7,022-byte method contract and the entire existing executed-results section are retained byte for byte as historical evidence. No learner database was opened, and no SQL, source audit, fixture or historical suite was rerun for this acceptance. SQL57, its validator, preflight and pinned prior evidence remain unchanged. No screenshot, real identifiers, property values or keyed groups are published, and learner conceptual understanding remains untested.
+
+The accepted observations retain the raw-text and snapshot limits above. They do not establish uniqueness after type conversion, disjoint date/item coverage between parts, a valid current attribute state or safe event-time joins. Typed staging, further semantic checks and later time-aware joins remain separate work; no source observation was changed or removed by this acceptance.

@@ -1,0 +1,293 @@
+{
+  "checked_at_utc": "2026-11-02T15:48:28.589593+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/58_audit_retailrocket_named_properties.sql",
+  "script_sha256": "8a98195b38b1c06bf3d3cdcf998db953451240886cfb587b7f02b4052d25f90f",
+  "validator": "validation/preflight_retailrocket_named_properties.py",
+  "validator_sha256": "a1434c2302f90729cd8df58fb17f2aec9b26f46879f31deeef1e0a1e14c356cd",
+  "code_and_dependency_sha256": {
+    "sql/58_audit_retailrocket_named_properties.sql": "8a98195b38b1c06bf3d3cdcf998db953451240886cfb587b7f02b4052d25f90f",
+    "validation/preflight_retailrocket_named_properties.py": "a1434c2302f90729cd8df58fb17f2aec9b26f46879f31deeef1e0a1e14c356cd",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "scripts/audit_retailrocket_sources.py": "0ff594d815cd17aca97036dc90627bd916d8bed201e0c34fa8ad4ca376d6b170",
+    "data/retailrocket_categories_import_preflight.json": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+    "data/retailrocket_properties_import_preflight.json": "ae36151425c519180acd5312fe7d0aade86a4f3b34db481043483dab3f9b332f",
+    "data/retailrocket_property_keys_preflight.json": "6de681cb06d8263b1d60c8e3db69800dec6f1572bf45e9dacc1713a4778483f1",
+    "data/retailrocket_property_keys_learner_acceptance.json": "9aae83843dd60827646f91f136c697f14b2bc142e772fc1f064c47e06746adf4",
+    "docs/RETAILROCKET_PROPERTY_KEYS_VALIDATION.md": "01e77e08348714366c20606b67b1f6cc33f4ae0c5292903632409751a5434022"
+  },
+  "method_contract": "docs/RETAILROCKET_NAMED_PROPERTIES_VALIDATION.md",
+  "method_contract_prefix_bytes": 7818,
+  "method_contract_prefix_sha256": "b4fb0f9d84ad0fb628ff36788be01fe2f8c86b960363fcfdaa1795a5576cbc59",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv",
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "raw_import_prefix_sha256": {
+    "sql/55_import_retailrocket_categories.sql": "196f4db2008a5d2bdd06c32575b70321e21a2faa9725e6fe0a89828015fadf00",
+    "sql/56_import_retailrocket_properties.sql": "333dcac15ecdaaf3299dbf8d402b9d83c1beb5ded31ef36a902623241f287993"
+  },
+  "raw_reconstruction_basis": "Frozen SQL55 and SQL56 import prefixes only; unchanged hashes and prior accepted copy proofs. No full prior comparisons or SQL57 key audit rerun.",
+  "input_property_rows": 20275902,
+  "input_category_rows": 1669,
+  "real_audit_executions": 1,
+  "report_rows": 22,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 10,
+  "info_rows": 12,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "part1_rows",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "part2_rows",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "category_reference_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "category_reference_duplicate_id_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "category_reference_missing_ids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "categoryid_rows",
+      "actual": 788214,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 9,
+      "check_name": "categoryid_items",
+      "actual": 417053,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "available_rows",
+      "actual": 1503639,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "available_items",
+      "actual": 417053,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "other_property_rows",
+      "actual": 17984049,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "available_zero_rows",
+      "actual": 863086,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "available_one_rows",
+      "actual": 640553,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "available_other_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "category_invalid_value_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "category_unmatched_exact_rows",
+      "actual": 167,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "named_missing_identity_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "named_invalid_identifier_or_timestamp_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 20,
+      "check_name": "property_partition_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "availability_partition_reconciled",
+      "actual": 1503639,
+      "expected": 1503639,
+      "status": "PASS"
+    },
+    {
+      "check_order": 22,
+      "check_name": "category_match_partition_reconciled",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "6eb6961f3542f88cac1ea3f6974ab63301c09e13a253d5c477c9d363b51ecd34",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output_columns order, each followed by LF; counts are integers, expected is integer or null.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "hand_checked_exact_matches_leading_zero_mismatch_binary_other_null_empty_opaque_partition",
+      "passed": true
+    },
+    {
+      "case": "duplicate_and_missing_reference_ids_do_not_multiply_counts_invalid_missing_identity_overlap_blocks_input",
+      "passed": true
+    },
+    {
+      "case": "empty_inputs_keep_report_and_bad_raw_schema_order_or_type_rejected",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "independent_synthetic_counter_reports_matched": true,
+  "full_source_python_counter_or_row_fingerprint_rerun": false,
+  "semantic_exceptions_required_to_be_zero": false,
+  "identity": "Exact raw text category membership via EXISTS. No numeric category normalization or typed-key collision audit.",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB",
+    "max_temp_directory_size": "8GB",
+    "private_directory_budget_bytes": 12884901888,
+    "timeout_seconds_per_phase": 600
+  },
+  "workspace_free_bytes_before": 51484512256,
+  "workspace_free_bytes_after": 51484385280,
+  "memory_availability_before": {
+    "method": "GlobalMemoryStatusEx",
+    "physical_memory_bytes": 16483872768,
+    "available_physical_memory_bytes": 501088256,
+    "available_page_file_bytes": 2535636992
+  },
+  "peak_private_directory_bytes_observed": 423374848,
+  "private_database_bytes_before_cleanup": 423374848,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "source_records_or_identifiers_or_category_values_exported_or_logged": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 56,
+  "elapsed_import_seconds": 37.331,
+  "elapsed_audit_seconds": 3.166,
+  "elapsed_import_and_audit_seconds": 40.497,
+  "timing_scope": "One frozen-prefix reconstruction and one read-only audit; excludes hashes and fixtures. Memory limit is not a process cap; disk observations are sampled.",
+  "scope": "Assistant named-property audit passed; learner SQL58 execution/acceptance pending. INFO values are descriptive. No typed staging, canonical matching, event/as-of join, cleanup or inventory/causal/monetary conclusion."
+}
