@@ -1,6 +1,6 @@
 # Retailrocket properties: raw import with source provenance
 
-[SQL56](../sql/56_import_retailrocket_properties.sql) imports the two audited item-property CSVs into **rr_raw.item_properties** with UNION ALL. On 2 November 2026, the assistant's single bounded source preflight passed all **14 checks across five report columns**. Learner execution and acceptance remain pending. The output/report contract below was fixed before the import preflight. This step preserves a raw attribute log; it does not infer property meaning, deduplicate records, resolve conflicts, choose the latest state or join other modules.
+[SQL56](../sql/56_import_retailrocket_properties.sql) imports the two audited item-property CSVs into **rr_raw.item_properties** with UNION ALL. On 2 November 2026, the assistant's single bounded source preflight passed all **14 checks across five report columns**. Learner screenshot acceptance was completed on **3 November 2026**, with 66 fully visible fields and four cropped check labels resolved from the frozen report contract, as documented below. The output/report contract below was fixed before the import preflight. This step preserves a raw attribute log; it does not infer property meaning, deduplicate records, resolve conflicts, choose the latest state or join other modules.
 
 ## Source and storage contract
 
@@ -60,4 +60,19 @@ All three focused fixture cases passed. The sampled peak private-directory size 
 
 The [aggregate preflight evidence](../data/retailrocket_properties_import_preflight.json) records the complete 14-row report, code/source fingerprints, resource observations, fixture results and preservation checks. Its report fingerprint is `8fc152f44f1fe524f3a5fcc8ce727c955114574ab4e2c1277f6587c37ac0b150`: ordered compact JSON arrays in output-column order, each followed by LF, with integer counts/order and string labels/status. No real property records or identifiers were exported or logged.
 
-The next learner action is to run SQL56 and return the complete 14-row, five-column report with every status visible. Property semantics, conflicts, time-aware coverage/joins, event staging and RF/funnel/basket definitions are subsequent work. No monetary amount is established by arbitrary numeric-looking property values, and Retailrocket remains separate from M5.
+## Learner screenshot acceptance — 3 November 2026
+
+The screenshot shows all fourteen report rows and five complete headers. All **42 numeric fields** (check_order, actual and expected), **14 complete PASS values** and **10 complete check labels** match the frozen report: **66 fully visible fields**. Four additional check-name cells have readable prefixes but cropped endings; the screenshot does not show all seventy field values in full.
+
+| Check order | Full label resolved from the frozen contract | Visibility |
+| ---: | --- | --- |
+| 11 | part1_source_rows_absent_from_table | Prefix visible; ending cropped |
+| 12 | part1_table_rows_absent_from_source | Prefix visible; ending cropped |
+| 13 | part2_source_rows_absent_from_table | Prefix visible; ending cropped |
+| 14 | part2_table_rows_absent_from_source | Prefix visible; ending cropped |
+
+The screenshot was independently transcribed before comparison with the frozen report. Each cropped label agrees with its readable prefix and fixed row position; its full text comes from the unchanged SQL/report contract and is not claimed as fully read from the screenshot. Removing numeric thousands separators and making only those four explicit label resolutions yields the same complete report fingerprint shown above, with zero mismatches. The [learner acceptance record](../data/retailrocket_properties_import_learner_acceptance.json) keeps the visible transcription, label resolutions and complete resolved report separate.
+
+This is visual reproduction acceptance, not a new direct audit of the learner database, source files or every underlying property record. No learner database was opened, and no SQL, source audit, fixture or historical suite was rerun for this acceptance. The earlier full per-part multiset comparisons, synthetic checks and cleanup remain separate historical assistant evidence; SQL56, its validator, preflight and prior acceptance evidence are unchanged. The original preflight retains its historical learner-pending wording; this later record establishes acceptance. No screenshot or real property records/identifiers are published, and learner conceptual understanding remains untested.
+
+SQL56 aggregate reproduction is accepted with the documented label-visibility caveat. The 20,275,902 rows are historical attribute records, with four raw VARCHAR fields plus source_file provenance, not distinct products. Property semantics, conflicts, time-aware coverage/joins, event staging and RF/funnel/basket definitions are subsequent work. No monetary amount or current attribute state is established by arbitrary numeric-looking property values, and Retailrocket remains separate from M5.

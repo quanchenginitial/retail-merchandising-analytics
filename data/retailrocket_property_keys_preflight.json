@@ -1,0 +1,290 @@
+{
+  "checked_at_utc": "2026-11-02T13:29:53.807686+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/57_audit_retailrocket_property_keys.sql",
+  "script_sha256": "36a39e3f1bc47987587d0929636e9c7d921f26904d44c16c1d7b42b82c1ff88c",
+  "validator": "validation/preflight_retailrocket_property_keys.py",
+  "validator_sha256": "3594f0d243385547ead70b000e4c60c799da40171c13750a17639920a600fe6d",
+  "code_and_dependency_sha256": {
+    "sql/57_audit_retailrocket_property_keys.sql": "36a39e3f1bc47987587d0929636e9c7d921f26904d44c16c1d7b42b82c1ff88c",
+    "validation/preflight_retailrocket_property_keys.py": "3594f0d243385547ead70b000e4c60c799da40171c13750a17639920a600fe6d",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "scripts/audit_retailrocket_sources.py": "0ff594d815cd17aca97036dc90627bd916d8bed201e0c34fa8ad4ca376d6b170",
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "data/retailrocket_properties_import_preflight.json": "ae36151425c519180acd5312fe7d0aade86a4f3b34db481043483dab3f9b332f",
+    "data/retailrocket_properties_import_learner_acceptance.json": "4d0c325a456fd22af3edb7b14e37ad857b9ae7f7b9a08f14d1305823c25c856e",
+    "docs/RETAILROCKET_PROPERTIES_IMPORT_VALIDATION.md": "64f7f519cc30a760a97a2b0535e0bda7b8404c7565dc4d94a88f0dfe2ad6296f"
+  },
+  "method_contract": "docs/RETAILROCKET_PROPERTY_KEYS_VALIDATION.md",
+  "method_contract_prefix_sha256": "dd56b37a1ca2359634876f9985460ff7fdb19e40830a34616d32fa608944e5b0",
+  "method_contract_prefix_bytes": 7022,
+  "source_audit": "data/retailrocket_source_audit.json",
+  "source_audit_sha256": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+  "accepted_copy_preflight": "data/retailrocket_properties_import_preflight.json",
+  "accepted_copy_preflight_sha256": "ae36151425c519180acd5312fe7d0aade86a4f3b34db481043483dab3f9b332f",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "source_rows": {
+    "item_properties_part1.csv": 10999999,
+    "item_properties_part2.csv": 9275903
+  },
+  "input_rows": 20275902,
+  "input_fields": 5,
+  "input_columns": [
+    "timestamp",
+    "itemid",
+    "property",
+    "value",
+    "source_file"
+  ],
+  "raw_table": "rr_raw.item_properties",
+  "raw_import_prefix_sha256": "333dcac15ecdaaf3299dbf8d402b9d83c1beb5ded31ef36a902623241f287993",
+  "raw_import_basis": "Only the accepted SQL56 import prefix; unchanged source hashes and frozen independent source audit/SQL56 complete copy proof. SQL56 comparisons were not rerun.",
+  "full_source_python_counter_or_row_fingerprint_rerun": false,
+  "real_audit_executions": 1,
+  "report_rows": 20,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 10,
+  "info_rows": 10,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "part1_rows",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "part2_rows",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "missing_core_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_items",
+      "actual": 417053,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 7,
+      "check_name": "distinct_property_names",
+      "actual": 1104,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_item_property_pairs",
+      "actual": 12003814,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 9,
+      "check_name": "candidate_keys",
+      "actual": 20275902,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_exact_tuples",
+      "actual": 20275902,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "exact_duplicate_surplus_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "conflicting_candidate_keys",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "rows_in_conflicting_keys",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "cross_part_exact_tuples",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "cross_part_candidate_keys",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "part_rows_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "tuple_rows_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "key_rows_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "exact_tuple_surplus_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "key_value_groups_reconciled",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "55278e85394b3706bd57e61b9982ca31d1892d47a8426586bc6bf8836f2f8823",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output_columns order, each followed by LF; counts/order are integers, expected is integer or null, labels/status are strings.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "independent_hand_checked_counter_within_cross_part_duplicates_conflicts_and_different_value_overlap",
+      "passed": true
+    },
+    {
+      "case": "leading_zero_timestamp_item_and_whitespace_property_value_identity_remains_exact_text",
+      "passed": true
+    },
+    {
+      "case": "missing_core_unknown_provenance_and_empty_inputs_block_observations_wrong_schema_rejected",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "independent_synthetic_counter_reports_matched": true,
+  "candidate_key_definition": [
+    "itemid",
+    "property",
+    "timestamp"
+  ],
+  "exact_tuple_definition": [
+    "itemid",
+    "property",
+    "timestamp",
+    "value"
+  ],
+  "identity": "Exact raw strings; source_file excluded from content identity and retained for cross-part presence.",
+  "duplicates_or_conflicts_required_to_be_zero": false,
+  "database": "Private disposable DuckDB file under ignored repository tmp; removed after validation.",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB",
+    "max_temp_directory_size": "8GB",
+    "private_directory_budget_bytes": 12884901888,
+    "timeout_seconds_per_phase": 600
+  },
+  "workspace_free_bytes_before": 52389023744,
+  "workspace_free_bytes_after": 52392886272,
+  "memory_availability_before": {
+    "method": "GlobalMemoryStatusEx",
+    "physical_memory_bytes": 16483872768,
+    "available_physical_memory_bytes": 1217585152,
+    "available_page_file_bytes": 2408366080
+  },
+  "peak_private_directory_bytes_observed": 1924182016,
+  "private_database_bytes_before_cleanup": 423112704,
+  "temporary_databases_and_spills_removed": true,
+  "source_records_or_identifiers_or_property_values_exported_or_logged": false,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 55,
+  "elapsed_import_seconds": 37.127,
+  "elapsed_audit_seconds": 85.476,
+  "elapsed_import_and_audit_seconds": 122.603,
+  "timing_scope": "One frozen-prefix import and one grouped audit; excludes hashes and tiny fixtures. Disk samples are once per second; memory_limit is not a process cap.",
+  "scope": "Assistant raw property grain/key audit complete; learner SQL57 execution/acceptance pending. INFO observations do not impose zero targets or choose deduplication/conflict policies. No typed staging, latest-state selection, as-of joins or business/value interpretation."
+}

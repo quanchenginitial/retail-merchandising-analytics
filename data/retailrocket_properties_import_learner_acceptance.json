@@ -1,0 +1,292 @@
+{
+  "observed_date": "2026-11-03",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant independent visual transcription of a learner-supplied DBeaver aggregate screenshot. All 14 report rows are visible; four check_name endings are cropped. No direct learner-database inspection.",
+  "acceptance_status": "accepted_with_documented_label_visibility_caveat",
+  "script": "sql/56_import_retailrocket_properties.sql",
+  "script_sha256": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+  "assistant_preflight": "data/retailrocket_properties_import_preflight.json",
+  "assistant_preflight_sha256": "ae36151425c519180acd5312fe7d0aade86a4f3b34db481043483dab3f9b332f",
+  "import_table": "rr_raw.item_properties",
+  "learner_action_type": "Raw property import with source-file provenance followed by aggregate validation; the checks section uses a session-only aggregate helper and does not modify the raw table.",
+  "result_rows": 14,
+  "result_columns": 5,
+  "report_field_positions": 70,
+  "visually_verified_field_values": 66,
+  "visually_verified_integer_values": 42,
+  "visually_verified_complete_check_labels": 10,
+  "visually_verified_status_values": 14,
+  "partially_visible_check_labels": 4,
+  "contract_resolved_check_labels": 4,
+  "all_70_report_fields_fully_visible": false,
+  "all_column_headers_fully_visible": true,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "rows_with_visually_verified_pass_status": 14,
+  "rows_with_pass_status": 14,
+  "visibility_caveats": [
+    "Check-name endings at check_order 11, 12, 13 and 14 are cropped. Their full labels are resolved from readable prefixes, fixed row order and the frozen SQL/report contract; they are not counted as fully visually verified fields."
+  ],
+  "cropped_check_labels": [
+    {
+      "check_order": 11,
+      "field": "check_name",
+      "fully_legible_prefix": "part1_source_rows_absent_from_",
+      "full_label_from_frozen_contract": "part1_source_rows_absent_from_table",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 12,
+      "field": "check_name",
+      "fully_legible_prefix": "part1_table_rows_absent_from_",
+      "full_label_from_frozen_contract": "part1_table_rows_absent_from_source",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 13,
+      "field": "check_name",
+      "fully_legible_prefix": "part2_source_rows_absent_from_",
+      "full_label_from_frozen_contract": "part2_source_rows_absent_from_table",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 14,
+      "field": "check_name",
+      "fully_legible_prefix": "part2_table_rows_absent_from_",
+      "full_label_from_frozen_contract": "part2_table_rows_absent_from_source",
+      "full_label_visually_verified": false
+    }
+  ],
+  "visible_prefix_recording": "Prefixes record only completely legible characters; partly clipped edge glyphs are deliberately omitted.",
+  "display_normalization": "Remove thousands separators from check_order, actual and expected; retain JSON integers. Preserve every fully visible label and PASS value. Resolve only the four explicitly identified cropped labels through the frozen contract.",
+  "independent_visual_transcription_recorded_before_reference_comparison": true,
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "row_count",
+      20275902,
+      20275902,
+      "PASS"
+    ],
+    [
+      2,
+      "part1_row_count",
+      10999999,
+      10999999,
+      "PASS"
+    ],
+    [
+      3,
+      "part2_row_count",
+      9275903,
+      9275903,
+      "PASS"
+    ],
+    [
+      4,
+      "column_count",
+      5,
+      5,
+      "PASS"
+    ],
+    [
+      5,
+      "varchar_column_count",
+      5,
+      5,
+      "PASS"
+    ],
+    [
+      6,
+      "column_sequence_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "missing_required_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      8,
+      "invalid_timestamp_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      9,
+      "invalid_itemid_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      10,
+      "unknown_source_file_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      11,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      12,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      13,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      14,
+      null,
+      0,
+      0,
+      "PASS"
+    ]
+  ],
+  "observed_rows_null_convention": "Null appears only in check_name positions whose full labels are cropped; it is an evidence placeholder, not an SQL NULL shown by the screenshot.",
+  "resolved_report_matches_assistant_preflight": true,
+  "visually_verified_field_mismatches": 0,
+  "visible_prefix_mismatches": 0,
+  "resolved_report_field_mismatches": 0,
+  "report_sha256": "8fc152f44f1fe524f3a5fcc8ce727c955114574ab4e2c1277f6587c37ac0b150",
+  "fingerprint_scope": "The fingerprint covers the complete resolved report, including four labels supplied by the frozen contract; it is not proof that all 70 fields were fully visible.",
+  "fingerprint_method": "SHA-256 of ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers; labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "part1_row_count",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "part2_row_count",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "varchar_column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_timestamp_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "invalid_itemid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "part1_source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "part1_table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "part2_source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "part2_table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "scope": "This accepts the displayed aggregate reproduction: 66 complete visual fields, four matching partial labels resolved against the fixed report contract, and 14 complete PASS values. Historical assistant preflight separately established full per-part source/table multiset equality, provenance and synthetic boundary checks; the screenshot is not a new direct audit of every learner-table row or source file. The frozen preflight retains its historical learner-pending state. The raw table retains 20,275,902 historical attribute records from both parts, four raw VARCHAR fields plus VARCHAR source_file; this is not a count of distinct products. Property interpretation, key conflicts, deduplication, current-state selection, as-of joins and behavioral or monetary metrics are not accepted here. Learner conceptual understanding is not tested by a PASS screenshot."
+}
