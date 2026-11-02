@@ -1,0 +1,264 @@
+{
+  "checked_at_utc": "2026-11-02T12:07:10.113158+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/56_import_retailrocket_properties.sql",
+  "script_sha256": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+  "validator": "validation/preflight_retailrocket_properties_import.py",
+  "validator_sha256": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+  "code_and_dependency_sha256": {
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "scripts/audit_retailrocket_sources.py": "0ff594d815cd17aca97036dc90627bd916d8bed201e0c34fa8ad4ca376d6b170",
+    "data/retailrocket_independent_checks.json": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+    "validation/retailrocket_source_check.sql": "49ddbf6a352ceda20f4be7fe90483e9cb55a8f8caf833b10b783b77a57217478",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "data/retailrocket_events_import_preflight.json": "e04285583f97e95f78f7c8d4084e8f49174ba657cd47201fb5fa485b9749b11b",
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "validation/preflight_retailrocket_categories_import.py": "c0976034d720fe56ac7975211818b316f600587147b6a7d550e61165aefaa86f",
+    "data/retailrocket_categories_import_preflight.json": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+    "data/retailrocket_categories_import_learner_acceptance.json": "486f344d9fc80f2f7f2980fb9a0fdfd236c91a875ef5906a8b43d56d05137f26",
+    "docs/RETAILROCKET_CATEGORIES_IMPORT_VALIDATION.md": "583354d485af1a0aee5936c2c731fc0cd73920d8280c6814e956d8d9074370cd"
+  },
+  "source_audit": "data/retailrocket_source_audit.json",
+  "source_audit_sha256": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv"
+  ],
+  "source_bytes": {
+    "item_properties_part1.csv": 484315749,
+    "item_properties_part2.csv": 408929907
+  },
+  "source_sha256": {
+    "item_properties_part1.csv": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81",
+    "item_properties_part2.csv": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+  },
+  "source_rows": {
+    "item_properties_part1.csv": 10999999,
+    "item_properties_part2.csv": 9275903
+  },
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "source_header": [
+    "timestamp",
+    "itemid",
+    "property",
+    "value"
+  ],
+  "table": "rr_raw.item_properties",
+  "raw_fields": 5,
+  "raw_types": [
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR"
+  ],
+  "import_semantics": "UNION ALL of two strict four-VARCHAR CSV readers with fixed VARCHAR source_file tags. All four strings, including exact empties, whitespace and duplicates, remain unchanged. Raw table uses plain CREATE; only a session TEMP aggregate helper is replaceable.",
+  "source_rows_compared": 20275902,
+  "source_fields_compared": 5,
+  "source_only_rows": 0,
+  "table_only_rows": 0,
+  "per_part_multiset_checks": [
+    {
+      "source_file": "item_properties_part1.csv",
+      "source_rows": 10999999,
+      "fields": 5,
+      "source_only_rows": 0,
+      "table_only_rows": 0
+    },
+    {
+      "source_file": "item_properties_part2.csv",
+      "source_rows": 9275903,
+      "fields": 5,
+      "source_only_rows": 0,
+      "table_only_rows": 0
+    }
+  ],
+  "full_source_multiset_comparison": "Four separate production EXCEPT ALL statements: each part in both directions, across all five raw/provenance fields. Unknown provenance is separately counted. Multiplicity is retained without requiring zero duplicate/conflicting keys.",
+  "independent_validation_basis": "Frozen independently executed Python standard-library source audit of all raw records, plus unchanged file hashes and current headers. Small synthetic CSV Counter comparisons independently check preservation; no full real-source Python tuple comparison is claimed.",
+  "full_source_python_counter_or_row_fingerprint_rerun": false,
+  "report_rows": 14,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 14,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "part1_row_count",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "part2_row_count",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "varchar_column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_timestamp_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "invalid_itemid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "part1_source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "part1_table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "part2_source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "part2_table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "8fc152f44f1fe524f3a5fcc8ce727c955114574ab4e2c1277f6587c37ac0b150",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output_columns order, each followed by LF; counts/order are integers and labels/status are strings.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "preserve_duplicates_across_parts_literals_spaces_leading_zeros_and_provenance_reject_reimport_detect_corruption",
+      "passed": true
+    },
+    {
+      "case": "preserve_empty_and_whitespace_fields_but_flag_required_and_numeric_failures",
+      "passed": true
+    },
+    {
+      "case": "reject_missing_source_part_and_malformed_extra_or_missing_fields",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "database": "Private temporary DuckDB file under ignored repository tmp; removed after validation.",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB",
+    "max_temp_directory_size": "8GB",
+    "private_directory_budget_bytes": 12884901888,
+    "timeout_seconds_per_phase": 600
+  },
+  "workspace_free_bytes_before": 52530954240,
+  "workspace_free_bytes_after": 52536307712,
+  "memory_availability_before": {
+    "method": "GlobalMemoryStatusEx",
+    "physical_memory_bytes": 16483872768,
+    "available_physical_memory_bytes": 2319863808,
+    "available_page_file_bytes": 11242303488
+  },
+  "peak_private_directory_bytes_observed": 1489874944,
+  "private_database_bytes_before_cleanup": 424423424,
+  "source_records_or_identifiers_exported_or_logged": false,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "m5_queries_or_historical_suites_rerun": false,
+  "historical_preflight_files_unchanged": 54,
+  "temporary_databases_and_spills_removed": true,
+  "elapsed_import_seconds": 24.72,
+  "elapsed_checks_seconds": 196.008,
+  "elapsed_import_and_checks_seconds": 220.728,
+  "timing_scope": "Two private CLI executions: import, then sequential checks. Excludes hashes and fixtures. Memory setting is not a process-wide cap; disk observations are sampled once per second.",
+  "scope": "Assistant raw property import preflight passed; learner SQL56 execution/acceptance pending. No semantic property interpretation, key conflict profiling, deduplication, latest-state selection, as-of joins or behavioral/monetary metrics."
+}

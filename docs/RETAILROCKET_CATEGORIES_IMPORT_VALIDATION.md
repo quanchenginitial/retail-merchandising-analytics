@@ -1,6 +1,6 @@
 # Retailrocket categories: raw reference import
 
-[SQL55](../sql/55_import_retailrocket_categories.sql) imports only the audited `category_tree.csv` into **rr_raw.category_tree**. On 2 November 2026, the assistant's isolated preflight passed all **15 checks across five report columns**. Learner execution and acceptance remain pending. This step preserves the raw reference and checks import integrity plus basic keys and parent references. It does not join events, properties or M5, and it does not perform recursive hierarchy, cycle, depth or root-membership analysis.
+[SQL55](../sql/55_import_retailrocket_categories.sql) imports only the audited `category_tree.csv` into **rr_raw.category_tree**. On 2 November 2026, the assistant's isolated preflight passed all **15 checks across five report columns**. Learner screenshot acceptance was completed on **2 November 2026**: all **75 visible fields** and **15 complete PASS statuses** matched the frozen report, with no visibility caveat. This step preserves the raw reference and checks import integrity plus basic keys and parent references. It does not join events, properties or M5, and it does not perform recursive hierarchy, cycle, depth or root-membership analysis.
 
 ## Frozen import and report contract
 
@@ -52,4 +52,12 @@ python validation/preflight_retailrocket_categories_import.py --duckdb "E:/DuckD
 
 The [aggregate preflight evidence](../data/retailrocket_categories_import_preflight.json) records code/dependency hashes, preservation checks, fixture results and the full 15-row report. Its report fingerprint is `80c8b1c3380d86eef37c9968dcedfda999fa20ecc4a1b8417538b932e588bced`: ordered compact JSON arrays in output-column order, followed by LF, with integer counts/order and string labels/status.
 
-The next learner action is to run SQL55 and return the complete 15-row, five-column report with every status visible. Raw property import, typed staging, category hierarchy validation, time-aware joins and RF/funnel/basket definitions remain subsequent work. Passing these checks does not establish that the category structure is acyclic or that a category is linked to a valid root.
+## Learner screenshot acceptance — 2 November 2026
+
+The screenshot shows **15 rows × 5 columns = 75 complete field values**: 45 integer fields, fifteen complete check names and fifteen complete PASS values. All five headers are visible. The longest check name, duplicate_categoryid_surplus_rows, is fully legible, including its ending; no check label is cropped or supplied from the contract.
+
+The screenshot was independently transcribed before comparison with the frozen report. Removing numeric thousands separators is the only display normalization. Every field matches, with zero mismatches and the same ordered report fingerprint shown above. The [learner acceptance record](../data/retailrocket_categories_import_learner_acceptance.json) records the complete aggregate transcription, visibility counts and frozen dependency fingerprints.
+
+This is visual reproduction acceptance, not a new direct audit of the learner database, source file or every underlying category row. No learner database was opened, and no SQL, source audit, fixture or historical suite was rerun for this acceptance. The earlier full-tuple comparison and cleanup remain separate historical assistant evidence; SQL55, its validator, preflight and prior acceptance evidence are unchanged. The original preflight retains its historical learner-pending wording; this later record establishes acceptance. No screenshot or real category records are published, and learner conceptual understanding remains untested.
+
+The next planned learner step is SQL56: combine the two property files with UNION ALL into rr_raw.item_properties, preserving four raw text fields plus source_file provenance. This is raw import, with no property mapping or interpretation yet. Typed staging, category hierarchy validation, time-aware joins and RF/funnel/basket definitions remain subsequent work. Passing SQL55 checks does not establish that the category structure is acyclic or that a category is linked to a valid root.

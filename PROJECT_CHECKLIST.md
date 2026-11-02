@@ -148,7 +148,9 @@
 - [x] 7B 助手准备并独立预检 [SQL54](sql/54_import_retailrocket_events.sql)：只建立 rr_raw.events，原五列保留 VARCHAR，保留全部重复记录，空交易编号为 NULL；18 行检查覆盖行数、字段、事件数量、空值与双向 EXCEPT ALL 对账。既有表不覆盖；见 [导入验证](docs/RETAILROCKET_EVENTS_IMPORT_VALIDATION.md)。未打开用户数据库。
 - [x] 7B 用户于 2026-11-02 截图验收 SQL54：18 个 PASS、54 个整数值与 14 个完整检查名称均匹配，合计 86 个完全可见字段；第 9/16/17/18 行名称末尾截断，通过可见前缀及固定行号/SQL 契约确认。保留 2,756,101 条事件及 460 条重复冗余行；见 [聚合验收](data/retailrocket_events_import_learner_acceptance.json)。不声称全部 90 个字段完整可见。
 - [x] 7C 助手准备并预检 [SQL55 类别原始表](sql/55_import_retailrocket_categories.sql)：只创建 rr_raw.category_tree，两列 VARCHAR，空 parentid 为 NULL；15 行检查覆盖 1,669 条类别记录、字段、类别键、25 个空父键、直接父键引用及双向完整来源对账。独立 Python CSV 多重集合核对、针对性用例及保留记录见 [验证说明](docs/RETAILROCKET_CATEGORIES_IMPORT_VALIDATION.md)。未打开用户数据库；环路、深度及属性关联尚未验证。
-- [ ] 7C 用户执行 SQL55，提供 15 行、5 列检查结果；助手预检不替代用户导入验收。
+- [x] 7C 用户于 2026-11-02 截图验收 SQL55：15 行 × 5 列、共 75 个字段完整可见且匹配，15 个状态均为 PASS；1,669 条类别记录、25 个空父类别，来源双向差异为 0。见 [聚合验收](data/retailrocket_categories_import_learner_acceptance.json)。
+- [x] 7D 助手准备并预检 [SQL56 商品属性原始表](sql/56_import_retailrocket_properties.sql)：两文件 UNION ALL 纵向合并为 20,275,902 条历史属性记录，四个原始 VARCHAR 字段及新增 source_file 来源字段；14 行检查覆盖总量、分文件数量、字段、必填/编号格式、来源标记及逐文件完整双向多重集合对账。见 [验证说明](docs/RETAILROCKET_PROPERTIES_IMPORT_VALIDATION.md)。保留重复与文本原貌，未打开用户数据库；时点关联后续实现。
+- [ ] 7D 用户执行 SQL56，提供 14 行、5 列检查结果；助手预检不替代用户导入验收。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -158,6 +160,6 @@
 
 ## 下一次对话从这里继续
 
-SQL54 已于 2026-11-02 截图验收：全部 18 个 PASS 与可见数值匹配，四个裁切名称由固定契约识别。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在现有 retail_merchandising 连接执行 [SQL55](sql/55_import_retailrocket_categories.sql)，仅创建类别原始表 rr_raw.category_tree，预计 15 行检查全部 PASS。SQL55 助手预检通过，用户执行待完成；属性加载、递归层级核验、去重策略、时点属性连接及行为指标仍待后续。M5 既有结论不变，整体项目未完成。
+SQL55 已于 2026-11-02 截图验收：75 个字段完整可见且匹配，15 个状态均为 PASS。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在现有 retail_merchandising 连接执行 [SQL56](sql/56_import_retailrocket_properties.sql)，创建商品属性原始表 rr_raw.item_properties，预计 14 行检查全部 PASS。SQL56 助手预检通过，用户执行待完成；类型化清洗、递归层级核验、去重策略、时点属性连接及行为指标仍待后续。M5 既有结论不变，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -1,0 +1,154 @@
+{
+  "observed_date": "2026-11-02",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant independent visual transcription of a learner-supplied DBeaver aggregate screenshot; all 15 rows, five columns, complete check names and PASS values are visible. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/55_import_retailrocket_categories.sql",
+  "script_sha256": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+  "assistant_preflight": "data/retailrocket_categories_import_preflight.json",
+  "assistant_preflight_sha256": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+  "import_table": "rr_raw.category_tree",
+  "learner_action_type": "Raw category-reference import followed by aggregate validation; the displayed checks query is read-only.",
+  "result_rows": 15,
+  "result_columns": 5,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 75,
+  "visually_verified_integer_values": 45,
+  "visually_verified_complete_check_labels": 15,
+  "visually_verified_status_values": 15,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "rows_with_visually_verified_pass_status": 15,
+  "rows_with_pass_status": 15,
+  "cropped_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove displayed thousands separators from check_order, actual and expected; retain JSON integers. Preserve all complete check names, PASS text and row/column order. No label reconstruction or value inference is needed.",
+  "independent_visual_transcription_recorded_before_reference_comparison": true,
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "80c8b1c3380d86eef37c9968dcedfda999fa20ecc4a1b8417538b932e588bced",
+  "fingerprint_method": "SHA-256 over the fifteen ordered report row arrays in output_columns order, encoded as UTF-8 compact JSON with ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are JSON integers; labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_categoryid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "invalid_categoryid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_parentid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "null_parentid_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "duplicate_categoryid_surplus_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "self_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "orphan_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "duplicate_surplus_rows_preserved",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "scope": "This accepts the displayed aggregate reproduction: all 75 complete visual fields and 15 PASS values match the frozen report. The historical assistant preflight separately established full two-field source/table equality with multiplicity using SQL EXCEPT ALL and independent Python csv Counter checks. The screenshot is not a new direct audit of every learner-table row or source file. The frozen preflight retains its historical learner-pending state. The 25 NULL-parent records are root candidates; no self-parent or immediate orphan does not establish absence of longer cycles or valid root membership. Raw property import, typed staging, hierarchy analysis, time-aware attribute joins and behavioral metrics remain subsequent work. Learner conceptual understanding is not tested by a PASS screenshot."
+}
