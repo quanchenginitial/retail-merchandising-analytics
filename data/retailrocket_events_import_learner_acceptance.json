@@ -1,0 +1,347 @@
+{
+  "observed_date": "2026-11-02",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All 18 report rows are visible; four check_name endings are cropped. No direct learner-database inspection.",
+  "acceptance_status": "accepted_with_documented_label_visibility_caveat",
+  "script": "sql/54_import_retailrocket_events.sql",
+  "script_sha256": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+  "assistant_preflight": "data/retailrocket_events_import_preflight.json",
+  "assistant_preflight_sha256": "e04285583f97e95f78f7c8d4084e8f49174ba657cd47201fb5fa485b9749b11b",
+  "import_table": "rr_raw.events",
+  "learner_action_type": "Raw import followed by aggregate validation; the displayed checks query is read-only.",
+  "result_rows": 18,
+  "result_columns": 5,
+  "report_field_positions": 90,
+  "visually_verified_field_values": 86,
+  "visually_verified_integer_values": 54,
+  "visually_verified_complete_check_labels": 14,
+  "visually_verified_status_values": 18,
+  "partially_visible_check_labels": 4,
+  "contract_resolved_check_labels": 4,
+  "all_90_report_fields_fully_visible": false,
+  "all_column_headers_fully_visible": true,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "rows_with_visually_verified_pass_status": 18,
+  "rows_with_pass_status": 18,
+  "visibility_caveats": [
+    "Check-name endings at check_order 9, 16, 17 and 18 are cropped. Their full labels are resolved from their unambiguous visible prefixes, row order and the frozen SQL/report contract; they are not counted as fully visually verified fields."
+  ],
+  "cropped_check_labels": [
+    {
+      "check_order": 9,
+      "field": "check_name",
+      "fully_legible_prefix": "invalid_transactionid_",
+      "full_label_from_frozen_contract": "invalid_transactionid_rows",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 16,
+      "field": "check_name",
+      "fully_legible_prefix": "source_rows_absent_",
+      "full_label_from_frozen_contract": "source_rows_absent_from_table",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 17,
+      "field": "check_name",
+      "fully_legible_prefix": "table_rows_absent_",
+      "full_label_from_frozen_contract": "table_rows_absent_from_source",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 18,
+      "field": "check_name",
+      "fully_legible_prefix": "duplicate_surplus_rows_",
+      "full_label_from_frozen_contract": "duplicate_surplus_rows_preserved",
+      "full_label_visually_verified": false
+    }
+  ],
+  "visible_prefix_recording": "Prefixes record only completely legible characters; partly clipped edge glyphs are deliberately omitted.",
+  "display_normalization": "Remove thousands separators from check_order, actual and expected; retain JSON integers. Preserve every fully visible label and PASS value. Resolve only the four explicitly identified cropped labels through the frozen contract.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "row_count",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      2,
+      "column_count",
+      5,
+      5,
+      "PASS"
+    ],
+    [
+      3,
+      "varchar_column_count",
+      5,
+      5,
+      "PASS"
+    ],
+    [
+      4,
+      "column_sequence_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      5,
+      "missing_required_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      6,
+      "invalid_timestamp_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "invalid_visitorid_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      8,
+      "invalid_itemid_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      9,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      10,
+      "unexpected_event_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      11,
+      "view_event_rows",
+      2664312,
+      2664312,
+      "PASS"
+    ],
+    [
+      12,
+      "addtocart_event_rows",
+      69332,
+      69332,
+      "PASS"
+    ],
+    [
+      13,
+      "transaction_event_rows",
+      22457,
+      22457,
+      "PASS"
+    ],
+    [
+      14,
+      "transactions_missing_id",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      15,
+      "null_transactionid_rows",
+      2733644,
+      2733644,
+      "PASS"
+    ],
+    [
+      16,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      17,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      18,
+      null,
+      460,
+      460,
+      "PASS"
+    ]
+  ],
+  "observed_rows_null_convention": "Null appears only in the check_name positions whose full labels are cropped; it is an evidence placeholder, not an SQL NULL shown by the screenshot.",
+  "resolved_report_matches_assistant_preflight": true,
+  "visually_verified_field_mismatches": 0,
+  "visible_prefix_mismatches": 0,
+  "resolved_report_field_mismatches": 0,
+  "report_sha256": "33da069bbaabe2936c14f08dce19a1eacf6322bc79a2d11cd001b3f06ec3bafb",
+  "fingerprint_scope": "The fingerprint covers the complete resolved report, including four labels supplied by the frozen contract; it is not proof that all 90 fields were fully visible.",
+  "fingerprint_method": "SHA-256 of ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers; labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "invalid_timestamp_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_visitorid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "invalid_itemid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "invalid_transactionid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "unexpected_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "view_event_rows",
+      "actual": 2664312,
+      "expected": 2664312,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "addtocart_event_rows",
+      "actual": 69332,
+      "expected": 69332,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "transaction_event_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "transactions_missing_id",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "null_transactionid_rows",
+      "actual": 2733644,
+      "expected": 2733644,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "duplicate_surplus_rows_preserved",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    }
+  ],
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "scope": "This accepts the displayed aggregate reproduction: 86 complete visual fields, four matching partial labels resolved against the fixed report contract, and 18 complete PASS values. Prior assistant preflight separately established full source/table multiset equality and synthetic boundary checks. The screenshot is not a new direct audit of every learner-table row or source file. The frozen preflight retains its historical learner-pending state. All 2,756,101 observations, including 460 duplicate-surplus rows, remain within the raw-copy contract; no deduplication, session/order definition, typed staging, as-of joins or behavior metrics are accepted here. Learner conceptual understanding is not tested by a PASS screenshot."
+}

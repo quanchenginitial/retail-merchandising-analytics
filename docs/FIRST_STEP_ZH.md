@@ -1,36 +1,36 @@
-# 当前一步：导入 Retailrocket 原始事件表
+# 当前一步：导入 Retailrocket 类别原始表
 
 更新日期：2026-11-02（Australia/Sydney）。
 
-**这一步为了什么：把浏览、加购和交易事件完整载入数据库，保留原始值，为后续类型转换、去重与行为分析建立可追溯的起点。**
+**这一步为了什么：保存“类别—父类别”关系，为后续按类别汇总浏览、加购与交易行为建立分类依据。**
 
-## 四份来源文件已核验
+## SQL54 已验收
 
-| 文件 | 实际数据行数（不含表头） | 字段数 |
-| --- | ---: | ---: |
-| events.csv | 2,756,101 | 5 |
-| item_properties_part1.csv | 10,999,999 | 4 |
-| item_properties_part2.csv | 9,275,903 | 4 |
-| category_tree.csv | 1,669 | 2 |
+18 个 PASS 和全部可见数值匹配冻结报告。截图中 54 个整数值、18 个状态及 14 个完整名称，共 86 个字段完全可见；第 9/16/17/18 行名称末尾截断，已结合可见前缀、固定行号与 SQL 契约确认，无需重跑。详见 [事件导入验收](RETAILROCKET_EVENTS_IMPORT_VALIDATION.md)。
 
-只读结构审计 38/38 检查通过：严格 CSV/UTF-8 解析、表头与每行列数、必填与可选空值、标识及毫秒时间戳的基本格式等均有记录。四份文件大小与官方版本 2 清单一致，扫描前后 SHA-256 未变。本地指纹用于固定本次快照，不等于官方文件认证。详见 [来源审计](RETAILROCKET_SOURCE_AUDIT.md)。
+事件表保留 2,756,101 条记录及 460 条重复冗余记录，来源与表的双向差异为零。原始重复保留不代表去重策略已确定；交易事件数也不等于订单数。
 
-独立事件检查发现 460 条重复冗余行，按五个解析字段完全相同计算；原始层全部保留。2,733,644 条浏览或加购事件的交易编号为空，22,457 条交易事件均有编号；不要把正常的空交易编号补成 0。交易事件数不等于去重订单数。事件时间范围按 Unix 毫秒转 UTC 为 2015-05-03 至 2015-09-18，原始层暂不转换时间。
+## 认识类别表
 
-## 现在执行 SQL54
+| 字段 | 含义与本步处理 |
+| --- | --- |
+| categoryid | 当前类别编号，保留原始文本 |
+| parentid | 上一级类别编号，保留原始文本；原文件为空时保存为 NULL |
+
+这张表有 1,669 行，描述类别关系，不是 1,669 个商品。25 个空父编号保留为根类别候选，不补 0。类别与商品的对应关系将通过后续商品属性表建立，事件表本身没有类别字段。
+
+## 现在执行 SQL55
 
 1. 在 DBeaver 选中现有 **retail_merchandising** 连接。
-2. 打开 [54_import_retailrocket_events.sql](../sql/54_import_retailrocket_events.sql)，执行整个脚本。
-3. 核对最后的 **18 行、5 列**检查结果，提供完整截图。列为 check_order、check_name、actual、expected、status。
+2. 打开 [55_import_retailrocket_categories.sql](../sql/55_import_retailrocket_categories.sql)，执行整个脚本。
+3. 核对最后 **15 行、5 列**结果，提供完整截图；预期全部 PASS。列为 check_order、check_name、actual、expected、status，可将名称列适当拉宽。
 
-脚本只建立新的 rr_raw.events 表，五列依次为 timestamp、visitorid、event、itemid、transactionid，均保留 VARCHAR。Retailrocket 使用单独的 rr_raw 命名空间，不与 M5 连接编号。两份属性及类别文件将在后续分别加载。
+脚本创建 rr_raw.category_tree，两列均为 VARCHAR。重点检查：row_count 和 distinct_categoryids 均为 1,669；column_count 和 varchar_column_count 均为 2；null_parentid_rows 为 25；其余问题计数与来源差异计数均为 0。
 
-预期所有检查为 PASS。其中 row_count 为 2,756,101，column_count 与 varchar_column_count 均为 5；三类事件分别为 view 2,664,312、addtocart 69,332、transaction 22,457；两个方向的来源差异计数均为 0；duplicate_surplus_rows_preserved 的 actual 与 expected 均为 **460**。这最后一项验证原始重复没有被悄悄删除。
+如果该表已经成功创建，只运行 SQL 中 CHECKS 标记之后的查询。脚本不会覆盖已有表，SQL54 的事件无需重新导入。出现 FAIL 时先保留结果并检查原因。
 
-脚本不覆盖已有 rr_raw.events。如果已经成功导入，只运行 SQL 文件中 CHECKS 标记之后的核对查询即可，不要重复创建或删除表。出现 FAIL 时保留结果，先查原因再推进。
+## 本步验证了什么
 
-## 验证边界
+助手已在隔离环境试运行，使用独立 Python CSV 多重集合核对全部 1,669 行、2 个字段，并检查原始重复、空值与文字格式保留。记录及针对性验证见 [类别导入验证](RETAILROCKET_CATEGORIES_IMPORT_VALIDATION.md)。这与用户实际执行验收分开记录，助手未打开用户的持久数据库。
 
-助手已在隔离环境运行 SQL54 并核对完整来源与导入表的多重集合，包含重复次数。针对重复及空值保留、重复丢失和差异检测的验证见 [导入验证说明](RETAILROCKET_EVENTS_IMPORT_VALIDATION.md)。没有打开用户的持久数据库，用户执行与截图验收仍待完成。
-
-本步不确定去重策略，不构建会话、漏斗、RF 或购物篮指标。原始事件、访客明细、来源 CSV 和数据库不上传 GitHub；上传 SQL、可复现检查及聚合证据。
+本步核对原始导入、直接父键引用和自身指向；尚未检查多节点环路、完整层级深度或根路径，不能因此宣布整个类别树结构已验证。两份属性文件、类型化清洗、时点属性连接及行为指标在后续分步推进。M5 与 Retailrocket 的编号不互相连接。

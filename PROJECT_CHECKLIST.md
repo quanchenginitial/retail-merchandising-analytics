@@ -146,7 +146,9 @@
 - [x] 7A 用户提供 D:/database/retailrocket 中四份原始 CSV；助手逐文件只读扫描，38/38 结构与字段检查通过，四份文件前后 SHA-256 和元数据未变。事件 2,756,101 行，属性 10,999,999 + 9,275,903 行，类别 1,669 行；见 [来源审计](docs/RETAILROCKET_SOURCE_AUDIT.md) 和 [机器记录](data/retailrocket_source_audit.json)。本地指纹不等于官方校验和。
 - [x] 7A 独立 DuckDB 内存核验事件与类别：事件类型、时间范围、必填字段及交易编号空值模式一致；记录五字段相同的 460 条重复冗余行、25 个空父类别根候选。重复先保留，交易事件数不当作订单数；类别环路、属性时点连接及业务定义待后续处理。见 [独立证据](data/retailrocket_independent_checks.json)。
 - [x] 7B 助手准备并独立预检 [SQL54](sql/54_import_retailrocket_events.sql)：只建立 rr_raw.events，原五列保留 VARCHAR，保留全部重复记录，空交易编号为 NULL；18 行检查覆盖行数、字段、事件数量、空值与双向 EXCEPT ALL 对账。既有表不覆盖；见 [导入验证](docs/RETAILROCKET_EVENTS_IMPORT_VALIDATION.md)。未打开用户数据库。
-- [ ] 7B 用户在 retail_merchandising 连接执行 SQL54，提供 18 行、5 列完整检查结果；助手预检不替代用户导入验收。
+- [x] 7B 用户于 2026-11-02 截图验收 SQL54：18 个 PASS、54 个整数值与 14 个完整检查名称均匹配，合计 86 个完全可见字段；第 9/16/17/18 行名称末尾截断，通过可见前缀及固定行号/SQL 契约确认。保留 2,756,101 条事件及 460 条重复冗余行；见 [聚合验收](data/retailrocket_events_import_learner_acceptance.json)。不声称全部 90 个字段完整可见。
+- [x] 7C 助手准备并预检 [SQL55 类别原始表](sql/55_import_retailrocket_categories.sql)：只创建 rr_raw.category_tree，两列 VARCHAR，空 parentid 为 NULL；15 行检查覆盖 1,669 条类别记录、字段、类别键、25 个空父键、直接父键引用及双向完整来源对账。独立 Python CSV 多重集合核对、针对性用例及保留记录见 [验证说明](docs/RETAILROCKET_CATEGORIES_IMPORT_VALIDATION.md)。未打开用户数据库；环路、深度及属性关联尚未验证。
+- [ ] 7C 用户执行 SQL55，提供 15 行、5 列检查结果；助手预检不替代用户导入验收。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -156,6 +158,6 @@
 
 ## 下一次对话从这里继续
 
-SQL53 已验收，阶段 6 的已实现描述性范围收束。Retailrocket 四份来源文件现已完成只读结构审计，独立事件/类别核验已记录；下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在原 retail_merchandising 连接运行 [SQL54](sql/54_import_retailrocket_events.sql)，只导入事件原始表 rr_raw.events，并核对 18 行检查。用户执行仍待完成。两份属性和类别表尚未导入，行为指标、去重策略、时点属性连接与整体项目仍未完成；不连接 M5 与 Retailrocket 的编号。
+SQL54 已于 2026-11-02 截图验收：全部 18 个 PASS 与可见数值匹配，四个裁切名称由固定契约识别。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在现有 retail_merchandising 连接执行 [SQL55](sql/55_import_retailrocket_categories.sql)，仅创建类别原始表 rr_raw.category_tree，预计 15 行检查全部 PASS。SQL55 助手预检通过，用户执行待完成；属性加载、递归层级核验、去重策略、时点属性连接及行为指标仍待后续。M5 既有结论不变，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

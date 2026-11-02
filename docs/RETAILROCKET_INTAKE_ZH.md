@@ -1,12 +1,12 @@
 # Retailrocket：独立来源接收与核验
 
-核对日期：2026-11-02（Australia/Sydney）。本页衔接 [数据集选择](DATASET_SELECTION_ZH.md) 与 [学习路线](ROADMAP_ZH.md)。用户已提供 D:/database/retailrocket 中四份 CSV，助手已完成全量只读结构审计，38/38 检查通过，见 [实测审计](RETAILROCKET_SOURCE_AUDIT.md)。文件均未修改；尚未在用户数据库中导入。
+核对日期：2026-11-02（Australia/Sydney）。本页衔接 [数据集选择](DATASET_SELECTION_ZH.md) 与 [学习路线](ROADMAP_ZH.md)。用户已提供 D:/database/retailrocket 中四份 CSV，助手已完成全量只读结构审计，38/38 检查通过，见 [实测审计](RETAILROCKET_SOURCE_AUDIT.md)。文件均未修改；SQL54 事件原始层已由用户截图验收，类别和属性加载按后续步骤推进。
 
-## 已完成接收，下一步导入事件原始层
+## 事件导入已验收，下一步导入类别参考
 
 用户已取得四份已解压文件。本次核验确认文件大小与此前官方版本 2 清单一致，实际行数与发布总数一致，扫描前后本地 SHA-256 未变。没有官方校验和对照，也未核验原压缩包或具体下载过程。[官方来源页面](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset) 保留用于来源追溯。
 
-下一步按 [当前一步](FIRST_STEP_ZH.md) 执行 SQL54，仅导入事件原始表；助手已在隔离环境预检，用户执行与截图验收待完成。属性及类别文件保持原样，后续分步加载。当前审计覆盖结构、字段及基本范围，尚未确定去重、时点属性连接、会话、RF、漏斗或购物篮口径。
+SQL54 已于 2026-11-02 截图验收，见 [验收记录](../data/retailrocket_events_import_learner_acceptance.json)：18 个 PASS 和全部可见数值匹配，四个裁切名称已按固定契约确认。下一步按 [当前一步](FIRST_STEP_ZH.md) 执行 SQL55，仅导入类别原始表；助手隔离预检通过，用户执行待完成。两份属性文件后续再加载。去重、层级环路、时点属性连接、会话、RF、漏斗及购物篮仍待各自审计和定义。
 
 ## 本次核对到的版本与清单
 

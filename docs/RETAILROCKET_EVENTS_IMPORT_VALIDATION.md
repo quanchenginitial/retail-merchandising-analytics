@@ -1,6 +1,6 @@
 # Retailrocket events: first raw import
 
-[SQL54](../sql/54_import_retailrocket_events.sql) imports the audited events file into **rr_raw.events**, isolated from the existing M5 tables. The assistant's bounded preflight passed all **18 checks across five report columns**. Learner execution and screenshot acceptance remain pending. This step establishes a faithful raw copy; it does not define sessions, orders, conversion, RF segments or a deduplication policy.
+[SQL54](../sql/54_import_retailrocket_events.sql) imports the audited events file into **rr_raw.events**, isolated from the existing M5 tables. The assistant's bounded preflight passed all **18 checks across five report columns**. Learner screenshot acceptance was completed on **2 November 2026**, with 86 fully visible fields and four cropped check labels resolved from the frozen report contract, as documented below. This step establishes a faithful raw copy; it does not define sessions, orders, conversion, RF segments or a deduplication policy.
 
 ## Source and import contract
 
@@ -53,8 +53,23 @@ The real input's size, exact header and hash match the accepted source audit. Al
 
 See the [aggregate preflight evidence](../data/retailrocket_events_import_preflight.json) for exact code/dependency hashes, focused cases, timing and preservation checks. Its ordered report fingerprint is `33da069bbaabe2936c14f08dce19a1eacf6322bc79a2d11cd001b3f06ec3bafb`: compact JSON arrays in the five-column order, followed by LF, with integer counts/order and string labels/status.
 
+## Learner screenshot acceptance — 2 November 2026
+
+The screenshot shows all eighteen report rows and five headers. All **54 numeric fields** (check_order, actual and expected), **18 complete PASS values** and **14 complete check labels** match the frozen report: **86 fully visible fields**. Four additional check-name cells have visible prefixes but cropped endings; the screenshot does not show all ninety field values in full.
+
+| Check order | Full label resolved from the frozen contract | Visibility |
+| ---: | --- | --- |
+| 9 | invalid_transactionid_rows | Prefix visible; ending cropped |
+| 16 | source_rows_absent_from_table | Prefix visible; ending cropped |
+| 17 | table_rows_absent_from_source | Prefix visible; ending cropped |
+| 18 | duplicate_surplus_rows_preserved | Prefix visible; ending cropped |
+
+Each cropped label agrees with its visible prefix and fixed row position. Its full text is supplied by the unchanged SQL/report contract, not claimed as fully read from the screenshot. After removing numeric thousands separators and making only those four explicit label resolutions, the complete aggregate report matches the frozen fingerprint above with zero mismatches. The [learner acceptance record](../data/retailrocket_events_import_learner_acceptance.json) keeps the visible transcription, the four label resolutions and the complete resolved report separate.
+
+This is screenshot reproduction acceptance, not a new audit of the learner database or every source row. No learner database was opened, and no SQL, source audit, fixture or historical suite was rerun for this acceptance. The earlier source/table multiset and preservation checks remain historical assistant evidence; SQL54, its validator, preflight and supporting audits are unchanged. The preflight retains its historical learner-pending wording; this later record establishes acceptance. No screenshot or real event identifiers/rows are published, and learner conceptual understanding remains untested.
+
 ## Acceptance boundary
 
 PASS means the first raw import and these specified checks agree with the audited source. It does not establish that every recorded event is a distinct real action, that identifiers define reliable order baskets, or that an anonymous visitor is a person. Duplicates require a later explicit policy before behavioral metrics; they are preserved now so that policy remains reviewable.
 
-The next learner action is to run SQL54 in the existing retail_merchandising DBeaver connection and return the complete 18-row, five-column report with every status visible. Typed staging, duplicate handling, event/transaction semantics, time-aware attribute joins and behavioral analysis remain subsequent work. Retailrocket and M5 identifiers remain separate.
+SQL54 aggregate reproduction is accepted with the documented label-visibility caveat. The next planned learner step is SQL55: raw category-tree import with categoryid and parentid retained as VARCHAR and exact-empty parentid represented as NULL; property imports follow later. Typed staging, duplicate handling, event/transaction semantics, time-aware attribute joins and behavioral analysis remain subsequent work. Retailrocket and M5 identifiers remain separate.

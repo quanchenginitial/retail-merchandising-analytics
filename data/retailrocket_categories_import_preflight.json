@@ -1,0 +1,199 @@
+{
+  "checked_at_utc": "2026-11-02T10:30:53.218869+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/55_import_retailrocket_categories.sql",
+  "script_sha256": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+  "validator": "validation/preflight_retailrocket_categories_import.py",
+  "validator_sha256": "c0976034d720fe56ac7975211818b316f600587147b6a7d550e61165aefaa86f",
+  "code_and_dependency_sha256": {
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "validation/preflight_retailrocket_categories_import.py": "c0976034d720fe56ac7975211818b316f600587147b6a7d550e61165aefaa86f",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "scripts/audit_retailrocket_sources.py": "0ff594d815cd17aca97036dc90627bd916d8bed201e0c34fa8ad4ca376d6b170",
+    "data/retailrocket_independent_checks.json": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+    "validation/retailrocket_source_check.sql": "49ddbf6a352ceda20f4be7fe90483e9cb55a8f8caf833b10b783b77a57217478",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "data/retailrocket_events_import_preflight.json": "e04285583f97e95f78f7c8d4084e8f49174ba657cd47201fb5fa485b9749b11b"
+  },
+  "source_audit": "data/retailrocket_source_audit.json",
+  "source_audit_sha256": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+  "independent_source_checks": "data/retailrocket_independent_checks.json",
+  "independent_source_checks_sha256": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+  "source_file": "category_tree.csv",
+  "source_bytes": 14454,
+  "source_sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b",
+  "source_hash_unchanged": true,
+  "source_header": [
+    "categoryid",
+    "parentid"
+  ],
+  "database": ":memory:",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "512MB",
+    "timeout_seconds": 60
+  },
+  "table": "rr_raw.category_tree",
+  "raw_fields": 2,
+  "raw_types": [
+    "VARCHAR",
+    "VARCHAR"
+  ],
+  "import_semantics": "Preserve all raw strings and observations, including leading zeros and duplicates; only exact-empty parentid becomes NULL. Plain CREATE protects an existing table. No trim, stored numeric cast, deduplication, replacement or joins to other tables.",
+  "source_rows_compared": 1669,
+  "source_fields_compared": 2,
+  "source_only_rows": 0,
+  "table_only_rows": 0,
+  "independent_python_csv_counter_source_only_rows": 0,
+  "independent_python_csv_counter_table_only_rows": 0,
+  "independent_python_csv_counter_all_tuples_and_multiplicities_matched": true,
+  "duplicate_surplus_rows_preserved": 0,
+  "full_source_multiset_comparison": "EXCEPT ALL in both directions plus an independent Python csv Counter comparison of all two-field tuples; NULL parent parsing is explicit.",
+  "report_rows": 15,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 15,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "row_count",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "varchar_column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "column_sequence_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_categoryid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "invalid_categoryid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_parentid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "null_parentid_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "duplicate_categoryid_surplus_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "self_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "orphan_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "source_rows_absent_from_table",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "table_rows_absent_from_source",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "duplicate_surplus_rows_preserved",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "80c8b1c3380d86eef37c9968dcedfda999fa20ecc4a1b8417538b932e588bced",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output_columns order, each followed by LF; counts/order are integers and labels/status are strings.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "preserve_null_leading_zeros_duplicates_flag_key_duplicates_reject_reimport_detect_lost_multiplicity",
+      "passed": true
+    },
+    {
+      "case": "retain_required_empty_whitespace_and_invalid_parent_text_flag_quality_and_immediate_links",
+      "passed": true
+    },
+    {
+      "case": "strict_csv_rejects_extra_and_missing_fields",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "source_records_or_identifiers_exported_or_logged": false,
+  "real_comparison_records_held_only_in_process_memory": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "m5_queries_or_historical_suites_rerun": false,
+  "historical_preflight_files_unchanged": 53,
+  "temporary_databases_and_spills_removed": true,
+  "elapsed_import_checks_and_private_comparison_query_seconds": 0.156,
+  "timing_scope": "One CLI execution includes import, all checks and private table projection; excludes hashing, Python reference and fixtures. memory_limit is not a process-wide cap.",
+  "scope": "Assistant category raw-import preflight passed; learner SQL55 execution and acceptance pending. NULL parents are root candidates. No recursive cycles/depth/root membership, typed staging, property import, as-of joins or behavioral metrics are implemented by this step."
+}
