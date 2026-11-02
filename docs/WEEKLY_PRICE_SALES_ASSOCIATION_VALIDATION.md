@@ -4,7 +4,7 @@
 
 The learner accepted SQL46 on **2 November 2026**, with all five rows and twelve fields visible and PASS. The [acceptance record](../data/price_sales_association_learner_acceptance.json) matches its frozen report. In that aggregate description, both price-up and price-down groups have positive mean unit changes, while the unchanged group has a slightly negative mean. These are associations, not price effects.
 
-[SQL47](../sql/47_weekly_price_sales_association.sql) splits the same observations by current endpoint week to examine timing concentration and whether the aggregate pattern recurs. This follow-up was chosen after seeing the accepted SQL46 result; it was not prespecified as part of the earlier report. Its [own protocol](WEEKLY_PRICE_SALES_ASSOCIATION_PROTOCOL.md) was fixed before new weekly sales outcomes were computed. **Assistant preflight has passed; learner SQL47 execution and acceptance remain pending.**
+[SQL47](../sql/47_weekly_price_sales_association.sql) splits the same observations by current endpoint week to examine timing concentration and whether the aggregate pattern recurs. This follow-up was chosen after seeing the accepted SQL46 result; it was not prespecified as part of the earlier report. Its [own protocol](WEEKLY_PRICE_SALES_ASSOCIATION_PROTOCOL.md) was fixed before new weekly sales outcomes were computed. **Assistant preflight passed; the learner accepted all eleven report rows and twelve fields on 2 November 2026.** Screenshot acceptance is recorded separately below; historical preflight evidence remains unchanged.
 
 ## Fixed scope and calculation
 
@@ -40,12 +40,22 @@ The completed run matched **365,880 weekly input rows × 12 fields**, **36,588 p
 | 11611 | 2016-04-09 | 92 | 2.271739 | 64 | -0.203125 | 30334 | -0.120690 | 0 | 30490 | -3465 | PASS |
 | 11612 | 2016-04-16 | 80 | 4.775000 | 63 | -0.571429 | 30347 | -0.659868 | 0 | 30490 | -19679 | PASS |
 
-All eleven rows and twelve fields match the independent reference. Published evidence contains only aggregate reports and fingerprints, not real SKU identifiers, individual transitions, raw price vectors, screenshots or databases. Learner reproduction of this report remains pending.
+All eleven rows and twelve fields match the independent reference and the learner's accepted screenshot. Published evidence contains only aggregate reports and fingerprints, not real SKU identifiers, individual transitions, raw price vectors, screenshots or databases.
 
-## Interpretation and next learner step
+## Learner acceptance — 2026-11-02
+
+The learner's DBeaver screenshot shows **all eleven rows and twelve fields, including eleven complete PASS values**. All **132 displayed values** match the frozen preflight after removing thousands separators and restoring only omitted trailing zeros in the three mean columns to six decimals. The [learner acceptance record](../data/weekly_price_sales_association_learner_acceptance.json) reproduces report SHA256 `106928695f37931fab9c6ab6f153b736ccdf0bbc50cf0b6d563dbc373774ab7a`, using chronological twelve-field row arrays encoded as compact JSON with one LF after each row. No TOTAL row is added.
+
+Every weekly row contains **30,490 transitions** and its four direction counts reconcile. Summing the displayed weeks gives **2,060 UP**, **1,736 DOWN**, **331,578 UNCHANGED** and **16 missing-endpoint transitions**, or **335,390 overall**, with total signed unit differences of **−5,010**. These are arithmetic controls on displayed counts and sums; exact full-window group means still require the original unrounded group sums and counts, not a simple average of rounded weekly means.
+
+The displayed UP means are positive in all eleven weeks. DOWN means are positive in the first eight weeks and negative in weeks **11610–11612**. These describe weekly group averages; they neither establish that every product/store changed in that direction nor explain the pattern causally.
+
+This is screenshot-based acceptance of the aggregate report. The assistant did not open the learner's database or rerun SQL, full-data preflight or fixtures. The complete source comparisons, all 44 internal cells, exact mean reconciliations and preservation/cleanup checks remain separate historical assistant evidence above. Frozen SQL, validator, protocol and preflight remain unchanged; no screenshot or individual pair/transition records are published.
+
+## Interpretation and next question
 
 Read each mean alongside its sample count, then compare the same price group across weeks. Weekly means based on very different counts should not receive equal weight in the aggregate. A concentrated pattern motivates investigation of timing and composition; it does not prove that calendar effects caused the earlier aggregate association. A consistent pattern also does not establish a price effect.
 
 Same-week price groups can still contain different products, stores, baseline sales and availability conditions. Adjacent comparisons share endpoints and repeated pairs are not independent experiments. No matched control, causal estimate, elasticity, promotion lift, statistical significance or inventory benefit is produced. This step adds time context to the accepted description and does not alter forecast choices or previously accepted results.
 
-Run the full SQL47 query in a new DBeaver editor connected to **retail_merchandising**, then return all **eleven rows and twelve columns**, including check_status. See [the Chinese current-step guide](FIRST_STEP_ZH.md).
+The accepted weekly pattern can guide the next declared descriptive check of composition or timing. See [the Chinese current-step guide](FIRST_STEP_ZH.md) for the next single action; the accepted forecast scope and conclusions remain fixed.

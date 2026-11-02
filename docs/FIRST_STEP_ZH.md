@@ -1,41 +1,45 @@
-# 当前一步：按周观察价格与销量变化
+# 当前一步：按商品部门观察价格与销量变化
 
 更新日期：2026-11-02（Australia/Sydney）。
 
-**这一步为了什么：检查 SQL46 的整体结果在不同周是否一致，还是集中在少数周，为解释价格与销量的关联补充时间背景。**
+**这一步为了什么：检查整体价格与销量关联是否集中于特定商品部门，为解释商品构成差异补充证据。**
 
-SQL46 的五行、十二列已验收，全部 PASS。涨价组平均销量变化为 +3.194660 件，降价组为 +1.667051 件，价格不变组为 −0.043842 件。前两组中位数均为 +1 件。这些是每次相邻周比较的变化件数，并不证明涨价或降价造成了增长。见 [验收记录](../data/price_sales_association_learner_acceptance.json)。
+SQL47 的 11 行、12 列和全部 132 个字段值已验收，全部 PASS。涨价组在十一周的平均销量变化均为正；降价组在前八周为正、最后三周为负。这说明总体均值不能代表每一周的情况。它仍然不证明价格造成了销量变化。见 [截图验收记录](../data/weekly_price_sales_association_learner_acceptance.json)。
 
-## 为什么要按周拆开
+## 为什么继续看商品部门
 
-整个窗口的平均值把不同日期混在一起。若调价较多的周本身就有普遍销量变化，直接看总体均值可能掩盖时间差异。SQL47 在每一周内并排展示三个价格组的数量和平均变化，先看这种可能性。
+不同商品部门的销量水平和调价次数可能不同。整体平均增加若干件，可能主要由某些部门贡献。SQL48 按数据中的七个商品部门编码分别显示涨价、降价、价格不变组的次数和平均销量变化，帮助识别这种构成差异。
 
-仍沿用同一个十二周窗口。每次比较保持“同一商品、同一门店、相邻两周”，销量变化仍是 **本周销量 − 上周销量**。十二周形成十一组相邻比较，因此本次报告有 **11 行，每行对应后一个周**，从 2016-02-06 开始，没有另加 TOTAL。
+这里的部门是商品分类编码，例如 FOODS_1；没有来源支持时不自行赋予更细的商品名称。每次比较仍是同一商品、同一门店的相邻两周，件数差仍为 **本周销量 − 上周销量**。
 
-## 这次执行 SQL47
+本次每个部门汇总全部十一组相邻周，**不是在同一周内进一步比较部门**。SQL47 已观察到的时间差异仍可能影响部门结果；这一步并未完成季节性或混杂因素调整。
 
-1. 打开 [47_weekly_price_sales_association.sql](../sql/47_weekly_price_sales_association.sql)，复制全文。
+## 执行 SQL48
+
+1. 打开 [48_department_price_sales_association.sql](../sql/48_department_price_sales_association.sql)，复制全文。
 2. 在 DBeaver 的 **retail_merchandising** 连接中新建编辑器，粘贴并使用 **执行 SQL 脚本 / Execute SQL Script（默认 Alt+X）**。
-3. 发回 **11 行、12 列**结果截图，包含最右侧 check_status。
+3. 发回完整 **7 行、12 列**结果截图，包含最右侧 check_status。按 dept_id 排序，**没有 TOTAL 行**。
 
-这是只读查询，不新增分析表。助手独立预检已通过；用户 SQL47 仍待执行与截图验收。
+这是只读查询，不新增分析表。助手独立预检已通过；用户 SQL48 执行与截图验收仍待完成。
 
 ## 怎样读结果
 
 | 字段 | 含义 |
 | --- | --- |
-| retail_week / week_start | 比较中后一个周的编号和开始日期 |
-| price_up_transitions | 当周涨价的商品门店相邻周比较次数 |
-| price_up_mean_unit_change | 当周涨价组每次比较平均增减多少件 |
-| price_down_transitions / price_down_mean_unit_change | 当周降价组的比较次数与平均销量变化 |
-| unchanged_transitions / unchanged_mean_unit_change | 当周价格不变组的比较次数与平均销量变化 |
-| missing_endpoint_transitions | 至少一个价格端点缺失的比较次数，仍计入覆盖 |
-| total_transitions | 当周全部比较次数，应为 30,490 |
-| total_unit_difference | 当周全部比较的销量变化合计，含缺价记录，单位为件 |
-| check_status | 输入、计算与对账检查是否通过 |
+| dept_id | 七个商品部门之一 |
+| series_count | 该部门不同的“商品 × 门店”组合数，不是独立商品数 |
+| price_up_transitions / price_up_mean_unit_change | 涨价的相邻周比较次数，以及每次比较平均增减多少件 |
+| price_down_transitions / price_down_mean_unit_change | 降价组的比较次数及平均件数差 |
+| unchanged_transitions / unchanged_mean_unit_change | 价格不变组的比较次数及平均件数差 |
+| missing_endpoint_transitions | 至少一个价格端点缺失的比较次数 |
+| total_transitions | 该部门全部比较次数，应等于 series_count × 11 |
+| total_unit_difference | 该部门全部比较的件数差合计，含缺价记录 |
+| check_status | 输入、计算和对账检查是否通过 |
 
-先看三个组的样本数量，再比较同一行的三个均值。正数代表平均增加，负数代表平均减少，单位都是件，**不是销量增长百分比**。某周某组没有记录时，该组次数为 0、均值为 NULL，不补成 0。
+先看样本次数，再看均值。每个商品门店组合有十二周记录，产生十一组相邻比较；同一个组合在不同周可以进入不同价格方向组。七个部门的 series_count 合计为 30,490，全部比较次数合计为 335,390。
 
-十一周的比较次数可以相加；**各周均值不能直接取简单平均来还原 SQL46**，必须按各周比较次数加权，且正式对账使用未舍入的销量差值合计。各周缺价记录仍在内部完整统计；本表只简化展示，不会删掉它们或零销量观察。
+正负均值表示平均增加或减少的件数，**不是增长率或价格弹性**。所有零销量比较都保留；某部门某方向为空时，次数为 0、均值为 NULL。缺价记录独立统计，其销量差仍计入部门总差值。
 
-同一周内，三组商品和门店构成仍可能不同；价格不变组依然不是因果对照。即使每周都观察到同方向变化，也不能直接解释为调价效果。见 [固定口径](WEEKLY_PRICE_SALES_ASSOCIATION_PROTOCOL.md) 和 [方法与预检](WEEKLY_PRICE_SALES_ASSOCIATION_VALIDATION.md)。
+各部门次数和件数差可以相加；还原 SQL46 的总体均值需要按比较次数加权，不能直接平均七个部门的均值。正式对账使用精确件数差合计，避免显示舍入影响。
+
+即使同一部门内，商品、门店、时间和原有销量水平仍可能不同。价格不变组仍是描述性比较，不能据此认定促销收益或调价效果。见 [固定口径](DEPARTMENT_PRICE_SALES_ASSOCIATION_PROTOCOL.md) 与 [方法和预检](DEPARTMENT_PRICE_SALES_ASSOCIATION_VALIDATION.md)。
