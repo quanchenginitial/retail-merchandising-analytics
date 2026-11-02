@@ -97,3 +97,23 @@ The private input reconstruction used only the frozen SQL55 and SQL56 import pre
 All three source hashes and metadata, 12 code/evidence dependency pins and 56 historical preflight files remained unchanged. Private database and spill files were removed. No learner database, event/M5 source, SQL55/56 full-comparison rerun or SQL57 key regrouping was used; no real item/category values or raw records were exported or logged.
 
 The learner's next step is to run SQL58 and return the complete 22-row report, including the INFO rows. Exact-unmatched category references remain visible for investigation before downstream interpretation. Staging and event-time attribute linkage remain subsequent work.
+
+## Learner screenshot acceptance — 3 November 2026
+
+The screenshot shows all **22 rows × 5 columns = 110 field positions**, with **107 complete fields** directly visible: 54 integers, twelve explicit NULL expectations, nineteen complete check names and twenty-two complete statuses. All five headers are visible. The status split is **10 PASS controls and 12 INFO observations**, with no FAIL or BLOCKED rows.
+
+Three check-name endings are cropped:
+
+| Check order | Full label resolved from the frozen contract | Visibility |
+| ---: | --- | --- |
+| 6 | category_reference_duplicate_id_surplus | Prefix visible; ending cropped |
+| 19 | named_invalid_identifier_or_timestamp_rows | Prefix visible; ending cropped |
+| 22 | category_match_partition_reconciled | Prefix visible; ending cropped |
+
+The complete order-21 label, availability_partition_reconciled, is visible, including its ending. No numeric, expected-NULL or status cell is cropped. Each of the three partial names agrees with a legible prefix and fixed row position, but its full text is supplied by the frozen contract; the screenshot does not show all 110 field values in full.
+
+The screenshot was independently transcribed before comparison with the frozen report. Numeric thousands separators were removed, displayed [NULL] expectations were retained as JSON null, and only the three documented labels were resolved. The resulting full aggregate report matches the frozen fingerprint above with zero mismatches. The [learner acceptance record](../data/retailrocket_named_properties_learner_acceptance.json) separates visible transcription, partial-label evidence and complete resolved results. INFO rows remain observations rather than zero-target success checks.
+
+This later record establishes learner acceptance and supersedes the earlier pending status and run request for current progress. The entire prior method, including its 7,818-byte frozen contract and executed-results section, is retained byte for byte. No learner database was opened, and no SQL, source audit, fixture or historical suite was rerun for acceptance. SQL58, its validator, preflight and pinned prior evidence remain unchanged. No screenshot, real item/category values or raw records are published, and learner conceptual understanding remains untested.
+
+The accepted 167 exact-unmatched category-property records retain the interpretation limits above: they are not a count of distinct categories, items or affected events, and their cause is unverified. Availability observations do not establish current item states, inventory quantities or stockout causes. Typed staging, canonical references, further investigation and event-time attribute linkage remain separate work.

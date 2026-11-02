@@ -154,7 +154,9 @@
 - [x] 7E 助手准备并预检 [SQL57 属性键审计](sql/57_audit_retailrocket_property_keys.sql)：在原始文本口径下区分完全重复、同键异值与跨文件重叠；20 行报告包含 10 项完整性检查和 10 项 INFO 观测，未预设重复或冲突必须为 0。见 [验证说明](docs/RETAILROCKET_PROPERTY_KEYS_VALIDATION.md)。未修改原始记录或实施去重、类型转换及关联。
 - [x] 7E 用户于 2026-11-03 截图验收 SQL57：20 行 × 5 列、共 100 个字段完整匹配，包含 10 个 PASS、10 个 INFO 和 10 个 NULL 预期值；417,053 个商品编号、1,104 个属性名、12,003,814 个商品/属性组合。原始文本口径未发现完全重复、同键异值或跨文件共享键；见 [聚合验收](data/retailrocket_property_keys_learner_acceptance.json)。结论限定本快照及原始文本，不外推类型转换或时点关联安全性。
 - [x] 7F 助手准备并预检 [SQL58 已知属性审计](sql/58_audit_retailrocket_named_properties.sql)：只读核对 categoryid/available 的数量、取值、身份字段及类别表精确匹配，22 行报告含 10 项完整性检查与 12 项 INFO 观测。采用存在性检查防止类别引用放大；异常值保留并计数，未自动修正或清洗。见 [验证说明](docs/RETAILROCKET_NAMED_PROPERTIES_VALIDATION.md)。
-- [ ] 7F 用户执行 SQL58，提供 22 行、5 列报告；预期 10 项 PASS、12 项 INFO，观测行 expected 为 NULL。
+- [x] 7F 用户于 2026-11-03 截图验收 SQL58：107 个字段完整匹配，第 6/19/22 行名称裁切，按可见前缀和固定契约识别；第 21 行名称完整。10 个 PASS、12 个 INFO 与 12 个 NULL 预期值均可见。167 是精确未匹配的类别属性记录数，不是商品、类别编号或事件数；见 [聚合验收](data/retailrocket_named_properties_learner_acceptance.json)。不声称全部 110 个字段完整可见。
+- [x] 7G 助手准备并预检 [SQL59 未匹配类别记录审计](sql/59_audit_retailrocket_unmatched_categories.sql)：只读固定的精确未匹配群体，统计不同商品编号、原始类别值、原始时间戳及来源分部，并诊断数值转换资格与参考歧义；22 行报告含 10 项 PASS 控制和 12 项 INFO 观测。见 [验证说明](docs/RETAILROCKET_UNMATCHED_CATEGORIES_VALIDATION.md)。不修剪或改写原文，不自动修复，不推断来源原因或事件时点覆盖。
+- [ ] 7G 用户执行 SQL59，提供 22 行、5 列报告；预期 10 项 PASS、12 项 INFO，观测行 expected 为 NULL。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -164,6 +166,6 @@
 
 ## 下一次对话从这里继续
 
-SQL57 已于 2026-11-03 截图验收：100 个字段完整匹配，10 个 PASS 和 10 个 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 在现有 retail_merchandising 连接执行 [SQL58](sql/58_audit_retailrocket_named_properties.sql)，核查类别/可用性取值及原始文本类别匹配。助手预检通过，用户执行待完成；预期 22 行报告包含 10 个 PASS、12 个 INFO。类型转换、清洗决策、类别环路、时点关联及行为指标仍待后续，整体项目未完成。
+SQL58 已于 2026-11-03 截图验收：107 个完整字段匹配，三处裁切名称由固定契约确认，10 个 PASS 和 12 个 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL59](sql/59_audit_retailrocket_unmatched_categories.sql)，检查 167 条精确未匹配类别属性记录的范围与数值参考候选。助手预检通过，用户执行待完成。商品历史明细、清洗决策、类型化模型、层级环路、时点关联及行为指标仍待后续，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -1,0 +1,299 @@
+{
+  "checked_at_utc": "2026-11-02T16:36:36.369169+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/59_audit_retailrocket_unmatched_categories.sql",
+  "script_sha256": "1ed2b023931a4ae6e085665024241f04b6581f93dc886a1055da1e1730dfaf68",
+  "validator": "validation/preflight_retailrocket_unmatched_categories.py",
+  "validator_sha256": "e4814b9acff8e282f14056920edbfb61f03526f2ef2cc95da2dd5aed04ac5d7c",
+  "code_and_dependency_sha256": {
+    "sql/59_audit_retailrocket_unmatched_categories.sql": "1ed2b023931a4ae6e085665024241f04b6581f93dc886a1055da1e1730dfaf68",
+    "validation/preflight_retailrocket_unmatched_categories.py": "e4814b9acff8e282f14056920edbfb61f03526f2ef2cc95da2dd5aed04ac5d7c",
+    "validation/preflight_retailrocket_named_properties.py": "a1434c2302f90729cd8df58fb17f2aec9b26f46879f31deeef1e0a1e14c356cd",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "sql/58_audit_retailrocket_named_properties.sql": "8a98195b38b1c06bf3d3cdcf998db953451240886cfb587b7f02b4052d25f90f",
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "scripts/audit_retailrocket_sources.py": "0ff594d815cd17aca97036dc90627bd916d8bed201e0c34fa8ad4ca376d6b170",
+    "data/retailrocket_categories_import_preflight.json": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+    "data/retailrocket_properties_import_preflight.json": "ae36151425c519180acd5312fe7d0aade86a4f3b34db481043483dab3f9b332f",
+    "data/retailrocket_named_properties_preflight.json": "75db9a7100bae260d2e35e1c2bdb6edd8e60b072cc66dbf5932aef725b3bd30a",
+    "data/retailrocket_named_properties_learner_acceptance.json": "71f537ca4f4cbc2cc243aac117db34dc32974c8ee22ed5c38d67bd671cdd5612",
+    "docs/RETAILROCKET_NAMED_PROPERTIES_VALIDATION.md": "eef9c0aabd84cddbe2e5137524c3d3778706c41615887e0b3ce6fd64850ddd97"
+  },
+  "method_contract": "docs/RETAILROCKET_UNMATCHED_CATEGORIES_VALIDATION.md",
+  "method_contract_prefix_bytes": 7145,
+  "method_contract_prefix_sha256": "9be6f7027aaaa81a126103a740470c8c4781ae180ebf9df5f493a2fa0484d9d4",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv",
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "accepted_cohort_preflight": "data/retailrocket_named_properties_preflight.json",
+  "accepted_cohort_preflight_sha256": "75db9a7100bae260d2e35e1c2bdb6edd8e60b072cc66dbf5932aef725b3bd30a",
+  "raw_import_prefix_sha256": {
+    "sql/55_import_retailrocket_categories.sql": "196f4db2008a5d2bdd06c32575b70321e21a2faa9725e6fe0a89828015fadf00",
+    "sql/56_import_retailrocket_properties.sql": "333dcac15ecdaaf3299dbf8d402b9d83c1beb5ded31ef36a902623241f287993"
+  },
+  "raw_reconstruction_basis": "Frozen SQL55/56 import prefixes only and fresh three-source hashes; prior copy evidence and accepted SQL58 exact-unmatched baseline. No prior comparisons or SQL57/58 audit rerun.",
+  "input_property_rows": 20275902,
+  "input_category_property_rows": 788214,
+  "input_category_reference_rows": 1669,
+  "exact_unmatched_cohort_rows": 167,
+  "real_audit_executions": 1,
+  "report_rows": 22,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 10,
+  "info_rows": 12,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "categoryid_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "exact_unmatched_rows",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "category_reference_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "reference_duplicate_id_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "reference_missing_ids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "unmatched_items",
+      "actual": 137,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 9,
+      "check_name": "unmatched_raw_category_values",
+      "actual": 30,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "unmatched_raw_timestamps",
+      "actual": 7,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "unmatched_part1_rows",
+      "actual": 92,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "unmatched_part2_rows",
+      "actual": 75,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "reference_numeric_ineligible_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "reference_ambiguous_normalized_ids",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "unmatched_numeric_eligible_rows",
+      "actual": 167,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "unmatched_numeric_ineligible_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "unmatched_numeric_unique_reference_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "unmatched_numeric_ambiguous_reference_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "unmatched_numeric_no_reference_rows",
+      "actual": 167,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 20,
+      "check_name": "unmatched_part_rows_reconciled",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "unmatched_numeric_eligibility_reconciled",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    },
+    {
+      "check_order": 22,
+      "check_name": "unmatched_numeric_candidate_partition_reconciled",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "67e062794f95028503399c7b822dff408eeb1af1ff78ac3c47f6d3f0e517089f",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output_columns order, each followed by LF; counts are integers, expected is integer or null.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "hand_checked_exact_cohort_leading_zeros_ambiguity_absence_whitespace_overflow_unicode_null_and_multiplicity",
+      "passed": true
+    },
+    {
+      "case": "exact_duplicate_and_null_reference_rows_fail_integrity_without_false_numeric_ambiguity",
+      "passed": true
+    },
+    {
+      "case": "zero_cohort_empty_input_and_unknown_provenance_keep_denominators_wrong_schema_rejected",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "independent_synthetic_counter_reports_matched": true,
+  "full_source_python_counter_or_row_fingerprint_rerun": false,
+  "diagnostic_results_required_to_be_zero": false,
+  "identity": "Cohort remains exact raw-text unmatched. Numeric diagnostic eligibility is ASCII digits/BIGINT only; reference ambiguity counts distinct raw spellings, never duplicate row occurrences.",
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "2GB",
+    "max_temp_directory_size": "8GB",
+    "private_directory_budget_bytes": 12884901888,
+    "timeout_seconds_per_phase": 600
+  },
+  "workspace_free_bytes_before": 51345088512,
+  "workspace_free_bytes_after": 51345862656,
+  "memory_availability_before": {
+    "method": "GlobalMemoryStatusEx",
+    "physical_memory_bytes": 16483872768,
+    "available_physical_memory_bytes": 949710848,
+    "available_page_file_bytes": 1707020288
+  },
+  "peak_private_directory_bytes_observed": 423899136,
+  "private_database_bytes_before_cleanup": 423899136,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "source_records_or_identifiers_or_category_values_exported_or_logged": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 57,
+  "elapsed_import_seconds": 37.766,
+  "elapsed_audit_seconds": 2.298,
+  "elapsed_import_and_audit_seconds": 40.064,
+  "timing_scope": "One frozen-prefix reconstruction and one read-only cohort audit; excludes hashes and fixtures. Memory limit is not a process cap; disk observations are sampled.",
+  "scope": "Assistant cohort diagnostic audit passed; learner SQL59 execution/acceptance pending. No persisted normalization, repair, staging, typed item/timestamp key merging, affected-item history, event/as-of join or source-cause/business-impact claim."
+}

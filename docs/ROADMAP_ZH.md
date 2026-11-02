@@ -2,7 +2,7 @@
 
 更新日期：2026-11-03（Australia/Sydney）。
 
-**当前状态：SQL57 属性键审计已验收，下一步运行 SQL58。** 截图 100 个字段完整可见并匹配，10 个 PASS、10 个 INFO。已确认本快照在原始文本口径下无完全重复及同键异值，见 [验收记录](../data/retailrocket_property_keys_learner_acceptance.json)。下一步审计已知的类别和可用性属性，按原始文本核对类别引用；SQL58 助手预检通过，用户执行待完成。
+**当前状态：SQL58 已知属性审计已验收，下一步运行 SQL59。** 截图有 107 个完整字段匹配，三处裁切名称按前缀与固定契约确认，10 个 PASS 和 12 个 INFO；见 [验收记录](../data/retailrocket_named_properties_learner_acceptance.json)。167 条类别属性记录未精确匹配参考表，这不是商品、类别编号或事件数量。SQL59 助手预检通过，用户执行待完成；本步只细查这个群体，不自动修复或解释来源原因。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接执行 [SQL58](../sql/58_audit_retailrocket_named_properties.sql)。目的：核查 categoryid 和 available 的真实取值与类别引用，为后续清洗及按时点关联提供依据。报告共 22 行、5 列，预期 10 个 PASS、12 个 INFO；异常或未知值按观测计数，不静默删除、修正或当成 0。原始表保持不变，数值化编号、类型碰撞和事件时点覆盖率留待后续。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接执行 [SQL59](../sql/59_audit_retailrocket_unmatched_categories.sql)。目的：区分未匹配记录的商品、原始类别值、时间戳和文件范围，并检查无修剪的数值转换资格及参考歧义。报告为 22 行、5 列，预期 10 个 PASS、12 个 INFO；INFO 的 expected 为 NULL。数值候选仅为诊断，不覆盖精确未匹配状态、不改写原始表。受影响商品历史和事件时点关联留待后续。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。
