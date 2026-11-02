@@ -4,7 +4,7 @@
 
 The learner accepted all **11 rows × 12 fields** of SQL47 on **2 November 2026**, including all eleven PASS values. See the [132-field acceptance record](../data/weekly_price_sales_association_learner_acceptance.json). Price-up means were positive in all eleven weeks; price-down means were positive in the first eight and negative in the final three. Those observations remain descriptive.
 
-The next [SQL48](../sql/48_department_price_sales_association.sql) groups the same transitions by seven merchandise departments to inspect composition. This follow-up was chosen after the observed SQL47 results; its [own protocol](DEPARTMENT_PRICE_SALES_ASSOCIATION_PROTOCOL.md) was fixed before computing the new department outcomes. **Assistant preflight has passed; learner SQL48 execution and acceptance remain pending.**
+[SQL48](../sql/48_department_price_sales_association.sql) groups the same transitions by seven merchandise departments to inspect composition. This follow-up was chosen after the observed SQL47 results; its [own protocol](DEPARTMENT_PRICE_SALES_ASSOCIATION_PROTOCOL.md) was fixed before computing the new department outcomes. **Assistant preflight passed; the learner accepted all seven report rows and twelve fields on 2 November 2026.** Screenshot acceptance is recorded separately below; historical preflight evidence remains unchanged.
 
 ## Fixed scope and definitions
 
@@ -40,6 +40,14 @@ Displayed-report SHA256: `3d7de6c2e4287f68bd7e2e1016a95b5c22bd1f38cf27864536d1d6
 | HOUSEHOLD_1 | 5320 | 200 | 3.320000 | 321 | 0.214953 | 57987 | -0.124873 | 12 | 58520 | -6466 | PASS |
 | HOUSEHOLD_2 | 5150 | 64 | 0.968750 | 409 | 1.880196 | 56177 | 0.015469 | 0 | 56650 | 1700 | PASS |
 
-Every displayed field matches the independent reference. Public evidence contains aggregates and fingerprints only, without real SKU identifiers, individual transitions, screenshots, raw data or databases. Learner reproduction is pending.
+Every displayed field matches the independent reference and the learner's accepted screenshot. Public evidence contains aggregates and fingerprints only, without real SKU identifiers, individual transitions, screenshots, raw data or databases.
 
-Read each mean alongside its sample count. The seven rows are all source departments, not a subset chosen by the direction or magnitude of the results. Run SQL48 and return seven rows and twelve fields including check_status. See the [Chinese current-step guide](FIRST_STEP_ZH.md).
+## Learner acceptance — 2026-11-02
+
+The learner's DBeaver screenshot shows **all seven rows and twelve field positions, including seven complete PASS values**. All **84 displayed values** match the frozen preflight after removing thousands separators and restoring only omitted trailing zeros in the three mean columns to six decimals. The final header is cropped; its **check_status** field name is identified from the frozen SQL column contract, while every PASS value is fully visible. The [learner acceptance record](../data/department_price_sales_association_learner_acceptance.json) reproduces report SHA256 `3d7de6c2e4287f68bd7e2e1016a95b5c22bd1f38cf27864536d1d6a4e97687c7`, using ordered twelve-field row arrays encoded as compact JSON with one LF after each row.
+
+Department series counts sum to **30,490 distinct item/store pairs**. Each department has eleven transitions per pair, and its four direction counts reconcile to its total. Across all seven displayed rows there are **2,060 UP**, **1,736 DOWN**, **331,578 UNCHANGED** and **16 missing-endpoint transitions**, or **335,390 overall**, with signed unit differences totaling **−5,010**. No TOTAL row is added. These are arithmetic controls on displayed counts and sums; exact group means still require the underlying group difference sums and transition counts.
+
+This is screenshot-based acceptance of the aggregate report. The assistant did not open the learner's database or rerun SQL, full-data preflight or fixtures. Complete source membership and value comparisons, all 28 internal cells, exact mean reconciliations and preservation/cleanup checks remain the separate historical assistant evidence above. Frozen SQL, validator, protocol and preflight remain unchanged; no screenshot or individual pair/transition records are published.
+
+Read each mean alongside its sample count. The seven rows are all source departments, not a subset chosen by the direction or magnitude of the results. The accepted department view remains separate from the weekly breakdown and does not jointly adjust for timing and department. See the [Chinese current-step guide](FIRST_STEP_ZH.md) for the next single action.
