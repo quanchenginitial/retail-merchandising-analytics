@@ -4,7 +4,7 @@
 
 SQL48 was learner-accepted on **2 November 2026**: all seven rows, twelve field values per row and seven complete PASS values match its frozen report. The cropped final header is documented separately from the visible status values in the [84-field acceptance record](../data/department_price_sales_association_learner_acceptance.json). Both price-direction means were negative in FOODS_1 and positive in FOODS_3. SQL47 had already shown variation across weeks.
 
-This [SQL49](../sql/49_week_department_price_contrasts.sql) follow-up was chosen after those results. Its [protocol](WEEK_DEPARTMENT_PRICE_CONTRASTS_PROTOCOL.md) was fixed before computing the new contrasts. It adds descriptive joint week/department context and is not a prespecified causal test. **Assistant preflight has passed; learner SQL49 execution and acceptance remain pending.**
+This [SQL49](../sql/49_week_department_price_contrasts.sql) follow-up was chosen after those results. Its [protocol](WEEK_DEPARTMENT_PRICE_CONTRASTS_PROTOCOL.md) was fixed before computing the new contrasts. It adds descriptive joint week/department context and is not a prespecified causal test. **Assistant preflight passed; the learner screenshot was accepted on 2 November 2026 with all 168 displayed values and fourteen complete PASS statuses matching the frozen report.**
 
 ## Population and eligibility
 
@@ -59,6 +59,14 @@ Displayed-report SHA256: `b85f3e28dc964a5261e843a3bc36da590b8fd1498fdc22c9ce91f6
 | HOUSEHOLD_2 | UP | 64 | 64 | 0 | 11 | 0.968750 | -0.011996 | 0.980746 | 10 | 1 | PASS |
 | HOUSEHOLD_2 | DOWN | 409 | 409 | 0 | 11 | 1.880196 | -0.020259 | 1.900455 | 11 | 0 | PASS |
 
-All displayed fields match the independent reference. Learner execution and acceptance are pending. Read support counts and week coverage alongside each gap; the fourteen rows include all seven departments and both directions, without choosing groups by their outcomes.
+All displayed fields matched the independent reference during preflight. The learner screenshot subsequently matched every field on **2 November 2026**. Read support counts and week coverage alongside each gap; the fourteen rows include all seven departments and both directions, without choosing groups by their outcomes.
 
-After learner acceptance, the planned next task is to summarize the price-association findings and limitations, then begin the anomaly-candidate protocol. Those tasks, the full Stage 6 module and the overall portfolio remain incomplete. Run SQL49 and return all fourteen rows and twelve columns including check_status; see the [Chinese guide](FIRST_STEP_ZH.md).
+## Learner screenshot acceptance — 2 November 2026
+
+The learner's DBeaver screenshot shows all **14 rows × 12 fields = 168 values**, including fourteen complete PASS statuses. Independent visual transcription matches the frozen report in all 168 positions: 84 integer counts, 42 mean/gap values, 28 department/direction labels and fourteen statuses. Only displayed thousands separators and omitted trailing zeros were normalized; the two means and gap retain six decimal places. No gap was recalculated by subtracting printed means. The resulting ordered row-array/LF hash is the same `b85f3e28dc964a5261e843a3bc36da590b8fd1498fdc22c9ce91f65a0837f43e`. See the [aggregate learner acceptance](../data/week_department_price_contrasts_learner_acceptance.json).
+
+The visible rows contain **3,796 target transitions: 2,060 UP and 1,736 DOWN**. All 3,796 are comparable and unsupported counts are zero in every row. Positive- and negative-gap week counts sum to comparable weeks in each row, so no tied weeks are displayed. FOODS_1's weighted gaps are **−0.531370 for UP** and **−1.376188 for DOWN**, despite positive gaps in **8/10** and **9/10** eligible weeks respectively. A count of weekly signs does not incorporate contrast magnitudes or target-transition weights. This remains descriptive evidence, without a causal interpretation.
+
+This acceptance is a visual aggregate-report comparison, not a direct audit of the learner database or a new verification of all 308 internal cells, unrounded contrasts or exact weekly signs. No learner database was opened and no SQL, preflight, fixture or historical analysis was rerun for acceptance. The full-source comparisons and preservation checks above remain separate historical assistant evidence. The original preflight JSON retains its historical pending status; the new acceptance record establishes the subsequent learner result. SQL49, its validator, protocol and preflight are unchanged, and no screenshot or individual records are published.
+
+The planned next task is to summarize the price-association findings and limitations, then begin the anomaly-candidate protocol. Those tasks, the full Stage 6 module and the overall portfolio remain incomplete; see the [current Chinese guide](FIRST_STEP_ZH.md).
