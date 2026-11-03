@@ -1,0 +1,257 @@
+{
+  "checked_at_utc": "2026-11-03T05:23:25.047061+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/60_stage_retailrocket_categories.sql",
+  "script_sha256": "fc7988bd2727ac2ffe0b715d19742454de9f6b77925bcf9783691be3dbe84c74",
+  "validator": "validation/preflight_retailrocket_categories_staging.py",
+  "validator_sha256": "8ba15cca9fbb3bf27a1c7287effad2334799ce97ff8c7f86cd6a39de6e5e7014",
+  "code_and_dependency_sha256": {
+    "sql/60_stage_retailrocket_categories.sql": "fc7988bd2727ac2ffe0b715d19742454de9f6b77925bcf9783691be3dbe84c74",
+    "validation/preflight_retailrocket_categories_staging.py": "8ba15cca9fbb3bf27a1c7287effad2334799ce97ff8c7f86cd6a39de6e5e7014",
+    "validation/preflight_retailrocket_categories_import.py": "c0976034d720fe56ac7975211818b316f600587147b6a7d550e61165aefaa86f",
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_categories_import_preflight.json": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+    "data/retailrocket_categories_import_learner_acceptance.json": "486f344d9fc80f2f7f2980fb9a0fdfd236c91a875ef5906a8b43d56d05137f26",
+    "docs/RETAILROCKET_CATEGORIES_IMPORT_VALIDATION.md": "583354d485af1a0aee5936c2c731fc0cd73920d8280c6814e956d8d9074370cd",
+    "data/retailrocket_unmatched_categories_preflight.json": "526a5db816aa5f2dfda41fd2548a3528b402447e9f7bc2159d66e743753a59e2",
+    "data/retailrocket_unmatched_categories_learner_acceptance.json": "8f7527610ce24b8f0405ae23858b770b7873ac717e6fd1b4ea1a1a3f719994cb",
+    "docs/RETAILROCKET_UNMATCHED_CATEGORIES_VALIDATION.md": "cede079c23aa0039f620de9365e7433504fa122515f823b1d63c07535e9f14d6"
+  },
+  "method_contract": "docs/RETAILROCKET_CATEGORIES_STAGING_VALIDATION.md",
+  "method_contract_prefix_bytes": 7118,
+  "method_contract_prefix_sha256": "e382b2c65139cdd215d938c04515dd593feab92488e0e796b21093598a979313",
+  "source_files": [
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "raw_import_prefix_sha256": "196f4db2008a5d2bdd06c32575b70321e21a2faa9725e6fe0a89828015fadf00",
+  "reconstruction_basis": "Frozen SQL55 import prefix only; fresh category CSV hash and private Python Counter. No property/event/M5 source or earlier full audit suite read/rerun.",
+  "source_rows_compared": 1669,
+  "source_fields_compared": 2,
+  "table": "rr_stg.category_tree",
+  "staged_types": [
+    "BIGINT",
+    "BIGINT"
+  ],
+  "transformation": "Exact reversible ASCII/BIGINT conversion of known reference rows only; NULL parents preserved. Plain guarded CTAS refuses invalid input and protects an existing destination.",
+  "real_staging_executions": 1,
+  "report_rows": 18,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 18,
+  "fail_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "bigint_column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "schema_mismatch_count",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_categoryids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "null_parent_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "self_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "orphan_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "raw_value_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "raw_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "staging_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "raw_null_parent_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "root_set_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "numeric_key_collisions",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "raw_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "20805154a073ff8c9ecca82f2ea7acf0eec440b97bc9738572dccdf499ca9cae",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF; counts are integers.",
+  "independent_python_csv_counter_typed_rows_matched": true,
+  "independent_python_csv_counter_raw_rows_unchanged": true,
+  "independent_python_typed_source_only_rows": 0,
+  "independent_python_typed_staging_only_rows": 0,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "hand_checked_typed_null_preservation_counter_report_changed_tuple_detected_existing_sentinel_preserved",
+      "passed": true
+    },
+    {
+      "case": "invalid_or_lossy_input_rejected_atomically_with_no_destination_and_raw_multiset_preserved",
+      "subcases": [
+        "empty_input",
+        "wrong_row_count",
+        "wrong_root_count",
+        "single_leading_zero",
+        "leading_zero_aliases",
+        "parent_leading_zero",
+        "null_category",
+        "empty_category",
+        "whitespace_category",
+        "overflow_category",
+        "negative_category",
+        "empty_parent",
+        "duplicate_key",
+        "self_parent",
+        "orphan_parent"
+      ],
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "case": "wrong_raw_type_or_order_rejected_without_staging_table",
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "invalid_input_subcase_count": 15,
+  "invalid_creation_destination_absence_verified": true,
+  "existing_destination_sentinel_preserved": true,
+  "independent_synthetic_counter_reports_matched": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "512MB",
+    "max_temp_directory_size": "1GB",
+    "timeout_seconds_per_phase": 60
+  },
+  "workspace_free_bytes_before": 50206916608,
+  "workspace_free_bytes_after": 50206744576,
+  "private_database_bytes_before_cleanup": 798720,
+  "largest_private_directory_bytes_observed_after_phase": 7786496,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 58,
+  "source_records_or_identifiers_exported_or_logged": false,
+  "real_comparison_records_held_only_in_process_memory": true,
+  "elapsed_import_staging_checks_and_private_queries_seconds": 0.219,
+  "timing_scope": "One bounded CLI run of raw prefix, guarded staging, checks and private projections; excludes hashing/Python reference/fixtures. Final directory-size observations are not continuous peaks.",
+  "scope": "Assistant category staging passed; learner SQL60 execution pending. No PK/NOT NULL constraints, cyclicity/depth/root-path guarantee, invented unknown category, property/event staging or time-aware join."
+}

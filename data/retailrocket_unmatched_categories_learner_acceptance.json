@@ -1,0 +1,222 @@
+{
+  "observed_date": "2026-11-03",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant independent visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty-two rows, complete check names, five column headers, statuses and twelve displayed NULL expectations are visible. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/59_audit_retailrocket_unmatched_categories.sql",
+  "script_sha256": "1ed2b023931a4ae6e085665024241f04b6581f93dc886a1055da1e1730dfaf68",
+  "assistant_preflight": "data/retailrocket_unmatched_categories_preflight.json",
+  "assistant_preflight_sha256": "526a5db816aa5f2dfda41fd2548a3528b402447e9f7bc2159d66e743753a59e2",
+  "method_contract": "docs/RETAILROCKET_UNMATCHED_CATEGORIES_VALIDATION.md",
+  "method_contract_prefix_bytes": 7145,
+  "method_contract_prefix_sha256": "9be6f7027aaaa81a126103a740470c8c4781ae180ebf9df5f493a2fa0484d9d4",
+  "method_before_acceptance_append_sha256": "0f075d69466807707b4018ad0183edcf764f1ccc477bac1f7b9a1ef313bc2f98",
+  "method_before_acceptance_append_bytes": 10765,
+  "read_only_query": true,
+  "input_tables": [
+    "rr_raw.item_properties",
+    "rr_raw.category_tree"
+  ],
+  "result_rows": 22,
+  "result_columns": 5,
+  "report_field_positions": 110,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 110,
+  "visually_verified_integer_values": 54,
+  "visually_verified_null_expected_values": 12,
+  "visually_verified_complete_check_labels": 22,
+  "visually_verified_status_values": 22,
+  "rows_with_visually_verified_pass_status": 10,
+  "rows_with_visually_verified_info_status": 12,
+  "rows_with_pass_status": 10,
+  "rows_with_info_status": 12,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_110_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "longest_check_label_fully_visible": "unmatched_numeric_candidate_partition_reconciled",
+  "cropped_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Transcribe displayed [NULL] in expected as JSON null, not zero or the string NULL. Preserve all complete check names, statuses and row/column order; no label reconstruction is needed.",
+  "independent_visual_transcription_recorded_before_reference_comparison": true,
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "67e062794f95028503399c7b822dff408eeb1af1ff78ac3c47f6d3f0e517089f",
+  "fingerprint_method": "SHA-256 of twenty-two ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers, expected is integer or JSON null, and labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "categoryid_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "exact_unmatched_rows",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "category_reference_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "reference_duplicate_id_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "reference_missing_ids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "unmatched_items",
+      "actual": 137,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 9,
+      "check_name": "unmatched_raw_category_values",
+      "actual": 30,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "unmatched_raw_timestamps",
+      "actual": 7,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "unmatched_part1_rows",
+      "actual": 92,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "unmatched_part2_rows",
+      "actual": 75,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "reference_numeric_ineligible_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "reference_ambiguous_normalized_ids",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "unmatched_numeric_eligible_rows",
+      "actual": 167,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "unmatched_numeric_ineligible_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "unmatched_numeric_unique_reference_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "unmatched_numeric_ambiguous_reference_rows",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "unmatched_numeric_no_reference_rows",
+      "actual": 167,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 20,
+      "check_name": "unmatched_part_rows_reconciled",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "unmatched_numeric_eligibility_reconciled",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    },
+    {
+      "check_order": 22,
+      "check_name": "unmatched_numeric_candidate_partition_reconciled",
+      "actual": 167,
+      "expected": 167,
+      "status": "PASS"
+    }
+  ],
+  "info_expectations_are_null_not_zero_targets": true,
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_identifiers_category_values_or_keyed_groups_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the aggregate screenshot reproduction: all 110 report fields match, with ten PASS controls, twelve INFO observations and twelve NULL expectations. Historical assistant source/preflight/fixture checks remain separate evidence; this is not a fresh direct audit of the learner database or source rows. The 167 exact-unmatched category-property records cover 137 distinct raw item IDs, 30 raw category values and seven raw timestamps, not seven dates or a measured event population. Parts contribute 92 and 75 records. All 167 are numeric-eligible, but none has a reference candidate under the specified ASCII-digit/BIGINT diagnostic. This provides no numeric-recoding resolution and does not establish an erroneous source value, missing-reference cause, current item state or event/business impact. No repair, persisted normalization, staging, affected-item history or event-time join is accepted here. Earlier pending statements remain historical; this appended record establishes the later learner acceptance. Learner conceptual understanding is not tested by a screenshot."
+}
