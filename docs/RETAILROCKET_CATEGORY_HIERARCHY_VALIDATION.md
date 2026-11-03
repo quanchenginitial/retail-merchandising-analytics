@@ -87,3 +87,13 @@ The one real CLI run took **0.224 seconds**, including the frozen SQL55/60 recon
 The real private database was **798,720 bytes** before cleanup. The largest post-phase directory observation across fixture and real runs was **6,225,920 bytes**, including multiple fixture databases in one private directory; it is not a continuously measured peak. All private databases and spills were removed. The category source hash and metadata, **11 pinned code/evidence dependencies**, and **59 historical preflight files** remained unchanged.
 
 This validation opened no learner database and read no property, event or M5 CSV. It created no reusable root/depth mapping or future database constraint. The next learner action is to execute the read-only SQL61 report and return its 18 rows with INFO distinguished from PASS.
+
+## Learner screenshot acceptance — 3 November 2026
+
+The learner supplied the SQL61 DBeaver report. All **18 rows × 5 columns, 90 fields**, are fully visible and match the frozen assistant preflight: **50 integer fields, four NULL expectations, 18 complete check names and 18 statuses (14 PASS, four INFO)**. All five headers are visible. There are no cropped labels, reconstructed fields, FAIL/BLOCKED rows or mismatches. See the [aggregate acceptance record](../data/retailrocket_category_hierarchy_learner_acceptance.json).
+
+The screenshot reproduces all 1,669 known reference nodes as root-reachable, 25 roots, and zero cycle-affected nodes, repeated traversal rows and depth-limit child edges. The four observations are maximum root depth 5, 1,307 leaf nodes, 318 branching nodes and maximum 31 direct children. Root depth is zero, so depth 5 means five edges from a root, not five levels. Their expected cells are NULL observations, not preset targets.
+
+Under the documented controls these results support the supplied reference snapshot's rooted-forest structure. They do not name anonymous categories, establish event-time coverage or repair the 167 unmatched property records. The read-only audit does not itself persist a reusable root/depth mapping, and the screenshot does not verify future database integrity or learner conceptual understanding.
+
+The independently transcribed report has fingerprint `bfe1a20d4724ad252b11137ac1e5ddc39ed19096e3dd5110a92fc1277e86a61f`, matching the frozen reference. The assistant did not reopen the learner database, rerun SQL/source preflights or fixtures, or save the screenshot, source identifiers or depth maps to the repository. All prior method bytes, including the frozen 7,217-byte contract and executed results, remain unchanged; earlier pending statements are historical and this appended record establishes learner acceptance.

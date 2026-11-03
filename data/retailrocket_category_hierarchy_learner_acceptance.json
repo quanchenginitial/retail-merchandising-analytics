@@ -1,0 +1,189 @@
+{
+  "observed_date": "2026-11-03",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant independent visual transcription of a learner-supplied DBeaver aggregate screenshot. All eighteen rows, five column headers, complete check names, integer values, four displayed NULL expectations and PASS/INFO statuses are fully visible. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/61_audit_retailrocket_category_hierarchy.sql",
+  "script_sha256": "865113e4469f0606f5a56482ebc8d85e78413d4dbfe033d8e18ba81ed6a4150b",
+  "assistant_preflight": "data/retailrocket_category_hierarchy_preflight.json",
+  "assistant_preflight_sha256": "d423c5fd130dfe9c470120f65b2fdb5ebf7bef6915f910d106de4984c9e3b9c5",
+  "method_contract": "docs/RETAILROCKET_CATEGORY_HIERARCHY_VALIDATION.md",
+  "method_contract_prefix_bytes": 7217,
+  "method_contract_prefix_sha256": "a5a5a9991287be24ca976055557803b0a5e9e83770ff5b546f2a80f0e64b0881",
+  "method_before_acceptance_append_sha256": "82d2c5f36d92fe4d8e0e66954804a339a22be274f159025d2165913a20362fe7",
+  "method_before_acceptance_append_bytes": 10805,
+  "read_only_query": true,
+  "input_table": "rr_stg.category_tree",
+  "result_rows": 18,
+  "result_columns": 5,
+  "report_field_positions": 90,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 90,
+  "visually_verified_integer_values": 50,
+  "visually_verified_null_expected_values": 4,
+  "visually_verified_complete_check_labels": 18,
+  "visually_verified_status_values": 18,
+  "rows_with_visually_verified_pass_status": 14,
+  "rows_with_visually_verified_info_status": 4,
+  "rows_with_pass_status": 14,
+  "rows_with_info_status": 4,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_90_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Transcribe the four displayed [NULL] expectations as JSON null, not zero or a string. Preserve every complete check name, status and row/column order; no label reconstruction is needed.",
+  "independent_visual_transcription_recorded_before_reference_comparison": true,
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "bfe1a20d4724ad252b11137ac1e5ddc39ed19096e3dd5110a92fc1277e86a61f",
+  "fingerprint_method": "SHA-256 of eighteen ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers, INFO expectations are JSON null, and labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "category_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_categoryids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "negative_identifier_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "root_nodes",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "self_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "orphan_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "root_reachable_nodes",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "cycle_affected_nodes",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "repeated_traversal_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "depth_limit_child_edges",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "max_root_depth",
+      "actual": 5,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "leaf_nodes",
+      "actual": 1307,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "branching_nodes",
+      "actual": 318,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "max_children_per_node",
+      "actual": 31,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_depth_maps_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the learner screenshot reproduction of SQL61's complete aggregate report, not a fresh direct audit of the learner database. Under the documented admission and traversal controls, all 1,669 known reference categories are root-reachable across 25 NULL-parent roots, with zero cycle-affected nodes, repeated traversal or depth-limit child edges. Observed shape statistics are maximum depth 5 with root depth 0 (five edges, not five levels), 1,307 leaves, 318 nodes with at least two children and maximum 31 direct children. These four observations have NULL expectations and were not preset success targets. The result establishes the stated forest properties of the supplied reference snapshot only, not category meanings, publisher authenticity, future integrity, event-time coverage or repair of the 167 unmatched property records. No reusable root/depth mapping table is created by this read-only audit. Prior assistant checks remain separate evidence; prior pending text remains historical and this appended record establishes learner acceptance. Learner conceptual understanding is not tested by a screenshot."
+}

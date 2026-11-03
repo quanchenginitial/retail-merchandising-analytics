@@ -1,0 +1,279 @@
+{
+  "checked_at_utc": "2026-11-03T06:31:17.347487+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/62_build_retailrocket_category_dimension.sql",
+  "script_sha256": "7e726c82d5fdbb664a6decea1a97aadc71f2db99999936f6e53ddcc2847176c4",
+  "validator": "validation/preflight_retailrocket_category_dimension.py",
+  "validator_sha256": "4dc6e74b23b05e0c11c6a0fe5bb1a47300840d88c6d1baed88223910b701f241",
+  "code_and_dependency_sha256": {
+    "sql/62_build_retailrocket_category_dimension.sql": "7e726c82d5fdbb664a6decea1a97aadc71f2db99999936f6e53ddcc2847176c4",
+    "validation/preflight_retailrocket_category_dimension.py": "4dc6e74b23b05e0c11c6a0fe5bb1a47300840d88c6d1baed88223910b701f241",
+    "validation/preflight_retailrocket_category_hierarchy.py": "1ea0a6bdadcdbf869c92bc0c459f9da3e28d865a1398b06db2ef1551ab7d3243",
+    "validation/preflight_retailrocket_categories_staging.py": "8ba15cca9fbb3bf27a1c7287effad2334799ce97ff8c7f86cd6a39de6e5e7014",
+    "validation/preflight_retailrocket_categories_import.py": "c0976034d720fe56ac7975211818b316f600587147b6a7d550e61165aefaa86f",
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "sql/60_stage_retailrocket_categories.sql": "fc7988bd2727ac2ffe0b715d19742454de9f6b77925bcf9783691be3dbe84c74",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_categories_import_preflight.json": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+    "data/retailrocket_categories_staging_preflight.json": "55f0bf8a07ec5e3e21ea5c8587ba4843e425a07b10001be6f777f9fcc54e147b",
+    "data/retailrocket_category_hierarchy_preflight.json": "d423c5fd130dfe9c470120f65b2fdb5ebf7bef6915f910d106de4984c9e3b9c5",
+    "data/retailrocket_category_hierarchy_learner_acceptance.json": "6dfa15b9ebe37d78d9280760cd6d09b40c3338a797c43aea5ffc0c495fe5f863",
+    "docs/RETAILROCKET_CATEGORY_HIERARCHY_VALIDATION.md": "93ccf261beed1a04af9353059e8cd2067f2506700f35554e97643035d8b1721f"
+  },
+  "method_contract": "docs/RETAILROCKET_CATEGORY_DIMENSION_VALIDATION.md",
+  "method_contract_prefix_bytes": 7282,
+  "method_contract_prefix_sha256": "5cd3ebab26b643a29c87a57c71f612f7d850991c666bfdb6971144dddf6fa593",
+  "source_files": [
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/55_import_retailrocket_categories.sql": "196f4db2008a5d2bdd06c32575b70321e21a2faa9725e6fe0a89828015fadf00",
+    "sql/60_stage_retailrocket_categories.sql": "e51693721dde7ec8f042ffc98416b9f7ac43e8784a0f94271ab47533dcd85464"
+  },
+  "reconstruction_basis": "Frozen SQL55 import/SQL60 creation prefixes only. SQL61 accepted evidence supplies baseline metadata, not a rerun of its audit.",
+  "table": "rr_core.dim_category",
+  "dimension_fields": [
+    "categoryid",
+    "parentid",
+    "root_categoryid",
+    "depth"
+  ],
+  "dimension_types": [
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT"
+  ],
+  "real_dimension_script_executions": 1,
+  "report_rows": 20,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 20,
+  "fail_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "dimension_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "null_parent_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_root_ids",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "root_identity_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "root_reference_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "parent_mapping_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "parent_root_depth_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "negative_depth_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "max_depth",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "source_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "dimension_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "expected_mapping_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "dimension_mapping_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "source_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "e4536879004701f2d4a733e0b259f8ef628934d094a056d520ddc028ff2aaa0e",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF; all count fields are integers.",
+  "independent_python_parent_chain_full_mapping_matched": true,
+  "independent_python_mapping_rows_compared": 1669,
+  "independent_python_mapping_fields_compared": 4,
+  "independent_python_input_tuples_unchanged": true,
+  "independent_python_report_matched": true,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "hand_checked_branching_forest_singleton_and_N_minus_1_chain_full_four_field_maps",
+      "passed": true
+    },
+    {
+      "case": "keyed_wrong_root_and_depth_detected_despite_unchanged_global_summaries_existing_sentinel_preserved",
+      "passed": true
+    },
+    {
+      "case": "invalid_empty_rootless_and_partly_rooted_graphs_or_populated_schema_rejected_atomically_input_preserved",
+      "subcases": [
+        "empty",
+        "wrong_count",
+        "wrong_roots",
+        "wrong_depth",
+        "duplicate",
+        "missing",
+        "negative",
+        "orphan",
+        "self_cycle",
+        "rootless_cycle",
+        "partial_rooted_cycle_with_feeder",
+        "wrong_type",
+        "wrong_order"
+      ],
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "rejection_subcase_count": 13,
+  "invalid_creation_destination_absence_verified": true,
+  "existing_destination_sentinel_preserved": true,
+  "keyed_wrong_root_and_depth_detected_with_unchanged_summaries": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "512MB",
+    "max_temp_directory_size": "1GB",
+    "timeout_seconds_per_phase": 60
+  },
+  "workspace_free_bytes_before": 49746386944,
+  "workspace_free_bytes_after": 49746337792,
+  "private_database_bytes_before_cleanup": 1060864,
+  "largest_private_directory_bytes_observed_after_phase": 4878336,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 60,
+  "source_records_identifiers_or_node_mappings_exported_or_logged": false,
+  "real_comparison_records_held_only_in_process_memory": true,
+  "elapsed_prefixes_dimension_checks_and_private_queries_seconds": 0.237,
+  "timing_scope": "One CLI execution of reconstruction prefixes, guarded dimension creation, its aggregate check query and private input/dimension projections; excludes hashing/Python oracle/fixtures. Creation and checking each derive the finite walk; no prior full audit suite is rerun.",
+  "scope": "Assistant static category dimension passed; learner SQL62 execution pending. Known reference only; no declared PK/NOT NULL constraints, time validity, full ancestor closure, category meaning, unknown-reference repair or event association."
+}
