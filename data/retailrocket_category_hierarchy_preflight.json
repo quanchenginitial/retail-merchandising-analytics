@@ -1,0 +1,245 @@
+{
+  "checked_at_utc": "2026-11-03T05:39:26.452523+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/61_audit_retailrocket_category_hierarchy.sql",
+  "script_sha256": "865113e4469f0606f5a56482ebc8d85e78413d4dbfe033d8e18ba81ed6a4150b",
+  "validator": "validation/preflight_retailrocket_category_hierarchy.py",
+  "validator_sha256": "1ea0a6bdadcdbf869c92bc0c459f9da3e28d865a1398b06db2ef1551ab7d3243",
+  "code_and_dependency_sha256": {
+    "sql/61_audit_retailrocket_category_hierarchy.sql": "865113e4469f0606f5a56482ebc8d85e78413d4dbfe033d8e18ba81ed6a4150b",
+    "validation/preflight_retailrocket_category_hierarchy.py": "1ea0a6bdadcdbf869c92bc0c459f9da3e28d865a1398b06db2ef1551ab7d3243",
+    "validation/preflight_retailrocket_categories_staging.py": "8ba15cca9fbb3bf27a1c7287effad2334799ce97ff8c7f86cd6a39de6e5e7014",
+    "validation/preflight_retailrocket_categories_import.py": "c0976034d720fe56ac7975211818b316f600587147b6a7d550e61165aefaa86f",
+    "sql/55_import_retailrocket_categories.sql": "5b513c18ebc1b4f1c32f5e77e18b5cf844546e6bbb9a83272dcef1223bbdd60f",
+    "sql/60_stage_retailrocket_categories.sql": "fc7988bd2727ac2ffe0b715d19742454de9f6b77925bcf9783691be3dbe84c74",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_categories_import_preflight.json": "a53ecb55b9799648049ce892479e421995aa3aa2fa56597dcababb708228cd6f",
+    "data/retailrocket_categories_staging_preflight.json": "55f0bf8a07ec5e3e21ea5c8587ba4843e425a07b10001be6f777f9fcc54e147b",
+    "data/retailrocket_categories_staging_learner_acceptance.json": "a602c9d2618a0527d83ae62d23fcceb20e65fc4958020a284bb2199d69ed86d1",
+    "docs/RETAILROCKET_CATEGORIES_STAGING_VALIDATION.md": "0547afad690aea53695b0e750f31b553e7879bdeceadf0665bb5b5d34d40e258"
+  },
+  "method_contract": "docs/RETAILROCKET_CATEGORY_HIERARCHY_VALIDATION.md",
+  "method_contract_prefix_bytes": 7217,
+  "method_contract_prefix_sha256": "a5a5a9991287be24ca976055557803b0a5e9e83770ff5b546f2a80f0e64b0881",
+  "source_files": [
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/55_import_retailrocket_categories.sql": "196f4db2008a5d2bdd06c32575b70321e21a2faa9725e6fe0a89828015fadf00",
+    "sql/60_stage_retailrocket_categories.sql": "e51693721dde7ec8f042ffc98416b9f7ac43e8784a0f94271ab47533dcd85464"
+  },
+  "reconstruction_basis": "Frozen SQL55 import and SQL60 creation prefixes only; one category CSV, no previous full report suites.",
+  "real_audit_report_executions": 1,
+  "private_depth_projection_executions": 1,
+  "report_rows": 18,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 14,
+  "info_rows": 4,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "category_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_categoryids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "negative_identifier_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "root_nodes",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "self_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "orphan_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "root_reachable_nodes",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "cycle_affected_nodes",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "repeated_traversal_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "depth_limit_child_edges",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "max_root_depth",
+      "actual": 5,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "leaf_nodes",
+      "actual": 1307,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "branching_nodes",
+      "actual": 318,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "max_children_per_node",
+      "actual": 31,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "report_sha256": "bfe1a20d4724ad252b11137ac1e5ddc39ed19096e3dd5110a92fc1277e86a61f",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF; actual counts are integers and INFO expectations are null.",
+  "independent_python_parent_chain_report_matched": true,
+  "independent_python_all_node_depths_matched": true,
+  "independent_python_depth_nodes_compared": 1669,
+  "independent_python_input_tuples_unchanged": true,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "hand_checked_branching_forest_isolated_root_singleton_and_maximum_N_minus_1_chain",
+      "passed": true
+    },
+    {
+      "case": "admitted_three_node_cycle_with_feeder_self_cycle_and_rootless_cycle_detected_finitely",
+      "passed": true
+    },
+    {
+      "case": "orphan_duplicate_missing_negative_empty_count_and_populated_schema_inputs_suppress_graph_root_baseline_does_not",
+      "subcases": [
+        "orphan",
+        "duplicate",
+        "missing_id",
+        "negative_id",
+        "negative_parent",
+        "empty",
+        "wrong_count",
+        "wrong_root_baseline",
+        "wrong_integer_type",
+        "wrong_order"
+      ],
+      "passed": true
+    }
+  ],
+  "independent_synthetic_graph_reports_and_depths_matched": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "512MB",
+    "max_temp_directory_size": "1GB",
+    "timeout_seconds_per_phase": 60
+  },
+  "workspace_free_bytes_before": 49761329152,
+  "workspace_free_bytes_after": 49761316864,
+  "private_database_bytes_before_cleanup": 798720,
+  "largest_private_directory_bytes_observed_after_phase": 6225920,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 59,
+  "source_records_identifiers_paths_or_depth_maps_exported_or_logged": false,
+  "real_comparison_records_held_only_in_process_memory": true,
+  "elapsed_prefixes_report_private_depths_and_input_query_seconds": 0.224,
+  "timing_scope": "One bounded CLI execution: two reconstruction prefixes, one public aggregate audit, one private SQL traversal projection and one private input projection; excludes hashes/Python oracle/fixtures. Directory observations are post-phase, not continuous peaks.",
+  "scope": "Assistant hierarchy audit passed; learner SQL61 execution pending. Known-reference forest only. No root/depth table, category meaning, unmatched-property repair, event-time coverage or future database constraint is established."
+}

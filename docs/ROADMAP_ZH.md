@@ -2,7 +2,7 @@
 
 更新日期：2026-11-03（Australia/Sydney）。
 
-**当前状态：SQL59 未匹配类别调查已验收，下一步运行 SQL60。** 截图 110 个字段全部完整可见并匹配，10 个 PASS 和 12 个 INFO；见 [验收记录](../data/retailrocket_unmatched_categories_learner_acceptance.json)。167 条记录涉及 137 个商品编号、30 个类别值及 7 个原始时间戳，严格数值诊断仍无参考候选。下一步创建类别类型化参考表；SQL60 助手预检通过，用户执行待完成。未知引用保留，来源原因及事件影响未验证。
+**当前状态：SQL60 类型化类别参考表已验收，下一步运行 SQL61。** 截图 90 个字段全部完整可见并匹配，18 项 PASS；见 [验收记录](../data/retailrocket_categories_staging_learner_acceptance.json)。1,669 行、两个整数列和 25 个空父编号均保留。SQL61 将核对完整层级及根可达性；助手预检通过，用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL60](../sql/60_stage_retailrocket_categories.sql)。目的：把文本类别编号转成经验证、可逆的整数键，保留父子关系和 NULL 父编号，为后续类别关联建立可复用参考表。报告为 18 行、5 列，预期全部 PASS。脚本使用普通 CREATE；已有目标表时不覆盖，只运行 CHECKS 查询。循环父子关系、深度、根路径和事件时点关联仍需后续单独检查。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接完整执行只读 [SQL61](../sql/61_audit_retailrocket_category_hierarchy.sql)。目的：在按类别层级汇总商品行为之前，检查循环关系、根可达性和有限遍历，并观察层级深度与分支结构。报告为 18 行、5 列，预期 14 项 PASS、4 项 INFO；INFO 的 expected 为 NULL。根深度定义为 0，受环影响数量包括环成员及父链最终进入环的类别。本步不改表，不重新导入来源，也不完成事件时点关联。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

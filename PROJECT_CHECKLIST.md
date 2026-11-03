@@ -158,7 +158,9 @@
 - [x] 7G 助手准备并预检 [SQL59 未匹配类别记录审计](sql/59_audit_retailrocket_unmatched_categories.sql)：只读固定的精确未匹配群体，统计不同商品编号、原始类别值、原始时间戳及来源分部，并诊断数值转换资格与参考歧义；22 行报告含 10 项 PASS 控制和 12 项 INFO 观测。见 [验证说明](docs/RETAILROCKET_UNMATCHED_CATEGORIES_VALIDATION.md)。不修剪或改写原文，不自动修复，不推断来源原因或事件时点覆盖。
 - [x] 7G 用户于 2026-11-03 截图验收 SQL59：22 行 × 5 列、110 个字段全部完整可见并匹配，10 个 PASS、12 个 INFO；无需补全名称。167 条未匹配类别属性记录涉及 137 个原始商品编号、30 个原始类别值和 7 个原始时间戳，数值诊断仍无参考候选；见 [聚合验收](data/retailrocket_unmatched_categories_learner_acceptance.json)。不据此判定来源错误、缺失原因或事件影响。
 - [x] 7H 助手准备并预检 [SQL60 类别参考表类型化](sql/60_stage_retailrocket_categories.sql)：以严格可逆的整数转换创建 rr_stg.category_tree，保留 1,669 条类别记录及 25 个 NULL 父编号；18 项检查验证字段、键、直接父引用及双向完整多重集合对账。原始表保留，普通 CREATE 不覆盖已有表；见 [验证说明](docs/RETAILROCKET_CATEGORIES_STAGING_VALIDATION.md)。不填补 167 条未匹配属性，不声称已检查环路、层级深度或根路径。
-- [ ] 7H 用户执行 SQL60，提供 18 行、5 列报告；预期全部 PASS。首次执行整个脚本；表已存在时保留原表，只执行 CHECKS 查询。
+- [x] 7H 用户于 2026-11-03 截图验收 SQL60：18 行 × 5 列、90 个字段全部完整可见并匹配，18 项 PASS；见 [聚合验收](data/retailrocket_categories_staging_learner_acceptance.json)。1,669 条类别记录、两个 BIGINT 列及 25 个 NULL 父编号保留，转换与完整多重集合对账一致。SQL60 本身未验证完整层级或声明数据库主键约束。
+- [x] 7I 助手准备并预检 [SQL61 类别层级审计](sql/61_audit_retailrocket_category_hierarchy.sql)：在唯一、非空及父引用完整的前提下，从 NULL 父编号根节点作有限遍历，核查全部类别的根可达性、受环影响类别、重复访问和深度截断。18 行报告含 14 项 PASS 控制和 4 项 INFO 深度/分支观测；见 [验证说明](docs/RETAILROCKET_CATEGORY_HIERARCHY_VALIDATION.md)。受环影响类别包括环成员及父链进入环的类别；不只统计环成员。不改表或关联事件。
+- [ ] 7I 用户执行 SQL61，提供 18 行、5 列报告；预期 14 项 PASS、4 项 INFO，INFO 的 expected 为 NULL。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -168,6 +170,6 @@
 
 ## 下一次对话从这里继续
 
-SQL59 已于 2026-11-03 截图验收：110 个字段完整匹配，10 个 PASS 和 12 个 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL60](sql/60_stage_retailrocket_categories.sql)，将已验证的类别编号转成整数键，保留父子关系与 NULL 父编号，建立后续关联可复用的参考表。助手预检通过，用户执行待完成；预期 18 项 PASS。未匹配属性保留，层级环路、深度、根路径、其他键的类型化及事件时点关联仍待后续，整体项目未完成。
+SQL60 已于 2026-11-03 截图验收：90 个字段完整匹配，18 项 PASS。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL61](sql/61_audit_retailrocket_category_hierarchy.sql)，检查完整类别层级是否有限、无环且每个类别都能通向根，为后续层级汇总提供依据。助手预检通过，用户执行待完成；报告为 14 项 PASS 和 4 项 INFO。其他键的类型化、历史属性及事件时点关联仍待后续，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

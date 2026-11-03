@@ -1,0 +1,189 @@
+{
+  "observed_date": "2026-11-03",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant independent visual transcription of a learner-supplied DBeaver aggregate screenshot. All eighteen rows, five column headers, complete check names, integer values and PASS statuses are fully visible. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/60_stage_retailrocket_categories.sql",
+  "script_sha256": "fc7988bd2727ac2ffe0b715d19742454de9f6b77925bcf9783691be3dbe84c74",
+  "assistant_preflight": "data/retailrocket_categories_staging_preflight.json",
+  "assistant_preflight_sha256": "55f0bf8a07ec5e3e21ea5c8587ba4843e425a07b10001be6f777f9fcc54e147b",
+  "method_contract": "docs/RETAILROCKET_CATEGORIES_STAGING_VALIDATION.md",
+  "method_contract_prefix_bytes": 7118,
+  "method_contract_prefix_sha256": "e382b2c65139cdd215d938c04515dd593feab92488e0e796b21093598a979313",
+  "method_before_acceptance_append_sha256": "8861bc7d25253c10058ba49dd52c637813fea7caf0420f906d4d16db33f0a023",
+  "method_before_acceptance_append_bytes": 10187,
+  "script_creates_staging_table": true,
+  "accepted_output": "Final SQL60 validation report",
+  "input_table": "rr_raw.category_tree",
+  "staging_table": "rr_stg.category_tree",
+  "result_rows": 18,
+  "result_columns": 5,
+  "report_field_positions": 90,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 90,
+  "visually_verified_integer_values": 54,
+  "visually_verified_null_expected_values": 0,
+  "visually_verified_complete_check_labels": 18,
+  "visually_verified_status_values": 18,
+  "rows_with_visually_verified_pass_status": 18,
+  "rows_with_pass_status": 18,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_90_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Preserve all complete check names, statuses and row/column order. No label reconstruction, missing-field inference or NULL substitution is required.",
+  "independent_visual_transcription_recorded_before_reference_comparison": true,
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "20805154a073ff8c9ecca82f2ea7acf0eec440b97bc9738572dccdf499ca9cae",
+  "fingerprint_method": "SHA-256 of eighteen ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers and labels/status are strings.",
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "bigint_column_count",
+      "actual": 2,
+      "expected": 2,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "schema_mismatch_count",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "missing_categoryids",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "null_parent_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "self_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "orphan_parent_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "raw_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "raw_value_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "raw_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "staging_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "raw_null_parent_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "root_set_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "numeric_key_collisions",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "raw_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the learner screenshot reproduction of SQL60's complete 18-row validation report, not a fresh direct audit of the learner database. It supports 1,669 staged reference records, two BIGINT columns, preserved 25 NULL parents and matching key/reference/roundtrip/multiset controls at this execution. The NULL-parent observations remain root candidates: cycles, complete root reachability and hierarchy depth were not checked by SQL60. Uniqueness and nonmissing category IDs are verified data conditions, not declared database PRIMARY KEY or NOT NULL constraints. This acceptance does not validate event-time joins, current availability, invented unknown categories, causal/business impact or learner conceptual understanding. The earlier assistant preflight is separate evidence; its original pending text remains historical and this appended record establishes later learner acceptance."
+}
