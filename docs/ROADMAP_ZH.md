@@ -2,7 +2,7 @@
 
 更新日期：2026-11-06（Australia/Sydney）。
 
-**当前状态：SQL62 类别维表已验收，下一步运行 SQL63。** 20 项 PASS，96 个字段完整可见并匹配，4 个裁切名称由可见前缀和固定契约识别；见 [验收记录](../data/retailrocket_category_dimension_learner_acceptance.json)。1,669 个类别的根与深度映射已通过检查。SQL63 将对电商事件的时间戳和编号进行类型化，保留原始记录及重复；助手预检通过，用户执行待完成。
+**当前状态：SQL63 事件类型化已验收，下一步运行 SQL64。** 截图 100 个字段全部完整可见并匹配，20 项 PASS；见 [验收记录](../data/retailrocket_events_staging_learner_acceptance.json)。2,756,101 条事件、重复次数及交易编号空值保留。SQL64 将核对 UTC 时间转换、日期范围及每日记录计数；助手预检通过，用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL63](../sql/63_stage_retailrocket_events.sql)。目的：将 rr_raw.events 的数值文本转为明确整数类型，保存为 rr_stg.events，供后续排序与关联使用。报告为 20 行、5 列，预期全部 PASS。已有目标表时只执行 CHECKS 查询，不覆盖原表。保留全部事件、重复记录和可空交易编号；本步不定义订单/会话、不转换日期或计算转化率。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接完整执行 [SQL64](../sql/64_audit_retailrocket_event_time.sql)。目的：在按日分析及历史属性关联之前，验证整数毫秒时间戳的 UTC 解析和日期归属。该步骤只读 rr_stg.events，不建立新表；报告为 18 行、5 列，预期 15 项 PASS、3 项 INFO，INFO 的 expected 为 NULL。UTC 是统一分析口径，不据此推断商家的本地营业日或时区。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

@@ -1,0 +1,353 @@
+{
+  "observed_date": "2026-11-06",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty rows, five headers, twenty complete check names, sixty integer values and twenty PASS statuses are fully visible. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/63_stage_retailrocket_events.sql",
+  "script_sha256": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+  "validator": "validation/preflight_retailrocket_events_staging.py",
+  "validator_sha256": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+  "assistant_preflight": "data/retailrocket_events_staging_preflight.json",
+  "assistant_preflight_sha256": "92c508abcdb12cdff05474dec509c9f0298a7d58c25835f2cd75a97afea63ff7",
+  "method_contract": "docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md",
+  "method_contract_prefix_bytes": 8088,
+  "method_contract_prefix_sha256": "1eff15c9b102fa2196065f3065d61459e69efe110a0e021d2f4dc14f157641ed",
+  "method_before_acceptance_append_sha256": "64d5695f68609c7cdf2d21ac64c5552a76ec6c07529be10d4e46f99a5cb94756",
+  "method_before_acceptance_append_bytes": 11975,
+  "input_table": "rr_raw.events",
+  "staging_table": "rr_stg.events",
+  "learner_action_type": "Guarded event-field type conversion followed by aggregate validation; the displayed check result accepts the observed typed staging snapshot.",
+  "result_rows": 20,
+  "result_columns": 5,
+  "report_field_positions": 100,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 100,
+  "visually_verified_integer_values": 60,
+  "visually_verified_complete_check_labels": 20,
+  "visually_verified_status_values": 20,
+  "rows_with_visually_verified_pass_status": 20,
+  "rows_with_pass_status": 20,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_100_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "partially_visible_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Preserve every complete check name, status and row/column order; no label reconstruction is needed.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "staging_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      2,
+      "column_count",
+      5,
+      5,
+      "PASS"
+    ],
+    [
+      3,
+      "schema_mismatch_count",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      4,
+      "missing_required_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      5,
+      "negative_numeric_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      6,
+      "unexpected_event_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "event_id_mismatch_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      8,
+      "view_rows",
+      2664312,
+      2664312,
+      "PASS"
+    ],
+    [
+      9,
+      "addtocart_rows",
+      69332,
+      69332,
+      "PASS"
+    ],
+    [
+      10,
+      "transaction_rows",
+      22457,
+      22457,
+      "PASS"
+    ],
+    [
+      11,
+      "null_transactionid_rows",
+      2733644,
+      2733644,
+      "PASS"
+    ],
+    [
+      12,
+      "duplicate_surplus_rows",
+      460,
+      460,
+      "PASS"
+    ],
+    [
+      13,
+      "raw_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      14,
+      "raw_value_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      15,
+      "raw_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      16,
+      "raw_duplicate_surplus",
+      460,
+      460,
+      "PASS"
+    ],
+    [
+      17,
+      "raw_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      18,
+      "staging_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      19,
+      "raw_null_transactionid_rows",
+      2733644,
+      2733644,
+      "PASS"
+    ],
+    [
+      20,
+      "source_contract_violations",
+      0,
+      0,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "negative_numeric_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "unexpected_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "event_id_mismatch_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "view_rows",
+      "actual": 2664312,
+      "expected": 2664312,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "addtocart_rows",
+      "actual": 69332,
+      "expected": 69332,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "transaction_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "null_transactionid_rows",
+      "actual": 2733644,
+      "expected": 2733644,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "duplicate_surplus_rows",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "raw_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "raw_value_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "raw_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "raw_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "raw_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "staging_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "raw_null_transactionid_rows",
+      "actual": 2733644,
+      "expected": 2733644,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "df201fe6fcd54779af3b9abdcfd8fa1d0e9ab16dd1ce9d948ba4dc0757960fc0",
+  "fingerprint_method": "SHA-256 of twenty ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers and labels/status are strings.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_event_histories_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the complete displayed SQL63 aggregate reproduction: all 100 fields are fully visible and match, including twenty PASS statuses. The accepted typed staging snapshot has 2,756,101 event observations and five fields with the intended BIGINT/VARCHAR schema. Event counts, 2,733,644 NULL transaction IDs and 460 duplicate surplus occurrences are preserved. Raw and staged multiset differences are zero and canonical value/schema/source checks pass. This screenshot is not a new direct audit of every learner-table row. Prior independent assistant source/table comparisons remain separate evidence; prior learner-pending wording is historical, and this appended record establishes learner acceptance. No timestamp-to-date or UTC interpretation, deduplication decision, session/order/person identity, historical property association, conversion rate or monetary metric is established by this step. Learner conceptual understanding is not tested by a PASS screenshot."
+}

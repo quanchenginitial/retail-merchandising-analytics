@@ -1,0 +1,275 @@
+{
+  "checked_at_utc": "2026-11-06T07:00:10.902694+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/64_audit_retailrocket_event_time.sql",
+  "script_sha256": "cc798d9e4cbfefb460102bdc4c7125d0f976f031b46b87fcefb9f8e29262e819",
+  "validator": "validation/preflight_retailrocket_event_time.py",
+  "validator_sha256": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+  "code_and_dependency_sha256": {
+    "sql/64_audit_retailrocket_event_time.sql": "cc798d9e4cbfefb460102bdc4c7125d0f976f031b46b87fcefb9f8e29262e819",
+    "validation/preflight_retailrocket_event_time.py": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_independent_checks.json": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+    "data/retailrocket_events_staging_preflight.json": "92c508abcdb12cdff05474dec509c9f0298a7d58c25835f2cd75a97afea63ff7",
+    "data/retailrocket_events_staging_learner_acceptance.json": "e6bcad9ecdf019cd8ce5a9ff21527eeecac002dd43f9c52ea9a1479e11dd07cb",
+    "docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md": "df3b0594345adf6f682941828496c95fc81e70ee4088108596d0a578a818070a"
+  },
+  "method_contract": "docs/RETAILROCKET_EVENT_TIME_VALIDATION.md",
+  "method_contract_prefix_bytes": 8758,
+  "method_contract_prefix_sha256": "75e3f3d48f9d3b295ff7543c6234c1a16cfc6906c03129fa04559eb25f3e39a3",
+  "source_files": [
+    "events.csv"
+  ],
+  "source_before": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "reconstruction_basis": "Only frozen SQL54 import and SQL63 creation prefixes; no prior full checks. One separate read-only report and one read-only per-occurrence stream.",
+  "source_table": "rr_stg.events",
+  "query_read_only": true,
+  "real_audit_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "report_rows": 18,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "actual_expected_types": "VARCHAR or NULL; check_order integer",
+  "checks_passed": 15,
+  "info_rows": 3,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "event_rows",
+      "actual": "2756101",
+      "expected": "2756101",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "schema_mismatch",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "missing_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "negative_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "unsupported_epoch_ms_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "converted_rows",
+      "actual": "2756101",
+      "expected": "2756101",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "conversion_null_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "roundtrip_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "date_partition_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "min_timestamp_ms",
+      "actual": "1430622004384",
+      "expected": "1430622004384",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "max_timestamp_ms",
+      "actual": "1442545187788",
+      "expected": "1442545187788",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "first_utc_timestamp",
+      "actual": "2015-05-03T03:00:04.384000Z",
+      "expected": "2015-05-03T03:00:04.384000Z",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "last_utc_timestamp",
+      "actual": "2015-09-18T02:59:47.788000Z",
+      "expected": "2015-09-18T02:59:47.788000Z",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "distinct_utc_dates",
+      "actual": "139",
+      "expected": "139",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "daily_rows_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "first_date_event_rows",
+      "actual": "13683",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "last_date_event_rows",
+      "actual": "1528",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "subsecond_event_rows",
+      "actual": "2753264",
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "report_sha256": "5293a6a3aedeb9b74821fc20cd6b9dd6d6e0b8555a8bf3d12d71045f26cb70c0",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF. actual/expected are strings or JSON null.",
+  "independent_python_integer_datetime_reference": true,
+  "independent_python_source_fold_matched": true,
+  "independent_python_report_matched": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 4,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_source_and_stream_date_partitions_matched": true,
+  "utc_date_partition_sha256": "97068f02a37c7342a9d20e58608567dc40eeea732736bf3bcb5f5b96512f8dfe",
+  "utc_date_partition_fingerprint_contract": "Ordered compact JSON [YYYY-MM-DD, occurrence_count] arrays followed by LF.",
+  "private_database_sha256_before_readonly": "11ea5107d175fdf77c0a3825ebf3499b3afd5fe1012779d5bec07f883fbee5db",
+  "private_database_sha256_after_readonly": "11ea5107d175fdf77c0a3825ebf3499b3afd5fe1012779d5bec07f883fbee5db",
+  "private_database_bytes_unchanged": true,
+  "supported_epoch_ms_min": 0,
+  "supported_epoch_ms_max": 253402300799999,
+  "time_interpretation": "UTC convention applied to timezone-naive TIMESTAMP; not evidence of business local timezone.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "exact_fraction_midnight_leap_day_duplicates_shared_upper_bound_two_zone_invariance",
+      "passed": true,
+      "fixture_occurrences": 10,
+      "session_timezones": [
+        "UTC",
+        "Australia/Sydney"
+      ]
+    },
+    {
+      "case": "frozen_bounds_or_date_count_mismatch_blocks_all_info_despite_valid_conversion",
+      "passed": true,
+      "subcases": [
+        "changed_minimum",
+        "changed_maximum",
+        "changed_date_count"
+      ]
+    },
+    {
+      "case": "invalid_prerequisites_block_every_derived_metric_without_unsafe_conversion",
+      "passed": true,
+      "subcases": [
+        "empty",
+        "wrong_count",
+        "null",
+        "negative",
+        "beyond_shared_range",
+        "bigint_overflow_for_timestamp",
+        "wrong_type_numeric",
+        "wrong_type_unparsed",
+        "wrong_order"
+      ]
+    }
+  ],
+  "invalid_prerequisite_subcase_count": 9,
+  "changed_control_subcase_count": 3,
+  "blocked_dependencies_verified": true,
+  "info_requires_all_controls_pass_verified": true,
+  "session_timezone_invariance_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120
+  },
+  "workspace_free_bytes_before": 47871475712,
+  "workspace_free_bytes_after": 47868678144,
+  "private_database_bytes_before_cleanup": 65548288,
+  "largest_private_directory_bytes_observed_after_phase": 65548288,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 62,
+  "source_records_or_identifiers_exported_or_logged": false,
+  "private_per_event_comparison_files_created": false,
+  "elapsed_python_source_fold_seconds": 16.159,
+  "elapsed_reconstruction_seconds": 4.766,
+  "elapsed_readonly_audit_seconds": 0.317,
+  "elapsed_private_stream_seconds": 31.445,
+  "timing_scope": "One reconstruction CLI, one read-only SQL64 report and one read-only per-occurrence stream; independent source fold timed separately. Hashing/fixtures excluded; not a performance benchmark.",
+  "scope": "Assistant timestamp audit passed; learner SQL64 pending. No table mutation, deduplication, local-business timezone inference, session/order/person definitions, event-time property join, conversion rate or monetary metric. Observed endpoint dates are not assumed complete collection days."
+}
