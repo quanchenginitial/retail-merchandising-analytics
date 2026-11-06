@@ -1,8 +1,8 @@
 # 商品分析项目：逐步学习与验收路线
 
-更新日期：2026-11-03（Australia/Sydney）。
+更新日期：2026-11-06（Australia/Sydney）。
 
-**当前状态：SQL61 类别层级审计已验收，下一步运行 SQL62。** 截图 90 个字段全部完整可见并匹配，14 项 PASS、4 项 INFO；见 [验收记录](../data/retailrocket_category_hierarchy_learner_acceptance.json)。1,669 个参考类别均通向 25 个根，最大深度 5 条边，未发现受环影响类别或不完整遍历。SQL62 将保存可复用的根类别与深度映射；助手预检通过，用户执行待完成。
+**当前状态：SQL62 类别维表已验收，下一步运行 SQL63。** 20 项 PASS，96 个字段完整可见并匹配，4 个裁切名称由可见前缀和固定契约识别；见 [验收记录](../data/retailrocket_category_dimension_learner_acceptance.json)。1,669 个类别的根与深度映射已通过检查。SQL63 将对电商事件的时间戳和编号进行类型化，保留原始记录及重复；助手预检通过，用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL62](../sql/62_build_retailrocket_category_dimension.sql)。目的：把每个类别所属根类别与深度保存在 rr_core.dim_category，供后续层级汇总重复使用。报告为 20 行、5 列，预期全部 PASS。已有目标表时只执行 CHECKS 查询，不覆盖原表。映射描述提供的静态类别参考，不包含属性历史有效期、事件时点匹配或全部祖先关系。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL63](../sql/63_stage_retailrocket_events.sql)。目的：将 rr_raw.events 的数值文本转为明确整数类型，保存为 rr_stg.events，供后续排序与关联使用。报告为 20 行、5 列，预期全部 PASS。已有目标表时只执行 CHECKS 查询，不覆盖原表。保留全部事件、重复记录和可空交易编号；本步不定义订单/会话、不转换日期或计算转化率。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

@@ -1,6 +1,6 @@
 # 商品分析项目进度
 
-更新日期：2026-11-02（Australia/Sydney）。
+更新日期：2026-11-06（Australia/Sydney）。
 
 ## 本次已经发生的工作
 
@@ -162,7 +162,9 @@
 - [x] 7I 助手准备并预检 [SQL61 类别层级审计](sql/61_audit_retailrocket_category_hierarchy.sql)：在唯一、非空及父引用完整的前提下，从 NULL 父编号根节点作有限遍历，核查全部类别的根可达性、受环影响类别、重复访问和深度截断。18 行报告含 14 项 PASS 控制和 4 项 INFO 深度/分支观测；见 [验证说明](docs/RETAILROCKET_CATEGORY_HIERARCHY_VALIDATION.md)。受环影响类别包括环成员及父链进入环的类别；不只统计环成员。不改表或关联事件。
 - [x] 7I 用户于 2026-11-03 截图验收 SQL61：18 行 × 5 列、90 个字段全部完整可见并匹配，14 项 PASS 和 4 项 INFO；见 [聚合验收](data/retailrocket_category_hierarchy_learner_acceptance.json)。1,669 个参考类别均可达 25 个根，受环影响、重复遍历及深度截断为 0；最大深度为 5 条边（根深度 0），1,307 个叶节点、318 个分支节点、最多 31 个直接子节点。结论限定提供的参考结构，不外推事件覆盖或修补未知引用。
 - [x] 7J 助手准备并预检 [SQL62 类别维表](sql/62_build_retailrocket_category_dimension.sql)：创建 rr_core.dim_category，保存 categoryid、parentid、root_categoryid、depth 四个 BIGINT 列；保留 1,669 个类别、25 个根和已验收的最大深度 5。20 项检查覆盖字段与键、根及父节点关系、来源两字段及预期四字段映射的完整多重集合对账；见 [验证说明](docs/RETAILROCKET_CATEGORY_DIMENSION_VALIDATION.md)。普通 CREATE 保留已有表，坏图或不完整映射拒绝创建；不推断属性有效期或修复 167 条未匹配记录。
-- [ ] 7J 用户执行 SQL62，提供 20 行、5 列报告；预期全部 PASS。首次完整执行，目标表已存在时保留原表并只运行 CHECKS 查询。
+- [x] 7J 用户于 2026-11-06 截图验收 SQL62：20 项 PASS，96 个字段完整可见并匹配；第 3、17、18、19 行名称裁切，按可见前缀与固定契约识别。1,669 个类别、25 个根与最大深度 5 保留，来源与完整根/深度映射差异为 0；见 [聚合验收](data/retailrocket_category_dimension_learner_acceptance.json)。不声称全部 100 个字段完整可见。
+- [x] 7K 助手准备并预检 [SQL63 事件类型化](sql/63_stage_retailrocket_events.sql)：创建 rr_stg.events，时间戳、访客、商品及可空交易编号转为 BIGINT，事件类型保留 VARCHAR；2,756,101 行、460 条完全重复盈余及 2,733,644 个 NULL 交易编号保留。原始数值文本需通过严格格式与精确往返转换校验，完整多重集合对账检查记录及重复次数；见 [验证说明](docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md)。本步不删除重复、定义订单或会话、转换日期、关联属性或计算转化率。
+- [ ] 7K 用户执行 SQL63，提供 20 行、5 列报告；预期全部 PASS。首次完整执行，目标表已存在时保留原表并只运行 CHECKS 查询。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -172,6 +174,6 @@
 
 ## 下一次对话从这里继续
 
-SQL61 已于 2026-11-03 截图验收：90 个字段完整匹配，14 项 PASS 与 4 项 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL62](sql/62_build_retailrocket_category_dimension.sql)，保存每个类别所属根类别和深度，让后续按不同类别层级汇总使用同一张映射表。助手预检通过，用户执行待完成；预期 20 项 PASS。其他键的类型化、历史属性及事件时点关联仍待后续，整体项目未完成。
+SQL62 已于 2026-11-06 截图验收：20 项 PASS，96 个完整可见字段加 4 个契约识别名称。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL63](sql/63_stage_retailrocket_events.sql)，将电商事件的时间戳与编号整理为明确类型，为后续排序和关联准备一致字段。助手预检通过，用户执行待完成；预期 20 项 PASS。事件重复保留，历史属性、时点关联及行为指标仍待后续，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

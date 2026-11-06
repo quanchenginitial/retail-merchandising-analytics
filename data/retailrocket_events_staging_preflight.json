@@ -1,0 +1,312 @@
+{
+  "checked_at_utc": "2026-11-06T06:28:01.433097+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/63_stage_retailrocket_events.sql",
+  "script_sha256": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+  "validator": "validation/preflight_retailrocket_events_staging.py",
+  "validator_sha256": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+  "code_and_dependency_sha256": {
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_independent_checks.json": "cfa364db88b931efe46bca395d4fcb2e6bb4f2a38df12c06517ebe22fc3828ee",
+    "data/retailrocket_events_import_preflight.json": "e04285583f97e95f78f7c8d4084e8f49174ba657cd47201fb5fa485b9749b11b",
+    "data/retailrocket_events_import_learner_acceptance.json": "bd6df79de9a870da6f0ba6d0f6abada074f43a20ded3984a03b661e78f796a88"
+  },
+  "method_contract": "docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md",
+  "method_contract_prefix_bytes": 8088,
+  "method_contract_prefix_sha256": "1eff15c9b102fa2196065f3065d61459e69efe110a0e021d2f4dc14f157641ed",
+  "source_files": [
+    "events.csv"
+  ],
+  "source_before": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb"
+  },
+  "reconstruction_basis": "Only frozen SQL54 import prefix; no previous full audit suites or learner database.",
+  "table": "rr_stg.events",
+  "staging_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "staging_types": [
+    "BIGINT",
+    "BIGINT",
+    "VARCHAR",
+    "BIGINT",
+    "BIGINT"
+  ],
+  "real_staging_script_executions": 1,
+  "real_private_comparison_stream_executions": 2,
+  "report_rows": 20,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 20,
+  "fail_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "staging_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "negative_numeric_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "unexpected_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "event_id_mismatch_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "view_rows",
+      "actual": 2664312,
+      "expected": 2664312,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "addtocart_rows",
+      "actual": 69332,
+      "expected": 69332,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "transaction_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "null_transactionid_rows",
+      "actual": 2733644,
+      "expected": 2733644,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "duplicate_surplus_rows",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "raw_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "raw_value_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "raw_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "raw_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "raw_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "staging_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "raw_null_transactionid_rows",
+      "actual": 2733644,
+      "expected": 2733644,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "df201fe6fcd54779af3b9abdcfd8fa1d0e9ab16dd1ce9d948ba4dc0757960fc0",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF; count fields are integers.",
+  "independent_python_source_counts": {
+    "rows": 2756101,
+    "event_counts": {
+      "view": 2664312,
+      "addtocart": 69332,
+      "transaction": 22457
+    },
+    "null_ids": 2733644
+  },
+  "independent_python_canonical_spelling_validated": true,
+  "independent_python_report_matched": true,
+  "independent_raw_stream": {
+    "rows": 2756101,
+    "fields": 5,
+    "duplicate_surplus": 460,
+    "matched": true,
+    "elapsed_seconds": 9.845
+  },
+  "independent_staging_stream": {
+    "rows": 2756101,
+    "fields": 5,
+    "duplicate_surplus": 460,
+    "matched": true,
+    "elapsed_seconds": 9.189
+  },
+  "independent_full_five_field_multiset_matched": true,
+  "independent_raw_input_unchanged": true,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "canonical_zero_max_bigint_null_duplicates_and_chunked_text_sort_streams_full_report",
+      "passed": true
+    },
+    {
+      "case": "same_count_tuple_change_duplicate_loss_detected_existing_sentinel_preserved",
+      "passed": true
+    },
+    {
+      "case": "invalid_canonical_values_empty_counts_and_populated_schema_rejected_atomically",
+      "subcases": [
+        "empty",
+        "wrong_count",
+        "isolated_leading_zero",
+        "numeric_alias_pair",
+        "whitespace",
+        "plus_sign",
+        "decimal",
+        "non_ascii_digits",
+        "overflow",
+        "missing_required",
+        "empty_required",
+        "empty_transaction_id",
+        "transaction_without_id",
+        "nontransaction_with_id",
+        "unexpected_event",
+        "negative",
+        "wrong_event_counts",
+        "wrong_duplicate_count",
+        "wrong_null_count",
+        "wrong_type",
+        "wrong_order"
+      ],
+      "passed": true,
+      "expected_rejection": true
+    }
+  ],
+  "rejection_subcase_count": 21,
+  "invalid_creation_destination_absence_verified": true,
+  "existing_destination_sentinel_preserved": true,
+  "same_count_changed_tuple_detected": true,
+  "lost_duplicate_occurrence_detected": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000
+  },
+  "private_source_comparison_chunks": 56,
+  "private_source_comparison_chunk_bytes": 96993967,
+  "private_comparison_spool_scope": "Complete real source tuples were written only to private temporary sorted chunks, streamed against private raw/staged tables and removed with their owning directory. No identifiers enter public artifacts or logs.",
+  "workspace_free_bytes_before": 48398045184,
+  "workspace_free_bytes_after": 48398974976,
+  "private_database_bytes_before_cleanup": 65286144,
+  "largest_private_directory_bytes_observed_after_phase": 162280111,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 61,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_source_sort_seconds": 18.92,
+  "elapsed_import_stage_and_checks_seconds": 17.159,
+  "timing_scope": "One real import/staging/check CLI phase and two private sorted comparison streams; source sorting and each stream recorded separately. Hashing/Python fixtures excluded; not a performance benchmark.",
+  "scope": "Assistant typed-event staging passed; learner SQL63 pending. All original observations and NULL/duplicate multiplicities retained. No UTC/date derivation, deduplication decision, declared event PK, session/order/person definitions, historical property association, conversion or monetary metrics."
+}

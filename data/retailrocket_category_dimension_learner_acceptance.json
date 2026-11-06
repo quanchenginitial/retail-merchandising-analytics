@@ -1,0 +1,384 @@
+{
+  "observed_date": "2026-11-06",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty rows, five headers, integer values and PASS statuses are visible; four check-name endings are cropped. No direct learner-database inspection.",
+  "acceptance_status": "accepted_with_documented_label_visibility_caveat",
+  "script": "sql/62_build_retailrocket_category_dimension.sql",
+  "script_sha256": "7e726c82d5fdbb664a6decea1a97aadc71f2db99999936f6e53ddcc2847176c4",
+  "validator": "validation/preflight_retailrocket_category_dimension.py",
+  "validator_sha256": "4dc6e74b23b05e0c11c6a0fe5bb1a47300840d88c6d1baed88223910b701f241",
+  "assistant_preflight": "data/retailrocket_category_dimension_preflight.json",
+  "assistant_preflight_sha256": "9a274605b753b4fee03dfa4134d99738c60fb941a5a1b558be9eff90604df029",
+  "method_contract": "docs/RETAILROCKET_CATEGORY_DIMENSION_VALIDATION.md",
+  "method_contract_prefix_bytes": 7282,
+  "method_contract_prefix_sha256": "5cd3ebab26b643a29c87a57c71f612f7d850991c666bfdb6971144dddf6fa593",
+  "method_before_acceptance_append_sha256": "1e826b886c9bf4626b93955e2a7a1d9aebf101b7da6391fbbef0ba3785466b46",
+  "method_before_acceptance_append_bytes": 10455,
+  "input_table": "rr_stg.category_tree",
+  "dimension_table": "rr_core.dim_category",
+  "learner_action_type": "Guarded category dimension construction followed by aggregate validation; the displayed checks query is read-only.",
+  "result_rows": 20,
+  "result_columns": 5,
+  "report_field_positions": 100,
+  "visually_verified_field_values": 96,
+  "visually_verified_integer_values": 60,
+  "visually_verified_complete_check_labels": 16,
+  "visually_verified_status_values": 20,
+  "partially_visible_check_labels": 4,
+  "contract_resolved_check_labels": 4,
+  "all_100_report_fields_fully_visible": false,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": false,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "rows_with_visually_verified_pass_status": 20,
+  "rows_with_pass_status": 20,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "visibility_caveats": [
+    "Check-name endings at check_order 3, 17, 18 and 19 are cropped. Their full labels are resolved from matching visible prefixes, row order and the frozen SQL/report contract; these four labels are not counted as fully visually verified fields."
+  ],
+  "cropped_check_labels": [
+    {
+      "check_order": 3,
+      "field": "check_name",
+      "fully_legible_prefix": "schema_mismatch_cou",
+      "full_label_from_frozen_contract": "schema_mismatch_count",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 17,
+      "field": "check_name",
+      "fully_legible_prefix": "expected_mapping_only",
+      "full_label_from_frozen_contract": "expected_mapping_only_rows",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 18,
+      "field": "check_name",
+      "fully_legible_prefix": "dimension_mapping_on",
+      "full_label_from_frozen_contract": "dimension_mapping_only_rows",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 19,
+      "field": "check_name",
+      "fully_legible_prefix": "source_contract_violat",
+      "full_label_from_frozen_contract": "source_contract_violations",
+      "full_label_visually_verified": false
+    }
+  ],
+  "visible_prefix_recording": "Prefixes record only completely legible characters; partly clipped edge glyphs are deliberately omitted.",
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Preserve all fully visible values and labels. observed_rows uses JSON null solely for four cropped names, not for database NULL values; results resolves these labels through the frozen contract.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "dimension_rows",
+      1669,
+      1669,
+      "PASS"
+    ],
+    [
+      2,
+      "column_count",
+      4,
+      4,
+      "PASS"
+    ],
+    [
+      3,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      4,
+      "distinct_categoryids",
+      1669,
+      1669,
+      "PASS"
+    ],
+    [
+      5,
+      "missing_required_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      6,
+      "duplicate_key_surplus",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "null_parent_rows",
+      25,
+      25,
+      "PASS"
+    ],
+    [
+      8,
+      "distinct_root_ids",
+      25,
+      25,
+      "PASS"
+    ],
+    [
+      9,
+      "root_identity_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      10,
+      "root_reference_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      11,
+      "parent_mapping_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      12,
+      "parent_root_depth_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      13,
+      "negative_depth_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      14,
+      "max_depth",
+      5,
+      5,
+      "PASS"
+    ],
+    [
+      15,
+      "source_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      16,
+      "dimension_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      17,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      18,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      19,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      20,
+      "source_rows",
+      1669,
+      1669,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "dimension_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": 4,
+      "expected": 4,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch_count",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_categoryids",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "null_parent_rows",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "distinct_root_ids",
+      "actual": 25,
+      "expected": 25,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "root_identity_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "root_reference_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "parent_mapping_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "parent_root_depth_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "negative_depth_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "max_depth",
+      "actual": 5,
+      "expected": 5,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "source_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "dimension_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "expected_mapping_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "dimension_mapping_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "source_rows",
+      "actual": 1669,
+      "expected": 1669,
+      "status": "PASS"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "e4536879004701f2d4a733e0b259f8ef628934d094a056d520ddc028ff2aaa0e",
+  "fingerprint_method": "SHA-256 of twenty ordered compact JSON row arrays in output_columns order after resolving the four documented labels, ensure_ascii=True, comma/colon separators and one LF after each row. Counts/order are integers and labels/status are strings.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_node_mappings_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the displayed SQL62 aggregate reproduction: 96 complete visual fields, four matching partial names resolved against the frozen contract and twenty complete PASS statuses. The report verifies 1,669 dimension rows, four BIGINT columns through the schema check, 25 NULL parents, 25 root IDs and maximum depth 5 with roots at depth zero; both category-parent multiset differences and both full root/depth mapping differences are zero. Root identity/reference and parent root/depth checks also pass. This is screenshot evidence, not a fresh direct audit of every learner-table row. Prior assistant preflight remains separate and its learner-pending text remains historical; this appended record establishes learner acceptance. The static supplied reference mapping does not establish category meanings, historical validity, full ancestor closure, event-time attribution, declared database key constraints or repair of the 167 unmatched property records. Learner conceptual understanding is not tested by a PASS screenshot."
+}
