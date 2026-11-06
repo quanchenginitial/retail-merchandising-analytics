@@ -2,7 +2,7 @@
 
 更新日期：2026-11-06（Australia/Sydney）。
 
-**当前状态：SQL63 事件类型化已验收，下一步运行 SQL64。** 截图 100 个字段全部完整可见并匹配，20 项 PASS；见 [验收记录](../data/retailrocket_events_staging_learner_acceptance.json)。2,756,101 条事件、重复次数及交易编号空值保留。SQL64 将核对 UTC 时间转换、日期范围及每日记录计数；助手预检通过，用户执行待完成。
+**当前状态：SQL64 事件时间审计已验收，下一步运行 SQL65。** 截图 90 个字段全部完整可见并匹配，15 项 PASS、3 项 INFO；见 [验收记录](../data/retailrocket_event_time_learner_acceptance.json)。毫秒到 UTC 的精确转换、日期归属与总量对账通过。SQL65 将整理类别与可用性的历史观察记录，保留原始属性值和来源；助手预检通过，用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接完整执行 [SQL64](../sql/64_audit_retailrocket_event_time.sql)。目的：在按日分析及历史属性关联之前，验证整数毫秒时间戳的 UTC 解析和日期归属。该步骤只读 rr_stg.events，不建立新表；报告为 18 行、5 列，预期 15 项 PASS、3 项 INFO，INFO 的 expected 为 NULL。UTC 是统一分析口径，不据此推断商家的本地营业日或时区。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL65](../sql/65_stage_retailrocket_item_state_observations.sql)。目的：从原始属性表选择 categoryid 与 available 的全部历史观察，将时间戳与商品编号整理为整数，同时保留属性值原文，为后续历史状态判断准备数据。报告为 22 行、5 列，预期 20 项 PASS、2 项 INFO；INFO 的 expected 为 NULL。已有目标表时只执行 CHECKS 查询。该步骤尚不生成有效期或关联事件，其他属性仍保留在原始表。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

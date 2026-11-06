@@ -1,0 +1,331 @@
+{
+  "observed_date": "2026-11-06",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All eighteen rows, five headers and all ninety report fields are fully visible, including complete UTC timestamp strings and three displayed NULL expectations. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/64_audit_retailrocket_event_time.sql",
+  "script_sha256": "cc798d9e4cbfefb460102bdc4c7125d0f976f031b46b87fcefb9f8e29262e819",
+  "validator": "validation/preflight_retailrocket_event_time.py",
+  "validator_sha256": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+  "assistant_preflight": "data/retailrocket_event_time_preflight.json",
+  "assistant_preflight_sha256": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+  "method_contract": "docs/RETAILROCKET_EVENT_TIME_VALIDATION.md",
+  "method_contract_prefix_bytes": 8758,
+  "method_contract_prefix_sha256": "75e3f3d48f9d3b295ff7543c6234c1a16cfc6906c03129fa04559eb25f3e39a3",
+  "method_before_acceptance_append_sha256": "f9e82316809cdc687268312a528dd144584472fd44e9e8da2299cf85a4f1f6cf",
+  "method_before_acceptance_append_bytes": 12743,
+  "read_only_query": true,
+  "input_table": "rr_stg.events",
+  "result_rows": 18,
+  "result_columns": 5,
+  "report_field_positions": 90,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 90,
+  "visually_verified_integer_values": 18,
+  "visually_verified_digit_string_values": 29,
+  "visually_verified_numeric_display_values": 47,
+  "visually_verified_utc_timestamp_string_values": 4,
+  "visually_verified_null_expected_values": 3,
+  "visually_verified_complete_check_labels": 18,
+  "visually_verified_status_values": 18,
+  "rows_with_visually_verified_pass_status": 15,
+  "rows_with_visually_verified_info_status": 3,
+  "rows_with_pass_status": 15,
+  "rows_with_info_status": 3,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_90_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_utc_timestamp_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "partially_visible_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Keep check_order as JSON integer. Preserve every actual/expected non-NULL cell as a VARCHAR string, including the twenty-nine digit-only values; do not coerce them into integers. Preserve all four complete UTC strings with six fractional digits and Z suffix. Transcribe the three displayed [NULL] expectations as JSON null. No label or value reconstruction is needed.",
+  "numeric_visibility_accounting": "Eighteen INTEGER row orders plus twenty-nine digit-only VARCHAR actual/expected values make forty-seven numeric display values; these are distinct from four UTC strings and three NULL expectations. Together with eighteen labels and eighteen statuses, all ninety fields are fully visible.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "event_rows",
+      "2756101",
+      "2756101",
+      "PASS"
+    ],
+    [
+      2,
+      "schema_mismatch",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      3,
+      "missing_timestamp_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      4,
+      "negative_timestamp_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      5,
+      "unsupported_epoch_ms_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      6,
+      "converted_rows",
+      "2756101",
+      "2756101",
+      "PASS"
+    ],
+    [
+      7,
+      "conversion_null_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      8,
+      "roundtrip_error_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      9,
+      "date_partition_error_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      10,
+      "min_timestamp_ms",
+      "1430622004384",
+      "1430622004384",
+      "PASS"
+    ],
+    [
+      11,
+      "max_timestamp_ms",
+      "1442545187788",
+      "1442545187788",
+      "PASS"
+    ],
+    [
+      12,
+      "first_utc_timestamp",
+      "2015-05-03T03:00:04.384000Z",
+      "2015-05-03T03:00:04.384000Z",
+      "PASS"
+    ],
+    [
+      13,
+      "last_utc_timestamp",
+      "2015-09-18T02:59:47.788000Z",
+      "2015-09-18T02:59:47.788000Z",
+      "PASS"
+    ],
+    [
+      14,
+      "distinct_utc_dates",
+      "139",
+      "139",
+      "PASS"
+    ],
+    [
+      15,
+      "daily_rows_difference",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      16,
+      "first_date_event_rows",
+      "13683",
+      null,
+      "INFO"
+    ],
+    [
+      17,
+      "last_date_event_rows",
+      "1528",
+      null,
+      "INFO"
+    ],
+    [
+      18,
+      "subsecond_event_rows",
+      "2753264",
+      null,
+      "INFO"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "event_rows",
+      "actual": "2756101",
+      "expected": "2756101",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "schema_mismatch",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "missing_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "negative_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "unsupported_epoch_ms_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "converted_rows",
+      "actual": "2756101",
+      "expected": "2756101",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "conversion_null_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "roundtrip_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "date_partition_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "min_timestamp_ms",
+      "actual": "1430622004384",
+      "expected": "1430622004384",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "max_timestamp_ms",
+      "actual": "1442545187788",
+      "expected": "1442545187788",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "first_utc_timestamp",
+      "actual": "2015-05-03T03:00:04.384000Z",
+      "expected": "2015-05-03T03:00:04.384000Z",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "last_utc_timestamp",
+      "actual": "2015-09-18T02:59:47.788000Z",
+      "expected": "2015-09-18T02:59:47.788000Z",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "distinct_utc_dates",
+      "actual": "139",
+      "expected": "139",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "daily_rows_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "first_date_event_rows",
+      "actual": "13683",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "last_date_event_rows",
+      "actual": "1528",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "subsecond_event_rows",
+      "actual": "2753264",
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "5293a6a3aedeb9b74821fc20cd6b9dd6d6e0b8555a8bf3d12d71045f26cb70c0",
+  "fingerprint_method": "SHA-256 of eighteen ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. check_order is integer; actual/expected are strings or JSON null.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_event_histories_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the complete displayed SQL64 aggregate reproduction: all ninety fields are fully visible and match, with fifteen PASS controls and three INFO observations. All 2,756,101 event occurrences converted under the declared Unix-millisecond/UTC convention, with zero roundtrip/date-partition/daily-count discrepancies and 139 represented UTC dates. The observed endpoints are 2015-05-03T03:00:04.384000Z and 2015-09-18T02:59:47.788000Z. INFO counts are 13,683 events on the first date, 1,528 on the last date and 2,753,264 occurrences with a nonzero millisecond remainder; these are occurrence counts, not distinct people, orders or timestamps. The endpoints do not establish collection start/end, uninterrupted tracking or complete boundary days, and UTC does not identify business-local time. This screenshot is not a fresh direct inspection of the learner database or a repeated source comparison. Prior assistant evidence remains separate and prior pending text stays historical; this append establishes learner acceptance. No persistent date columns, duplicate policy, sessions, order/person definitions, historical-property association, conversion rate or monetary measure are accepted here. Learner conceptual understanding is not tested by a PASS screenshot."
+}

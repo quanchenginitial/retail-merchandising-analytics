@@ -1,0 +1,375 @@
+{
+  "checked_at_utc": "2026-11-06T08:19:45.423707+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/65_stage_retailrocket_item_state_observations.sql",
+  "script_sha256": "487b1dde1aea98750dce9f8c7f482d246edc560d8d59a0115f8daa5659aa5bc7",
+  "validator": "validation/preflight_retailrocket_item_state_observations.py",
+  "validator_sha256": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+  "code_and_dependency_sha256": {
+    "sql/65_stage_retailrocket_item_state_observations.sql": "487b1dde1aea98750dce9f8c7f482d246edc560d8d59a0115f8daa5659aa5bc7",
+    "validation/preflight_retailrocket_item_state_observations.py": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_properties_import_preflight.json": "ae36151425c519180acd5312fe7d0aade86a4f3b34db481043483dab3f9b332f",
+    "data/retailrocket_properties_import_learner_acceptance.json": "4d0c325a456fd22af3edb7b14e37ad857b9ae7f7b9a08f14d1305823c25c856e",
+    "data/retailrocket_property_keys_preflight.json": "6de681cb06d8263b1d60c8e3db69800dec6f1572bf45e9dacc1713a4778483f1",
+    "data/retailrocket_property_keys_learner_acceptance.json": "9aae83843dd60827646f91f136c697f14b2bc142e772fc1f064c47e06746adf4",
+    "data/retailrocket_named_properties_preflight.json": "75db9a7100bae260d2e35e1c2bdb6edd8e60b072cc66dbf5932aef725b3bd30a",
+    "data/retailrocket_named_properties_learner_acceptance.json": "71f537ca4f4cbc2cc243aac117db34dc32974c8ee22ed5c38d67bd671cdd5612",
+    "data/retailrocket_unmatched_categories_preflight.json": "526a5db816aa5f2dfda41fd2548a3528b402447e9f7bc2159d66e743753a59e2"
+  },
+  "method_contract": "docs/RETAILROCKET_ITEM_STATE_OBSERVATIONS_VALIDATION.md",
+  "method_contract_prefix_bytes": 10388,
+  "method_contract_prefix_sha256": "b83200620a8734c1da2e8b0948886bd937e5007591afaad7109709fa345c4836",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/56_import_retailrocket_properties.sql": "31b465757a0d1b0a7424f9caf25dbe00e90aa5bd6c53abd8eca5bca1fc546ebe"
+  },
+  "reconstruction_basis": "Full raw SQL56 import prefix only. No old import/key/named/reference audit queries rerun. SQL65 selects only categoryid and available.",
+  "table": "rr_stg.item_state_observations",
+  "staging_fields": [
+    "timestamp",
+    "itemid",
+    "property",
+    "value",
+    "source_file"
+  ],
+  "staging_types": [
+    "BIGINT",
+    "BIGINT",
+    "VARCHAR",
+    "VARCHAR",
+    "VARCHAR"
+  ],
+  "raw_rows": 20275902,
+  "selected_rows": 2291853,
+  "opaque_complement_rows": 17984049,
+  "real_staging_script_executions": 1,
+  "real_reconstruction_executions": 1,
+  "real_private_comparison_stream_executions": 2,
+  "report_rows": 22,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 20,
+  "info_rows": 2,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "raw_part1_rows",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "raw_part2_rows",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "raw_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "raw_unknown_source_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "staging_rows",
+      "actual": 2291853,
+      "expected": 2291853,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "staging_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "categoryid_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "available_rows",
+      "actual": 1503639,
+      "expected": 1503639,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "other_property_rows",
+      "actual": 17984049,
+      "expected": 17984049,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "negative_numeric_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "value_rule_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "unexpected_property_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "candidate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "raw_key_value_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "raw_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "staging_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "selected_part1_rows",
+      "actual": 1243692,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 22,
+      "check_name": "selected_part2_rows",
+      "actual": 1048161,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "report_sha256": "d51af897958e1cefe8cf4e31d2fc259fe4d44327e2eb2f67d49338ebfcf6db56",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF; actual/expected are integer counts or JSON null.",
+  "independent_python_source_counts": {
+    "raw_rows": 20275902,
+    "raw_parts": {
+      "item_properties_part1.csv": 10999999,
+      "item_properties_part2.csv": 9275903
+    },
+    "selected_rows": 2291853,
+    "selected_parts": {
+      "item_properties_part1.csv": 1243692,
+      "item_properties_part2.csv": 1048161
+    },
+    "categoryid_rows": 788214,
+    "available_rows": 1503639,
+    "other_rows": 17984049
+  },
+  "independent_python_selected_key_and_value_rules_matched": true,
+  "independent_python_report_matched": true,
+  "independent_raw_stream": {
+    "rows": 2291853,
+    "fields": 5,
+    "candidate_key_surplus": 0,
+    "selected_parts": {
+      "item_properties_part1.csv": 1243692,
+      "item_properties_part2.csv": 1048161
+    },
+    "matched": true,
+    "elapsed_seconds": 15.091
+  },
+  "independent_staging_stream": {
+    "rows": 2291853,
+    "fields": 5,
+    "candidate_key_surplus": 0,
+    "selected_parts": {
+      "item_properties_part1.csv": 1243692,
+      "item_properties_part2.csv": 1048161
+    },
+    "matched": true,
+    "elapsed_seconds": 12.725
+  },
+  "independent_full_selected_five_field_multiset_matched": true,
+  "independent_selected_raw_input_unchanged": true,
+  "independent_candidate_key_surplus_verified_zero": true,
+  "prior_unmatched_category_records": 167,
+  "unmatched_category_count_recomputed": false,
+  "unknown_reference_preservation_basis": "Complete selected five-field tuple equality preserves the previously observed unmatched cohort. No category reference is read or joined, and no new unmatched count is claimed.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "exact_named_subset_value_spellings_unknown_reference_opaque_complement_and_chunked_streams",
+      "passed": true,
+      "raw_fixture_rows": 8,
+      "selected_fixture_rows": 6
+    },
+    {
+      "case": "same_count_value_and_provenance_changes_detected_info_blocked_existing_sentinel_preserved",
+      "passed": true
+    },
+    {
+      "case": "invalid_selected_keys_values_counts_provenance_and_cross_part_candidate_keys_rejected_atomically",
+      "passed": true,
+      "expected_rejection": true,
+      "subcases": [
+        "empty",
+        "no_selected",
+        "isolated_leading_zero",
+        "numeric_key_alias",
+        "missing_timestamp",
+        "empty_item",
+        "whitespace_key",
+        "overflow_key",
+        "negative_key",
+        "invalid_availability",
+        "invalid_category_value",
+        "overflow_category_value",
+        "missing_value",
+        "unknown_provenance",
+        "duplicate_key_across_parts",
+        "conflicting_key_across_parts",
+        "wrong_raw_count",
+        "wrong_selected_count",
+        "wrong_type",
+        "wrong_order"
+      ]
+    }
+  ],
+  "rejection_subcase_count": 20,
+  "invalid_creation_destination_absence_verified": true,
+  "existing_destination_sentinel_preserved": true,
+  "same_count_value_mutation_detected": true,
+  "same_count_provenance_mutation_detected": true,
+  "info_requires_all_controls_pass_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "private_directory_budget_bytes": 5368709120
+  },
+  "private_selected_source_comparison_chunks": 46,
+  "private_selected_source_comparison_chunk_bytes": 139673953,
+  "private_comparison_spool_scope": "Only selected categoryid/available five-field source tuples were written to private sorted chunks; opaque observations were counted but never spooled. All chunks removed with their owning private directory.",
+  "memory_availability_before": {
+    "method": "GlobalMemoryStatusEx",
+    "physical_memory_bytes": 16483872768,
+    "available_physical_memory_bytes": 853839872,
+    "available_page_file_bytes": 9621024768
+  },
+  "workspace_free_bytes_before": 47976521728,
+  "workspace_free_bytes_after": 48016609280,
+  "private_database_bytes_before_cleanup": 441724928,
+  "largest_private_directory_bytes_observed_after_phase": 581398881,
+  "temporary_databases_and_spills_removed": true,
+  "private_selected_source_comparison_spools_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 63,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_scan_select_sort_seconds": 37.272,
+  "elapsed_full_raw_reconstruction_seconds": 36.609,
+  "elapsed_staging_and_checks_seconds": 27.18,
+  "timing_scope": "One full raw prefix reconstruction, one SQL65 staging/check phase and two selected read-only streams. Python two-source scan/selection/sort and stream timings recorded separately; hashing/fixtures excluded, not a performance benchmark.",
+  "scope": "Assistant named item-state observations passed; learner SQL65 pending. Only 2,291,853 selected records typed. All other properties stay raw/opaque. Exact value/provenance and unknown references retained; no intervals, latest-state selection, as-of/event join, deduplication, identity repair, exact inventory, conversion or monetary claim."
+}

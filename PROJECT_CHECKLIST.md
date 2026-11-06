@@ -166,7 +166,9 @@
 - [x] 7K 助手准备并预检 [SQL63 事件类型化](sql/63_stage_retailrocket_events.sql)：创建 rr_stg.events，时间戳、访客、商品及可空交易编号转为 BIGINT，事件类型保留 VARCHAR；2,756,101 行、460 条完全重复盈余及 2,733,644 个 NULL 交易编号保留。原始数值文本需通过严格格式与精确往返转换校验，完整多重集合对账检查记录及重复次数；见 [验证说明](docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md)。本步不删除重复、定义订单或会话、转换日期、关联属性或计算转化率。
 - [x] 7K 用户于 2026-11-06 截图验收 SQL63：20 行 × 5 列、100 个字段全部完整可见并匹配，20 项 PASS；见 [聚合验收](data/retailrocket_events_staging_learner_acceptance.json)。2,756,101 条事件和五列类型保留，三类事件计数、460 条完全重复盈余及 2,733,644 个 NULL 交易编号一致，完整多重集合差异为 0。时间戳仍为整数，不据此声称日期或时区口径已验证。
 - [x] 7L 助手准备并预检 [SQL64 事件时间审计](sql/64_audit_retailrocket_event_time.sql)：只读 rr_stg.events，按 Unix 毫秒时间戳检查精确 UTC 转换与往返、日期边界及逐日计数对账；见 [验证说明](docs/RETAILROCKET_EVENT_TIME_VALIDATION.md)。18 行报告含 15 项 PASS 控制及 3 项 INFO 观测，INFO 的 expected 为 NULL。首日、末日事件数及含小数秒的记录数作为观测报告，不预设为成功条件。无新建表、去重或订单/会话定义；UTC 分析口径不推断商家本地时区。
-- [ ] 7L 用户执行 SQL64，提供 18 行、5 列报告；预期 15 项 PASS、3 项 INFO。此为只读检查，可直接执行，不需要重新导入或重建表。
+- [x] 7L 用户于 2026-11-06 截图验收 SQL64：18 行 × 5 列、90 个字段全部完整可见并匹配，15 项 PASS、3 项 INFO；见 [聚合验收](data/retailrocket_event_time_learner_acceptance.json)。全部 2,756,101 条事件的毫秒往返、日期归属与每日总量核对通过，覆盖 139 个有观测的 UTC 日期。首日 13,683 条、末日 1,528 条，2,753,264 条保留非零毫秒部分；这些是事件条数，不证明完整采集日或商家本地时区。
+- [x] 7M 助手准备并预检 [SQL65 商品状态观察记录](sql/65_stage_retailrocket_item_state_observations.sql)：创建 rr_stg.item_state_observations，仅选择 categoryid 与 available 共 2,291,853 条历史观察，timestamp 与 itemid 转为 BIGINT，property、value、source_file 保持 VARCHAR。保留 788,214 条类别与 1,503,639 条可用性记录，属性值及文件来源不改写；其余 17,984,049 条属性留在原始表。22 行报告含 20 项 PASS 和 2 项分文件选中行数 INFO；见 [验证说明](docs/RETAILROCKET_ITEM_STATE_OBSERVATIONS_VALIDATION.md)。不只取最新状态，不生成有效期，不关联事件，不重数或修复此前 167 条未匹配类别记录。
+- [ ] 7M 用户执行 SQL65，提供 22 行、5 列报告；预期 20 项 PASS、2 项 INFO，INFO 的 expected 为 NULL。首次完整执行；目标表已存在时保留原表，只执行 CHECKS 查询。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -176,6 +178,6 @@
 
 ## 下一次对话从这里继续
 
-SQL63 已于 2026-11-06 截图验收：100 个字段完整匹配，20 项 PASS。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL64](sql/64_audit_retailrocket_event_time.sql)，核对毫秒时间戳到 UTC 的精确转换、日期边界及每日记录归属，为后续按日分析和历史属性匹配建立统一时间口径。助手预检通过，用户执行待完成；预期 15 项 PASS、3 项 INFO。事件重复处理、历史属性及行为指标仍待后续，整体项目未完成。
+SQL64 已于 2026-11-06 截图验收：90 个字段完整匹配，15 项 PASS、3 项 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL65](sql/65_stage_retailrocket_item_state_observations.sql)，将有明确含义的类别与可用性历史记录整理出来，为后续判断事件发生时商品状态准备数据。助手预检通过，用户执行待完成；预期 20 项 PASS、2 项 INFO。历史有效期、事件时点关联与行为指标仍待后续，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
