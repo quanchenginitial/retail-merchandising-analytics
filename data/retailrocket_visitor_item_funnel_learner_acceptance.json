@@ -1,0 +1,124 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of the learner-supplied DBeaver aggregate screenshot. All three rows, five column headers and fifteen result fields are fully visible; no direct learner-database inspection.",
+  "script": "sql/71_analyze_retailrocket_visitor_item_funnel.sql",
+  "script_sha256": "4679b7ae63cb6b9763f8ea13626bffc96bfdfbae3f954cb16efc89dfd9a11506",
+  "validator": "validation/preflight_retailrocket_visitor_item_funnel.py",
+  "validator_sha256": "95362916fe912c830788983badbf85b19531a84acdf82114e4b25dc9d55bc6ef",
+  "assistant_preflight": "data/retailrocket_visitor_item_funnel_preflight.json",
+  "assistant_preflight_sha256": "78330fbe444ec5efdae5aad887c4d11162b0125ae1b55d2e7b691a18d2b4bb17",
+  "method_contract": "docs/RETAILROCKET_VISITOR_ITEM_FUNNEL_VALIDATION.md",
+  "method_contract_prefix_bytes": 8553,
+  "method_contract_prefix_sha256": "df835a679be19c19e2169a031328f4da27cf26cf0b26130e286a24ea1ec1ec2b",
+  "method_before_acceptance_append_bytes": 13397,
+  "method_before_acceptance_append_sha256": "91b08f4601039aea3045c3efb5ddb43eefd42d5c759f213313fb5ee9d507ab21",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "required_readset_columns": 5,
+  "learner_action_type": "Read-only full-observation visitor-item pair funnel with strictly ordered view, qualifying cart and qualifying transaction.",
+  "result_rows": 3,
+  "result_columns": 5,
+  "report_field_positions": 15,
+  "visually_verified_field_values": 15,
+  "visually_verified_integer_count_values": 3,
+  "visually_verified_decimal_percentage_values": 5,
+  "visually_verified_complete_stage_labels": 3,
+  "visually_verified_status_values": 3,
+  "visually_verified_null_values": 1,
+  "rows_with_pass_status": 3,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_15_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_stage_labels_fully_visible": true,
+  "cropped_field_values": 0,
+  "contract_resolved_field_values": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove integer thousands separators. Retain displayed percentage strings in observed_rows. Normalize non-null percentages with Decimal to four places in results: VIEW share 100 becomes 100.0000 and final share 0.783 becomes 0.7830. Preserve the first-row displayed [NULL] step rate as JSON null. No value changes or label reconstruction.",
+  "visibility_accounting": "Three integer pair counts + five non-null percentage cells + one NULL step-rate cell + three complete stage labels + three PASS statuses = fifteen report fields. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "stage",
+    "visitor_item_pairs",
+    "share_of_view_pairs_pct",
+    "step_rate_pct",
+    "check_status"
+  ],
+  "observed_rows": [
+    [
+      "VIEW",
+      2132127,
+      "100",
+      null,
+      "PASS"
+    ],
+    [
+      "VIEW_THEN_CART",
+      45804,
+      "2.1483",
+      "2.1483",
+      "PASS"
+    ],
+    [
+      "VIEW_THEN_CART_THEN_TRANSACTION",
+      16695,
+      "0.783",
+      "36.4488",
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "stage",
+    "visitor_item_pairs",
+    "share_of_view_pairs_pct",
+    "step_rate_pct",
+    "check_status"
+  ],
+  "results": [
+    {
+      "stage": "VIEW",
+      "visitor_item_pairs": 2132127,
+      "share_of_view_pairs_pct": "100.0000",
+      "step_rate_pct": null,
+      "check_status": "PASS"
+    },
+    {
+      "stage": "VIEW_THEN_CART",
+      "visitor_item_pairs": 45804,
+      "share_of_view_pairs_pct": "2.1483",
+      "step_rate_pct": "2.1483",
+      "check_status": "PASS"
+    },
+    {
+      "stage": "VIEW_THEN_CART_THEN_TRANSACTION",
+      "visitor_item_pairs": 16695,
+      "share_of_view_pairs_pct": "0.7830",
+      "step_rate_pct": "36.4488",
+      "check_status": "PASS"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "08299a5dc9c79b8e862f8a4e1363b2f3beba5dd3033ca794113134f049382cb1",
+  "fingerprint_method": "SHA-256 of three compact JSON row arrays in output_columns order followed by LF. Pair counts remain integers, non-null percentages use exact four-place Decimal strings, and the base step rate remains JSON null.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "full17_not_reverified": true,
+  "property_files_read": false,
+  "SQL69_rerun": false,
+  "SQL70_rerun": false,
+  "scope": "Accepts all fifteen visible SQL71 aggregate fields and three PASS rows. The full-observation cohort has 2,132,127 distinct visitor/item pairs with a recorded view; 45,804 reach a strictly later qualifying cart, and 16,695 reach a transaction strictly after that cart. Shares of the view cohort are 100.0000%, 2.1483% and 0.7830%; the conditional cart-to-transaction step rate is 36.4488%. Each pair contributes at most once per nested stage; source duplicates remain preserved. Same-millisecond events do not establish order. Paths without a recorded view are excluded. Full-period progression has unequal follow-up and observation-boundary truncation; absent later events do not prove abandonment. These are anonymous pair paths rather than people, validated orders, sessions, fixed-window conversion or causal effects. Screenshot acceptance is separate from database inspection and the earlier five-field source preflight, does not reverify UTC/property fields, and does not test learner conceptual understanding. Historical pending statements remain unchanged; this appendix establishes current learner acceptance."
+}
