@@ -1,0 +1,147 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All five rows, four column headers and twenty result fields are fully visible; no direct learner-database inspection.",
+  "script": "sql/73_audit_retailrocket_first_view_category_coverage.sql",
+  "script_sha256": "a8701a98b0e33a613b9a6f7cbfd6f24df783a790baac38f90b70dc90bb3997f5",
+  "validator": "validation/preflight_retailrocket_first_view_category_coverage.py",
+  "validator_sha256": "8d9c8b034e7ed04a7d351b5ed2e0b404ed9a96364b000f7fee0304b35aa72f3e",
+  "assistant_preflight": "data/retailrocket_first_view_category_coverage_preflight.json",
+  "assistant_preflight_sha256": "abef32c021f88b413fea9dc72822cba545319c51e2721017b3b4018c30a90e11",
+  "method_contract": "docs/RETAILROCKET_FIRST_VIEW_CATEGORY_COVERAGE_VALIDATION.md",
+  "method_contract_prefix_bytes": 9951,
+  "method_contract_prefix_sha256": "f95f39277b2a7c61a5612ea70a7902ca3836991c64dfbc75b396fc5ec602c00e",
+  "method_before_acceptance_append_bytes": 14941,
+  "method_before_acceptance_append_sha256": "947103d652fb4bc0143c876d3310ef87cd31afdf0a7cd7d1b9381597b383846f",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid",
+    "categoryid_value",
+    "categoryid_from_ms",
+    "categoryid_to_ms",
+    "categoryid_source_file",
+    "categoryid_coverage"
+  ],
+  "required_readset_columns": 10,
+  "reference_table": "rr_core.dim_category",
+  "reference_readset_fields": [
+    "categoryid"
+  ],
+  "learner_action_type": "Read-only category-reference coverage at each seven-day-eligible visitor/item pair's first observed view.",
+  "result_rows": 5,
+  "result_columns": 4,
+  "report_field_positions": 20,
+  "visually_verified_field_values": 20,
+  "visually_verified_integer_count_values": 5,
+  "visually_verified_decimal_percentage_values": 5,
+  "visually_verified_complete_coverage_labels": 5,
+  "visually_verified_status_values": 5,
+  "visually_verified_null_values": 0,
+  "rows_with_pass_status": 5,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_20_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_coverage_labels_fully_visible": true,
+  "cropped_field_values": 0,
+  "contract_resolved_field_values": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove integer thousands separators. Retain displayed percentage strings in observed_rows. Normalize UNKNOWN_REFERENCE share 0 to 0.0000 and TOTAL share 100 to 100.0000 using exact Decimal arithmetic in results; other percentages already have four places. No value changes or reconstructed labels.",
+  "visibility_accounting": "Five integer pair counts + five percentage cells + five complete coverage labels + five PASS statuses = twenty report fields. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "coverage_status",
+    "eligible_pairs",
+    "share_of_eligible_pairs_pct",
+    "check_status"
+  ],
+  "observed_rows": [
+    [
+      "MAPPED",
+      1527206,
+      "74.7784",
+      "PASS"
+    ],
+    [
+      "UNKNOWN_REFERENCE",
+      0,
+      "0",
+      "PASS"
+    ],
+    [
+      "BEFORE_FIRST",
+      304405,
+      "14.9049",
+      "PASS"
+    ],
+    [
+      "NO_HISTORY",
+      210699,
+      "10.3167",
+      "PASS"
+    ],
+    [
+      "TOTAL",
+      2042310,
+      "100",
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "coverage_status",
+    "eligible_pairs",
+    "share_of_eligible_pairs_pct",
+    "check_status"
+  ],
+  "results": [
+    {
+      "coverage_status": "MAPPED",
+      "eligible_pairs": 1527206,
+      "share_of_eligible_pairs_pct": "74.7784",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "UNKNOWN_REFERENCE",
+      "eligible_pairs": 0,
+      "share_of_eligible_pairs_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "BEFORE_FIRST",
+      "eligible_pairs": 304405,
+      "share_of_eligible_pairs_pct": "14.9049",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "NO_HISTORY",
+      "eligible_pairs": 210699,
+      "share_of_eligible_pairs_pct": "10.3167",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "TOTAL",
+      "eligible_pairs": 2042310,
+      "share_of_eligible_pairs_pct": "100.0000",
+      "check_status": "PASS"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "ce37f37a9e45af0159a52b9cac78cb4853ada26af1e2b8ab252379034da59d50",
+  "fingerprint_method": "SHA-256 of five compact JSON row arrays in output_columns order followed by LF. Counts remain integers and percentages use exact four-place Decimal strings.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "scope": "Accepts all twenty fully visible SQL73 aggregate fields and five PASS rows. The unchanged seven-day-eligible cohort totals 2,042,310 visitor/item pairs: 1,527,206 MAPPED (74.7784%), zero UNKNOWN_REFERENCE, 304,405 BEFORE_FIRST (14.9049%) and 210,699 NO_HISTORY (10.3167%). The four mutually exclusive coverage states reconcile to TOTAL and unknown states are retained. MAPPED identifies first-view recorded category plus numeric static-reference membership, not validated business truth, historical hierarchy, freshness, human category names or conversion performance. Attribution checks cover all view occurrences tied at each eligible pair's earliest view timestamp with NULL-aware full category-tuple agreement. No future category is filled backward. Zero UNKNOWN_REFERENCE in this first-view cohort neither repairs nor negates the earlier 167 unmatched source property observations, which have another grain and scope. The screenshot does not reverify unqueried availability/UTC fields, the full seventeen-field fact or category hierarchy, nor establish people, orders, inventory, causality or conceptual understanding. It is separate from direct database inspection; previous pending statements remain historically intact and this appendix establishes current learner acceptance."
+}
