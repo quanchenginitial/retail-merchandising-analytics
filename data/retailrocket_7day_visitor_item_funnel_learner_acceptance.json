@@ -1,0 +1,156 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All five rows, five column headers and twenty-five result fields are fully visible; no direct learner-database inspection.",
+  "script": "sql/72_analyze_retailrocket_7day_visitor_item_funnel.sql",
+  "script_sha256": "f350472b8b38c82de5a20ca4da6e6fc658447a2c657f85ef98fd898d54a7afe0",
+  "validator": "validation/preflight_retailrocket_7day_visitor_item_funnel.py",
+  "validator_sha256": "70ffac5f59986de4aae5af88c0ea4ce0ba60cfe6b34aa7854c819e45cdb9799d",
+  "assistant_preflight": "data/retailrocket_7day_visitor_item_funnel_preflight.json",
+  "assistant_preflight_sha256": "bdd3f9e50b3ff97d82f10f61672ee2b95c855c1167528a688517e96899baa411",
+  "method_contract": "docs/RETAILROCKET_7DAY_VISITOR_ITEM_FUNNEL_VALIDATION.md",
+  "method_contract_prefix_bytes": 9445,
+  "method_contract_prefix_sha256": "dced516c84c1e0f0191a1e8271369fac276ceb68685ba11b6f5a055ac1bb685e",
+  "method_before_acceptance_append_bytes": 15328,
+  "method_before_acceptance_append_sha256": "3a5abd0eef2e1ac42c6e31c7ac3a4bca665fb6d2e205ad6c0405416b97ed54da",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "required_readset_columns": 5,
+  "window_ms": 604800000,
+  "observation_end_ms": 1442545187788,
+  "eligibility_cutoff_ms": 1441940387788,
+  "learner_action_type": "Read-only fixed seven-day pair funnel with log-end eligibility, two cohort diagnostics and three nested eligible stages.",
+  "result_rows": 5,
+  "result_columns": 5,
+  "report_field_positions": 25,
+  "visually_verified_field_values": 25,
+  "visually_verified_integer_count_values": 5,
+  "visually_verified_decimal_percentage_values": 5,
+  "visually_verified_complete_stage_labels": 5,
+  "visually_verified_status_values": 5,
+  "visually_verified_null_values": 5,
+  "rows_with_pass_status": 5,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_25_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_stage_labels_fully_visible": true,
+  "cropped_field_values": 0,
+  "contract_resolved_field_values": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove integer thousands separators. Retain displayed percentage strings in observed_rows. Normalize the eligible-base share 100 to exact four-place Decimal string 100.0000 in results; other displayed percentages already have four places. Preserve all five displayed [NULL] rate cells as JSON null. No label reconstruction or numeric value change.",
+  "visibility_accounting": "Five integer pair counts + five non-null percentage cells + five NULL rate cells + five complete stage labels + five PASS statuses = twenty-five report fields. DBeaver row numbers are UI chrome and are excluded.",
+  "observed_output_columns": [
+    "stage",
+    "visitor_item_pairs",
+    "share_of_eligible_pairs_pct",
+    "step_rate_pct",
+    "check_status"
+  ],
+  "observed_rows": [
+    [
+      "VIEWED_ALL",
+      2132127,
+      null,
+      null,
+      "PASS"
+    ],
+    [
+      "EXCLUDED_INCOMPLETE_7D",
+      89817,
+      null,
+      null,
+      "PASS"
+    ],
+    [
+      "ELIGIBLE_VIEW_7D",
+      2042310,
+      "100",
+      null,
+      "PASS"
+    ],
+    [
+      "VIEW_THEN_CART_7D",
+      43147,
+      "2.1127",
+      "2.1127",
+      "PASS"
+    ],
+    [
+      "VIEW_CART_TRANSACTION_7D",
+      15520,
+      "0.7599",
+      "35.9701",
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "stage",
+    "visitor_item_pairs",
+    "share_of_eligible_pairs_pct",
+    "step_rate_pct",
+    "check_status"
+  ],
+  "results": [
+    {
+      "stage": "VIEWED_ALL",
+      "visitor_item_pairs": 2132127,
+      "share_of_eligible_pairs_pct": null,
+      "step_rate_pct": null,
+      "check_status": "PASS"
+    },
+    {
+      "stage": "EXCLUDED_INCOMPLETE_7D",
+      "visitor_item_pairs": 89817,
+      "share_of_eligible_pairs_pct": null,
+      "step_rate_pct": null,
+      "check_status": "PASS"
+    },
+    {
+      "stage": "ELIGIBLE_VIEW_7D",
+      "visitor_item_pairs": 2042310,
+      "share_of_eligible_pairs_pct": "100.0000",
+      "step_rate_pct": null,
+      "check_status": "PASS"
+    },
+    {
+      "stage": "VIEW_THEN_CART_7D",
+      "visitor_item_pairs": 43147,
+      "share_of_eligible_pairs_pct": "2.1127",
+      "step_rate_pct": "2.1127",
+      "check_status": "PASS"
+    },
+    {
+      "stage": "VIEW_CART_TRANSACTION_7D",
+      "visitor_item_pairs": 15520,
+      "share_of_eligible_pairs_pct": "0.7599",
+      "step_rate_pct": "35.9701",
+      "check_status": "PASS"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "2c3f6c2e2565f21d67419c0be4b09df9a48ebf4e9937b9fa09ca14b83e5d90a6",
+  "fingerprint_method": "SHA-256 of five compact JSON row arrays in output_columns order followed by LF. Pair counts remain integers, non-null percentages use exact four-place Decimal strings, and the five NULL rate cells remain JSON null.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "full17_not_reverified": true,
+  "property_files_read": false,
+  "SQL69_rerun": false,
+  "SQL70_rerun": false,
+  "SQL71_rerun": false,
+  "scope": "Accepts all twenty-five visible SQL72 fields and five PASS rows. The 2,132,127 viewed pairs partition into 89,817 incomplete-window exclusions and 2,042,310 eligible pairs. Among eligible pairs, 43,147 have a strictly later cart and 15,520 a strictly later transaction within the same inclusive first-observed-view + seven-day deadline. The shares are 2.1127% and 0.7599% of eligible pairs, with a 35.9701% conditional cart-to-transaction step rate. Eligibility depends on time rather than outcome, so incomplete pairs remain excluded even if progression was already recorded. The first two diagnostic rows and three nested stages cannot be summed together. Seven days are a chosen rule, first observed view is not first-ever view, and global log-end eligibility does not establish continuous or person-specific capture. The cohort and horizon differ from SQL71; differences are not causal or like-for-like business performance effects. Original occurrences remain preserved. The screenshot does not establish people, sessions, validated orders, abandonment, optimal windows, inventory or causality; it is distinct from database inspection and does not reverify unqueried UTC/property fields or learner conceptual understanding. Historical pending statements remain intact; current learner acceptance is appended."
+}

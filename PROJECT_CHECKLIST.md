@@ -182,7 +182,9 @@
 - [x] 7S 助手准备并预检 [SQL71 访客—商品顺序路径](sql/71_analyze_retailrocket_visitor_item_funnel.sql)：只读事实表原始 5 个事件字段，每个有浏览的访客—商品组合以最早浏览为起点，寻找严格晚于浏览的最早加购，再寻找严格晚于该加购的最早交易。每组在各嵌套阶段最多计一次，同毫秒不能证明先后；输出 3 行、5 列，预期全部 PASS，见 [验证说明](docs/RETAILROCKET_VISITOR_ITEM_FUNNEL_VALIDATION.md)。使用完整观测期，没有固定跟踪窗口或会话定义，需保留跟踪时长不等与边界截断的限制；助手预检只验证 events.csv 和五字段读取范围。
 - [x] 7S 用户于 2026-11-09 截图验收 SQL71：3 行 × 5 列、15 个字段完整可见并匹配，三行 PASS；见 [聚合验收](data/retailrocket_visitor_item_funnel_learner_acceptance.json)。2,132,127 个有浏览的组合中，45,804 个进入严格后续加购，16,695 个再进入严格后续交易；占浏览组合 2.1483% 与 0.7830%，加购后续交易阶段比率为 36.4488%。完整观测期的跟踪时长不等及边界限制保持不变。
 - [x] 7T 助手准备并预检 [SQL72 固定 7 天路径](sql/72_analyze_retailrocket_7day_visitor_item_funnel.sql)：每个组合从首次观测浏览起算 604,800,000 毫秒，只有截止时间不晚于全日志最大时间的组合进入合格分母；不足 7 天的组合即使已经完成路径也排除。加购与交易都须在同一个含终点的 7 天窗口内，且严格按阶段先后。输出 5 行、5 列，预期全部 PASS；前两行给出全部/排除组合，后三行为嵌套路径，不能五行相加。见 [验证说明](docs/RETAILROCKET_7DAY_VISITOR_ITEM_FUNNEL_VALIDATION.md)。7 天为分析规则，日志跨度不证明连续采集；助手仅验证 events.csv 的五字段读取范围。
-- [ ] 7T 用户执行 SQL72，提供 5 行、5 列完整结果，预期五行全部 PASS。前两行的两个比率和合格浏览行的阶段比率为 NULL；只读查询可完整重复执行。
+- [x] 7T 用户于 2026-11-09 截图验收 SQL72：5 行 × 5 列、25 个字段完整匹配，五行 PASS、五个 NULL 比率保留；见 [聚合验收](data/retailrocket_7day_visitor_item_funnel_learner_acceptance.json)。2,132,127 个浏览组合 = 89,817 个排除 + 2,042,310 个合格组合；合格组合中 43,147 个进入加购、15,520 个进入后续交易，占比分别 2.1127%、0.7599%，加购到交易阶段比率 35.9701%。合格基准显示的 100 精确规范为 100.0000。
+- [x] 7U 助手准备并预检 [SQL73 首次浏览类别覆盖](sql/73_audit_retailrocket_first_view_category_coverage.sql)：沿用 SQL72 的 2,042,310 个合格访客—商品组合，按首次观测浏览时的已有类别信息，划分 MAPPED、UNKNOWN_REFERENCE、BEFORE_FIRST、NO_HISTORY 并保留全部组合。输出四种互斥状态及 TOTAL，共 5 行、4 列，预期全部 PASS；见 [验证说明](docs/RETAILROCKET_FIRST_VIEW_CATEGORY_COVERAGE_VALIDATION.md)。同一最早时刻的记录须先核对含 NULL 的完整五字段类别信息一致，冲突则阻止输出；不任取一条。仅验证事件与类别十字段及参考 categoryid，不重验可用性、UTC 或类别层级。
+- [ ] 7U 用户执行 SQL73，提供 5 行、4 列完整结果，预期五行全部 PASS。四种状态计数之和应等于 TOTAL 2,042,310；只读查询可完整重复执行。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -192,6 +194,6 @@
 
 ## 下一次对话从这里继续
 
-SQL71 已于 2026-11-09 截图验收：15 个字段完整匹配，三行 PASS，完整观测期的访客—商品顺序路径已完成。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL72](sql/72_analyze_retailrocket_7day_visitor_item_funnel.sql)，将后续路径统一限制在首次观测浏览后的 7×24 小时，并单独列出日志结束前不足此跨度的组合。助手预检通过，用户执行待完成。与 SQL71 相比，分母和窗口同时变化，不能把比率差直接解释为业务改善或因果效果；整体项目未完成。
+SQL72 已于 2026-11-09 截图验收：25 个字段完整匹配，五行 PASS，7 天合格分母为 2,042,310 个组合。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL73](sql/73_audit_retailrocket_first_view_category_coverage.sql)，检查这些组合在首次观测浏览时有多少能归入静态类别参考，并保留各类未知状态，为后续分类漏斗明确覆盖范围。助手预检通过，用户执行待完成。本步不比较类别转化表现；整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

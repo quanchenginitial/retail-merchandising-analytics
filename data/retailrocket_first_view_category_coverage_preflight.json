@@ -1,0 +1,338 @@
+{
+  "checked_at_utc": "2026-11-09T10:38:43.822826+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/73_audit_retailrocket_first_view_category_coverage.sql",
+  "script_sha256": "a8701a98b0e33a613b9a6f7cbfd6f24df783a790baac38f90b70dc90bb3997f5",
+  "validator": "validation/preflight_retailrocket_first_view_category_coverage.py",
+  "validator_sha256": "8d9c8b034e7ed04a7d351b5ed2e0b404ed9a96364b000f7fee0304b35aa72f3e",
+  "code_and_dependency_sha256": {
+    "sql/73_audit_retailrocket_first_view_category_coverage.sql": "a8701a98b0e33a613b9a6f7cbfd6f24df783a790baac38f90b70dc90bb3997f5",
+    "validation/preflight_retailrocket_first_view_category_coverage.py": "8d9c8b034e7ed04a7d351b5ed2e0b404ed9a96364b000f7fee0304b35aa72f3e",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "validation/preflight_retailrocket_item_state_observations.py": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+    "validation/preflight_retailrocket_item_state_intervals.py": "07a1601c9835eb6df17eab5a6fb9523900b83972c51ce3ff319f1bf7424b3c48",
+    "validation/preflight_retailrocket_7day_visitor_item_funnel.py": "70ffac5f59986de4aae5af88c0ea4ce0ba60cfe6b34aa7854c819e45cdb9799d",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "sql/62_build_retailrocket_category_dimension.sql": "7e726c82d5fdbb664a6decea1a97aadc71f2db99999936f6e53ddcc2847176c4",
+    "data/retailrocket_category_dimension_preflight.json": "9a274605b753b4fee03dfa4134d99738c60fb941a5a1b558be9eff90604df029",
+    "data/retailrocket_category_dimension_learner_acceptance.json": "d44de86dc6591274a980e242ae1090f096ca89f973b347aca26649d0ecf3abde",
+    "docs/RETAILROCKET_CATEGORY_DIMENSION_VALIDATION.md": "96f713692f2e3cbb05cddf11dcd16463e55ddf314b01ebfc124ae4af77e3248f",
+    "sql/69_build_retailrocket_events_enriched.sql": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+    "data/retailrocket_events_enriched_preflight.json": "5ce07f134881cdb064e4f111e71e25dff6b0d1141508a7146a3c9aa2614c7111",
+    "data/retailrocket_events_enriched_learner_acceptance.json": "34350b37b156f63f3c79606bb781a28b0ed53b29d423787e472f3569fccc123e",
+    "docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md": "9c0ea74a0d035b8a2dd2b073b88abb5cf3e35c530d073f10fffd8512d7db2ccc",
+    "sql/72_analyze_retailrocket_7day_visitor_item_funnel.sql": "f350472b8b38c82de5a20ca4da6e6fc658447a2c657f85ef98fd898d54a7afe0",
+    "data/retailrocket_7day_visitor_item_funnel_preflight.json": "bdd3f9e50b3ff97d82f10f61672ee2b95c855c1167528a688517e96899baa411",
+    "data/retailrocket_7day_visitor_item_funnel_learner_acceptance.json": "052470a8f40b47af74bdb720c4a34af7bf10479606cf3081ff08d33af45f7c2d",
+    "docs/RETAILROCKET_7DAY_VISITOR_ITEM_FUNNEL_VALIDATION.md": "0ba6f14e50c925a30c683ed25db4c4ac5102bbe079b1c2bf8a3fc2a13d88150d"
+  },
+  "method_contract": "docs/RETAILROCKET_FIRST_VIEW_CATEGORY_COVERAGE_VALIDATION.md",
+  "method_contract_prefix_bytes": 9951,
+  "method_contract_prefix_sha256": "f95f39277b2a7c61a5612ea70a7902ca3836991c64dfbc75b396fc5ec602c00e",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv",
+    "events.csv",
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "private_category_build_sha256": "687e8efaaf06c2d86b6a82353c6ad523d9e4ad57f0fe50059cfb28b8fa9b6c81",
+  "private_category_enrichment_sha256": "9f91d2910d3ed2b9903e0d886fb9f028d5e049738839ddf8ad961ae351d2ca1f",
+  "projection_scope": "Category-only ten-field disposable fact plus ID-only category reference. SQL69 full seventeen-field fact and SQL62 hierarchy remain supported by their accepted evidence and are not rebuilt or reverified.",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid",
+    "categoryid_value",
+    "categoryid_from_ms",
+    "categoryid_to_ms",
+    "categoryid_source_file",
+    "categoryid_coverage"
+  ],
+  "required_readset_columns": 10,
+  "reference_table": "rr_core.dim_category",
+  "reference_readset_fields": [
+    "categoryid"
+  ],
+  "reference_ids_compared": 1669,
+  "independent_reference_id_set_matched": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "property_files_read": true,
+  "category_csv_read": true,
+  "category_only_history_reconstructed": true,
+  "availability_history_reconstructed": false,
+  "UTC_fields_read": false,
+  "SQL69_rerun": false,
+  "SQL62_hierarchy_rerun": false,
+  "SQL70_rerun": false,
+  "SQL71_rerun": false,
+  "SQL72_rerun": false,
+  "learner_database_opened": false,
+  "query_read_only": true,
+  "private_stream_read_only": true,
+  "real_source_attempts": 1,
+  "real_cli_phases": 4,
+  "real_category_build_executions": 1,
+  "real_category_enrichment_executions": 1,
+  "real_analysis_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "report_rows": 5,
+  "report_columns": 4,
+  "output_columns": [
+    "coverage_status",
+    "eligible_pairs",
+    "share_of_eligible_pairs_pct",
+    "check_status"
+  ],
+  "checks_passed": 5,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "coverage_status": "MAPPED",
+      "eligible_pairs": 1527206,
+      "share_of_eligible_pairs_pct": "74.7784",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "UNKNOWN_REFERENCE",
+      "eligible_pairs": 0,
+      "share_of_eligible_pairs_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "BEFORE_FIRST",
+      "eligible_pairs": 304405,
+      "share_of_eligible_pairs_pct": "14.9049",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "NO_HISTORY",
+      "eligible_pairs": 210699,
+      "share_of_eligible_pairs_pct": "10.3167",
+      "check_status": "PASS"
+    },
+    {
+      "coverage_status": "TOTAL",
+      "eligible_pairs": 2042310,
+      "share_of_eligible_pairs_pct": "100.0000",
+      "check_status": "PASS"
+    }
+  ],
+  "report_sha256": "ce37f37a9e45af0159a52b9cac78cb4853ada26af1e2b8ab252379034da59d50",
+  "report_fingerprint_contract": "SHA-256 of compact JSON arrays in output-column order followed by LF; four-place DECIMAL shares are JSON strings, counts integers and undefined shares null.",
+  "independent_python_event_counts": {
+    "rows": 2756101,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644,
+    "observation_end_ms": 1442545187788
+  },
+  "independent_python_category_counts": {
+    "raw_rows": 20275902,
+    "raw_parts": {
+      "item_properties_part1.csv": 10999999,
+      "item_properties_part2.csv": 9275903
+    },
+    "category_rows": 788214,
+    "selected_parts": {
+      "item_properties_part1.csv": 426305,
+      "item_properties_part2.csv": 361909
+    }
+  },
+  "independent_python_interval_counts": {
+    "rows": 788214,
+    "item_property_pairs": 417053,
+    "finite_intervals": 371161,
+    "open_intervals": 417053,
+    "unchanged_next_value_links": 345542
+  },
+  "independent_python_aggregate_counts": {
+    "rows": 2756101,
+    "duplicate_surplus": 460,
+    "observed_pairs": 2145179,
+    "viewed_pairs": 2132127,
+    "eligible_pairs": 2042310,
+    "first_view_occurrences": 2042360,
+    "maximum_current_item_history_rows": 18,
+    "maximum_simultaneous_pair_states": 1,
+    "observed_max_timestamp_ms": 1442545187788,
+    "MAPPED": 1527206,
+    "UNKNOWN_REFERENCE": 0,
+    "BEFORE_FIRST": 304405,
+    "NO_HISTORY": 210699
+  },
+  "independent_python_report_matched": true,
+  "independent_python_Decimal_shares_matched": true,
+  "independent_one_pair_streaming_state": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 10,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "independent_category_values_bounds_provenance_statuses_matched": true,
+  "selected_category_history_fully_drained": true,
+  "eligible_first_view_tie_consistency_verified": true,
+  "numeric_reference_lookup_preserves_original_text": true,
+  "window_ms": 604800000,
+  "observation_end_ms": 1442545187788,
+  "observation_end_utc": "2015-09-18T02:59:47.788000Z",
+  "eligibility_cutoff_ms": 1441940387788,
+  "eligibility_cutoff_utc": "2015-09-11T02:59:47.788000Z",
+  "eligible_pairs": 2042310,
+  "expected_eligible_pairs": 2042310,
+  "coverage_partition_reconciled": true,
+  "maximum_simultaneous_pair_states": 1,
+  "maximum_current_item_history_rows": 18,
+  "private_database_sha256_before_readonly": "714824527c118e4149dba6acca64fb70231804536a726b5860d9a5abda80a405",
+  "private_database_sha256_after_readonly": "714824527c118e4149dba6acca64fb70231804536a726b5860d9a5abda80a405",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 4,
+  "fixture_cases": [
+    {
+      "case": "all_four_statuses_numeric_reference_original_text_temporal_boundaries_tied_duplicates_later_category_change",
+      "passed": true,
+      "event_rows": 12,
+      "event_chunks": 4,
+      "category_rows": 5,
+      "category_chunks": 3,
+      "expected_counts": [
+        3,
+        1,
+        2,
+        1,
+        7
+      ],
+      "complete_readset_fields": 10,
+      "extra_unqueried_column_allowed": true
+    },
+    {
+      "case": "bad_fact_reference_tied_snapshot_cohort_endpoint_and_duplicate_admission_block_all_metrics",
+      "passed": true,
+      "subcases": [
+        "conflicting_tied_value",
+        "conflicting_tied_provenance",
+        "future_match",
+        "expired_match",
+        "malformed_category_value",
+        "unmatched_nonnull_field",
+        "invalid_status",
+        "duplicate_reference_id",
+        "negative_reference_id",
+        "null_reference_id",
+        "reference_wrong_type",
+        "fact_wrong_type",
+        "empty_fact",
+        "wrong_reference_count",
+        "wrong_cohort_count",
+        "wrong_endpoint",
+        "wrong_duplicate_count"
+      ],
+      "history_cap_abort_without_filtering": true
+    },
+    {
+      "case": "zero_unknown_reference_allowed_and_zero_eligible_all_shares_NULL",
+      "passed": true,
+      "subcases": 2
+    },
+    {
+      "case": "conflicting_source_observation_key_fails_before_interval_or_asof_creation",
+      "passed": true
+    }
+  ],
+  "invalid_admission_fixture_subcases": 17,
+  "invalid_admission_blocks_all_metrics_verified": true,
+  "additional_unqueried_columns_allowed_verified": true,
+  "zero_denominator_NULLs_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "default_memory_limit": "1GB",
+    "default_max_temp_directory_size": "2GB",
+    "category_enrichment_memory_limit": "2GB",
+    "category_enrichment_max_temp_directory_size": "4GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "current_item_history_row_cap": 50000,
+    "simultaneous_pair_state_budget": 1,
+    "minimum_free_bytes": 8589934592,
+    "private_directory_budget_bytes": 7516192768
+  },
+  "private_event_comparison_chunks": 56,
+  "private_category_comparison_chunks": 16,
+  "private_comparison_chunk_bytes": 146809694,
+  "private_database_bytes_before_cleanup": 117452800,
+  "largest_private_directory_bytes_observed_after_phase": 264262494,
+  "workspace_free_bytes_before": 49870831616,
+  "workspace_free_bytes_after": 49890713600,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "historical_preflight_files_unchanged": 71,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_category_scan_sort_seconds": 18.858,
+  "elapsed_python_event_scan_sort_seconds": 24.633,
+  "elapsed_category_build_seconds": 3.404,
+  "elapsed_category_enrichment_seconds": 7.111,
+  "elapsed_readonly_category_coverage_seconds": 3.313,
+  "elapsed_private_stream_seconds": 28.074,
+  "timing_scope": "Four CLI phases: category-only import/intervals and ID projection; frozen event prefixes plus category-only enrichment; read-only SQL73; read-only ten-field source comparison. Sorting timed separately; hashing and fixtures excluded.",
+  "scope": "Assistant SQL73 passed; learner execution pending. Category coverage at earliest observed view within the unchanged seven-day-eligible visitor-item cohort. MAPPED means observation assignment plus numeric static-reference membership, not validated freshness, business truth, inventory, hierarchy, or category-specific conversion."
+}
