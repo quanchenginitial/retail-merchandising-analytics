@@ -1,0 +1,426 @@
+{
+  "checked_at_utc": "2026-11-09T12:05:56.729273+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/77_analyze_retailrocket_category_availability_funnel.sql",
+  "script_sha256": "60bda48dea5621a876aa319c378c7600528c9c2950154b51f76d99b21aef7466",
+  "validator": "validation/preflight_retailrocket_category_availability_funnel.py",
+  "validator_sha256": "b1620dfee1606b319d668b5db11bb9558be89d3c9fbd3ec0362d67f8acb9327d",
+  "code_and_dependency_sha256": {
+    "sql/77_analyze_retailrocket_category_availability_funnel.sql": "60bda48dea5621a876aa319c378c7600528c9c2950154b51f76d99b21aef7466",
+    "validation/preflight_retailrocket_category_availability_funnel.py": "b1620dfee1606b319d668b5db11bb9558be89d3c9fbd3ec0362d67f8acb9327d",
+    "validation/preflight_retailrocket_category_item_cart_concentration.py": "6c414d9c5bb83d1882374bf9b4f0e8416b0f498e9d7cbca738c947da38b52896",
+    "validation/preflight_retailrocket_category_7day_funnel.py": "a4e51ee60f6417c9e3cb272c71bb053c7278b426d5940b59dec106829570546b",
+    "validation/preflight_retailrocket_first_view_category_coverage.py": "8d9c8b034e7ed04a7d351b5ed2e0b404ed9a96364b000f7fee0304b35aa72f3e",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "validation/preflight_retailrocket_item_state_observations.py": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+    "validation/preflight_retailrocket_item_state_intervals.py": "07a1601c9835eb6df17eab5a6fb9523900b83972c51ce3ff319f1bf7424b3c48",
+    "validation/preflight_retailrocket_7day_visitor_item_funnel.py": "70ffac5f59986de4aae5af88c0ea4ce0ba60cfe6b34aa7854c819e45cdb9799d",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "sql/62_build_retailrocket_category_dimension.sql": "7e726c82d5fdbb664a6decea1a97aadc71f2db99999936f6e53ddcc2847176c4",
+    "data/retailrocket_category_dimension_preflight.json": "9a274605b753b4fee03dfa4134d99738c60fb941a5a1b558be9eff90604df029",
+    "data/retailrocket_category_dimension_learner_acceptance.json": "d44de86dc6591274a980e242ae1090f096ca89f973b347aca26649d0ecf3abde",
+    "docs/RETAILROCKET_CATEGORY_DIMENSION_VALIDATION.md": "96f713692f2e3cbb05cddf11dcd16463e55ddf314b01ebfc124ae4af77e3248f",
+    "sql/69_build_retailrocket_events_enriched.sql": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+    "data/retailrocket_events_enriched_preflight.json": "5ce07f134881cdb064e4f111e71e25dff6b0d1141508a7146a3c9aa2614c7111",
+    "data/retailrocket_events_enriched_learner_acceptance.json": "34350b37b156f63f3c79606bb781a28b0ed53b29d423787e472f3569fccc123e",
+    "docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md": "9c0ea74a0d035b8a2dd2b073b88abb5cf3e35c530d073f10fffd8512d7db2ccc",
+    "sql/72_analyze_retailrocket_7day_visitor_item_funnel.sql": "f350472b8b38c82de5a20ca4da6e6fc658447a2c657f85ef98fd898d54a7afe0",
+    "data/retailrocket_7day_visitor_item_funnel_preflight.json": "bdd3f9e50b3ff97d82f10f61672ee2b95c855c1167528a688517e96899baa411",
+    "data/retailrocket_7day_visitor_item_funnel_learner_acceptance.json": "052470a8f40b47af74bdb720c4a34af7bf10479606cf3081ff08d33af45f7c2d",
+    "docs/RETAILROCKET_7DAY_VISITOR_ITEM_FUNNEL_VALIDATION.md": "0ba6f14e50c925a30c683ed25db4c4ac5102bbe079b1c2bf8a3fc2a13d88150d",
+    "sql/73_audit_retailrocket_first_view_category_coverage.sql": "a8701a98b0e33a613b9a6f7cbfd6f24df783a790baac38f90b70dc90bb3997f5",
+    "data/retailrocket_first_view_category_coverage_preflight.json": "abef32c021f88b413fea9dc72822cba545319c51e2721017b3b4018c30a90e11",
+    "data/retailrocket_first_view_category_coverage_learner_acceptance.json": "a6a4781b58680bcd5f5340f7b3b45a696cf38e04c54f7d33056194fa8d113f14",
+    "docs/RETAILROCKET_FIRST_VIEW_CATEGORY_COVERAGE_VALIDATION.md": "83ec8d4b7e0b3bbbab0abcb2e8826ca6df24adab7ab2d959eafe545536239ef1",
+    "sql/74_analyze_retailrocket_category_7day_funnel.sql": "b013cf0c7c887d687b5551d74d3d785e3bd0b08d320651bf7f314926c5b789da",
+    "data/retailrocket_category_7day_funnel_preflight.json": "003c4ab2a974aee5a1b4a2751d29b25e40729a21cccb01f0217d5f7e873ac477",
+    "data/retailrocket_category_7day_funnel_learner_acceptance.json": "6d656b15240c9683f88f9f3283ce3a6c8ad6b24937a0bc3cb33f0a8e4ccd357a",
+    "docs/RETAILROCKET_CATEGORY_7DAY_FUNNEL_VALIDATION.md": "e3691f3715154ed2452e4b13e925306cbc925dd2f44898ab6602ec0c9a49501e",
+    "sql/75_analyze_retailrocket_category_funnel_time_cohorts.sql": "4abb202fc3d63650ca9f6dc36d2d1e74751d07fac057842c04e59dd747fafb2d",
+    "data/retailrocket_category_funnel_time_cohorts_preflight.json": "08320ae0d519cd08d06a87f83d0d5685cbfd2f360b32e4fcc3bbdd5e115054c2",
+    "data/retailrocket_category_funnel_time_cohorts_learner_acceptance.json": "027cc549ade7e48f8301c72b45df5e1263bd96b6950f4ec0f4f7228a2937d8ac",
+    "docs/RETAILROCKET_CATEGORY_FUNNEL_TIME_COHORTS_VALIDATION.md": "56bc1056858787591dc918a56c7475f01dc607650001d8356c5b9cd42dc2bac2",
+    "sql/76_analyze_retailrocket_category_item_cart_concentration.sql": "1ccdecabfe3f2ed017d686c24e70e0e47ccaca2b55e45960b0f473da055245b8",
+    "data/retailrocket_category_item_cart_concentration_preflight.json": "ef6094d7bec679d47007a23c908d97b088d08332d612f007643a3ada81fca355",
+    "data/retailrocket_category_item_cart_concentration_learner_acceptance.json": "f4d8b1b787c4138f423e48c5d858f5f0ca665fbcf9d5347ea6389349e5021989",
+    "docs/RETAILROCKET_CATEGORY_ITEM_CART_CONCENTRATION_VALIDATION.md": "5447d8859e34f1015ec219a2d74ae251bef32a4d9453079d680898767ddfe7eb"
+  },
+  "method_contract": "docs/RETAILROCKET_CATEGORY_AVAILABILITY_FUNNEL_VALIDATION.md",
+  "method_contract_prefix_bytes": 10939,
+  "method_contract_prefix_sha256": "33311c7d9048a25a0f260b8c1ccef6d91bc8cbcf71d526dfd55dbf585c87f02c",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv",
+    "events.csv",
+    "category_tree.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    },
+    "category_tree.csv": {
+      "size_bytes": 14454,
+      "modified_time_ns": 1667883846000000000,
+      "sha256": "94e865eb0a3d48cbbfe3b79079018dd92509315c88f5fd8d00d0b4b5af434f5b"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "private_named_history_build_sha256": "f6abb655825e37827180ea909910f5295e2fd90d9bf30d62f02eb1f18e43b9bd",
+  "private_two_property_enrichment_sha256": "fff83b60f988d5d896029e91f5402c896daf281509ab82a374b7e83d24857cb5",
+  "projection_scope": "Two-property fifteen-field disposable fact plus ID-only category reference. SQL69 full seventeen-field fact and SQL62 hierarchy remain supported by their accepted evidence and are not rebuilt or reverified.",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid",
+    "categoryid_value",
+    "categoryid_from_ms",
+    "categoryid_to_ms",
+    "categoryid_source_file",
+    "categoryid_coverage",
+    "available_value",
+    "available_from_ms",
+    "available_to_ms",
+    "available_source_file",
+    "available_coverage"
+  ],
+  "required_readset_columns": 15,
+  "reference_table": "rr_core.dim_category",
+  "reference_readset_fields": [
+    "categoryid"
+  ],
+  "reference_ids_compared": 1669,
+  "independent_reference_id_set_matched": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "property_files_read": true,
+  "category_csv_read": true,
+  "category_only_history_reconstructed": false,
+  "availability_history_reconstructed": true,
+  "named_property_histories_reconstructed": true,
+  "UTC_fields_read": false,
+  "SQL69_rerun": false,
+  "SQL62_hierarchy_rerun": false,
+  "SQL70_rerun": false,
+  "SQL71_rerun": false,
+  "SQL72_rerun": false,
+  "SQL73_rerun": false,
+  "SQL74_rerun": false,
+  "SQL75_rerun": false,
+  "SQL76_rerun": false,
+  "learner_database_opened": false,
+  "query_read_only": true,
+  "private_stream_read_only": true,
+  "real_source_attempts": 1,
+  "real_cli_phases": 4,
+  "real_named_history_build_executions": 1,
+  "real_two_property_enrichment_executions": 1,
+  "real_analysis_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "report_rows": 5,
+  "report_columns": 9,
+  "output_columns": [
+    "availability_status",
+    "eligible_pairs",
+    "cart_pairs",
+    "transaction_pairs",
+    "eligible_share_pct",
+    "cart_rate_pct",
+    "transaction_rate_pct",
+    "cart_to_transaction_rate_pct",
+    "check_status"
+  ],
+  "checks_passed": 5,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "availability_status": "RECORDED_1",
+      "eligible_pairs": 16994,
+      "cart_pairs": 419,
+      "transaction_pairs": 64,
+      "eligible_share_pct": "67.6917",
+      "cart_rate_pct": "2.4656",
+      "transaction_rate_pct": "0.3766",
+      "cart_to_transaction_rate_pct": "15.2745",
+      "check_status": "PASS"
+    },
+    {
+      "availability_status": "RECORDED_0",
+      "eligible_pairs": 7005,
+      "cart_pairs": 56,
+      "transaction_pairs": 12,
+      "eligible_share_pct": "27.9028",
+      "cart_rate_pct": "0.7994",
+      "transaction_rate_pct": "0.1713",
+      "cart_to_transaction_rate_pct": "21.4286",
+      "check_status": "PASS"
+    },
+    {
+      "availability_status": "BEFORE_FIRST",
+      "eligible_pairs": 1106,
+      "cart_pairs": 8,
+      "transaction_pairs": 0,
+      "eligible_share_pct": "4.4055",
+      "cart_rate_pct": "0.7233",
+      "transaction_rate_pct": "0.0000",
+      "cart_to_transaction_rate_pct": "0.0000",
+      "check_status": "PASS"
+    },
+    {
+      "availability_status": "NO_HISTORY",
+      "eligible_pairs": 0,
+      "cart_pairs": 0,
+      "transaction_pairs": 0,
+      "eligible_share_pct": "0.0000",
+      "cart_rate_pct": null,
+      "transaction_rate_pct": null,
+      "cart_to_transaction_rate_pct": null,
+      "check_status": "PASS"
+    },
+    {
+      "availability_status": "TOTAL",
+      "eligible_pairs": 25105,
+      "cart_pairs": 483,
+      "transaction_pairs": 76,
+      "eligible_share_pct": "100.0000",
+      "cart_rate_pct": "1.9239",
+      "transaction_rate_pct": "0.3027",
+      "cart_to_transaction_rate_pct": "15.7350",
+      "check_status": "PASS"
+    }
+  ],
+  "report_sha256": "d42b1832f6a7f49024f41d6fb8ed35895ec518204066e53c055aca6d7f1c552e",
+  "report_fingerprint_contract": "SHA-256 of compact JSON arrays in output-column order followed by LF; four-place DECIMAL shares are JSON strings, counts integers and undefined shares null.",
+  "independent_python_event_counts": {
+    "rows": 2756101,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644,
+    "observation_end_ms": 1442545187788
+  },
+  "independent_python_named_property_counts": {
+    "raw_rows": 20275902,
+    "raw_parts": {
+      "item_properties_part1.csv": 10999999,
+      "item_properties_part2.csv": 9275903
+    },
+    "selected_rows": 2291853,
+    "categoryid_rows": 788214,
+    "available_rows": 1503639,
+    "selected_parts": {
+      "item_properties_part1.csv": 1243692,
+      "item_properties_part2.csv": 1048161
+    }
+  },
+  "independent_python_interval_counts": {
+    "rows": 2291853,
+    "item_property_pairs": 834106,
+    "finite_intervals": 1457747,
+    "open_intervals": 834106,
+    "unchanged_next_value_links": 1260380
+  },
+  "independent_python_aggregate_counts": {
+    "rows": 2756101,
+    "duplicate_surplus": 460,
+    "observed_pairs": 2145179,
+    "viewed_pairs": 2132127,
+    "eligible_pairs": 2042310,
+    "first_view_occurrences": 2042360,
+    "maximum_current_item_history_rows": 36,
+    "maximum_simultaneous_pair_states": 1,
+    "observed_max_timestamp_ms": 1442545187788,
+    "MAPPED": 1527206,
+    "UNKNOWN_REFERENCE": 0,
+    "BEFORE_FIRST": 304405,
+    "NO_HISTORY": 210699,
+    "cart_pairs": 43147,
+    "transaction_pairs": 15520,
+    "selected_eligible_pairs": 25105,
+    "selected_cart_pairs": 483,
+    "selected_transaction_pairs": 76
+  },
+  "independent_python_availability_counts": {
+    "RECORDED_1": [
+      16994,
+      419,
+      64
+    ],
+    "RECORDED_0": [
+      7005,
+      56,
+      12
+    ],
+    "BEFORE_FIRST": [
+      1106,
+      8,
+      0
+    ],
+    "NO_HISTORY": [
+      0,
+      0,
+      0
+    ]
+  },
+  "independent_python_report_matched": true,
+  "independent_python_Decimal_rates_matched": true,
+  "independent_one_pair_streaming_state": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 15,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "independent_category_values_bounds_provenance_statuses_matched": true,
+  "independent_availability_values_bounds_provenance_statuses_matched": true,
+  "selected_named_history_fully_drained": true,
+  "eligible_first_view_tie_consistency_verified": true,
+  "combined_category_availability_tie_consistency_verified": true,
+  "numeric_reference_lookup_preserves_original_text": true,
+  "target_categoryid": 1613,
+  "target_parent_counts_match_SQL74_SQL75_SQL76": true,
+  "no_all_item_aggregate_map": true,
+  "availability_aggregate_count": 4,
+  "window_ms": 604800000,
+  "observation_end_ms": 1442545187788,
+  "observation_end_utc": "2015-09-18T02:59:47.788000Z",
+  "eligibility_cutoff_ms": 1441940387788,
+  "eligibility_cutoff_utc": "2015-09-11T02:59:47.788000Z",
+  "eligible_pairs": 2042310,
+  "expected_eligible_pairs": 2042310,
+  "coverage_partition_reconciled": true,
+  "global_flow_counts_reconciled": true,
+  "report_count_partition_reconciled": true,
+  "first_view_attribution_fixed_through_outcomes": true,
+  "shared_first_view_deadline_verified": true,
+  "strict_stage_order_verified": true,
+  "availability_first_view_attribution_fixed": true,
+  "pooled_rates_use_sum_transactions_over_sum_carts": true,
+  "maximum_simultaneous_pair_states": 1,
+  "maximum_current_item_history_rows": 36,
+  "private_database_sha256_before_readonly": "2652b5e71ea00c57d46ab687c3cd9d698577a66397712a001117bca58a4e16ac",
+  "private_database_sha256_after_readonly": "2652b5e71ea00c57d46ab687c3cd9d698577a66397712a001117bca58a4e16ac",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 5,
+  "fixture_cases": [
+    {
+      "case": "two_recorded_values_two_missing_classes_independent_observation_clocks_fixed_first_view_exact_boundary_strict_deadline_and_duplicates",
+      "passed": true,
+      "event_rows": 32,
+      "expected_target_counts": [
+        7,
+        6,
+        5
+      ],
+      "complete_readset_fields": 15,
+      "named_history_rows": 15
+    },
+    {
+      "case": "target_count_conflicting_tied_availability_noncanonical_value_future_expired_unknown_provenance_and_unmatched_nonnull_block",
+      "passed": true,
+      "subcases": 8
+    },
+    {
+      "case": "combined_two_property_history_cap_aborts_without_filtering",
+      "passed": true
+    },
+    {
+      "case": "duplicate_named_observation_key_prevents_private_history_table_creation",
+      "passed": true
+    },
+    {
+      "case": "empty_buckets_zero_cart_and_empty_target_denominators_remain_explicit_NULL",
+      "passed": true,
+      "subcases": 2
+    }
+  ],
+  "invalid_admission_fixture_subcases": 8,
+  "invalid_admission_blocks_all_metrics_verified": true,
+  "additional_unqueried_columns_allowed_verified": true,
+  "zero_denominator_NULLs_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "default_memory_limit": "1GB",
+    "default_max_temp_directory_size": "2GB",
+    "category_enrichment_memory_limit": "2GB",
+    "category_enrichment_max_temp_directory_size": "4GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "current_item_history_row_cap": 50000,
+    "simultaneous_pair_state_budget": 1,
+    "combined_property_history_row_cap": 50000,
+    "availability_aggregate_budget": 4,
+    "minimum_free_bytes": 8589934592,
+    "private_directory_budget_bytes": 7516192768
+  },
+  "private_event_comparison_chunks": 56,
+  "private_named_history_comparison_chunks": 46,
+  "private_comparison_chunk_bytes": 236667920,
+  "private_database_bytes_before_cleanup": 163328000,
+  "largest_private_directory_bytes_observed_after_phase": 399995920,
+  "workspace_free_bytes_before": 49783037952,
+  "workspace_free_bytes_after": 49780465664,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "historical_preflight_files_unchanged": 75,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "aggregate_category_ids_in_public_report": false,
+  "target_categoryid_published_as_aggregate_context": true,
+  "raw_item_ids_in_public_report": false,
+  "source_records_or_visitor_item_transaction_ids_published": false,
+  "raw_category_history_rows_published": false,
+  "raw_availability_history_rows_published": false,
+  "elapsed_python_named_history_scan_sort_seconds": 28.35,
+  "elapsed_python_event_scan_sort_seconds": 24.247,
+  "elapsed_named_history_build_seconds": 6.392,
+  "elapsed_two_property_enrichment_seconds": 9.701,
+  "elapsed_readonly_availability_funnel_seconds": 12.055,
+  "elapsed_private_stream_seconds": 44.605,
+  "timing_scope": "Four CLI phases: both named histories/intervals and ID projection; frozen event prefixes plus two-property enrichment; read-only SQL77; read-only fifteen-field source comparison. Sorting timed separately; hashing and fixtures excluded.",
+  "scope": "Assistant SQL77 passed; learner execution pending. Seven-day funnel by availability recorded at the first eligible view in fixed category 1613. Post-hoc descriptive diagnosis; recorded values are historical context, not verified inventory, availability throughout follow-up or a causal explanation. Missing history is retained. No UTC or category hierarchy rebuild."
+}

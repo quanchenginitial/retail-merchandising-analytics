@@ -1,46 +1,48 @@
-# 当前一步：检查类别内的商品加购集中度
+# 当前一步：按首次浏览的历史可用性记录比较路径
 
 更新日期：2026-11-09（Australia/Sydney）。
 
-**这一步为了什么：检查类别 1613 的加购是否集中在少数商品，比较不同加购量商品分档的交易比率，为进一步排查提供线索。**
+**这一步为了什么：观察类别 1613 在不同历史可用性记录下的加购与交易路径，同时保留记录不足的组合，为后续排查提供线索。**
 
-## SQL75 已验收
+## SQL76 已验收
 
-30 行全部 PASS。截图有 **298 个字段完整可见**，另外两个截断的 UNKNOWN_REFERENCE 标签依据固定契约和可见上下文唯一还原；全部数值及 16 个 NULL 与预检匹配。各分组 EARLY 与 LATE 的计数相加还原 SQL74，见 [验收记录](RETAILROCKET_CATEGORY_FUNNEL_TIME_COHORTS_VALIDATION.md)。两个时期长度不同，原始计数变化不直接代表增长。
+截图 **5 行 × 10 列、50 个字段完整匹配，五行全部 PASS**，四个 NULL 保留。总计 1,161 个商品，包含 1,010 个零加购商品和 151 个有加购商品；加权交易/加购比率为 **15.7350%**，有加购商品的等权均值为 **14.6612%**。空的 CART_20_PLUS 档正常保留零计数和 NULL，比率差异本身不证明原因；见 [验收记录](RETAILROCKET_CATEGORY_ITEM_CART_CONCENTRATION_VALIDATION.md)。
 
-## SQL76 怎样分商品
+## SQL77 怎样分组
 
-本次汇总全体合格组合中**首次浏览类别为 1613**的商品，不再拆 EARLY/LATE。每个商品至少有一个该类别的合格访客—商品组合，再按它的**加购组合数**归入唯一一档：
+仍使用首次浏览类别为 **1613** 的同一 7 天合格访客—商品组合。按该组合**首次浏览时、时间不晚于浏览的最后一条 available 历史记录**分组：
 
-| cart_volume_band | 每个商品的加购组合数 |
+| availability_status | 含义 |
 | --- | --- |
-| ZERO_CART | 0 |
-| CART_01_04 | 1–4 |
-| CART_05_19 | 5–19 |
-| CART_20_PLUS | 至少 20 |
-| TOTAL | 上述全部商品 |
+| RECORDED_1 | 匹配到的历史 available 值为 1 |
+| RECORDED_0 | 匹配到的历史 available 值为 0 |
+| BEFORE_FIRST | 首次浏览早于该商品最早的 available 记录 |
+| NO_HISTORY | 该商品没有 available 历史记录 |
+| TOTAL | 上述四组总计 |
 
-这里统计的是满足原有严格顺序及同一 7 天期限的访客—商品组合，不是加购点击次数、实际人数或核验订单数。首次浏览类别保持固定，后续类别变化不改变归属。四档计数应加总为 TOTAL，并还原 SQL74 类别 1613 的 **25,105 个合格、483 个加购、76 个交易组合**。
+类别与可用性都固定在首次浏览时，后续状态变化不重新分组。未知状态不使用未来记录或其他商品填补。每个合格访客—商品组合在首次浏览时刻的全部浏览记录，必须分别具有一致的类别与可用性信息；严格的浏览→加购→交易顺序和同一个 7 天期限保持不变。
 
-## 两种比率有什么不同
+## 怎样阅读九列结果
 
-- **weighted_cart_to_transaction_rate_pct**：100 × 本档交易组合总数 ÷ 加购组合总数。加购量较大的商品影响更大。
-- **mean_item_cart_to_transaction_rate_pct**：先对每个有加购的商品计算未四舍五入的交易组合数 ÷ 加购组合数，再等权平均并乘 100。每个有加购的商品权重相同，零加购商品不进入这个平均。
-- **cart_share_pct**：100 × 本档加购组合数 ÷ 全类别 483 个加购组合，用来读集中程度；显示值经过四舍五入，合计不一定恰好 100。
-- **zero_transaction_cart_items**：有加购组合、但没有符合路径规则的交易组合的商品数。
+availability_status 后面是 eligible_pairs、cart_pairs、transaction_pairs 三阶段组合数，再加四个百分比与 check_status：
 
-ZERO_CART 的两种交易/加购比率都是 NULL，zero_transaction_cart_items 为 0。助手预检中 CART_20_PLUS 是空档，保留零计数和两种 NULL 比率属于正常结果。TOTAL 的商品均值从全部有加购商品重新计算，不能直接平均各档均值。结果同时保留 item_count、eligible_pairs、cart_pairs 和 transaction_pairs，阅读比率时要一起看分母。这里的零交易仅限本队列、窗口和顺序规则，不表示商品从未售出。
+- **eligible_share_pct**：100 × 本组合格数 ÷ 类别 1613 的全部合格数。
+- **cart_rate_pct**：100 × 本组加购数 ÷ 本组合格数。
+- **transaction_rate_pct**：100 × 本组交易数 ÷ 本组合格数。
+- **cart_to_transaction_rate_pct**：100 × 本组交易数 ÷ 本组加购数。
 
-## 现在执行 SQL76
+四组计数相加应还原 TOTAL 的 **25,105 个合格、483 个加购、76 个交易组合**。零分母对应 NULL，不替换为 0；空组也保留。比率使用各自分母，不能直接相加或简单平均。这里的组合数不是点击次数、实际人数或核验订单数。
+
+## 现在执行 SQL77
 
 1. 在 DBeaver 选中现有 **retail_merchandising** 连接。
-2. 打开 [76_analyze_retailrocket_category_item_cart_concentration.sql](../sql/76_analyze_retailrocket_category_item_cart_concentration.sql)，完整执行查询。
-3. 提供 **5 行、10 列完整结果**，预期全部 PASS。拉宽长字段名并保留 NULL；若需横向拆成两张，两张都保留 **cart_volume_band 和全部五行**。
+2. 打开 [77_analyze_retailrocket_category_availability_funnel.sql](../sql/77_analyze_retailrocket_category_availability_funnel.sql)，完整执行查询。
+3. 提供 **5 行、9 列完整结果**，预期全部 PASS。拉宽字段名并保留 NULL；若需横向拆成两张，两张都保留 **availability_status 和全部五行**。
 
-这是只读查询，可以完整重复执行，无需重新导入 CSV 或建表。助手预检已通过，用户执行及截图验收仍待完成；见 [验证说明](RETAILROCKET_CATEGORY_ITEM_CART_CONCENTRATION_VALIDATION.md)。
+这是只读查询，可以完整重复执行，无需重新导入 CSV 或建表。助手预检已通过，用户执行及截图验收仍待完成；见 [验证说明](RETAILROCKET_CATEGORY_AVAILABILITY_FUNNEL_VALIDATION.md)。
 
-## 如何使用这一步的结论
+## 验证与解释范围
 
-类别 1613 是在观察到先前较低比率后选出的，因此本次是**探索性追查，不是独立确认**。分档阈值没有被证明最优；少量加购就会使单个商品比率大幅变化，两种平均的差别本身不证明原因，也不支持直接下架或调整策略。公开结果只有分档统计，不含商品、访客或交易编号。
+本次验证从此前的 **10 个事件/类别字段扩大为 15 个事件/类别/可用性字段**。助手从四份 CSV 重建 categoryid 与 available 两种历史，共 2,291,853 条命名属性记录；不重验事实表已有 UTC 派生字段、完整十七字段、类别层级或此前整套分析。
 
-验证范围仍是事件/类别十字段及参考类别编号；不重验可用性字段、事实表已有 UTC 派生字段、整个事实表或类别层级。
+RECORDED_0/1 表示最后已记录的历史状态，**不能直接当作浏览当刻真实库存、顾客实际看到的状态或缺货原因**。BEFORE_FIRST/NO_HISTORY 表示分析资料的覆盖不足，不证明网站发生故障。类别 1613 是根据先前结果选出的，仍属探索性追查；组间路径差异不是因果效果或独立确认。公开内容只有状态分组统计，不含访客、商品、交易编号或原始属性历史。
