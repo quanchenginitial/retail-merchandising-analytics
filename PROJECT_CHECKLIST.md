@@ -170,7 +170,9 @@
 - [x] 7M 助手准备并预检 [SQL65 商品状态观察记录](sql/65_stage_retailrocket_item_state_observations.sql)：创建 rr_stg.item_state_observations，仅选择 categoryid 与 available 共 2,291,853 条历史观察，timestamp 与 itemid 转为 BIGINT，property、value、source_file 保持 VARCHAR。保留 788,214 条类别与 1,503,639 条可用性记录，属性值及文件来源不改写；其余 17,984,049 条属性留在原始表。22 行报告含 20 项 PASS 和 2 项分文件选中行数 INFO；见 [验证说明](docs/RETAILROCKET_ITEM_STATE_OBSERVATIONS_VALIDATION.md)。不只取最新状态，不生成有效期，不关联事件，不重数或修复此前 167 条未匹配类别记录。
 - [x] 7M 用户于 2026-11-09 截图验收 SQL65：22 行 × 5 列、110 个字段全部完整可见并匹配，20 项 PASS、2 项 INFO；见 [聚合验收](data/retailrocket_item_state_observations_learner_acceptance.json)。选中 2,291,853 条历史观察，包含 788,214 条 categoryid 和 1,503,639 条 available；来源分片分别贡献 1,243,692 与 1,048,161 条。属性值及来源保留，候选键与双向完整记录对账通过，其他 17,984,049 条属性继续保留在原始表。
 - [x] 7N 助手准备并预检 [SQL66 属性时间审计](sql/66_audit_retailrocket_item_state_time.sql)：只读 rr_stg.item_state_observations，核对 Unix 毫秒到 UTC 的精确转换、往返、日期划分和每日计数对账；见 [验证说明](docs/RETAILROCKET_ITEM_STATE_TIME_VALIDATION.md)。20 行报告包含 12 项 PASS 控制和 8 项 INFO 观测；INFO 的 expected 为 NULL，只有全部控制通过才显示。观察时间范围、日期数及边界日记录数不预设为成功条件，也不解释为真实状态变化时刻或完整目录覆盖。
-- [ ] 7N 用户执行 SQL66，提供 20 行、5 列完整报告；预期 12 项 PASS、8 项 INFO。本步只读，可直接重复执行，无须建表或重新导入 CSV。
+- [x] 7N 用户于 2026-11-09 截图验收 SQL66：20 行 × 5 列、100 个字段全部完整可见并匹配，12 项 PASS、8 项 INFO；见 [聚合验收](data/retailrocket_item_state_time_learner_acceptance.json)。2,291,853 条属性观察的 UTC 转换、毫秒往返及按日对账通过。合并历史包含 18 个有记录的 UTC 日期，时间端点为 2015-05-10T03:00:00.000000Z 和 2015-09-13T03:00:00.000000Z；这不证明连续采集或完整商品目录。
+- [x] 7O 助手准备并预检 [SQL67 商品属性观察区间](sql/67_build_retailrocket_item_state_intervals.sql)：创建 rr_core.item_state_intervals，为每个 itemid/property 将本次观察时间作为起点、下一次记录时间作为终点，最后一条终点为 NULL；使用包含起点、不含终点的 [from,to) 查询约定，保留全部 2,291,853 条原始观察、属性值和来源。24 行报告含 20 项 PASS、4 项 INFO；见 [验证说明](docs/RETAILROCKET_ITEM_STATE_INTERVALS_VALIDATION.md)。不合并相邻相同值，不向首条观察之前反向补值，不关联事件，不修复未知类别；NULL 只表示没有更晚记录，不能证明永久有效或无限新鲜度。
+- [ ] 7O 用户执行 SQL67，提供 24 行、5 列完整报告；预期 20 项 PASS、4 项 INFO，INFO 的 expected 为 NULL。首次完整执行建立区间表；若目标表已存在，保留原表，只执行 CHECKS 标记后的查询。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -180,6 +182,6 @@
 
 ## 下一次对话从这里继续
 
-SQL65 已于 2026-11-09 截图验收：110 个字段完整匹配，20 项 PASS、2 项 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL66](sql/66_audit_retailrocket_item_state_time.sql)，核对类别与可用性历史记录的时间转换、毫秒精度及日期计数，为后续历史状态关联准备统一时间口径。助手预检通过，用户执行待完成；预期 12 项 PASS、8 项 INFO。本步只读，不重建表。历史有效期、事件时点关联与行为指标仍待后续，整体项目未完成。
+SQL66 已于 2026-11-09 截图验收：100 个字段完整匹配，12 项 PASS、8 项 INFO。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL67](sql/67_build_retailrocket_item_state_intervals.sql)，将商品属性观察连接成 [from,to) 查询区间，为后续查找截至事件发生时最近记录的状态准备数据。助手预检通过，用户执行待完成；预期 20 项 PASS、4 项 INFO。每条观察和原始属性值保留，末尾 NULL 不代表永久有效；本步不关联事件。后续时点关联与行为指标仍待完成，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

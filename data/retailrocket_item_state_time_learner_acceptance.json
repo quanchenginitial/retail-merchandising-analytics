@@ -1,0 +1,359 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty rows, five headers and all one hundred report fields are fully visible, including complete UTC timestamp strings and eight displayed NULL expectations. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/66_audit_retailrocket_item_state_time.sql",
+  "script_sha256": "29437def61dbbd23879e84801aa51e333afd26b4b2c6a6539b0b2084323cf20a",
+  "validator": "validation/preflight_retailrocket_item_state_time.py",
+  "validator_sha256": "d8686a07182f1d2eff96ece434b2f7e24248e8410df43886a12383614c3266d0",
+  "assistant_preflight": "data/retailrocket_item_state_time_preflight.json",
+  "assistant_preflight_sha256": "21c6a6c1cb21a69c8b23ec915d51ab399c63a25ebff8c4db2c67f157d75001af",
+  "method_contract": "docs/RETAILROCKET_ITEM_STATE_TIME_VALIDATION.md",
+  "method_contract_prefix_bytes": 8346,
+  "method_contract_prefix_sha256": "19cfe93e4e12226be16c057190d1b1b9c3cc54c8c0be49b0db74fc1dca4f6c98",
+  "method_before_acceptance_append_sha256": "15ee72c2b9e3c65a6f6cfa87fa794225dc36d1882d42924d0d0fa2971e42908e",
+  "method_before_acceptance_append_bytes": 12914,
+  "read_only_query": true,
+  "input_table": "rr_stg.item_state_observations",
+  "result_rows": 20,
+  "result_columns": 5,
+  "report_field_positions": 100,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 100,
+  "visually_verified_integer_values": 20,
+  "visually_verified_digit_string_values": 30,
+  "visually_verified_numeric_display_values": 50,
+  "visually_verified_utc_timestamp_string_values": 2,
+  "visually_verified_null_expected_values": 8,
+  "visually_verified_complete_check_labels": 20,
+  "visually_verified_status_values": 20,
+  "rows_with_visually_verified_pass_status": 12,
+  "rows_with_visually_verified_info_status": 8,
+  "rows_with_pass_status": 12,
+  "rows_with_info_status": 8,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_100_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_utc_timestamp_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "partially_visible_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Keep check_order as a JSON integer. Preserve every non-NULL actual/expected cell as a VARCHAR string, including thirty digit-only values. Preserve the two UTC strings with all six fractional digits and the Z suffix. Transcribe the eight displayed [NULL] expectations as JSON null. No label or value reconstruction is needed.",
+  "numeric_visibility_accounting": "Twenty INTEGER row orders plus thirty digit-only VARCHAR actual/expected values make fifty numeric display values. Two UTC timestamp strings, eight NULL expectations, twenty complete labels and twenty statuses bring the visible total to one hundred fields.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "observation_rows",
+      "2291853",
+      "2291853",
+      "PASS"
+    ],
+    [
+      2,
+      "schema_mismatch",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      3,
+      "missing_timestamp_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      4,
+      "negative_timestamp_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      5,
+      "unsupported_epoch_ms_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      6,
+      "converted_rows",
+      "2291853",
+      "2291853",
+      "PASS"
+    ],
+    [
+      7,
+      "conversion_null_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      8,
+      "roundtrip_error_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      9,
+      "date_partition_error_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      10,
+      "daily_rows_difference",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      11,
+      "categoryid_rows",
+      "788214",
+      "788214",
+      "PASS"
+    ],
+    [
+      12,
+      "available_rows",
+      "1503639",
+      "1503639",
+      "PASS"
+    ],
+    [
+      13,
+      "min_timestamp_ms",
+      "1431226800000",
+      null,
+      "INFO"
+    ],
+    [
+      14,
+      "max_timestamp_ms",
+      "1442113200000",
+      null,
+      "INFO"
+    ],
+    [
+      15,
+      "first_utc_timestamp",
+      "2015-05-10T03:00:00.000000Z",
+      null,
+      "INFO"
+    ],
+    [
+      16,
+      "last_utc_timestamp",
+      "2015-09-13T03:00:00.000000Z",
+      null,
+      "INFO"
+    ],
+    [
+      17,
+      "distinct_utc_dates",
+      "18",
+      null,
+      "INFO"
+    ],
+    [
+      18,
+      "first_date_observation_rows",
+      "446582",
+      null,
+      "INFO"
+    ],
+    [
+      19,
+      "last_date_observation_rows",
+      "93764",
+      null,
+      "INFO"
+    ],
+    [
+      20,
+      "subsecond_observation_rows",
+      "0",
+      null,
+      "INFO"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "observation_rows",
+      "actual": "2291853",
+      "expected": "2291853",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "schema_mismatch",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "missing_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "negative_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "unsupported_epoch_ms_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "converted_rows",
+      "actual": "2291853",
+      "expected": "2291853",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "conversion_null_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "roundtrip_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "date_partition_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "daily_rows_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "categoryid_rows",
+      "actual": "788214",
+      "expected": "788214",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "available_rows",
+      "actual": "1503639",
+      "expected": "1503639",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "min_timestamp_ms",
+      "actual": "1431226800000",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "max_timestamp_ms",
+      "actual": "1442113200000",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "first_utc_timestamp",
+      "actual": "2015-05-10T03:00:00.000000Z",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "last_utc_timestamp",
+      "actual": "2015-09-13T03:00:00.000000Z",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "distinct_utc_dates",
+      "actual": "18",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "first_date_observation_rows",
+      "actual": "446582",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "last_date_observation_rows",
+      "actual": "93764",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 20,
+      "check_name": "subsecond_observation_rows",
+      "actual": "0",
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "4212b9cdd85528fc56905cb6fb1574940bb70f8891b9ad0c474c2ca30520d7fa",
+  "fingerprint_method": "SHA-256 of twenty ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. check_order is integer; actual/expected are strings or JSON null.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_property_histories_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts all one hundred visible fields of the SQL66 aggregate reproduction, with twelve PASS controls and eight INFO observations. All 2,291,853 selected named-property observations converted under the Unix-millisecond/UTC convention, with zero roundtrip, date-partition or daily-reconciliation discrepancies. The per-property counts are 788,214 categoryid and 1,503,639 available. INFO endpoints are 1431226800000 and 1442113200000 milliseconds, rendered as 2015-05-10T03:00:00.000000Z and 2015-09-13T03:00:00.000000Z. Eighteen represented UTC dates include 446,582 first-date and 93,764 last-date observations; no occurrence has a nonzero millisecond remainder. These combined-history observations do not establish per-item/per-property coverage, uninterrupted collection, complete catalogue snapshots, update cadence, local business time or exact real-world state-change instants. This screenshot is distinct from direct database inspection and prior assistant preflight evidence. It creates no validity intervals or event associations and repairs no category references. Inventory, conversion, monetary or causal outcomes and learner conceptual understanding are not established. Historical pending statements remain unchanged; this appended acceptance records current learner progress."
+}
