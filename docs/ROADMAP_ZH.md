@@ -2,7 +2,7 @@
 
 更新日期：2026-11-09（Australia/Sydney）。
 
-**当前状态：SQL66 属性时间审计已验收，下一步运行 SQL67。** 截图 100 个字段全部完整可见并匹配，12 项 PASS、8 项 INFO；见 [验收记录](../data/retailrocket_item_state_time_learner_acceptance.json)。2,291,853 条属性观察的 UTC 转换、毫秒往返和日期计数通过。SQL67 将保留每条观察，并按同一商品、同一属性的下一次记录确定查询区间；助手预检通过，用户执行待完成。
+**当前状态：SQL67 商品属性观察区间已验收，下一步运行 SQL68。** 截图 120 个字段全部完整可见并匹配，20 项 PASS、4 项 INFO；见 [验收记录](../data/retailrocket_item_state_intervals_learner_acceptance.json)。2,291,853 条观察完整保留，区间端点及记录对账通过。SQL68 将只读核对事件时点的属性覆盖，区分能匹配、早于首条观察及没有该属性历史三种情况；助手预检通过，用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL67](../sql/67_build_retailrocket_item_state_intervals.sql)。目的：为商品属性历史建立包含起点、不含终点的 [from,to) 查询区间，以便后续查找截至事件发生时最近记录的状态，而不要求事件与属性记录发生在同一天。报告为 24 行、5 列，预期 20 项 PASS、4 项 INFO；INFO 的 expected 为 NULL。若区间表已存在，保留原表，只执行 CHECKS 标记后的查询。末尾 NULL 只表示没有更晚记录；不反向补齐首条记录之前的时间，不证明真实业务有效期，本步也不关联事件。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接完整执行 [SQL68](../sql/68_audit_retailrocket_event_property_coverage.sql)。目的：先确认全部事件在发生时能关联到哪些此前或同时记录的类别与可用性，为后续分析明确可解释的数据范围。报告为 28 行、5 列，预期 20 项 PASS、8 项 INFO；INFO 的 expected 为 NULL。本步只读，可直接重复执行，无须建立新表或重新导入 CSV。未匹配事件保留，不用未来属性值反向补齐；开放尾部匹配是已匹配记录的子集，不证明永久有效或无限新鲜度。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。
