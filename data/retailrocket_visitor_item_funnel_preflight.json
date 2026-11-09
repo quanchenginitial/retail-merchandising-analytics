@@ -1,0 +1,214 @@
+{
+  "checked_at_utc": "2026-11-09T08:42:52.399995+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/71_analyze_retailrocket_visitor_item_funnel.sql",
+  "script_sha256": "4679b7ae63cb6b9763f8ea13626bffc96bfdfbae3f954cb16efc89dfd9a11506",
+  "validator": "validation/preflight_retailrocket_visitor_item_funnel.py",
+  "validator_sha256": "95362916fe912c830788983badbf85b19531a84acdf82114e4b25dc9d55bc6ef",
+  "code_and_dependency_sha256": {
+    "sql/71_analyze_retailrocket_visitor_item_funnel.sql": "4679b7ae63cb6b9763f8ea13626bffc96bfdfbae3f954cb16efc89dfd9a11506",
+    "validation/preflight_retailrocket_visitor_item_funnel.py": "95362916fe912c830788983badbf85b19531a84acdf82114e4b25dc9d55bc6ef",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "sql/69_build_retailrocket_events_enriched.sql": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "sql/70_analyze_retailrocket_event_overview.sql": "3dfb5a188d89ecfc4d7d32a7a1f296c467b9307192b6f0a2f303997542e9fdb4",
+    "data/retailrocket_event_overview_preflight.json": "a72ef53f358df04cdd021b3d3329b6fdc1353e076d8c879a665071a0f30203fb",
+    "data/retailrocket_event_overview_learner_acceptance.json": "967f28441f5ceae35b34e52d6f26515169c300f8e051a945d45246c015b1d096",
+    "docs/RETAILROCKET_EVENT_OVERVIEW_VALIDATION.md": "c938198893a4f42c4bddf00d853152ca04ca5aecc7f2a4daecb47fd3d2897afd",
+    "data/retailrocket_events_enriched_preflight.json": "5ce07f134881cdb064e4f111e71e25dff6b0d1141508a7146a3c9aa2614c7111",
+    "data/retailrocket_events_enriched_learner_acceptance.json": "34350b37b156f63f3c79606bb781a28b0ed53b29d423787e472f3569fccc123e",
+    "docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md": "9c0ea74a0d035b8a2dd2b073b88abb5cf3e35c530d073f10fffd8512d7db2ccc"
+  },
+  "method_contract": "docs/RETAILROCKET_VISITOR_ITEM_FUNNEL_VALIDATION.md",
+  "method_contract_prefix_bytes": 8553,
+  "method_contract_prefix_sha256": "df835a679be19c19e2169a031328f4da27cf26cf0b26130e286a24ea1ec1ec2b",
+  "source_files": [
+    "events.csv"
+  ],
+  "source_before": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "private_readset_projection_sql": "CREATE SCHEMA rr_mart;\nCREATE TABLE rr_mart.events_enriched AS SELECT timestamp,visitorid,event,itemid,transactionid FROM rr_stg.events;",
+  "private_readset_projection_sha256": "dfcd1693cb7991d18930bfa2752f3da40a098aaad1fc759ec3a49f75918e8523",
+  "projection_scope": "Disposable original-five-column stand-in for SQL71 readset only; accepted SQL69 remains the evidence for the seventeen-column production fact. UTC and property fields are not reverified.",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "required_readset_columns": 5,
+  "full17_not_reverified": true,
+  "property_files_read": false,
+  "category_csv_read": false,
+  "SQL69_rerun": false,
+  "SQL70_rerun": false,
+  "UTC_fields_read": false,
+  "learner_database_opened": false,
+  "query_read_only": true,
+  "private_stream_read_only": true,
+  "real_source_attempts": 1,
+  "real_reconstruction_executions": 1,
+  "real_analysis_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "report_rows": 3,
+  "report_columns": 5,
+  "output_columns": [
+    "stage",
+    "visitor_item_pairs",
+    "share_of_view_pairs_pct",
+    "step_rate_pct",
+    "check_status"
+  ],
+  "checks_passed": 3,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "stage": "VIEW",
+      "visitor_item_pairs": 2132127,
+      "share_of_view_pairs_pct": "100.0000",
+      "step_rate_pct": null,
+      "check_status": "PASS"
+    },
+    {
+      "stage": "VIEW_THEN_CART",
+      "visitor_item_pairs": 45804,
+      "share_of_view_pairs_pct": "2.1483",
+      "step_rate_pct": "2.1483",
+      "check_status": "PASS"
+    },
+    {
+      "stage": "VIEW_THEN_CART_THEN_TRANSACTION",
+      "visitor_item_pairs": 16695,
+      "share_of_view_pairs_pct": "0.7830",
+      "step_rate_pct": "36.4488",
+      "check_status": "PASS"
+    }
+  ],
+  "report_sha256": "08299a5dc9c79b8e862f8a4e1363b2f3beba5dd3033ca794113134f049382cb1",
+  "report_fingerprint_contract": "SHA-256 of compact JSON arrays in output-column order followed by LF; DECIMAL percentages are four-place JSON strings, integer counts remain integers, NULL rates remain JSON null.",
+  "independent_python_source_counts": {
+    "rows": 2756101,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644
+  },
+  "independent_python_aggregate_counts": {
+    "rows": 2756101,
+    "duplicate_surplus": 460,
+    "observed_pairs": 2145179,
+    "pairs_without_view": 13052,
+    "viewed_pairs": 2132127,
+    "view_then_cart_pairs": 45804,
+    "view_then_cart_then_transaction_pairs": 16695,
+    "maximum_simultaneous_pair_states": 1
+  },
+  "independent_python_report_matched": true,
+  "independent_python_Decimal_rates_matched": true,
+  "independent_one_pair_streaming_state": true,
+  "strict_timestamp_order_verified": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 5,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "maximum_simultaneous_pair_states": 1,
+  "private_database_sha256_before_readonly": "801435c1282b93612cf12c5ebdc100bae51bc902950c170581821a71c6486afb",
+  "private_database_sha256_after_readonly": "801435c1282b93612cf12c5ebdc100bae51bc902950c170581821a71c6486afb",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "strict_ties_later_valid_subsequences_early_events_skipped_carts_pair_identity_duplicates_numeric_chunks",
+      "passed": true,
+      "events": 24,
+      "chunks": 8,
+      "expected_stage_counts": [
+        5,
+        3,
+        2
+      ],
+      "extra_unqueried_column_allowed": true
+    },
+    {
+      "case": "invalid_admission_blocks_all_metrics_and_missing_required_field_binds_fail",
+      "passed": true,
+      "subcases": [
+        "empty_readset",
+        "negative_identifier",
+        "invalid_event",
+        "invalid_transaction_null",
+        "negative_timestamp",
+        "unsupported_timestamp",
+        "missing_timestamp",
+        "required_field_type",
+        "wrong_row_count",
+        "wrong_duplicate_count",
+        "missing_required_column"
+      ]
+    },
+    {
+      "case": "zero_cart_and_valid_zero_view_denominators_remain_NULL_where_undefined",
+      "passed": true,
+      "subcases": [
+        "no_qualifying_cart",
+        "valid_no_view_cohort"
+      ]
+    }
+  ],
+  "invalid_fixture_subcase_count": 11,
+  "zero_denominator_fixture_subcase_count": 2,
+  "invalid_admission_blocks_all_metrics_verified": true,
+  "additional_unqueried_columns_allowed_verified": true,
+  "zero_denominator_NULLs_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "simultaneous_pair_state_budget": 1,
+    "private_directory_budget_bytes": 5368709120
+  },
+  "private_event_comparison_chunks": 56,
+  "private_event_comparison_chunk_bytes": 96993967,
+  "private_database_bytes_before_cleanup": 90714112,
+  "largest_private_directory_bytes_observed_after_phase": 187708079,
+  "workspace_free_bytes_before": 50051379200,
+  "workspace_free_bytes_after": 50050764800,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "historical_preflight_files_unchanged": 69,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_event_scan_sort_seconds": 25.172,
+  "elapsed_reconstruction_seconds": 5.995,
+  "elapsed_readonly_funnel_seconds": 1.758,
+  "elapsed_private_stream_seconds": 14.623,
+  "timing_scope": "Three CLI phases: event prefixes plus disposable five-field projection; read-only pair funnel; read-only five-field stream. Source sorting timed separately; hashing and fixtures excluded.",
+  "scope": "Assistant SQL71 pair-funnel preflight passed; learner SQL71 pending. Full-observation same-pair strict view-cart-transaction progression, not session/fixed-window/person/order or causal conversion. No-view paths excluded; follow-up varies by first-view time and observation boundaries. Original occurrences retained. Only original-five-field readset verified; UTC/property fields not reverified."
+}
