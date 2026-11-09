@@ -186,7 +186,9 @@
 - [x] 7U 助手准备并预检 [SQL73 首次浏览类别覆盖](sql/73_audit_retailrocket_first_view_category_coverage.sql)：沿用 SQL72 的 2,042,310 个合格访客—商品组合，按首次观测浏览时的已有类别信息，划分 MAPPED、UNKNOWN_REFERENCE、BEFORE_FIRST、NO_HISTORY 并保留全部组合。输出四种互斥状态及 TOTAL，共 5 行、4 列，预期全部 PASS；见 [验证说明](docs/RETAILROCKET_FIRST_VIEW_CATEGORY_COVERAGE_VALIDATION.md)。同一最早时刻的记录须先核对含 NULL 的完整五字段类别信息一致，冲突则阻止输出；不任取一条。仅验证事件与类别十字段及参考 categoryid，不重验可用性、UTC 或类别层级。
 - [x] 7U 用户于 2026-11-09 截图验收 SQL73：5 行 × 4 列、20 个字段完整匹配，五行 PASS；见 [聚合验收](data/retailrocket_first_view_category_coverage_learner_acceptance.json)。2,042,310 个合格组合中，MAPPED 1,527,206（74.7784%）、UNKNOWN_REFERENCE 0、BEFORE_FIRST 304,405（14.9049%）、NO_HISTORY 210,699（10.3167%），四类对账一致。显示的 0/100 精确规范为 0.0000/100.0000；本队列引用未知为 0 不改变此前 167 条属性观察的事实。
 - [x] 7V 助手准备并预检 [SQL74 分类别 7 天路径](sql/74_analyze_retailrocket_category_7day_funnel.sql)：以首次观测浏览类别固定分组，展示合格组合数最多的 10 个可映射类别、其余可映射类别合计、三个未知桶及 TOTAL。15 行、9 列预计全部 PASS；合格/加购/交易合计与 SQL72、覆盖桶与 SQL73 对账。排序按合格组合数降序、并列按数字类别编号升序，不按转化率挑选。各行比率使用本行分母，零分母为 NULL；见 [验证说明](docs/RETAILROCKET_CATEGORY_7DAY_FUNNEL_VALIDATION.md)。原有 7 天窗口、严格顺序与未知状态均保留，验证范围仍为事件/类别十字段及参考编号。
-- [ ] 7V 用户执行 SQL74，提供 15 行、9 列完整结果，预期全部 PASS。如需分两张截图，两张都保留 segment、categoryid 和全部 15 行，方便对应；保留所有 NULL。
+- [x] 7V 用户于 2026-11-09 截图验收 SQL74：15 行 × 9 列、135 个字段完整可见并匹配，15 行 PASS、8 个 NULL 保留；见 [聚合验收](data/retailrocket_category_7day_funnel_learner_acceptance.json)。所有分组计数与 SQL72/73 对账，总计为 2,042,310 个合格、43,147 个加购及 15,520 个交易组合；六个省略末尾零的小数显示值已如实保留并精确规范化。类别代码以分组后的匿名标签公开，不猜测业务名称。
+- [x] 7W 助手准备并预检 [SQL75 类别路径的时间队列比较](sql/75_analyze_retailrocket_category_funnel_time_cohorts.sql)：以首次观测浏览是否早于 2015-07-01T00:00:00Z 划分 EARLY/LATE，仍使用原有 7 天窗口及资格。两组固定沿用 SQL74 的同一套全局 Top10 类别和其余/未知桶，不分别重排；30 行、10 列预计全部 PASS，各组跨队列计数逐项还原 SQL74，见 [验证说明](docs/RETAILROCKET_CATEGORY_FUNNEL_TIME_COHORTS_VALIDATION.md)。分组后续事件可跨 7 月边界，分类只取首次浏览；两个起点区间长度不同，此为探索性比较，不证明显著性、季节性或因果关系。
+- [ ] 7W 用户执行 SQL75，提供 30 行、10 列完整结果，预期全部 PASS。可分 EARLY/LATE 两张、每张 15 行；若还需横向拆分，保留 cohort、segment、categoryid 和该队列的全部 15 行。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -196,6 +198,6 @@
 
 ## 下一次对话从这里继续
 
-SQL73 已于 2026-11-09 截图验收：20 个字段完整匹配、五行 PASS，74.7784% 的合格组合可映射静态类别，其余类别历史覆盖状态已明确。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL74](sql/74_analyze_retailrocket_category_7day_funnel.sql)，比较按首次浏览类别分组后的 7 天路径规模与阶段比率，同时保留未知桶和总计。助手预检通过，用户执行待完成。Top 类别按合格组合规模选择，类别编号保持匿名标签，不推断业务名称或因果效果；整体项目未完成。
+SQL74 已于 2026-11-09 截图验收：135 个字段完整匹配、15 行 PASS，分类别 7 天路径与全局及覆盖计数对账通过。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL75](sql/75_analyze_retailrocket_category_funnel_time_cohorts.sql)，固定全局同一组类别，比较首次浏览在 7 月 1 日前后的路径规模与阶段比率。助手预检通过，用户执行待完成。队列按首次浏览确定，后续动作可跨分界；区间长度不等，结果用于探索，不把差异当成显著性、季节性或因果证据；整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
