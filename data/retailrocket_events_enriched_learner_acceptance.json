@@ -1,0 +1,479 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty-eight rows, five headers and all 140 report fields are fully visible, including complete check labels and eight displayed NULL expectations. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/69_build_retailrocket_events_enriched.sql",
+  "script_sha256": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+  "validator": "validation/preflight_retailrocket_events_enriched.py",
+  "validator_sha256": "612e5c54f90b513b6641b2ccb63465c4fc19f0ff29bede0d76f1eb60396a93e2",
+  "assistant_preflight": "data/retailrocket_events_enriched_preflight.json",
+  "assistant_preflight_sha256": "5ce07f134881cdb064e4f111e71e25dff6b0d1141508a7146a3c9aa2614c7111",
+  "method_contract": "docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md",
+  "method_contract_prefix_bytes": 12517,
+  "method_contract_prefix_sha256": "4ef7c43f3a4b8069c4cccb846fc159b54d65cf7a6766deda1da2cf3ca04ff689",
+  "original_method_contract_prefix_bytes": 10590,
+  "original_method_contract_prefix_sha256": "429c848a03ae1e3f1c965e6af8741c22582683b1bcd6f2f761ea2fb18676c644",
+  "method_before_acceptance_append_sha256": "bb5048ab83cad1830a9af290b1d7bd74588cda30de75948103329f678c057e28",
+  "method_before_acceptance_append_bytes": 17825,
+  "input_tables": [
+    "rr_stg.events",
+    "rr_core.item_state_intervals"
+  ],
+  "fact_table": "rr_mart.events_enriched",
+  "learner_action_type": "Guarded seventeen-field event-fact construction followed by aggregate validation; the screenshot accepts the displayed fact snapshot under the frozen source and temporal-match contract.",
+  "result_rows": 28,
+  "result_columns": 5,
+  "report_field_positions": 140,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 140,
+  "visually_verified_integer_values": 76,
+  "visually_verified_check_order_integer_values": 28,
+  "visually_verified_actual_expected_integer_values": 48,
+  "visually_verified_null_expected_values": 8,
+  "visually_verified_complete_check_labels": 28,
+  "visually_verified_status_values": 28,
+  "rows_with_visually_verified_pass_status": 20,
+  "rows_with_visually_verified_info_status": 8,
+  "rows_with_pass_status": 20,
+  "rows_with_info_status": 8,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_140_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "partially_visible_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Transcribe the eight displayed [NULL] expectations as JSON null. Preserve complete check labels, statuses and row/column order; no label reconstruction is needed.",
+  "numeric_visibility_accounting": "Twenty-eight integer row orders plus forty-eight integer actual/expected values make seventy-six integer fields. Eight NULL expectations, twenty-eight complete labels and twenty-eight statuses bring the visible total to 140 fields.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "event_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      2,
+      "event_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      3,
+      "invalid_event_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      4,
+      "event_duplicate_surplus",
+      460,
+      460,
+      "PASS"
+    ],
+    [
+      5,
+      "interval_rows",
+      2291853,
+      2291853,
+      "PASS"
+    ],
+    [
+      6,
+      "interval_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "invalid_interval_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      8,
+      "interval_candidate_key_surplus",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      9,
+      "interval_chain_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      10,
+      "categoryid_interval_rows",
+      788214,
+      788214,
+      "PASS"
+    ],
+    [
+      11,
+      "available_interval_rows",
+      1503639,
+      1503639,
+      "PASS"
+    ],
+    [
+      12,
+      "source_contract_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      13,
+      "fact_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      14,
+      "fact_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      15,
+      "invalid_fact_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      16,
+      "fact_duplicate_surplus",
+      460,
+      460,
+      "PASS"
+    ],
+    [
+      17,
+      "expected_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      18,
+      "fact_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      19,
+      "timestamp_roundtrip_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      20,
+      "utc_date_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      21,
+      "categoryid_matched_rows",
+      2099173,
+      null,
+      "INFO"
+    ],
+    [
+      22,
+      "categoryid_before_first_rows",
+      401343,
+      null,
+      "INFO"
+    ],
+    [
+      23,
+      "categoryid_no_history_rows",
+      255585,
+      null,
+      "INFO"
+    ],
+    [
+      24,
+      "categoryid_open_tail_match_rows",
+      1924845,
+      null,
+      "INFO"
+    ],
+    [
+      25,
+      "available_matched_rows",
+      2224316,
+      null,
+      "INFO"
+    ],
+    [
+      26,
+      "available_before_first_rows",
+      276200,
+      null,
+      "INFO"
+    ],
+    [
+      27,
+      "available_no_history_rows",
+      255585,
+      null,
+      "INFO"
+    ],
+    [
+      28,
+      "available_open_tail_match_rows",
+      1127773,
+      null,
+      "INFO"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "event_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "event_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "invalid_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "event_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "interval_rows",
+      "actual": 2291853,
+      "expected": 2291853,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "interval_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_interval_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "interval_candidate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "interval_chain_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "categoryid_interval_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "available_interval_rows",
+      "actual": 1503639,
+      "expected": 1503639,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "fact_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "fact_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "invalid_fact_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "fact_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "expected_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "fact_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "timestamp_roundtrip_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "utc_date_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "categoryid_matched_rows",
+      "actual": 2099173,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 22,
+      "check_name": "categoryid_before_first_rows",
+      "actual": 401343,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 23,
+      "check_name": "categoryid_no_history_rows",
+      "actual": 255585,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 24,
+      "check_name": "categoryid_open_tail_match_rows",
+      "actual": 1924845,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 25,
+      "check_name": "available_matched_rows",
+      "actual": 2224316,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 26,
+      "check_name": "available_before_first_rows",
+      "actual": 276200,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 27,
+      "check_name": "available_no_history_rows",
+      "actual": 255585,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 28,
+      "check_name": "available_open_tail_match_rows",
+      "actual": 1127773,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "780838696b74c8d9ad107214609d4dc0735aebabaeff307938e60893e02e5c2f",
+  "fingerprint_method": "SHA-256 of twenty-eight ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. check_order and non-NULL actual/expected cells are integers; the eight INFO expectations are JSON null.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_event_histories_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "failed_attempt_and_pre_recovery_amendment_preserved_byte_for_byte": true,
+  "prior_assistant_real_source_attempts": 2,
+  "prior_assistant_successful_source_attempts": 1,
+  "scope": "This accepts all 140 fully visible fields of the SQL69 aggregate reproduction, with twenty PASS controls and eight INFO observations. The fact snapshot retains 2,756,101 event occurrences and the 460 exact duplicate-surplus occurrences under the seventeen-field schema contract. Both full expected/fact multiset differences, timestamp roundtrip errors and UTC date errors are zero. Category coverage remains 2,099,173 MATCHED, 401,343 BEFORE_FIRST and 255,585 NO_HISTORY; availability coverage remains 2,224,316 MATCHED, 276,200 BEFORE_FIRST and 255,585 NO_HISTORY. Open-tail counts of 1,924,845 category and 1,127,773 availability matches remain matched subsets. No new event identifier, deduplication, future backfill, freshness cutoff, reference repair, session/order definition, conversion rate, inventory quantity or monetary/causal result is established. UTC fields follow the accepted analytical convention, not a known business-local timezone. Screenshot evidence remains separate from direct database inspection and prior assistant preflight evidence. The original failed assistant attempt, unknown failure cause, approved pre-recovery resource amendment and successful recovery remain fully preserved; this learner screenshot does not turn that history into first-pass success. Historical pending statements remain unchanged, with current learner acceptance appended here; conceptual understanding is not tested."
+}

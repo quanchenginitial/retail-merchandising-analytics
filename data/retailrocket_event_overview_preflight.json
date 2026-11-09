@@ -1,0 +1,228 @@
+{
+  "checked_at_utc": "2026-11-09T08:21:33.562560+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/70_analyze_retailrocket_event_overview.sql",
+  "script_sha256": "3dfb5a188d89ecfc4d7d32a7a1f296c467b9307192b6f0a2f303997542e9fdb4",
+  "validator": "validation/preflight_retailrocket_event_overview.py",
+  "validator_sha256": "c4c86e149f76dacb5e6919f1dbb279cf42407c26de3fcad66002ac1cd074c194",
+  "code_and_dependency_sha256": {
+    "sql/70_analyze_retailrocket_event_overview.sql": "3dfb5a188d89ecfc4d7d32a7a1f296c467b9307192b6f0a2f303997542e9fdb4",
+    "validation/preflight_retailrocket_event_overview.py": "c4c86e149f76dacb5e6919f1dbb279cf42407c26de3fcad66002ac1cd074c194",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "sql/69_build_retailrocket_events_enriched.sql": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_event_time.py": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "data/retailrocket_events_enriched_preflight.json": "5ce07f134881cdb064e4f111e71e25dff6b0d1141508a7146a3c9aa2614c7111",
+    "data/retailrocket_events_enriched_learner_acceptance.json": "34350b37b156f63f3c79606bb781a28b0ed53b29d423787e472f3569fccc123e",
+    "docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md": "9c0ea74a0d035b8a2dd2b073b88abb5cf3e35c530d073f10fffd8512d7db2ccc"
+  },
+  "method_contract": "docs/RETAILROCKET_EVENT_OVERVIEW_VALIDATION.md",
+  "method_contract_prefix_bytes": 8108,
+  "method_contract_prefix_sha256": "e9676f52d45e3446a27d76c0f1d2eaae9d237ca8342a68411ac96046390074bf",
+  "source_files": [
+    "events.csv"
+  ],
+  "source_before": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "private_readset_projection_sql": "CREATE SCHEMA rr_mart;\nCREATE TABLE rr_mart.events_enriched AS SELECT timestamp,visitorid,event,itemid,transactionid,\n    make_timestamp_ms(timestamp) AS event_timestamp_utc,CAST(make_timestamp_ms(timestamp) AS DATE) AS event_date_utc\nFROM rr_stg.events;",
+  "private_readset_projection_sha256": "59bc9951e1f1669d068e05dd2748814af93c4111463eba0ea70c5892e3f53e72",
+  "projection_scope": "Disposable seven-column stand-in for SQL70 readset only; accepted SQL69 remains the evidence for the seventeen-column production fact and its ten unqueried property fields.",
+  "source_table": "rr_mart.events_enriched",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid",
+    "event_timestamp_utc",
+    "event_date_utc"
+  ],
+  "required_readset_columns": 7,
+  "full17_not_reverified": true,
+  "property_files_read": false,
+  "category_csv_read": false,
+  "SQL69_rerun": false,
+  "learner_database_opened": false,
+  "query_read_only": true,
+  "private_stream_read_only": true,
+  "real_source_attempts": 1,
+  "real_reconstruction_executions": 1,
+  "real_analysis_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "report_rows": 4,
+  "report_columns": 10,
+  "output_columns": [
+    "event_type",
+    "event_rows",
+    "event_share_pct",
+    "distinct_visitor_ids",
+    "distinct_item_ids",
+    "distinct_transaction_ids",
+    "first_event_utc",
+    "last_event_utc",
+    "observed_utc_dates",
+    "check_status"
+  ],
+  "checks_passed": 4,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "event_type": "view",
+      "event_rows": 2664312,
+      "event_share_pct": "96.6696",
+      "distinct_visitor_ids": 1404179,
+      "distinct_item_ids": 234838,
+      "distinct_transaction_ids": 0,
+      "first_event_utc": "2015-05-03T03:00:11.289000Z",
+      "last_event_utc": "2015-09-18T02:59:47.788000Z",
+      "observed_utc_dates": 139,
+      "check_status": "PASS"
+    },
+    {
+      "event_type": "addtocart",
+      "event_rows": 69332,
+      "event_share_pct": "2.5156",
+      "distinct_visitor_ids": 37722,
+      "distinct_item_ids": 23903,
+      "distinct_transaction_ids": 0,
+      "first_event_utc": "2015-05-03T03:00:04.384000Z",
+      "last_event_utc": "2015-09-18T02:50:49.834000Z",
+      "observed_utc_dates": 139,
+      "check_status": "PASS"
+    },
+    {
+      "event_type": "transaction",
+      "event_rows": 22457,
+      "event_share_pct": "0.8148",
+      "distinct_visitor_ids": 11719,
+      "distinct_item_ids": 12025,
+      "distinct_transaction_ids": 17672,
+      "first_event_utc": "2015-05-03T03:27:21.391000Z",
+      "last_event_utc": "2015-09-18T02:43:12.017000Z",
+      "observed_utc_dates": 139,
+      "check_status": "PASS"
+    },
+    {
+      "event_type": "TOTAL",
+      "event_rows": 2756101,
+      "event_share_pct": "100.0000",
+      "distinct_visitor_ids": 1407580,
+      "distinct_item_ids": 235061,
+      "distinct_transaction_ids": 17672,
+      "first_event_utc": "2015-05-03T03:00:04.384000Z",
+      "last_event_utc": "2015-09-18T02:59:47.788000Z",
+      "observed_utc_dates": 139,
+      "check_status": "PASS"
+    }
+  ],
+  "report_sha256": "ed621a3b2b89aed8c428d34fc010c57e08ae0ee598ef112aa8c117b11d70aff7",
+  "report_fingerprint_contract": "SHA-256 of compact JSON arrays in output-column order followed by LF; DECIMAL percentages are four-place JSON strings, integer counts remain integers, UTC strings include six fractional digits and Z.",
+  "independent_python_source_counts": {
+    "rows": 2756101,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644
+  },
+  "independent_python_aggregate_counts": {
+    "rows": 2756101,
+    "duplicate_surplus": 460,
+    "identifier_set_entries": 3402371
+  },
+  "independent_python_report_matched": true,
+  "independent_python_Decimal_shares_matched": true,
+  "independent_TOTAL_distincts_recomputed": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 7,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "independent_UTC_timestamp_and_date_matched": true,
+  "identifier_set_entry_budget": 4000000,
+  "identifier_set_entries_observed": 3402371,
+  "private_database_sha256_before_readonly": "73b9db2b79df4cf4f694a524584b4263104206571eee4427137abca9522d423c",
+  "private_database_sha256_after_readonly": "73b9db2b79df4cf4f694a524584b4263104206571eee4427137abca9522d423c",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "direct_TOTAL_distincts_numeric_chunks_duplicates_NULL_zero_transaction_ids_UTC_dates_and_record_shares",
+      "passed": true,
+      "events": 9,
+      "chunks": 5
+    },
+    {
+      "case": "extra_unqueried_columns_allowed_without_full_schema_claim",
+      "passed": true
+    },
+    {
+      "case": "invalid_admission_blocks_all_metrics_and_missing_required_field_binds_fail",
+      "passed": true,
+      "subcases": [
+        "empty_readset",
+        "negative_identifier",
+        "invalid_event",
+        "invalid_transaction_null",
+        "missing_UTC",
+        "UTC_roundtrip",
+        "UTC_microsecond",
+        "UTC_date",
+        "required_field_type",
+        "wrong_row_count",
+        "wrong_duplicate_count",
+        "missing_required_column"
+      ]
+    }
+  ],
+  "invalid_fixture_subcase_count": 12,
+  "invalid_admission_blocks_all_metrics_verified": true,
+  "additional_unqueried_columns_allowed_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "identifier_set_entry_budget": 4000000,
+    "private_directory_budget_bytes": 5368709120
+  },
+  "private_event_comparison_chunks": 56,
+  "private_event_comparison_chunk_bytes": 96993967,
+  "private_database_bytes_before_cleanup": 104607744,
+  "largest_private_directory_bytes_observed_after_phase": 201601711,
+  "workspace_free_bytes_before": 50097479680,
+  "workspace_free_bytes_after": 50097348608,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "historical_preflight_files_unchanged": 68,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_event_scan_sort_seconds": 27.189,
+  "elapsed_reconstruction_seconds": 7.27,
+  "elapsed_readonly_overview_seconds": 2.513,
+  "elapsed_private_stream_seconds": 45.495,
+  "timing_scope": "Three CLI phases: event prefixes plus disposable seven-field projection; read-only overview; read-only seven-field stream. Source sorting timed separately; hashing and fixtures excluded.",
+  "scope": "Assistant SQL70 overview preflight passed; learner SQL70 pending. Event-record shares are not conversion rates. Visitor identifiers are not verified persons; transaction records or distinct identifiers are not validated orders. All original occurrences retained; TOTAL distincts recomputed. Only the seven-field readset was verified; no property history, inventory, monetary or causal claims."
+}

@@ -2,7 +2,7 @@
 
 更新日期：2026-11-09（Australia/Sydney）。
 
-**当前状态：SQL68 事件属性覆盖审计已验收，下一步运行 SQL69。** 截图 135 个字段完整可见，5 个截断检查名依据行号、可见前缀与固定脚本确认；所有数值和状态匹配，20 项 PASS、8 项 INFO。见 [验收记录](../data/retailrocket_event_property_coverage_learner_acceptance.json)。SQL69 将已核对的事件与历史属性匹配结果保存为 17 列事实表，并追加统一 UTC 时间和日期；助手预检通过，用户执行待完成。
+**当前状态：SQL69 事件事实表已验收，下一步运行 SQL70 行为概览。** 截图 140 个字段全部完整可见并匹配，20 项 PASS、8 项 INFO；见 [验收记录](../data/retailrocket_events_enriched_learner_acceptance.json)。SQL70 将三类事件汇总为记录规模、占比、不同编号覆盖及 UTC 时间范围，助手预检通过、用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接首次完整执行 [SQL69](../sql/69_build_retailrocket_events_enriched.sql)。目的：把已验收的事件属性匹配结果落成可重复查询的事实表，为后续按日汇总与行为分析准备稳定输入。表中保留全部 2,756,101 条事件记录、原有重复次数和未匹配分类，并增加 UTC 时间与日期。报告为 28 行、5 列，预期 20 项 PASS、8 项 INFO；INFO 的 expected 为 NULL。若目标表已存在，保留原表，只执行 CHECKS 标记后的查询。该步骤不新增事件编号、去重、类别修复、新鲜度截止或会话/转化率定义。
+阅读 [当前一步](FIRST_STEP_ZH.md)，在现有 retail_merchandising 连接完整执行 [SQL70](../sql/70_analyze_retailrocket_event_overview.sql)。目的：了解浏览、加购和交易事件的构成，以及各类记录覆盖的访客编号、商品和日期，为后续行为分析建立基线。查询只读事实表中 7 个事件与 UTC 字段，可重复运行，输出 view、addtocart、transaction、TOTAL 共 4 行、10 列，预期全部 PASS。TOTAL 的不同编号、日期及端点独立计算。事件记录占比不代表转化率，匿名访客编号不等于真实人数，交易编号尚未验证为订单。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

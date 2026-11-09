@@ -176,7 +176,9 @@
 - [x] 7P 助手准备并预检 [SQL68 事件属性时点覆盖审计](sql/68_audit_retailrocket_event_property_coverage.sql)：只读 rr_stg.events 与 rr_core.item_state_intervals，分别为 categoryid、available 查找起点不晚于事件时刻的最近观察，保留全部 2,756,101 条事件记录及原有重复次数。每种属性按 MATCHED、BEFORE_FIRST、NO_HISTORY 三类完整划分；开放尾部匹配是 MATCHED 的子集，不是第四类。28 行报告包含 20 项 PASS、8 项 INFO；见 [验证说明](docs/RETAILROCKET_EVENT_PROPERTY_COVERAGE_VALIDATION.md)。不以未来值反向补齐，不设新鲜度截止，不建立事件事实表，不去重或修复类别引用；覆盖不等于已确认的真实状态、库存或转化结果。
 - [x] 7P 用户于 2026-11-09 截图验收 SQL68：28 行报告中 135 个字段完整可见，另有 5 个检查名末尾截断，依据可见前缀、行号及固定脚本确认；不宣称全部 140 个字段直接可见。所有数值、NULL 预期和状态匹配，20 项 PASS、8 项 INFO；见 [聚合验收](data/retailrocket_event_property_coverage_learner_acceptance.json)。类别匹配 2,099,173 条，可用性匹配 2,224,316 条；两种属性均保留全部 2,756,101 条事件及重复次数，未匹配与开放尾部情况分别记录。
 - [x] 7Q 助手准备并预检 [SQL69 历史属性事件事实表](sql/69_build_retailrocket_events_enriched.sql)：创建 rr_mart.events_enriched，将 SQL68 已验收的 15 个事件及属性匹配字段保存，并追加 event_timestamp_utc TIMESTAMP、event_date_utc DATE，形成 17 列。保留全部 2,756,101 条事件记录、未匹配分类及 460 条完全重复的额外记录；完整 17 字段双向对账及 UTC 往返/日期检查通过。28 行报告含 20 项 PASS、8 项覆盖 INFO；见 [验证说明](docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md)。不新增事件编号、不去重、不设置新鲜度截止，也不修复类别引用或计算会话、转化率及库存。
-- [ ] 7Q 用户执行 SQL69，提供 28 行、5 列完整报告；预期 20 项 PASS、8 项 INFO，INFO 的 expected 为 NULL。首次完整执行建立事实表；若 rr_mart.events_enriched 已存在，保留原表，只执行 CHECKS 标记后的检查查询。
+- [x] 7Q 用户于 2026-11-09 截图验收 SQL69：28 行 × 5 列的 140 个字段全部完整可见并匹配，20 项 PASS、8 项 INFO；见 [聚合验收](data/retailrocket_events_enriched_learner_acceptance.json)。17 列事实表保留 2,756,101 条事件及 460 条完全重复的额外记录，完整字段对账、UTC 往返与日期检查通过；此前助手首次失败及恢复验证历史完整保留。
+- [x] 7R 助手准备并预检 [SQL70 行为事件概览](sql/70_analyze_retailrocket_event_overview.sql)：只读已验收事实表的原始 5 个事件字段和 2 个 UTC 字段，输出 view、addtocart、transaction、TOTAL 四行，展示记录数及占比、不同访客/商品/交易编号数、时间端点和有观测的 UTC 日期数。4 行 × 10 列、预期全部 PASS；见 [验证说明](docs/RETAILROCKET_EVENT_OVERVIEW_VALIDATION.md)。TOTAL 的不同编号、日期与端点独立计算，非简单相加；事件占比不是转化率。助手预检只读取 events.csv 和七字段投影，不重新验证 SQL69 的十个属性字段。
+- [ ] 7R 用户执行 SQL70，提供 4 行、10 列完整结果，预期四行全部 PASS。只读查询可完整重复执行，不建表、不重新导入源文件。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -186,6 +188,6 @@
 
 ## 下一次对话从这里继续
 
-SQL68 已于 2026-11-09 截图验收：135 个字段完整可见，5 个截断检查名依据固定脚本确认；20 项 PASS、8 项 INFO，全部数值与状态匹配。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL69](sql/69_build_retailrocket_events_enriched.sql)，将已验收的事件属性匹配结果及统一 UTC 时间/日期保存为 17 列事实表，为后续按日分析准备可重复查询的数据。助手预检通过，用户执行待完成。所有事件、未匹配分类与重复次数均保留，尚不引入会话或转化率定义；整体项目未完成。
+SQL69 已于 2026-11-09 截图验收：140 个字段全部完整可见，20 项 PASS、8 项 INFO，17 列事实表已经验收。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL70](sql/70_analyze_retailrocket_event_overview.sql)，了解三类行为的记录规模、占比及编号覆盖范围，建立后续分析的基础概览。助手预检通过，用户执行待完成。当前计算事件构成，不把三类记录数的比例当作漏斗转化率；整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
