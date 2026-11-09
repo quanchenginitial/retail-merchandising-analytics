@@ -1,0 +1,512 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty-eight rows, five headers, integer actual/expected values, eight NULL expectations and statuses are visible. Five check-name endings are cropped. No direct learner-database inspection.",
+  "acceptance_status": "accepted_with_documented_label_visibility_caveat",
+  "script": "sql/68_audit_retailrocket_event_property_coverage.sql",
+  "script_sha256": "10ff00cf80e1de85d1fc25225a28450012a16ecef02f243b79ebae1e24d366fc",
+  "validator": "validation/preflight_retailrocket_event_property_coverage.py",
+  "validator_sha256": "b687bd3b5c879cf5782ea0f0997e034c2275f8939ccbd583fd6b42b6869e6a1a",
+  "assistant_preflight": "data/retailrocket_event_property_coverage_preflight.json",
+  "assistant_preflight_sha256": "16581de6f217c3064807e1ee5243f1e8f9d3bed9548ae4af5a0d76ecb4950df8",
+  "method_contract": "docs/RETAILROCKET_EVENT_PROPERTY_COVERAGE_VALIDATION.md",
+  "method_contract_prefix_bytes": 10863,
+  "method_contract_prefix_sha256": "8cb849837dafdaa7f403afd653d42413062e471f80464fddadc0be170295bd30",
+  "method_before_acceptance_append_sha256": "66f00cab759b32564495d22add4a7e5394ed47c5c3fea9c3faeb1f1c151dc391",
+  "method_before_acceptance_append_bytes": 16285,
+  "read_only_query": true,
+  "input_tables": [
+    "rr_stg.events",
+    "rr_core.item_state_intervals"
+  ],
+  "result_rows": 28,
+  "result_columns": 5,
+  "report_field_positions": 140,
+  "visually_verified_field_values": 135,
+  "visually_verified_integer_values": 76,
+  "visually_verified_check_order_integer_values": 28,
+  "visually_verified_actual_expected_integer_values": 48,
+  "visually_verified_null_expected_values": 8,
+  "visually_verified_complete_check_labels": 23,
+  "visually_verified_status_values": 28,
+  "partially_visible_check_labels": 5,
+  "contract_resolved_check_labels": 5,
+  "cropped_check_label_count": 5,
+  "all_140_report_fields_fully_visible": false,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": false,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "rows_with_visually_verified_pass_status": 20,
+  "rows_with_visually_verified_info_status": 8,
+  "rows_with_pass_status": 20,
+  "rows_with_info_status": 8,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "visibility_caveats": [
+    "Check-name endings at check_order 17, 19, 20, 24 and 28 are cropped. Their full names are resolved from matching visible prefixes, row order and the frozen SQL/report contract; these five labels are not counted as fully visually verified fields. Rows 8 and 18 have fully visible complete labels."
+  ],
+  "cropped_check_labels": [
+    {
+      "check_order": 17,
+      "field": "check_name",
+      "fully_legible_prefix": "categoryid_boundary_error_ro",
+      "full_label_from_frozen_contract": "categoryid_boundary_error_rows",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 19,
+      "field": "check_name",
+      "fully_legible_prefix": "categoryid_coverage_partition",
+      "full_label_from_frozen_contract": "categoryid_coverage_partition_difference",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 20,
+      "field": "check_name",
+      "fully_legible_prefix": "available_coverage_partition_",
+      "full_label_from_frozen_contract": "available_coverage_partition_difference",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 24,
+      "field": "check_name",
+      "fully_legible_prefix": "categoryid_open_tail_match_",
+      "full_label_from_frozen_contract": "categoryid_open_tail_match_rows",
+      "full_label_visually_verified": false
+    },
+    {
+      "check_order": 28,
+      "field": "check_name",
+      "fully_legible_prefix": "available_open_tail_match_ro",
+      "full_label_from_frozen_contract": "available_open_tail_match_rows",
+      "full_label_visually_verified": false
+    }
+  ],
+  "visible_prefix_recording": "Conservative prefixes record only wholly legible characters, not necessarily the longest visible prefix; partly clipped edge glyphs are omitted.",
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. The eight displayed [NULL] expectations are database NULLs. In observed_rows, five additional nulls in the check_name position mean cropped label endings, not database NULLs; results resolves only those five labels through the frozen contract. All other values are directly transcribed.",
+  "numeric_visibility_accounting": "Twenty-eight integer row orders plus forty-eight integer actual/expected values make seventy-six integer fields. Eight NULL expectations, twenty-three fully visible complete labels and twenty-eight statuses bring the visually verified total to 135 fields. Five additional labels are contract-resolved, completing the 140-position report without claiming they were fully visible.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "event_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      2,
+      "event_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      3,
+      "invalid_event_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      4,
+      "event_duplicate_surplus",
+      460,
+      460,
+      "PASS"
+    ],
+    [
+      5,
+      "interval_rows",
+      2291853,
+      2291853,
+      "PASS"
+    ],
+    [
+      6,
+      "interval_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "invalid_interval_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      8,
+      "interval_candidate_key_surplus",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      9,
+      "interval_chain_errors",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      10,
+      "categoryid_interval_rows",
+      788214,
+      788214,
+      "PASS"
+    ],
+    [
+      11,
+      "available_interval_rows",
+      1503639,
+      1503639,
+      "PASS"
+    ],
+    [
+      12,
+      "source_contract_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      13,
+      "categoryid_joined_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      14,
+      "available_joined_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      15,
+      "categoryid_future_match_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      16,
+      "available_future_match_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      17,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      18,
+      "available_boundary_error_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      19,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      20,
+      null,
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      21,
+      "categoryid_matched_rows",
+      2099173,
+      null,
+      "INFO"
+    ],
+    [
+      22,
+      "categoryid_before_first_rows",
+      401343,
+      null,
+      "INFO"
+    ],
+    [
+      23,
+      "categoryid_no_history_rows",
+      255585,
+      null,
+      "INFO"
+    ],
+    [
+      24,
+      null,
+      1924845,
+      null,
+      "INFO"
+    ],
+    [
+      25,
+      "available_matched_rows",
+      2224316,
+      null,
+      "INFO"
+    ],
+    [
+      26,
+      "available_before_first_rows",
+      276200,
+      null,
+      "INFO"
+    ],
+    [
+      27,
+      "available_no_history_rows",
+      255585,
+      null,
+      "INFO"
+    ],
+    [
+      28,
+      null,
+      1127773,
+      null,
+      "INFO"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "event_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "event_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "invalid_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "event_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "interval_rows",
+      "actual": 2291853,
+      "expected": 2291853,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "interval_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_interval_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "interval_candidate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "interval_chain_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "categoryid_interval_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "available_interval_rows",
+      "actual": 1503639,
+      "expected": 1503639,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "categoryid_joined_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "available_joined_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "categoryid_future_match_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "available_future_match_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "categoryid_boundary_error_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "available_boundary_error_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "categoryid_coverage_partition_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "available_coverage_partition_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "categoryid_matched_rows",
+      "actual": 2099173,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 22,
+      "check_name": "categoryid_before_first_rows",
+      "actual": 401343,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 23,
+      "check_name": "categoryid_no_history_rows",
+      "actual": 255585,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 24,
+      "check_name": "categoryid_open_tail_match_rows",
+      "actual": 1924845,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 25,
+      "check_name": "available_matched_rows",
+      "actual": 2224316,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 26,
+      "check_name": "available_before_first_rows",
+      "actual": 276200,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 27,
+      "check_name": "available_no_history_rows",
+      "actual": 255585,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 28,
+      "check_name": "available_open_tail_match_rows",
+      "actual": 1127773,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "e6be3ad761ce64b831686ffd2185d82454a623ee70e730bd7d344a3d42b20fbf",
+  "fingerprint_method": "SHA-256 of twenty-eight ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. check_order and non-NULL actual/expected cells are integers; the eight INFO expectations are JSON null. Five cropped names in this complete report are resolved from the frozen contract, not fully read from the screenshot.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_event_histories_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts the SQL68 aggregate reproduction with a documented five-label visibility caveat: 135 fields are fully visible and five check names are contract-resolved. All twenty PASS statuses, eight INFO statuses, numeric values and NULL expectations are directly visible and match. Both property joins preserve 2,756,101 event occurrences, including the 460 duplicate-surplus occurrences. Category coverage is 2,099,173 MATCHED, 401,343 BEFORE_FIRST and 255,585 NO_HISTORY; availability coverage is 2,224,316 MATCHED, 276,200 BEFORE_FIRST and 255,585 NO_HISTORY. Category and availability open-tail matches are 1,924,845 and 1,127,773; they are subsets of MATCHED, not additional mutually exclusive classes. Future-match and interval-boundary controls report zero discrepancies. This read-only audit applies no freshness cutoff, future backfill, deduplication or category-reference repair and creates no production fact table. A matched last-known value does not establish real-world current state, exact inventory, session/order definition, conversion rate or monetary/causal outcome. Screenshot evidence remains separate from direct database inspection and prior assistant preflight evidence. Historical pending statements remain unchanged; this appendix records learner acceptance without claiming all 140 fields were visually readable or testing conceptual understanding."
+}

@@ -1,0 +1,481 @@
+{
+  "checked_at_utc": "2026-11-09T07:36:07.248668+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/69_build_retailrocket_events_enriched.sql",
+  "script_sha256": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+  "validator": "validation/preflight_retailrocket_events_enriched.py",
+  "validator_sha256": "612e5c54f90b513b6641b2ccb63465c4fc19f0ff29bede0d76f1eb60396a93e2",
+  "code_and_dependency_sha256": {
+    "sql/69_build_retailrocket_events_enriched.sql": "eb237735b6ec058404a605a0f3af0b150d6d4212a6cefb4b2c5c2451189012c7",
+    "validation/preflight_retailrocket_events_enriched.py": "612e5c54f90b513b6641b2ccb63465c4fc19f0ff29bede0d76f1eb60396a93e2",
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "sql/65_stage_retailrocket_item_state_observations.sql": "487b1dde1aea98750dce9f8c7f482d246edc560d8d59a0115f8daa5659aa5bc7",
+    "sql/67_build_retailrocket_item_state_intervals.sql": "22fbf7bb15e8146557d3983b759d28f67acdf258863eeb39e5724c8137162289",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_item_state_intervals.py": "07a1601c9835eb6df17eab5a6fb9523900b83972c51ce3ff319f1bf7424b3c48",
+    "validation/preflight_retailrocket_item_state_observations.py": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_item_state_intervals_preflight.json": "20bac44e24974706ceb5f0aa6cab5fb68872a322c481ea0ad59ce26a80fb90e5",
+    "data/retailrocket_item_state_intervals_learner_acceptance.json": "1f245bbf2a7cc18d1dec8f7b8d4a7eb8af291852be21d191045fdba4916b1915",
+    "docs/RETAILROCKET_ITEM_STATE_INTERVALS_VALIDATION.md": "8a512ec1459904cc395f58473f80329bd7cfd705d80bf9bb85afe089ab0bffe6",
+    "data/retailrocket_events_staging_preflight.json": "92c508abcdb12cdff05474dec509c9f0298a7d58c25835f2cd75a97afea63ff7",
+    "data/retailrocket_events_staging_learner_acceptance.json": "e6bcad9ecdf019cd8ce5a9ff21527eeecac002dd43f9c52ea9a1479e11dd07cb",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "validation/preflight_retailrocket_event_time.py": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+    "sql/68_audit_retailrocket_event_property_coverage.sql": "10ff00cf80e1de85d1fc25225a28450012a16ecef02f243b79ebae1e24d366fc",
+    "validation/preflight_retailrocket_event_property_coverage.py": "b687bd3b5c879cf5782ea0f0997e034c2275f8939ccbd583fd6b42b6869e6a1a",
+    "data/retailrocket_event_property_coverage_preflight.json": "16581de6f217c3064807e1ee5243f1e8f9d3bed9548ae4af5a0d76ecb4950df8",
+    "data/retailrocket_event_property_coverage_learner_acceptance.json": "8d6b55162c9114643f22f42ad29fbe2ffabbc2f5121628f98dc85aebbed33199",
+    "docs/RETAILROCKET_EVENT_PROPERTY_COVERAGE_VALIDATION.md": "5a94657e80b53387f2f8cf1d0d4b94ebe17677fb9e42b4ce5ade77ad0a02fe3e"
+  },
+  "method_contract": "docs/RETAILROCKET_EVENTS_ENRICHED_VALIDATION.md",
+  "method_contract_prefix_bytes": 12517,
+  "method_contract_prefix_sha256": "4ef7c43f3a4b8069c4cccb846fc159b54d65cf7a6766deda1da2cf3ca04ff689",
+  "original_method_contract_prefix_bytes": 10590,
+  "original_method_contract_prefix_sha256": "429c848a03ae1e3f1c965e6af8741c22582683b1bcd6f2f761ea2fb18676c644",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv",
+    "events.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    },
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/56_import_retailrocket_properties.sql": "31b465757a0d1b0a7424f9caf25dbe00e90aa5bd6c53abd8eca5bca1fc546ebe",
+    "sql/65_stage_retailrocket_item_state_observations.sql": "6b0d196abedc86bd48e0cea3b763fc1686f50325b762dd78ef63fd0801318161",
+    "sql/67_build_retailrocket_item_state_intervals.sql": "a369fd448eee007c0904c41e5c89bae5c3de2c704a0e2f98ae8a9f31e98c04ed",
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "reconstruction_basis": "Only SQL56/65/67 property/interval creation prefixes and SQL54/63 event creation prefixes, in two reconstruction phases; no prior full checks.",
+  "source_tables": [
+    "rr_stg.events",
+    "rr_core.item_state_intervals"
+  ],
+  "target_table": "rr_mart.events_enriched",
+  "target_columns": 17,
+  "checks_query_read_only": true,
+  "private_stream_read_only": true,
+  "real_source_attempts": 2,
+  "real_source_successful_attempts": 1,
+  "real_property_reconstruction_executions": 2,
+  "real_event_reconstruction_executions": 2,
+  "real_build_and_check_script_executions": 2,
+  "real_private_stream_executions": 1,
+  "initial_failed_attempt": {
+    "phase": "SQL69 create/check",
+    "failure_category": "unknown_nonzero_cli_exit",
+    "timeout": false,
+    "property_reconstruction_completed": true,
+    "event_reconstruction_completed": true,
+    "private_directory_cleanup_verified": true,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "report_or_evidence_issued": false
+  },
+  "successful_recovery_creation_marker_reached": true,
+  "safe_error_category_reporting": true,
+  "report_rows": 28,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 20,
+  "info_rows": 8,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "event_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "event_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "invalid_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "event_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "interval_rows",
+      "actual": 2291853,
+      "expected": 2291853,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "interval_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_interval_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "interval_candidate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "interval_chain_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "categoryid_interval_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "available_interval_rows",
+      "actual": 1503639,
+      "expected": 1503639,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "fact_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "fact_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "invalid_fact_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "fact_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "expected_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "fact_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "timestamp_roundtrip_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "utc_date_errors",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "categoryid_matched_rows",
+      "actual": 2099173,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 22,
+      "check_name": "categoryid_before_first_rows",
+      "actual": 401343,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 23,
+      "check_name": "categoryid_no_history_rows",
+      "actual": 255585,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 24,
+      "check_name": "categoryid_open_tail_match_rows",
+      "actual": 1924845,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 25,
+      "check_name": "available_matched_rows",
+      "actual": 2224316,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 26,
+      "check_name": "available_before_first_rows",
+      "actual": 276200,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 27,
+      "check_name": "available_no_history_rows",
+      "actual": 255585,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 28,
+      "check_name": "available_open_tail_match_rows",
+      "actual": 1127773,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "report_sha256": "780838696b74c8d9ad107214609d4dc0735aebabaeff307938e60893e02e5c2f",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF; actual/expected are integer counts or JSON null.",
+  "independent_python_property_source_counts": {
+    "raw_rows": 20275902,
+    "raw_parts": {
+      "item_properties_part1.csv": 10999999,
+      "item_properties_part2.csv": 9275903
+    },
+    "rows": 2291853,
+    "selected_parts": {
+      "item_properties_part1.csv": 1243692,
+      "item_properties_part2.csv": 1048161
+    },
+    "categoryid": 788214,
+    "available": 1503639,
+    "other_rows": 17984049
+  },
+  "independent_python_event_source_counts": {
+    "event_rows": 2756101,
+    "view_rows": 2664312,
+    "addtocart_rows": 69332,
+    "transaction_rows": 22457,
+    "null_transaction_rows": 2733644
+  },
+  "independent_python_interval_counts": {
+    "rows": 2291853,
+    "item_property_pairs": 834106,
+    "finite_intervals": 1457747,
+    "open_intervals": 834106,
+    "unchanged_next_value_links": 1260380
+  },
+  "independent_python_match_counts": {
+    "event_rows": 2756101,
+    "event_duplicate_surplus": 460,
+    "maximum_current_event_item_history_rows": 36,
+    "categoryid_matched_rows": 2099173,
+    "categoryid_before_first_rows": 401343,
+    "categoryid_no_history_rows": 255585,
+    "categoryid_open_tail_match_rows": 1924845,
+    "available_matched_rows": 2224316,
+    "available_before_first_rows": 276200,
+    "available_no_history_rows": 255585,
+    "available_open_tail_match_rows": 1127773
+  },
+  "independent_python_numeric_external_sort": true,
+  "independent_python_current_item_binary_search": true,
+  "independent_python_report_matched": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 17,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "independent_original_property_values_and_provenance_preserved": true,
+  "independent_UTC_timestamp_and_date_matched": true,
+  "all_source_property_intervals_reconciled": true,
+  "coverage_partitions_reconciled": true,
+  "open_tail_counts_are_matched_subsets": true,
+  "no_backward_fill_verified": true,
+  "maximum_current_event_item_history_rows_observed": 36,
+  "current_item_history_budget_rows": 50000,
+  "history_buffer_cap_inherited_from_accepted_SQL68": true,
+  "null_marker": "__NULL__",
+  "private_database_sha256_before_readonly": "07b25ed874e3c555c11b60ecc1628666656630770cf0e00b405760019a030f64",
+  "private_database_sha256_after_readonly": "07b25ed874e3c555c11b60ecc1628666656630770cf0e00b405760019a030f64",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 4,
+  "fixture_cases": [
+    {
+      "case": "persisted_17_fields_numeric_chunks_coverage_boundaries_duplicates_null_transactions_UTC_milliseconds_and_midnight",
+      "passed": true,
+      "fixture_events": 12,
+      "fixture_intervals": 6,
+      "event_chunks": 6,
+      "property_chunks": 3
+    },
+    {
+      "case": "existing_target_creation_rejected_without_change",
+      "passed": true
+    },
+    {
+      "case": "same_count_fact_content_UTC_and_schema_mutations_detected_INFO_blocked",
+      "passed": true,
+      "subcases": [
+        "original_event",
+        "property_provenance",
+        "coverage",
+        "utc_timestamp",
+        "utc_date",
+        "fact_schema"
+      ]
+    },
+    {
+      "case": "invalid_input_creation_atomic_and_checks_only_dependencies_blocked",
+      "passed": true,
+      "subcases": [
+        "empty_events",
+        "empty_intervals",
+        "wrong_event_count",
+        "wrong_duplicate_count",
+        "null_event_time",
+        "negative_event_item",
+        "wrong_event_type",
+        "wrong_interval_order",
+        "duplicate_interval_key",
+        "overlapping_chain",
+        "gapped_chain",
+        "closed_final_tail",
+        "invalid_interval_value",
+        "unknown_provenance"
+      ]
+    }
+  ],
+  "invalid_prerequisite_subcase_count": 14,
+  "atomic_invalid_input_noncreation_verified": true,
+  "existing_target_preserved_verified": true,
+  "fact_mutation_subcase_count": 6,
+  "blocked_dependencies_verified": true,
+  "info_requires_all_controls_pass_verified": true,
+  "overlap_gap_and_invalid_tail_admission_blocked": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "current_item_history_rows": 50000,
+    "private_directory_budget_bytes": 7516192768,
+    "free_space_admission_bytes": 8589934592,
+    "build_check_memory_limit": "2GB",
+    "build_check_max_temp_directory_size": "4GB"
+  },
+  "private_property_comparison_chunks": 46,
+  "private_property_comparison_chunk_bytes": 139673953,
+  "private_event_comparison_chunks": 56,
+  "private_event_comparison_chunk_bytes": 96993967,
+  "private_comparison_spool_scope": "Selected property source tuples and every event occurrence were sorted privately; no normalized 5.5-million-row join export was created. All chunks removed with their owning private directory.",
+  "workspace_free_bytes_before": 50584735744,
+  "workspace_free_bytes_after": 50170638336,
+  "private_database_bytes_before_cleanup": 537669632,
+  "largest_private_directory_bytes_observed_after_phase": 774337552,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "learner_database_opened": false,
+  "category_csv_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 67,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_property_scan_select_sort_seconds": 31.431,
+  "elapsed_python_event_scan_sort_seconds": 27.814,
+  "elapsed_property_reconstruction_seconds": 38.99,
+  "elapsed_event_reconstruction_seconds": 16.338,
+  "elapsed_build_and_check_seconds": 60.314,
+  "elapsed_private_stream_seconds": 71.345,
+  "timing_scope": "Successful recovery only, excluding the earlier unknown failed attempt. Four CLI phases: property prefix chain, event prefix chain, SQL69 creation and checks, and read-only 17-field persisted fact stream. Independent source sorting timed separately; hashing/fixtures excluded; not a performance benchmark.",
+  "scope": "Assistant enriched-event materialization preflight passed; learner SQL69 pending. Each original event occurrence retained. MATCHED means greatest recorded start at/before event with interval compliance, not confirmed business truth or freshness. NO_HISTORY and BEFORE_FIRST retained without backfill. Open-tail matches are subsets, not a fourth class. Persistent 17-column fact verified, with UTC timestamp/date. No category reference repair, expiry age, inventory, conversion or causal claim."
+}
