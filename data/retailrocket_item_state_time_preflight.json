@@ -1,0 +1,318 @@
+{
+  "checked_at_utc": "2026-11-09T06:08:09.365534+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/66_audit_retailrocket_item_state_time.sql",
+  "script_sha256": "29437def61dbbd23879e84801aa51e333afd26b4b2c6a6539b0b2084323cf20a",
+  "validator": "validation/preflight_retailrocket_item_state_time.py",
+  "validator_sha256": "d8686a07182f1d2eff96ece434b2f7e24248e8410df43886a12383614c3266d0",
+  "code_and_dependency_sha256": {
+    "sql/66_audit_retailrocket_item_state_time.sql": "29437def61dbbd23879e84801aa51e333afd26b4b2c6a6539b0b2084323cf20a",
+    "validation/preflight_retailrocket_item_state_time.py": "d8686a07182f1d2eff96ece434b2f7e24248e8410df43886a12383614c3266d0",
+    "sql/56_import_retailrocket_properties.sql": "7393f18fead1537fda9976dd2a8beedae104870d666930e6a67be11c198880a4",
+    "sql/65_stage_retailrocket_item_state_observations.sql": "487b1dde1aea98750dce9f8c7f482d246edc560d8d59a0115f8daa5659aa5bc7",
+    "validation/preflight_retailrocket_properties_import.py": "c8dc3bbc3ea1b50e721cab9d6aae084138b38302fc0dc31bf58f493f3c771c13",
+    "validation/preflight_retailrocket_item_state_observations.py": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+    "validation/preflight_retailrocket_event_time.py": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_item_state_observations_preflight.json": "26ae8ba3fd4ffbb2efa55a64e9c4dc8dfb505741378fa4026d51a3951f9b3471",
+    "data/retailrocket_item_state_observations_learner_acceptance.json": "9c22c8f8f38103bd298797a3f37d1bba0267e11243253074883ec3054d6a4a78",
+    "docs/RETAILROCKET_ITEM_STATE_OBSERVATIONS_VALIDATION.md": "cd181d277a98e82e3986e35a591b8f2478bf0ce5f977ae32b0dde9f8439330c4"
+  },
+  "method_contract": "docs/RETAILROCKET_ITEM_STATE_TIME_VALIDATION.md",
+  "method_contract_prefix_bytes": 8346,
+  "method_contract_prefix_sha256": "19cfe93e4e12226be16c057190d1b1b9c3cc54c8c0be49b0db74fc1dca4f6c98",
+  "source_files": [
+    "item_properties_part1.csv",
+    "item_properties_part2.csv"
+  ],
+  "source_before": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_after": {
+    "item_properties_part1.csv": {
+      "size_bytes": 484315749,
+      "modified_time_ns": 1667883860000000000,
+      "sha256": "30aad5aeca58b2dc27dcc73e1708565f5818e45adb3eb57401f91e87355b0b81"
+    },
+    "item_properties_part2.csv": {
+      "size_bytes": 408929907,
+      "modified_time_ns": 1667883898000000000,
+      "sha256": "d5e7d1a91dc40f522aeb596b267e6c87d8aed689a7192d12369cfb165eb987e5"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/56_import_retailrocket_properties.sql": "31b465757a0d1b0a7424f9caf25dbe00e90aa5bd6c53abd8eca5bca1fc546ebe",
+    "sql/65_stage_retailrocket_item_state_observations.sql": "6b0d196abedc86bd48e0cea3b763fc1686f50325b762dd78ef63fd0801318161"
+  },
+  "reconstruction_basis": "Only frozen SQL56 import and SQL65 creation prefixes; no prior full checks. Separate read-only SQL66 report and per-occurrence stream.",
+  "source_table": "rr_stg.item_state_observations",
+  "query_read_only": true,
+  "real_audit_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "real_raw_reconstruction_executions": 1,
+  "real_staging_reconstruction_executions": 1,
+  "report_rows": 20,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "actual_expected_types": "VARCHAR or NULL; check_order integer",
+  "checks_passed": 12,
+  "info_rows": 8,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "observation_rows",
+      "actual": "2291853",
+      "expected": "2291853",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "schema_mismatch",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "missing_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "negative_timestamp_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "unsupported_epoch_ms_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "converted_rows",
+      "actual": "2291853",
+      "expected": "2291853",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "conversion_null_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "roundtrip_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "date_partition_error_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "daily_rows_difference",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "categoryid_rows",
+      "actual": "788214",
+      "expected": "788214",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "available_rows",
+      "actual": "1503639",
+      "expected": "1503639",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "min_timestamp_ms",
+      "actual": "1431226800000",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "max_timestamp_ms",
+      "actual": "1442113200000",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "first_utc_timestamp",
+      "actual": "2015-05-10T03:00:00.000000Z",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "last_utc_timestamp",
+      "actual": "2015-09-13T03:00:00.000000Z",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "distinct_utc_dates",
+      "actual": "18",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "first_date_observation_rows",
+      "actual": "446582",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "last_date_observation_rows",
+      "actual": "93764",
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 20,
+      "check_name": "subsecond_observation_rows",
+      "actual": "0",
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "report_sha256": "4212b9cdd85528fc56905cb6fb1574940bb70f8891b9ad0c474c2ca30520d7fa",
+  "report_fingerprint_contract": "SHA-256 of ordered compact JSON arrays in output-column order, each followed by LF. actual/expected are strings or JSON null.",
+  "independent_source_raw_parts": {
+    "item_properties_part1.csv": 10999999,
+    "item_properties_part2.csv": 9275903
+  },
+  "independent_source_selected_parts": {
+    "item_properties_part1.csv": 1243692,
+    "item_properties_part2.csv": 1048161
+  },
+  "independent_source_property_counts": {
+    "rows": 2291853,
+    "categoryid": 788214,
+    "available": 1503639
+  },
+  "independent_python_integer_datetime_reference": true,
+  "independent_python_source_fold_matched": true,
+  "independent_python_report_matched": true,
+  "independent_stream_occurrences_compared": 2291853,
+  "independent_stream_fields_compared": 4,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_source_and_stream_date_partitions_matched": true,
+  "utc_date_partition_sha256": "caf271d84a26b0ab3b1e30e0600c0bf9aed6e06b17c8a817881210baeadcdb36",
+  "utc_date_partition_fingerprint_contract": "Ordered compact JSON [YYYY-MM-DD, occurrence_count] arrays followed by LF.",
+  "private_database_sha256_before_readonly": "f0d7ab5aa053533e94050efc3fcfb93ed3f7fe2343d8a5f7a12ac420827df7b0",
+  "private_database_sha256_after_readonly": "f0d7ab5aa053533e94050efc3fcfb93ed3f7fe2343d8a5f7a12ac420827df7b0",
+  "private_database_bytes_unchanged": true,
+  "supported_epoch_ms_min": 0,
+  "supported_epoch_ms_max": 253402300799999,
+  "time_interpretation": "UTC convention applied to timezone-naive TIMESTAMP; not evidence of business local timezone or a precisely timed state change.",
+  "fixture_case_count": 3,
+  "fixture_cases": [
+    {
+      "case": "exact_fraction_midnight_leap_day_duplicates_shared_upper_bound_two_zone_invariance",
+      "passed": true,
+      "fixture_occurrences": 10,
+      "session_timezones": [
+        "UTC",
+        "Australia/Sydney"
+      ]
+    },
+    {
+      "case": "wrong_property_counts_block_conversion_and_all_info_even_with_matching_total",
+      "passed": true,
+      "subcases": [
+        "wrong_category_count",
+        "wrong_available_count",
+        "same_total_wrong_property_mix"
+      ]
+    },
+    {
+      "case": "invalid_prerequisites_block_every_derived_metric_without_unsafe_conversion",
+      "passed": true,
+      "subcases": [
+        "empty",
+        "wrong_count",
+        "null",
+        "negative",
+        "beyond_shared_range",
+        "bigint_overflow_for_timestamp",
+        "wrong_type_numeric",
+        "wrong_type_unparsed",
+        "wrong_order"
+      ]
+    }
+  ],
+  "invalid_prerequisite_subcase_count": 9,
+  "changed_control_subcase_count": 3,
+  "blocked_dependencies_verified": true,
+  "info_requires_all_controls_pass_verified": true,
+  "session_timezone_invariance_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120
+  },
+  "workspace_free_bytes_before": 50890252288,
+  "workspace_free_bytes_after": 50889019392,
+  "private_database_bytes_before_cleanup": 442773504,
+  "largest_private_directory_bytes_observed_after_phase": 442773504,
+  "temporary_databases_and_spills_removed": true,
+  "learner_database_opened": false,
+  "other_source_csvs_read": false,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "historical_preflight_files_unchanged": 64,
+  "source_records_or_identifiers_exported_or_logged": false,
+  "private_per_observation_comparison_files_created": false,
+  "elapsed_python_source_fold_seconds": 22.012,
+  "elapsed_raw_reconstruction_seconds": 24.043,
+  "elapsed_staging_reconstruction_seconds": 10.368,
+  "elapsed_readonly_audit_seconds": 0.296,
+  "elapsed_private_stream_seconds": 17.89,
+  "timing_scope": "Two prefix reconstruction CLI phases, one read-only SQL66 report and one read-only per-occurrence stream; independent selected-source fold timed separately. Hashing/fixtures excluded; not a performance benchmark.",
+  "scope": "Assistant named-observation timestamp audit passed; learner SQL66 pending. No table mutation, deduplication, local-business timezone inference, effective validity interval, exact change time, latest state, event-time property join, conversion rate or inventory/monetary metric. Global selected-history date coverage is not per-item/per-property coverage or proof of complete collection days."
+}

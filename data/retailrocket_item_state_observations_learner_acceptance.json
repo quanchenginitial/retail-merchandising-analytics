@@ -1,0 +1,387 @@
+{
+  "observed_date": "2026-11-09",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot. All twenty-two rows, five headers and all 110 report fields are fully visible, including complete check labels and two displayed NULL expectations. No direct learner-database inspection.",
+  "acceptance_status": "accepted",
+  "script": "sql/65_stage_retailrocket_item_state_observations.sql",
+  "script_sha256": "487b1dde1aea98750dce9f8c7f482d246edc560d8d59a0115f8daa5659aa5bc7",
+  "validator": "validation/preflight_retailrocket_item_state_observations.py",
+  "validator_sha256": "41e9368e01feba40cbb6f935b98490d5fa38b35bf17e8707984a2c424f9fc718",
+  "assistant_preflight": "data/retailrocket_item_state_observations_preflight.json",
+  "assistant_preflight_sha256": "26ae8ba3fd4ffbb2efa55a64e9c4dc8dfb505741378fa4026d51a3951f9b3471",
+  "method_contract": "docs/RETAILROCKET_ITEM_STATE_OBSERVATIONS_VALIDATION.md",
+  "method_contract_prefix_bytes": 10388,
+  "method_contract_prefix_sha256": "b83200620a8734c1da2e8b0948886bd937e5007591afaad7109709fa345c4836",
+  "method_before_acceptance_append_sha256": "977fe14ad658f17d14dcd2610e016783953c7e345bef69037cb8d13c14c2bd8c",
+  "method_before_acceptance_append_bytes": 14451,
+  "input_table": "rr_raw.item_properties",
+  "staging_table": "rr_stg.item_state_observations",
+  "learner_action_type": "Guarded selection and typing of named item-state observations followed by aggregate validation; the screenshot accepts the displayed staging snapshot.",
+  "result_rows": 22,
+  "result_columns": 5,
+  "report_field_positions": 110,
+  "visually_verified_columns_per_row": 5,
+  "visually_verified_field_values": 110,
+  "visually_verified_integer_values": 64,
+  "visually_verified_check_order_integer_values": 22,
+  "visually_verified_actual_expected_integer_values": 42,
+  "visually_verified_null_expected_values": 2,
+  "visually_verified_complete_check_labels": 22,
+  "visually_verified_status_values": 22,
+  "rows_with_visually_verified_pass_status": 20,
+  "rows_with_visually_verified_info_status": 2,
+  "rows_with_pass_status": 20,
+  "rows_with_info_status": 2,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_110_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "all_check_status_values_fully_visible": true,
+  "all_check_order_actual_expected_and_status_values_fully_visible": true,
+  "all_null_expected_values_fully_visible": true,
+  "cropped_check_labels": 0,
+  "partially_visible_check_labels": 0,
+  "contract_resolved_check_labels": 0,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators and retain JSON integers. Transcribe the two displayed [NULL] expectations as JSON null. Preserve complete check labels, statuses and row/column order; no label reconstruction is needed.",
+  "numeric_visibility_accounting": "Twenty-two integer row orders plus forty-two integer actual/expected values make sixty-four integer fields. Two NULL expectations, twenty-two complete labels and twenty-two statuses bring the visible total to 110 fields.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "raw_rows",
+      20275902,
+      20275902,
+      "PASS"
+    ],
+    [
+      2,
+      "raw_part1_rows",
+      10999999,
+      10999999,
+      "PASS"
+    ],
+    [
+      3,
+      "raw_part2_rows",
+      9275903,
+      9275903,
+      "PASS"
+    ],
+    [
+      4,
+      "raw_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      5,
+      "raw_unknown_source_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      6,
+      "staging_rows",
+      2291853,
+      2291853,
+      "PASS"
+    ],
+    [
+      7,
+      "staging_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      8,
+      "categoryid_rows",
+      788214,
+      788214,
+      "PASS"
+    ],
+    [
+      9,
+      "available_rows",
+      1503639,
+      1503639,
+      "PASS"
+    ],
+    [
+      10,
+      "other_property_rows",
+      17984049,
+      17984049,
+      "PASS"
+    ],
+    [
+      11,
+      "missing_required_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      12,
+      "negative_numeric_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      13,
+      "value_rule_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      14,
+      "unexpected_property_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      15,
+      "unknown_source_file_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      16,
+      "candidate_key_surplus",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      17,
+      "raw_key_value_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      18,
+      "raw_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      19,
+      "staging_only_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      20,
+      "source_contract_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      21,
+      "selected_part1_rows",
+      1243692,
+      null,
+      "INFO"
+    ],
+    [
+      22,
+      "selected_part2_rows",
+      1048161,
+      null,
+      "INFO"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "raw_rows",
+      "actual": 20275902,
+      "expected": 20275902,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "raw_part1_rows",
+      "actual": 10999999,
+      "expected": 10999999,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "raw_part2_rows",
+      "actual": 9275903,
+      "expected": 9275903,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "raw_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "raw_unknown_source_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "staging_rows",
+      "actual": 2291853,
+      "expected": 2291853,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "staging_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "categoryid_rows",
+      "actual": 788214,
+      "expected": 788214,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "available_rows",
+      "actual": 1503639,
+      "expected": 1503639,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "other_property_rows",
+      "actual": 17984049,
+      "expected": 17984049,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "missing_required_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "negative_numeric_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "value_rule_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "unexpected_property_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "unknown_source_file_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "candidate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "raw_key_value_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "raw_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "staging_only_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "selected_part1_rows",
+      "actual": 1243692,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 22,
+      "check_name": "selected_part2_rows",
+      "actual": 1048161,
+      "expected": null,
+      "status": "INFO"
+    }
+  ],
+  "ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "d51af897958e1cefe8cf4e31d2fc259fe4d44327e2eb2f67d49338ebfcf6db56",
+  "fingerprint_method": "SHA-256 of twenty-two ordered compact JSON row arrays in output_columns order, ensure_ascii=True, comma/colon separators and one LF after each row. check_order and non-NULL actual/expected cells are integers; the two INFO expectations are JSON null.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "source_records_or_identifiers_or_property_histories_published": false,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "scope": "This accepts all 110 visible fields of the SQL65 aggregate reproduction, with twenty PASS controls and two INFO observations. The typed subset contains 2,291,853 named observations: 788,214 categoryid and 1,503,639 available rows. Only timestamp and itemid are typed as BIGINT; property, value and source_file retain VARCHAR text. The 17,984,049 opaque other-property observations remain in raw storage. Both selected full-row difference counts and candidate-key surplus are zero. The source-part INFO counts are 1,243,692 and 1,048,161 and reconcile to the selected population. The previously observed 167 unmatched category records are preserved under the accepted complete selected-row reconciliation; no new category lookup or unmatched count is claimed. This screenshot is distinct from direct database inspection and prior assistant preflight evidence. It does not establish UTC conversion of property timestamps, effective-date intervals, latest/current states, event-time associations, exact inventory quantities, conversion rates, monetary outcomes or learner conceptual understanding. Historical pending statements remain unchanged; this appendix establishes current learner acceptance."
+}
