@@ -71,3 +71,31 @@ The canonical source parse/reconstruction took 32.968 seconds and the independen
 Source identity, pinned dependencies and all 83 historical preflight artifacts remained unchanged. Private database byte hashes matched across both read-only phases. Temporary membership CSV, database and spills were removed. The learner database, properties, category reference and enriched fact were not opened. Public artifacts contain only aggregate band results and proof fingerprints, without original source IDs or event records.
 
 Report SHA-256: `4fe01bb6ca60f917757c289b0ac7569d5a1831769d16525a6dd3bcde9d6f07f8`. Script SHA-256: `ca02d51d5d5aa59b375fe1bb6ad1343247c3fdd58439e07082990c6771c72c4e`. Validator SHA-256: `048ec0032a5b9335707cbee8c4283cf867c394f14b591540c2dee0fe26386c6f`. The frozen 7,394-byte method prefix remains unchanged at `d97211d2c9684c014ee483b98459e01c44adc5707e7bc047f30b530a6c8b5727`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot showing all five rows, seven column headers and 35 result fields of SQL85. These comprise five band labels, fifteen integer counts, ten percentage displays and five PASS labels. No INFO, FAIL, BLOCKED or NULL cells appear. Maximum frequency is one of the three integer-count columns; UI row numbers are excluded.
+
+Six comma-formatted integer counts normalize by removing their thousands separators. F_1 visitor_share_pct displays 90.92926, and both TOTAL shares display 100; these three shortened percentages normalize to six decimals without changing values. The other seven percentage values already show six decimals. The two integer-looking TOTAL shares retain percentage semantics. Every field and band order matches the frozen preflight exactly; no hidden field, precision or label was inferred. Acceptance concerns the rounded returned report. The assistant did not open the learner database or rerun SQL, source parsing, private frequency streams or fixtures.
+
+| frequency_band | visitor_ids | visitor_share_pct | candidate_baskets | basket_share_pct | max_baskets_per_visitor | check_status |
+| --- | --- | --- | --- | --- | --- | --- |
+| F_1 | 10656 | 90.929260 | 10656 | 60.298778 | 1 | PASS |
+| F_2 | 748 | 6.382797 | 1496 | 8.465369 | 2 | PASS |
+| F_3_4 | 177 | 1.510368 | 575 | 3.253735 | 4 | PASS |
+| F_5_PLUS | 138 | 1.177575 | 4945 | 27.982119 | 502 | PASS |
+| TOTAL | 11719 | 100.000000 | 17672 | 100.000000 | 502 | PASS |
+
+| frequency_band | field | displayed | normalized six-decimal value |
+| --- | --- | --- | --- |
+| F_1 | visitor_share_pct | 90.92926 | 90.929260 |
+| TOTAL | visitor_share_pct | 100 | 100.000000 |
+| TOTAL | basket_share_pct | 100 | 100.000000 |
+
+The four disjoint frequency bands reconcile to 11,719 transaction-recorded visitor IDs and 17,672 candidate baskets. Their shares use these separate denominators; TOTAL must not be added again to the bands. Frequency counts distinct composite candidate baskets, not item memberships, repeated events or purchased quantities. The population excludes F=0 and IDs without a recorded transaction; it is not the entire set of event visitor IDs.
+
+F_1 contains 10,656 recorded IDs. F_5_PLUS contains 138 IDs and 4,945 candidate baskets, with a maximum frequency of 502. These are finite-window descriptive counts, not loyalty, customer-value or verified-person classifications. Candidate baskets are not verified paid orders. Recency and combined RF analysis remain unfinished. No empty band appears in this screenshot; zero-band NULL maxima remain supported by the frozen fixture evidence rather than direct observation here.
+
+The exact comparison of all 11,719 private visitor/frequency rows across two integer fields, accepted-input fingerprints and fixture behaviour remains supported by the frozen assistant preflight. The [machine-readable learner acceptance](../data/retailrocket_visitor_purchase_frequency_learner_acceptance.json) retains raw displayed strings, normalized values, all three percentage normalizations and all six comma-formatted count normalizations. Its report SHA-256 is `4fe01bb6ca60f917757c289b0ac7569d5a1831769d16525a6dd3bcde9d6f07f8`, matching the returned SQL report fingerprint.
+
+The prior 11,943-byte method and executed-results document remains byte-for-byte intact at SHA-256 `e91ac98fdd3a6d45aaf94ea98dbcf65c6d215fee329fd91a3bc78a8d8f0221fc`; its frozen 7,394-byte prefix remains `d97211d2c9684c014ee483b98459e01c44adc5707e7bc047f30b530a6c8b5727`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw source records, memberships or visitor/item/transaction identifiers are published.

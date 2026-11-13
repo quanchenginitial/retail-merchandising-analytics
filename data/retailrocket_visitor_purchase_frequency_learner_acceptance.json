@@ -1,0 +1,317 @@
+{
+  "observed_date": "2026-11-13",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot for read-only SQL85. All five rows, seven headers and 35 result fields are fully visible, with five PASS statuses and no NULLs. No direct learner-database inspection.",
+  "script": "sql/85_analyze_retailrocket_visitor_purchase_frequency.sql",
+  "script_sha256": "ca02d51d5d5aa59b375fe1bb6ad1343247c3fdd58439e07082990c6771c72c4e",
+  "validator": "validation/preflight_retailrocket_visitor_purchase_frequency.py",
+  "validator_sha256": "048ec0032a5b9335707cbee8c4283cf867c394f14b591540c2dee0fe26386c6f",
+  "assistant_preflight": "data/retailrocket_visitor_purchase_frequency_preflight.json",
+  "assistant_preflight_sha256": "34aa68ff1504090ec79382c94ecdbcc23c43079149866683f35e50c864c3b854",
+  "method_contract": "docs/RETAILROCKET_VISITOR_PURCHASE_FREQUENCY_VALIDATION.md",
+  "method_contract_prefix_bytes": 7394,
+  "method_contract_prefix_sha256": "d97211d2c9684c014ee483b98459e01c44adc5707e7bc047f30b530a6c8b5727",
+  "method_before_acceptance_append_bytes": 11943,
+  "method_before_acceptance_append_sha256": "e91ac98fdd3a6d45aaf94ea98dbcf65c6d215fee329fd91a3bc78a8d8f0221fc",
+  "source_table": "rr_mart.transaction_basket_items",
+  "readset_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid"
+  ],
+  "required_readset_columns": 3,
+  "learner_action_type": "Read-only observed candidate-basket frequency distribution among transaction-recorded visitor IDs.",
+  "result_rows": 5,
+  "result_columns": 7,
+  "report_field_positions": 35,
+  "visually_verified_field_values": 35,
+  "visually_verified_band_labels": 5,
+  "visually_verified_integer_count_values": 15,
+  "visually_verified_decimal_percentage_values": 10,
+  "visually_verified_status_values": 5,
+  "integer_count_columns": [
+    "visitor_ids",
+    "candidate_baskets",
+    "max_baskets_per_visitor"
+  ],
+  "decimal_percentage_columns": [
+    "visitor_share_pct",
+    "basket_share_pct"
+  ],
+  "percentage_fields_displayed_without_decimal_point": 2,
+  "percentage_fields_displayed_with_five_decimals": 1,
+  "percentage_fields_displayed_with_six_decimals": 7,
+  "shortened_decimal_percentage_displays": 3,
+  "integer_fields_with_thousands_separators": 6,
+  "visually_verified_null_values": 0,
+  "rows_with_pass_status": 5,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_35_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_numeric_and_status_values_fully_visible": true,
+  "all_band_labels_fully_visible": true,
+  "visibility_caveats": [],
+  "display_normalization": "Six integer counts contain thousands separators, which are removed without changing their values. F_1 visitor_share_pct displays 90.92926, normalized to 90.929260; both TOTAL percentages display 100, normalized to 100.000000. The other seven percentages already have six decimal places. Two integer-looking percentages remain percentage fields. No hidden precision, label or NULL is inferred.",
+  "decimal_display_normalizations": [
+    {
+      "frequency_band": "F_1",
+      "field": "visitor_share_pct",
+      "displayed": "90.92926",
+      "normalized_six_decimal": "90.929260"
+    },
+    {
+      "frequency_band": "TOTAL",
+      "field": "visitor_share_pct",
+      "displayed": "100",
+      "normalized_six_decimal": "100.000000"
+    },
+    {
+      "frequency_band": "TOTAL",
+      "field": "basket_share_pct",
+      "displayed": "100",
+      "normalized_six_decimal": "100.000000"
+    }
+  ],
+  "integer_separator_normalizations": [
+    {
+      "frequency_band": "F_1",
+      "field": "visitor_ids",
+      "displayed": "10,656",
+      "normalized_integer": 10656
+    },
+    {
+      "frequency_band": "F_1",
+      "field": "candidate_baskets",
+      "displayed": "10,656",
+      "normalized_integer": 10656
+    },
+    {
+      "frequency_band": "F_2",
+      "field": "candidate_baskets",
+      "displayed": "1,496",
+      "normalized_integer": 1496
+    },
+    {
+      "frequency_band": "F_5_PLUS",
+      "field": "candidate_baskets",
+      "displayed": "4,945",
+      "normalized_integer": 4945
+    },
+    {
+      "frequency_band": "TOTAL",
+      "field": "visitor_ids",
+      "displayed": "11,719",
+      "normalized_integer": 11719
+    },
+    {
+      "frequency_band": "TOTAL",
+      "field": "candidate_baskets",
+      "displayed": "17,672",
+      "normalized_integer": 17672
+    }
+  ],
+  "visibility_accounting": "Five band labels plus fifteen integer counts plus ten percentage displays plus five PASS labels equal 35 fields. DBeaver UI row numbers are excluded. Count columns include maximum frequency, while the two integer-looking TOTAL percentages retain percentage semantics.",
+  "observed_output_columns": [
+    "frequency_band",
+    "visitor_ids",
+    "visitor_share_pct",
+    "candidate_baskets",
+    "basket_share_pct",
+    "max_baskets_per_visitor",
+    "check_status"
+  ],
+  "observed_display_rows": [
+    [
+      "F_1",
+      "10,656",
+      "90.92926",
+      "10,656",
+      "60.298778",
+      "1",
+      "PASS"
+    ],
+    [
+      "F_2",
+      "748",
+      "6.382797",
+      "1,496",
+      "8.465369",
+      "2",
+      "PASS"
+    ],
+    [
+      "F_3_4",
+      "177",
+      "1.510368",
+      "575",
+      "3.253735",
+      "4",
+      "PASS"
+    ],
+    [
+      "F_5_PLUS",
+      "138",
+      "1.177575",
+      "4,945",
+      "27.982119",
+      "502",
+      "PASS"
+    ],
+    [
+      "TOTAL",
+      "11,719",
+      "100",
+      "17,672",
+      "100",
+      "502",
+      "PASS"
+    ]
+  ],
+  "observed_rows": [
+    [
+      "F_1",
+      10656,
+      90.92926,
+      10656,
+      60.298778,
+      1,
+      "PASS"
+    ],
+    [
+      "F_2",
+      748,
+      6.382797,
+      1496,
+      8.465369,
+      2,
+      "PASS"
+    ],
+    [
+      "F_3_4",
+      177,
+      1.510368,
+      575,
+      3.253735,
+      4,
+      "PASS"
+    ],
+    [
+      "F_5_PLUS",
+      138,
+      1.177575,
+      4945,
+      27.982119,
+      502,
+      "PASS"
+    ],
+    [
+      "TOTAL",
+      11719,
+      100.0,
+      17672,
+      100.0,
+      502,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "frequency_band",
+    "visitor_ids",
+    "visitor_share_pct",
+    "candidate_baskets",
+    "basket_share_pct",
+    "max_baskets_per_visitor",
+    "check_status"
+  ],
+  "results": [
+    {
+      "frequency_band": "F_1",
+      "visitor_ids": 10656,
+      "visitor_share_pct": 90.92926,
+      "candidate_baskets": 10656,
+      "basket_share_pct": 60.298778,
+      "max_baskets_per_visitor": 1,
+      "check_status": "PASS"
+    },
+    {
+      "frequency_band": "F_2",
+      "visitor_ids": 748,
+      "visitor_share_pct": 6.382797,
+      "candidate_baskets": 1496,
+      "basket_share_pct": 8.465369,
+      "max_baskets_per_visitor": 2,
+      "check_status": "PASS"
+    },
+    {
+      "frequency_band": "F_3_4",
+      "visitor_ids": 177,
+      "visitor_share_pct": 1.510368,
+      "candidate_baskets": 575,
+      "basket_share_pct": 3.253735,
+      "max_baskets_per_visitor": 4,
+      "check_status": "PASS"
+    },
+    {
+      "frequency_band": "F_5_PLUS",
+      "visitor_ids": 138,
+      "visitor_share_pct": 1.177575,
+      "candidate_baskets": 4945,
+      "basket_share_pct": 27.982119,
+      "max_baskets_per_visitor": 502,
+      "check_status": "PASS"
+    },
+    {
+      "frequency_band": "TOTAL",
+      "visitor_ids": 11719,
+      "visitor_share_pct": 100.0,
+      "candidate_baskets": 17672,
+      "basket_share_pct": 100.0,
+      "max_baskets_per_visitor": 502,
+      "check_status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "4fe01bb6ca60f917757c289b0ac7569d5a1831769d16525a6dd3bcde9d6f07f8",
+  "screenshot_rounded_percentage_values_match_returned_SQL_report_exactly": true,
+  "screenshot_confirms_unrounded_percentage_values": false,
+  "fingerprint_method": "SHA-256 of five compact normalized JSON row arrays plus LF in output-column order, retaining three integer counts and two floating percentage values per row. Agreement concerns the rounded returned report, not direct verification of unrounded arithmetic.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "membership_details_published": false,
+  "raw_visitor_identifiers_published": false,
+  "snapshot_band_aggregate_report_only": true,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "property_history_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "frequency_bands": [
+    "F_1",
+    "F_2",
+    "F_3_4",
+    "F_5_PLUS",
+    "TOTAL"
+  ],
+  "band_visitor_counts_sum": 11719,
+  "band_basket_counts_sum": 17672,
+  "visitor_share_denominator": 11719,
+  "basket_share_denominator": 17672,
+  "max_baskets_per_visitor": 502,
+  "population": "Transaction-recorded visitor IDs with at least one candidate basket only.",
+  "frequency_definition": "Distinct composite visitorid,transactionid candidate baskets per visitor ID, counting each basket once regardless of its number of item memberships or source event occurrences.",
+  "all_event_visitors_in_denominator": false,
+  "F_zero_nontransaction_visitors_included": false,
+  "selected_pair_funnel_category_restriction_applied": false,
+  "recency_computed": false,
+  "combined_RF_scores_or_segments_completed": false,
+  "band_cutoffs_optimized": false,
+  "verified_people_orders_or_lifetime_loyalty_claimed": false,
+  "scope": "Accepts all 35 visible SQL85 report fields, five PASS rows and no NULLs. Four disjoint observed-frequency bands reconcile to 11,719 transaction-recorded IDs and 17,672 candidate baskets; TOTAL is not an additional disjoint band. Shares use separate ID and basket denominators. There are 10,656 F_1 IDs; 138 F_5_PLUS IDs contribute 4,945 candidate baskets, with maximum frequency 502. The counts describe this finite snapshot, not loyalty, customer value, verified people or orders. The denominator excludes F=0 and non-transaction visitors rather than covering all event IDs. Three shortened percentage displays and six comma-formatted counts normalize exactly. The screenshot does not directly verify the private 11,719-by-two frequency proof, source reconstruction or empty-band/invalid-input fixtures, which remain supported by frozen assistant evidence. No source, learner database, SQL or fixture rerun was performed. Recency and combined RF remain pending. Earlier pending statements stay intact as history; this appendix establishes current learner acceptance."
+}
