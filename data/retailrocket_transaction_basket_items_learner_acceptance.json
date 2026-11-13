@@ -1,0 +1,401 @@
+{
+  "observed_date": "2026-11-13",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot for SQL79 membership-table creation/checks. All twenty-one rows, five column headers and one hundred five result fields are fully visible. Every actual equals expected and all twenty-one statuses are PASS. No direct learner-database inspection.",
+  "script": "sql/79_build_retailrocket_transaction_basket_items.sql",
+  "script_sha256": "80fb5a9bf484a9b9e313e4421d9420b30051269044afa2335c3cb6c21e531846",
+  "validator": "validation/preflight_retailrocket_transaction_basket_items.py",
+  "validator_sha256": "1a6605b07dd2bcf0719fac0773c739da4bd4a23327b78c4b0f380d32fa605eab",
+  "assistant_preflight": "data/retailrocket_transaction_basket_items_preflight.json",
+  "assistant_preflight_sha256": "9eb0e37d1b6c0133f41e9e12c10e64324a73e88506e1c9fa09be9ab3f4482592",
+  "method_contract": "docs/RETAILROCKET_TRANSACTION_BASKET_ITEMS_VALIDATION.md",
+  "method_contract_prefix_bytes": 8503,
+  "method_contract_prefix_sha256": "b5b50226a110b37ab801dc20f8fccfc355c8df11629ac6425fc8401e2067d8dd",
+  "method_before_acceptance_append_bytes": 14243,
+  "method_before_acceptance_append_sha256": "9c0e2943a439709d942139299b3bce02ea62e6ecc9fb2dbaa1448daf995e96d6",
+  "source_table": "rr_stg.events",
+  "source_readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "source_readset_columns": 5,
+  "destination_table": "rr_mart.transaction_basket_items",
+  "destination_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid",
+    "first_timestamp_ms",
+    "last_timestamp_ms",
+    "source_event_rows"
+  ],
+  "destination_columns": 6,
+  "destination_types": [
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT"
+  ],
+  "learner_action_type": "Candidate-basket/item membership-table creation and validation report over the accepted rr_stg.events transaction population.",
+  "result_rows": 21,
+  "result_columns": 5,
+  "report_field_positions": 105,
+  "visually_verified_field_values": 105,
+  "visually_verified_integer_values": 63,
+  "visually_verified_integer_count_values": 42,
+  "visually_verified_check_order_values": 21,
+  "visually_verified_actual_integer_values": 21,
+  "visually_verified_expected_integer_values": 21,
+  "visually_verified_null_values": 0,
+  "visually_verified_expected_null_values": 0,
+  "visually_verified_complete_check_names": 21,
+  "visually_verified_status_values": 21,
+  "rows_with_pass_status": 21,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_105_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_numeric_and_status_values_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "visibility_caveats": [],
+  "display_normalization": "Remove displayed numeric thousands separators while retaining integer values. There are no NULL or decimal cells and no shortened numeric precision. All check names are fully visible; no label resolution or inferred hidden field is required.",
+  "decimal_display_normalizations": [],
+  "visibility_accounting": "Twenty-one check_order integers, twenty-one actual integers and twenty-one expected integers total sixty-three integer fields. These plus twenty-one complete check names and twenty-one PASS labels total one hundred five fully visible result fields. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "source_event_rows",
+      2756101,
+      2756101,
+      "PASS"
+    ],
+    [
+      2,
+      "source_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      3,
+      "source_invalid_event_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      4,
+      "source_duplicate_surplus",
+      460,
+      460,
+      "PASS"
+    ],
+    [
+      5,
+      "source_transaction_rows",
+      22457,
+      22457,
+      "PASS"
+    ],
+    [
+      6,
+      "source_contract_violations",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      7,
+      "membership_rows",
+      22323,
+      22323,
+      "PASS"
+    ],
+    [
+      8,
+      "column_count",
+      6,
+      6,
+      "PASS"
+    ],
+    [
+      9,
+      "schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      10,
+      "missing_or_invalid_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      11,
+      "duplicate_key_surplus",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      12,
+      "candidate_baskets",
+      17672,
+      17672,
+      "PASS"
+    ],
+    [
+      13,
+      "source_event_rows_sum",
+      22457,
+      22457,
+      "PASS"
+    ],
+    [
+      14,
+      "repeated_memberships",
+      123,
+      123,
+      "PASS"
+    ],
+    [
+      15,
+      "repeat_surplus_rows",
+      134,
+      134,
+      "PASS"
+    ],
+    [
+      16,
+      "single_item_baskets",
+      15029,
+      15029,
+      "PASS"
+    ],
+    [
+      17,
+      "multi_item_baskets",
+      2643,
+      2643,
+      "PASS"
+    ],
+    [
+      18,
+      "max_distinct_items_per_basket",
+      31,
+      31,
+      "PASS"
+    ],
+    [
+      19,
+      "source_only_memberships",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      20,
+      "table_only_memberships",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      21,
+      "basket_partition_difference",
+      0,
+      0,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "source_event_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "source_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "source_invalid_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "source_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "source_transaction_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "membership_rows",
+      "actual": 22323,
+      "expected": 22323,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "column_count",
+      "actual": 6,
+      "expected": 6,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "missing_or_invalid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "candidate_baskets",
+      "actual": 17672,
+      "expected": 17672,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "source_event_rows_sum",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "repeated_memberships",
+      "actual": 123,
+      "expected": 123,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "repeat_surplus_rows",
+      "actual": 134,
+      "expected": 134,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "single_item_baskets",
+      "actual": 15029,
+      "expected": 15029,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "multi_item_baskets",
+      "actual": 2643,
+      "expected": 2643,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "max_distinct_items_per_basket",
+      "actual": 31,
+      "expected": 31,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "source_only_memberships",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "table_only_memberships",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "basket_partition_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "8cb3cf875bc4e83d55c671a84a6fe48fcdf1ef8521461e3be5497028eb0e026a",
+  "fingerprint_method": "SHA-256 of twenty-one compact normalized JSON row arrays in output_columns order followed by LF. Check-order and count values remain integers. All source screenshot fields are fully visible.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "membership_details_published": false,
+  "aggregate_membership_validation_only": true,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "property_history_not_reverified": true,
+  "UTC_fields_not_reverified": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "scope": "Accepts all one hundred five visible fields of SQL79 membership-table reproduction. All twenty-one checks PASS with actual equal to expected. The six-BIGINT destination contains 22,323 unique candidate-basket/item memberships across 17,672 candidate baskets; source_event_rows sums to 22,457 transaction-event occurrences. There are 123 repeated memberships and 134 occurrences beyond one per membership. All 15,029 single-item and 2,643 multi-item candidate baskets remain represented, with at most 31 distinct items. Source-only and table-only complete membership differences are zero. Membership timestamps remain item-specific and occurrence counts are not purchased quantities. The full source control remains 2,756,101 events with 460 duplicate surplus occurrences, distinct from the transaction membership grain. Candidate keys are analytical conventions, not verified business orders. The screenshot reproduces the declared creation/check output without independent assistant access to the learner database or fresh source/fixture checks. No raw membership/event IDs, association rule, monetary metric, causal uplift or new verification of property/UTC/full17/hierarchy fields or learner conceptual understanding is claimed. Existing-destination preservation and guarded invalid creation remain supported by frozen assistant fixtures rather than newly tested in the learner environment. Prior learner-pending statements remain intact as history; this appendix establishes current acceptance."
+}

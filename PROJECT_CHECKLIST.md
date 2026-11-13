@@ -197,7 +197,9 @@
 - [x] 7Z 助手准备并预检 [SQL78 交易事件与候选篮子粒度审计](sql/78_audit_retailrocket_transaction_basket_grain.sql)：在 rr_stg.events 原始五字段上区分 22,457 条 transaction 事件、交易编号、(visitorid, transactionid) 候选篮子与商品成员关系，分别审视完全重复和同商品不同时间的重复记录；见 [验证说明](docs/RETAILROCKET_TRANSACTION_BASKET_GRAIN_VALIDATION.md)。21 行、五列包含八项 PASS 控制和十三项 INFO 新观测；只验证 events.csv 五字段，不重跑属性、时点连接、UTC、层级或历史整套检查。此步不删除重复、不将行数当数量，也不核实真实订单。
 - [x] 7Z 用户于 2026-11-13 截图验收 SQL78：105 个字段完整可见并匹配，含 50 个整数、13 个 expected=NULL、21 个完整检查名、八项 PASS 与十三项 INFO；见 [聚合验收](data/retailrocket_transaction_basket_grain_learner_acceptance.json)。22,457 条交易事件对应 17,672 个候选篮子、22,323 个独立篮子/商品成员关系；134 条额外重复记录不是购买数量。候选篮子含 15,029 个单商品组和 2,643 个多商品组，最大 31 个商品；实际订单语义仍未核实。
 - [x] 7AA 助手准备并预检 [SQL79 候选篮子商品成员表](sql/79_build_retailrocket_transaction_basket_items.sql)：从 rr_stg.events 建 rr_mart.transaction_basket_items，每个 (visitorid, transactionid, itemid) 一行；六个 BIGINT 字段保留商品成员的首末时间戳和 source_event_rows 出现次数。预期 22,323 行、17,672 个候选篮子、次数合计 22,457，21 项检查全部 PASS；见 [验证说明](docs/RETAILROCKET_TRANSACTION_BASKET_ITEMS_VALIDATION.md)。保留单商品篮子和源事件；输入无效时建表失败，目标已存在则拒绝覆盖。助手从 events.csv 核对原始五字段及完整新表六字段，不重跑属性、UTC、层级或历史整套检查。
-- [ ] 7AA 用户首次完整执行 SQL79 建表和检查，提供 21 行 × 5 列全部 PASS 的完整结果。若目标已存在，仅执行 CHECKS 标记以下检查段；不默认删除或重建。
+- [x] 7AA 用户于 2026-11-13 截图验收 SQL79：21 行 × 5 列、105 个字段完整可见，63 个整数与 21 个完整检查名逐项匹配，21 项全部 PASS、无 NULL；见 [聚合验收](data/retailrocket_transaction_basket_items_learner_acceptance.json)。成员表 22,323 行、17,672 个候选篮子、源事件次数合计 22,457；123 个重复成员、134 次额外出现，单/多商品篮子 15,029 / 2,643，最大 31 个不同商品。次数不解释为件数，候选篮子不等于已核实订单。
+- [x] 7AB 助手准备并预检只读 [SQL80 商品对计数](sql/80_analyze_retailrocket_basket_pair_counts.sql)：仅读取 rr_mart.transaction_basket_items 的 visitorid、transactionid、itemid，以两项候选篮子键连接、item_a < item_b 生成无序商品对，每篮子每对最多一次，不用 source_event_rows 加权。15 行 × 5 列包含十项 PASS 和五项 INFO，探索值 expected=NULL；见 [验证说明](docs/RETAILROCKET_BASKET_PAIR_COUNTS_VALIDATION.md)。保留全部 17,672 个候选篮子的总体口径，单商品组产生零对；对数与各篮子 k×(k−1)/2 合计核对。助手单次解析 events.csv 重建六字段成员输入并匹配 SQL79 已验收流哈希，独立逐项核对全部商品对聚合；复用先前五字段来源验证，不重跑旧套件或属性历史。
+- [ ] 7AB 用户执行 SQL80，提供完整 15 行 × 5 列结果；正常为十项 PASS、五项 INFO、五个 expected=NULL，且无 FAIL/BLOCKED。此步不建表，不计算支持度、置信度或提升度。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -207,6 +209,6 @@
 
 ## 下一次对话从这里继续
 
-SQL78 已于 2026-11-13 截图验收：105 个字段完整匹配，八项 PASS、十三项 INFO、十三个预期 NULL 保留。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 首次完整执行 [SQL79](sql/79_build_retailrocket_transaction_basket_items.sql)，把候选篮子商品成员关系固定为每组一行，保留首末时间和源事件出现次数。助手预检通过、用户建表验收待完成；预期 21 行、五列全部 PASS。已有目标表时仅执行 CHECKS 段，不默认删除或覆盖。候选篮子不等于核实订单，source_event_rows 不等于件数；RF、篮子规则及 Power BI 仍未完成。
+SQL79 已于 2026-11-13 截图验收：105 个字段完整匹配，21 项全部 PASS，无 NULL；候选篮子商品成员表已建立。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL80](sql/80_analyze_retailrocket_basket_pair_counts.sql)，确认哪些商品对在同一候选篮子出现过、计数是否正确。助手预检通过、用户执行待完成；15 行五列正常应有十项 PASS 和五项 INFO，INFO 的 expected=NULL 表示尚未预设探索值。全部候选篮子仍是总体，单商品组贡献零对；不将出现次数当数量，也不将共同出现当真实订单或推荐效果。RF、篮子规则及 Power BI 仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -103,3 +103,39 @@ The events.csv hash, size and modification metadata matched the accepted source 
 This table makes one observed item membership per candidate basket reusable without confusing repeated event observations with item quantity. Its time bounds remain specific to the basket-item membership. It does not establish actual completed orders, units purchased, revenue, product complementarity, recommendation effectiveness or business uplift.
 
 Report SHA-256: `8cb3cf875bc4e83d55c671a84a6fe48fcdf1ef8521461e3be5497028eb0e026a`. Script SHA-256: `80fb5a9bf484a9b9e313e4421d9420b30051269044afa2335c3cb6c21e531846`. Validator SHA-256: `1a6605b07dd2bcf0719fac0773c739da4bd4a23327b78c4b0f380d32fa605eab`. The original 8,503-byte frozen method prefix remains unchanged at `b5b50226a110b37ab801dc20f8fccfc355c8df11629ac6425fc8401e2067d8dd`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot showing all twenty-one rows, five column headers and one hundred five result fields of the SQL79 membership-table creation/check report. All check names are fully visible. Twenty-one check_order values, twenty-one actual counts and twenty-one expected counts total sixty-three integer fields; twenty-one complete check names and twenty-one PASS labels complete the 105-field accounting. UI row numbers are excluded. Every actual value equals its expected value; there are no INFO, FAIL, BLOCKED, NULL or decimal cells. No cropped-label resolution or hidden-value inference was required.
+
+Numeric thousands separators were removed without changing integer values. The complete ordered report matches the assistant preflight. The assistant did not open the learner database or rerun SQL, source checks, fixtures or a table build for this acceptance.
+
+| check_order | check_name | actual | expected | status |
+| --- | --- | --- | --- | --- |
+| 1 | source_event_rows | 2756101 | 2756101 | PASS |
+| 2 | source_schema_mismatch | 0 | 0 | PASS |
+| 3 | source_invalid_event_rows | 0 | 0 | PASS |
+| 4 | source_duplicate_surplus | 460 | 460 | PASS |
+| 5 | source_transaction_rows | 22457 | 22457 | PASS |
+| 6 | source_contract_violations | 0 | 0 | PASS |
+| 7 | membership_rows | 22323 | 22323 | PASS |
+| 8 | column_count | 6 | 6 | PASS |
+| 9 | schema_mismatch | 0 | 0 | PASS |
+| 10 | missing_or_invalid_rows | 0 | 0 | PASS |
+| 11 | duplicate_key_surplus | 0 | 0 | PASS |
+| 12 | candidate_baskets | 17672 | 17672 | PASS |
+| 13 | source_event_rows_sum | 22457 | 22457 | PASS |
+| 14 | repeated_memberships | 123 | 123 | PASS |
+| 15 | repeat_surplus_rows | 134 | 134 | PASS |
+| 16 | single_item_baskets | 15029 | 15029 | PASS |
+| 17 | multi_item_baskets | 2643 | 2643 | PASS |
+| 18 | max_distinct_items_per_basket | 31 | 31 | PASS |
+| 19 | source_only_memberships | 0 | 0 | PASS |
+| 20 | table_only_memberships | 0 | 0 | PASS |
+| 21 | basket_partition_difference | 0 | 0 | PASS |
+
+The accepted report contains 22,323 unique candidate-basket/item memberships across 17,672 candidate baskets, with all six fields matching the declared BIGINT schema. Summed source_event_rows restores 22,457 transaction-event occurrences. There are 123 repeated memberships and 134 additional occurrences above one per membership. All 15,029 single-item and 2,643 multi-item candidates remain represented; the maximum contains 31 distinct items. Source-only and table-only complete six-field membership differences are zero, as is the basket partition difference. The full source control retains 2,756,101 event rows and 460 duplicate surplus occurrences, which must not be confused with transaction quantities or duplicated membership keys.
+
+The member-specific first/last timestamps and source-event occurrence count preserve the declared analytical grain. They are not whole-basket settlement times or purchased units, and candidate baskets remain an explicit grouping convention rather than verified business orders. Co-purchase support, confidence, lift and recommendation effects have not been established by this table. The screenshot accepts the reported reproduction; existing-destination preservation, source preservation and atomic invalid-creation fixtures remain supported by the frozen assistant evidence rather than new direct checks of the learner database.
+
+The [machine-readable learner acceptance](../data/retailrocket_transaction_basket_items_learner_acceptance.json) records all visible values. Its report SHA-256 is `8cb3cf875bc4e83d55c671a84a6fe48fcdf1ef8521461e3be5497028eb0e026a`, matching the assistant preflight. The prior 14,243-byte method and executed-results document remains byte-for-byte intact at SHA-256 `9c0e2943a439709d942139299b3bce02ea62e6ecc9fb2dbaa1448daf995e96d6`; its frozen 8,503-byte prefix remains `b5b50226a110b37ab801dc20f8fccfc355c8df11629ac6425fc8401e2067d8dd`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw source events, membership rows or visitor/item/transaction identifiers are published.
