@@ -1,0 +1,332 @@
+{
+  "observed_date": "2026-11-13",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot for the read-only SQL81 nested association-metric threshold profile. All five rows, nine column headers and forty-five result fields are fully visible. All five statuses are PASS; no NULL cells are present. No direct learner-database inspection.",
+  "script": "sql/81_analyze_retailrocket_basket_association_metrics.sql",
+  "script_sha256": "d0c2600a49becb4f09de5f52a2e56dca4804c035b4c1eff0a9206cde13be0ecd",
+  "validator": "validation/preflight_retailrocket_basket_association_metrics.py",
+  "validator_sha256": "e81b8c908fb4475b201afa5fbbc80714a3f4eb16f02be1334e2f2a8a8d3f3dcf",
+  "assistant_preflight": "data/retailrocket_basket_association_metrics_preflight.json",
+  "assistant_preflight_sha256": "e9b1d867a3b601909ac50a6962120be91ca7d94f3623c654c189fdc8100c634f",
+  "method_contract": "docs/RETAILROCKET_BASKET_ASSOCIATION_METRICS_VALIDATION.md",
+  "method_contract_prefix_bytes": 7695,
+  "method_contract_prefix_sha256": "3f825703a4ef994189cd071c1f877fc43576ff3ae618b757fa9a376ac4dd4ea1",
+  "method_before_acceptance_append_bytes": 12389,
+  "method_before_acceptance_append_sha256": "98dacdfbe2752aa698b6eeae89d95bfe76b4c0c3821fd5be955d3b8858c2de30",
+  "source_table": "rr_mart.transaction_basket_items",
+  "readset_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid"
+  ],
+  "required_readset_columns": 3,
+  "learner_action_type": "Read-only nested pair-count threshold profile of support, pooled directional confidence and lift over the accepted candidate-basket membership keys.",
+  "result_rows": 5,
+  "result_columns": 9,
+  "report_field_positions": 45,
+  "visually_verified_field_values": 45,
+  "visually_verified_integer_count_values": 15,
+  "visually_verified_decimal_metric_values": 25,
+  "visually_verified_status_values": 5,
+  "integer_count_columns": [
+    "min_pair_baskets",
+    "retained_pairs",
+    "retained_pair_occurrences"
+  ],
+  "decimal_metric_columns": [
+    "retained_pair_pct",
+    "median_support_pct",
+    "median_directional_confidence_pct",
+    "median_lift",
+    "max_lift"
+  ],
+  "decimal_metric_fields_displayed_without_decimal_point": 6,
+  "shortened_decimal_metric_displays": 7,
+  "visually_verified_null_values": 0,
+  "rows_with_pass_status": 5,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_45_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_numeric_and_status_values_fully_visible": true,
+  "visibility_caveats": [],
+  "display_normalization": "Remove numeric thousands separators. The three count columns remain integers; all five metric columns retain their six-decimal report semantics, even when DBeaver omits a decimal point or trailing zeroes. Six metric cells display integer-looking values and one displays a single decimal; seven such shortened displays normalize without changing their values. No NULL, cropped field or missing precision is inferred.",
+  "decimal_display_normalizations": [
+    {
+      "min_pair_baskets": 1,
+      "field": "retained_pair_pct",
+      "displayed": "100",
+      "normalized_six_decimal": "100.000000"
+    },
+    {
+      "min_pair_baskets": 1,
+      "field": "median_directional_confidence_pct",
+      "displayed": "60",
+      "normalized_six_decimal": "60.000000"
+    },
+    {
+      "min_pair_baskets": 1,
+      "field": "max_lift",
+      "displayed": "17,672",
+      "normalized_six_decimal": "17672.000000"
+    },
+    {
+      "min_pair_baskets": 2,
+      "field": "median_lift",
+      "displayed": "4,418",
+      "normalized_six_decimal": "4418.000000"
+    },
+    {
+      "min_pair_baskets": 2,
+      "field": "max_lift",
+      "displayed": "8,836",
+      "normalized_six_decimal": "8836.000000"
+    },
+    {
+      "min_pair_baskets": 3,
+      "field": "median_directional_confidence_pct",
+      "displayed": "75",
+      "normalized_six_decimal": "75.000000"
+    },
+    {
+      "min_pair_baskets": 3,
+      "field": "median_lift",
+      "displayed": "1,325.4",
+      "normalized_six_decimal": "1325.400000"
+    }
+  ],
+  "visibility_accounting": "Five rows each contain three integer-count fields, five decimal-metric displays and one PASS label: fifteen integer-count values plus twenty-five decimal-metric displays plus five statuses equal forty-five fields. Six of the metric displays happen to look like integers but are not counted as count-column values. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "min_pair_baskets",
+    "retained_pairs",
+    "retained_pair_pct",
+    "retained_pair_occurrences",
+    "median_support_pct",
+    "median_directional_confidence_pct",
+    "median_lift",
+    "max_lift",
+    "check_status"
+  ],
+  "observed_display_rows": [
+    [
+      "1",
+      "9,688",
+      "100",
+      "10,757",
+      "0.005659",
+      "60",
+      "5,890.666667",
+      "17,672",
+      "PASS"
+    ],
+    [
+      "2",
+      "903",
+      "9.320809",
+      "1,972",
+      "0.011317",
+      "66.666667",
+      "4,418",
+      "8,836",
+      "PASS"
+    ],
+    [
+      "3",
+      "79",
+      "0.815442",
+      "324",
+      "0.016976",
+      "75",
+      "1,325.4",
+      "5,890.666667",
+      "PASS"
+    ],
+    [
+      "5",
+      "12",
+      "0.123865",
+      "110",
+      "0.036781",
+      "46.195652",
+      "264.091482",
+      "2,524.571429",
+      "PASS"
+    ],
+    [
+      "10",
+      "1",
+      "0.010322",
+      "39",
+      "0.220688",
+      "64.528986",
+      "166.475362",
+      "166.475362",
+      "PASS"
+    ]
+  ],
+  "observed_rows": [
+    [
+      1,
+      9688,
+      100.0,
+      10757,
+      0.005659,
+      60.0,
+      5890.666667,
+      17672.0,
+      "PASS"
+    ],
+    [
+      2,
+      903,
+      9.320809,
+      1972,
+      0.011317,
+      66.666667,
+      4418.0,
+      8836.0,
+      "PASS"
+    ],
+    [
+      3,
+      79,
+      0.815442,
+      324,
+      0.016976,
+      75.0,
+      1325.4,
+      5890.666667,
+      "PASS"
+    ],
+    [
+      5,
+      12,
+      0.123865,
+      110,
+      0.036781,
+      46.195652,
+      264.091482,
+      2524.571429,
+      "PASS"
+    ],
+    [
+      10,
+      1,
+      0.010322,
+      39,
+      0.220688,
+      64.528986,
+      166.475362,
+      166.475362,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "min_pair_baskets",
+    "retained_pairs",
+    "retained_pair_pct",
+    "retained_pair_occurrences",
+    "median_support_pct",
+    "median_directional_confidence_pct",
+    "median_lift",
+    "max_lift",
+    "check_status"
+  ],
+  "results": [
+    {
+      "min_pair_baskets": 1,
+      "retained_pairs": 9688,
+      "retained_pair_pct": 100.0,
+      "retained_pair_occurrences": 10757,
+      "median_support_pct": 0.005659,
+      "median_directional_confidence_pct": 60.0,
+      "median_lift": 5890.666667,
+      "max_lift": 17672.0,
+      "check_status": "PASS"
+    },
+    {
+      "min_pair_baskets": 2,
+      "retained_pairs": 903,
+      "retained_pair_pct": 9.320809,
+      "retained_pair_occurrences": 1972,
+      "median_support_pct": 0.011317,
+      "median_directional_confidence_pct": 66.666667,
+      "median_lift": 4418.0,
+      "max_lift": 8836.0,
+      "check_status": "PASS"
+    },
+    {
+      "min_pair_baskets": 3,
+      "retained_pairs": 79,
+      "retained_pair_pct": 0.815442,
+      "retained_pair_occurrences": 324,
+      "median_support_pct": 0.016976,
+      "median_directional_confidence_pct": 75.0,
+      "median_lift": 1325.4,
+      "max_lift": 5890.666667,
+      "check_status": "PASS"
+    },
+    {
+      "min_pair_baskets": 5,
+      "retained_pairs": 12,
+      "retained_pair_pct": 0.123865,
+      "retained_pair_occurrences": 110,
+      "median_support_pct": 0.036781,
+      "median_directional_confidence_pct": 46.195652,
+      "median_lift": 264.091482,
+      "max_lift": 2524.571429,
+      "check_status": "PASS"
+    },
+    {
+      "min_pair_baskets": 10,
+      "retained_pairs": 1,
+      "retained_pair_pct": 0.010322,
+      "retained_pair_occurrences": 39,
+      "median_support_pct": 0.220688,
+      "median_directional_confidence_pct": 64.528986,
+      "median_lift": 166.475362,
+      "max_lift": 166.475362,
+      "check_status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "a0bc66720b6b0e15ab2086308851949b1e6e9c8f99a8d3086ae7e25a20d5bdf1",
+  "screenshot_rounded_decimal_values_match_returned_SQL_report_exactly": true,
+  "screenshot_confirms_unrounded_metric_values": false,
+  "fingerprint_method": "SHA-256 of five normalized compact JSON row arrays in output_columns order followed by LF, preserving the returned SQL report numeric types: three integer counts and five floating metric fields per row. The digest matches the actual SQL-output fingerprint; exact screenshot agreement concerns six-decimal displayed report values, not mathematical exactness of unrounded metrics.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "membership_details_published": false,
+  "pair_details_published": false,
+  "aggregate_threshold_profile_validation_only": true,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "property_history_not_reverified": true,
+  "UTC_fields_not_reverified": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "support_denominator": 17672,
+  "retained_pair_pct_denominator": 9688,
+  "thresholds": [
+    1,
+    2,
+    3,
+    5,
+    10
+  ],
+  "threshold_rows_nested": true,
+  "threshold_rows_additive": false,
+  "source_event_rows_used_as_pair_weight": false,
+  "association_metrics_calculated": true,
+  "thresholds_selected_as_optimal": false,
+  "candidate_baskets_are_verified_orders": false,
+  "recommendation_or_causal_effect_estimated": false,
+  "scope": "Accepts all forty-five visible fields of SQL81 reproduction, with five PASS rows and no NULLs. The five nested minimum-count thresholds retain 9,688, 903, 79, 12 and 1 distinct pairs, respectively. All seventeen thousand six hundred seventy-two candidate baskets remain in support and item-marginal denominators; retained-pair percentages use nine thousand six hundred eighty-eight observed distinct pairs. Retained pair occurrences sum pair appearances and are not distinct covered baskets. Confidence medians pool both directions once per pair without source-event or frequency weighting; support and confidence displays are percentages and lift is dimensionless. The screenshot exactly matches the returned six-decimal report after separator and trailing-zero normalization. It does not directly verify the 9,688 unrounded ten-field metric rows, source reconstruction or fixtures, which remain supported by frozen assistant evidence. No source or learner database is accessed for this acceptance. Threshold rows overlap and are not summed; no optimal threshold, rule ranking, verified order, simultaneous purchase, quantity, revenue, recommendation effect, causal uplift or learner conceptual mastery is established. Earlier learner-pending statements remain intact as history; this appendix establishes current acceptance."
+}

@@ -77,3 +77,35 @@ The source parse/reconstruction took 17.088 seconds and the independent metric r
 Source identity, pinned dependency hashes and all 79 historical preflight files remained unchanged. Private database hashes matched before and after both read-only phases. All private membership CSV, database and spill files were removed. No learner database, property files, category reference or enriched fact was opened. Public evidence contains aggregate summaries and fingerprints only, without source IDs or a pair list. The results describe observed binary association, not quantities, revenue, verified paid orders or causal effects.
 
 Report SHA-256: `a0bc66720b6b0e15ab2086308851949b1e6e9c8f99a8d3086ae7e25a20d5bdf1`. Script SHA-256: `d0c2600a49becb4f09de5f52a2e56dca4804c035b4c1eff0a9206cde13be0ecd`. Validator SHA-256: `e81b8c908fb4475b201afa5fbbc80714a3f4eb16f02be1334e2f2a8a8d3f3dcf`. The original 7,695-byte method prefix remains unchanged at `3f825703a4ef994189cd071c1f877fc43576ff3ae618b757fa9a376ac4dd4ea1`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot showing all five rows, nine column headers and forty-five result fields of the SQL81 nested threshold profile. The visible fields comprise fifteen integer-count values, twenty-five decimal-metric displays and five PASS labels. Six metric cells look like integers because the interface omits trailing zeroes, but remain metric fields; one further metric cell displays a single decimal. UI row numbers are excluded. All five statuses are PASS, with no INFO, FAIL, BLOCKED or NULL cells.
+
+Thousands separators were removed and seven shortened metric displays were restored to the report's six-decimal notation without changing their values. Every displayed report value matches the frozen preflight exactly. This is acceptance of the rounded report: it does not claim the screenshot reveals unrounded metrics or mathematically exact floating-point calculations. No cropped fields, labels or hidden values were inferred. The assistant did not open the learner database or rerun SQL, source parsing, membership reconstruction, metric streams or fixtures for this acceptance.
+
+| min_pair_baskets | retained_pairs | retained_pair_pct | retained_pair_occurrences | median_support_pct | median_directional_confidence_pct | median_lift | max_lift | check_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 9688 | 100.000000 | 10757 | 0.005659 | 60.000000 | 5890.666667 | 17672.000000 | PASS |
+| 2 | 903 | 9.320809 | 1972 | 0.011317 | 66.666667 | 4418.000000 | 8836.000000 | PASS |
+| 3 | 79 | 0.815442 | 324 | 0.016976 | 75.000000 | 1325.400000 | 5890.666667 | PASS |
+| 5 | 12 | 0.123865 | 110 | 0.036781 | 46.195652 | 264.091482 | 2524.571429 | PASS |
+| 10 | 1 | 0.010322 | 39 | 0.220688 | 64.528986 | 166.475362 | 166.475362 | PASS |
+
+The seven shortened displays normalize as follows; comma removal is independent of precision normalization.
+
+| min_pair_baskets | field | displayed | normalized six-decimal value |
+| --- | --- | --- | --- |
+| 1 | retained_pair_pct | 100 | 100.000000 |
+| 1 | median_directional_confidence_pct | 60 | 60.000000 |
+| 1 | max_lift | 17,672 | 17672.000000 |
+| 2 | median_lift | 4,418 | 4418.000000 |
+| 2 | max_lift | 8,836 | 8836.000000 |
+| 3 | median_directional_confidence_pct | 75 | 75.000000 |
+| 3 | median_lift | 1,325.4 | 1325.400000 |
+
+The accepted nested minimum-count thresholds 1, 2, 3, 5 and 10 retain 9,688, 903, 79, 12 and 1 distinct pairs. They share the same 17,672 candidate-basket denominator for support and item marginals, while retained_pair_pct uses all 9,688 observed distinct pairs. Single-item candidates remain in the population. Each retained pair contributes its two directional confidences once to the pooled median; support and confidence are percentages, and lift is dimensionless. Retained pair occurrences sum appearances across pairs, not uniquely covered baskets. Rows overlap and must not be added.
+
+This profile supports discussion of sparse co-occurrence and count thresholds; it does not establish an optimal cutoff, validated rule ranking, commercial recommendation benefit or causal effect. Candidate baskets remain a diagnostic grouping rather than verified orders or simultaneous purchases. The full unrounded ten-field metric comparison, accepted-input fingerprints and fixture behaviour remain supported by the frozen assistant evidence rather than new direct checks of the learner environment.
+
+The [machine-readable learner acceptance](../data/retailrocket_basket_association_metrics_learner_acceptance.json) records the raw displayed strings, normalized values and seven precision normalizations. Its report SHA-256 is `a0bc66720b6b0e15ab2086308851949b1e6e9c8f99a8d3086ae7e25a20d5bdf1`, matching the actual SQL report fingerprint. The prior 12,389-byte method and executed-results document remains byte-for-byte intact at SHA-256 `98dacdfbe2752aa698b6eeae89d95bfe76b4c0c3821fd5be955d3b8858c2de30`; its frozen 7,695-byte prefix remains `3f825703a4ef994189cd071c1f877fc43576ff3ae618b757fa9a376ac4dd4ea1`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw events, memberships, item-pair lists or visitor/item/transaction identifiers are published.
