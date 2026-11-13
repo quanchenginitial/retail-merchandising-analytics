@@ -199,7 +199,9 @@
 - [x] 7AA 助手准备并预检 [SQL79 候选篮子商品成员表](sql/79_build_retailrocket_transaction_basket_items.sql)：从 rr_stg.events 建 rr_mart.transaction_basket_items，每个 (visitorid, transactionid, itemid) 一行；六个 BIGINT 字段保留商品成员的首末时间戳和 source_event_rows 出现次数。预期 22,323 行、17,672 个候选篮子、次数合计 22,457，21 项检查全部 PASS；见 [验证说明](docs/RETAILROCKET_TRANSACTION_BASKET_ITEMS_VALIDATION.md)。保留单商品篮子和源事件；输入无效时建表失败，目标已存在则拒绝覆盖。助手从 events.csv 核对原始五字段及完整新表六字段，不重跑属性、UTC、层级或历史整套检查。
 - [x] 7AA 用户于 2026-11-13 截图验收 SQL79：21 行 × 5 列、105 个字段完整可见，63 个整数与 21 个完整检查名逐项匹配，21 项全部 PASS、无 NULL；见 [聚合验收](data/retailrocket_transaction_basket_items_learner_acceptance.json)。成员表 22,323 行、17,672 个候选篮子、源事件次数合计 22,457；123 个重复成员、134 次额外出现，单/多商品篮子 15,029 / 2,643，最大 31 个不同商品。次数不解释为件数，候选篮子不等于已核实订单。
 - [x] 7AB 助手准备并预检只读 [SQL80 商品对计数](sql/80_analyze_retailrocket_basket_pair_counts.sql)：仅读取 rr_mart.transaction_basket_items 的 visitorid、transactionid、itemid，以两项候选篮子键连接、item_a < item_b 生成无序商品对，每篮子每对最多一次，不用 source_event_rows 加权。15 行 × 5 列包含十项 PASS 和五项 INFO，探索值 expected=NULL；见 [验证说明](docs/RETAILROCKET_BASKET_PAIR_COUNTS_VALIDATION.md)。保留全部 17,672 个候选篮子的总体口径，单商品组产生零对；对数与各篮子 k×(k−1)/2 合计核对。助手单次解析 events.csv 重建六字段成员输入并匹配 SQL79 已验收流哈希，独立逐项核对全部商品对聚合；复用先前五字段来源验证，不重跑旧套件或属性历史。
-- [ ] 7AB 用户执行 SQL80，提供完整 15 行 × 5 列结果；正常为十项 PASS、五项 INFO、五个 expected=NULL，且无 FAIL/BLOCKED。此步不建表，不计算支持度、置信度或提升度。
+- [x] 7AB 用户于 2026-11-13 截图验收 SQL80：15 行 × 5 列、75 个字段完整可见，40 个整数、15 个完整检查名及状态、五个 expected=NULL 匹配；十项 PASS、五项 INFO，无 FAIL/BLOCKED，见 [聚合验收](data/retailrocket_basket_pair_counts_learner_acceptance.json)。10,757 次篮子内商品对出现对应 9,688 个独立商品对，8,785 对仅出现一次、903 对至少两次，最高 39 个篮子；两项对数核对差异均为零。
+- [x] 7AC 助手准备并预检只读 [SQL81 关联指标与数量门槛概览](sql/81_analyze_retailrocket_basket_association_metrics.sql)：按最少共现篮子数 1、2、3、5、10，汇总保留商品对、支持度、双向置信度及提升度；见 [验证说明](docs/RETAILROCKET_BASKET_ASSOCIATION_METRICS_VALIDATION.md)。五行九列正常全部 PASS。支持度及商品边际频率采用全部 17,672 个候选篮子；保留商品对比例采用 9,688 对。每对两方向等权汇总置信度中位数，阈值行重叠，不能相加。独立验证核对重建六字段成员输入及全部未舍入十字段商品对指标，复用已验收来源证据。
+- [ ] 7AC 用户执行 SQL81，提供五行 × 九列完整结果，正常五项 PASS。此步只读、不建表；门槛比较不代表选定最佳门槛或验证推荐效果。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -209,6 +211,6 @@
 
 ## 下一次对话从这里继续
 
-SQL79 已于 2026-11-13 截图验收：105 个字段完整匹配，21 项全部 PASS，无 NULL；候选篮子商品成员表已建立。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL80](sql/80_analyze_retailrocket_basket_pair_counts.sql)，确认哪些商品对在同一候选篮子出现过、计数是否正确。助手预检通过、用户执行待完成；15 行五列正常应有十项 PASS 和五项 INFO，INFO 的 expected=NULL 表示尚未预设探索值。全部候选篮子仍是总体，单商品组贡献零对；不将出现次数当数量，也不将共同出现当真实订单或推荐效果。RF、篮子规则及 Power BI 仍未完成。
+SQL80 已于 2026-11-13 截图验收：75 个字段完整匹配，十项 PASS、五项 INFO、五个预期 NULL 保留。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL81](sql/81_analyze_retailrocket_basket_association_metrics.sql)，比较不同最少共现数量要求下保留的商品对及关联指标。助手预检通过、用户执行待完成；五行九列正常全部 PASS。支持度分母保持全部 17,672 个候选篮子，商品对保留比例分母为 9,688；五个门槛逐层包含、不能相加。高提升度不等于有效推荐，RF、规则验证及 Power BI 仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

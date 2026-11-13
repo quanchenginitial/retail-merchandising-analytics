@@ -91,3 +91,33 @@ Source hashes/metadata, pinned dependencies and all 78 historical preflight arti
 This diagnostic establishes reproducible binary pair counts over candidate baskets. It does not calculate support, confidence or lift, identify meaningful complements, establish recommendation effectiveness or validate business order semantics. Subsequent association metrics must retain all eligible candidate baskets as their population and address sparse co-occurrences separately.
 
 Report SHA-256: `fcf64ac290ecfab36fd5b617de0638f7d08b331a3a084c4f6731fc7b706c4a03`. Script SHA-256: `f6858e4074798d1786dff4cee147d9049fb901519de1d17c07058afebf49c2f4`. Validator SHA-256: `12b7e52450c483aba2ea6b788f5a1f5c88d62a18f40ad2b43c3da9cb09e1c486`. The original 7,702-byte method prefix remains unchanged at `069c296001badd3789a4a652e368af6805eaf65b8497932622bcb8be7d8d9b86`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot showing all fifteen rows, five column headers and seventy-five result fields of the read-only SQL80 pair-count report. All check names are fully visible. Fifteen check_order integers, fifteen actual integers and ten non-NULL expected integers total forty integer fields. Five expected NULL cells, fifteen complete check names and fifteen status labels complete the 75-field accounting; UI row numbers are excluded. Ten controls PASS and five observations are INFO. There are no FAIL or BLOCKED rows. The five genuine INFO expectations remain NULL because they are exploratory observations rather than predetermined control values.
+
+Displayed thousands separators were removed without changing counts; displayed [NULL] cells were retained as JSON null. There are no decimal cells, shortened precision or hidden fields. The complete ordered report matches the frozen assistant preflight. The assistant did not open the learner database or rerun SQL, source parsing, input reconstruction, pair streams or fixtures for this acceptance.
+
+| check_order | check_name | actual | expected | status |
+| --- | --- | --- | --- | --- |
+| 1 | membership_rows | 22323 | 22323 | PASS |
+| 2 | required_key_schema_mismatch | 0 | 0 | PASS |
+| 3 | invalid_key_rows | 0 | 0 | PASS |
+| 4 | duplicate_membership_keys | 0 | 0 | PASS |
+| 5 | candidate_baskets | 17672 | 17672 | PASS |
+| 6 | single_item_baskets | 15029 | 15029 | PASS |
+| 7 | multi_item_baskets | 2643 | 2643 | PASS |
+| 8 | max_items_per_basket | 31 | 31 | PASS |
+| 9 | pair_occurrences | 10757 | NULL | INFO |
+| 10 | distinct_item_pairs | 9688 | NULL | INFO |
+| 11 | pairs_seen_once | 8785 | NULL | INFO |
+| 12 | pairs_seen_2plus | 903 | NULL | INFO |
+| 13 | max_baskets_per_pair | 39 | NULL | INFO |
+| 14 | pair_occurrence_reconciliation_difference | 0 | 0 | PASS |
+| 15 | pair_frequency_partition_difference | 0 | 0 | PASS |
+
+The accepted report retains all 17,672 candidate baskets and 22,323 memberships. Its 15,029 singleton baskets generate zero pairs and remain in the population; 2,643 multi-item baskets generate 10,757 unordered basket-pair occurrences. These comprise 9,688 distinct item pairs, of which 8,785 occur in one candidate basket and 903 occur in at least two. The largest observed frequency is 39 candidate baskets. Both reconciliation differences are zero: pair occurrences agree with the sum of k×(k−1)/2, and the once/at-least-twice partition restores the distinct-pair count.
+
+The query uses only the three membership keys, joins both candidate-basket keys and requires numeric item_a < item_b. It neither weights pairs by source_event_rows nor treats repeats as quantities. These are co-occurrence counts under an explicit candidate grouping, not verified orders, simultaneous purchases or demonstrated recommendation effectiveness. Support, confidence, lift and rule rankings have not been calculated in this step. The screenshot accepts the displayed reproduction; complete input fingerprint checks, private pair-stream comparison and fixture behaviour remain supported by the frozen assistant evidence rather than new direct checks of the learner database.
+
+The [machine-readable learner acceptance](../data/retailrocket_basket_pair_counts_learner_acceptance.json) records all visible values. Its report SHA-256 is `fcf64ac290ecfab36fd5b617de0638f7d08b331a3a084c4f6731fc7b706c4a03`, matching the assistant preflight. The prior 12,906-byte method and executed-results document remains byte-for-byte intact at SHA-256 `194760b5cfcb86d9f6b6eff1ce31e8fe84fe0dbf8d5bd0cdd5195427bed12509`; its frozen 7,702-byte prefix remains `069c296001badd3789a4a652e368af6805eaf65b8497932622bcb8be7d8d9b86`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw events, memberships, item-pair lists or visitor/item/transaction identifiers are published.

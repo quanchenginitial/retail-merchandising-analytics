@@ -1,33 +1,37 @@
-# 当前一步：核对候选篮子中的商品对计数
+# 当前一步：比较关联指标与共现数量门槛
 
 更新日期：2026-11-13（Australia/Sydney）。
 
-**这一步为了什么：在分析“哪些商品经常一起出现”之前，先确认同一候选篮子内的商品对只计一次，并核对总数，给后续共同购买分析建立正确的计数和总体口径。**
+**这一步为了什么：把“商品一起出现多少次”转成可比较的关联指标，并观察提高最低共现数量要求后，还剩多少候选商品对，避免只看很高的提升度就下结论。**
 
-## SQL79 已验收
+## SQL80 已验收
 
-截图 **21 行 × 5 列、105 个字段完整匹配，21 项全部 PASS、无 NULL**。rr_mart.transaction_basket_items 已有 **22,323 个商品成员、17,672 个候选篮子**，source_event_rows 合计 **22,457**。123 个成员出现多次，共多出 134 次出现；这些是事件次数，不是已核实的购买件数。见 [验收记录](../data/retailrocket_transaction_basket_items_learner_acceptance.json)。
+截图 **15 行 × 5 列、75 个字段完整匹配**：十项 PASS、五项 INFO，五个 expected=NULL 正常保留。10,757 次篮子内商品对出现，对应 **9,688 个独立商品对**；其中 **8,785 对仅出现一次、903 对至少两次**，最高共现于 39 个候选篮子。两项计数核对差异均为零，见 [验收记录](../data/retailrocket_basket_pair_counts_learner_acceptance.json)。
 
-候选篮子包括 **15,029 个单商品组和 2,643 个多商品组**，最大 31 个不同商品。本步从这张已建立的表继续，不再执行 SQL79 建表部分。
+## SQL81 的三个指标
 
-## SQL80 怎么计数
+设 N 为全部 **17,672 个候选篮子**，n_A、n_B 分别为包含 A、B 的篮子数，n_AB 为同时包含两者的篮子数。
 
-只读取成员表的 **visitorid、transactionid、itemid**。同一候选篮子要求前两个编号都相同；商品对要求 item_a < item_b，因此 A–B 与 B–A 合并为一对，也不会产生 A–A。每个篮子内每对最多计一次，不使用 source_event_rows 加权。
+- **支持度** = n_AB/N：全部候选篮子中有多少比例包含这一对。
+- **置信度 A→B** = n_AB/n_A：包含 A 的篮子中有多少比例也包含 B。B→A 的分母不同；本报告让每对的两个方向各贡献一次，计算合并后的中位数。
+- **提升度** = 置信度 A→B ÷ (n_B/N)：相对于 B 在总体中的出现比例，A、B 共同出现的关联强度。它没有百分号；高值不等于有效推荐或因果效果。
 
-例如，一个篮子包含 A、B、C，会产生 A–B、A–C、B–C 三对；只有 A 的篮子产生零对。对含 k 个不同商品的篮子，应有 k×(k−1)/2 对；SQL80 用这个公式核对总数。**全部 17,672 个候选篮子仍是后续支持度的总体**，不能把单商品组从分母中排除。本步尚不计算支持度、置信度或提升度。
+支持度和置信度显示为百分比，报告中的百分比与提升度保留六位小数。单商品篮子仍计入 N 和商品各自的出现次数，不使用 source_event_rows 加权。
 
-## 现在执行 SQL80
+## 现在执行 SQL81
 
 1. 在 DBeaver 选中现有 **retail_merchandising** 连接。
-2. 打开 [80_analyze_retailrocket_basket_pair_counts.sql](../sql/80_analyze_retailrocket_basket_pair_counts.sql)，完整执行这条只读查询。无需建表或重新导入 CSV。
-3. 提供 **15 行、5 列完整结果**，列为 check_order、check_name、actual、expected、status；请拉宽 check_name。若拆图，保留检查序号和名称，并让相邻截图有重叠行。
+2. 打开 [81_analyze_retailrocket_basket_association_metrics.sql](../sql/81_analyze_retailrocket_basket_association_metrics.sql)，完整执行只读查询。无需建表、重新导入 CSV 或重跑 SQL79/80。
+3. 提供 **五行、九列完整结果，正常五行全部 PASS**。请确保最右侧 check_status 可见；如需拆图，保留最左侧 min_pair_baskets，并让相邻截图有重叠列。
 
-正常结果应有 **十项 PASS、五项 INFO，且无 FAIL/BLOCKED**。八项来源控制核对商品成员与篮子数量、键类型、有效性和唯一性；末两项控制核对商品对合计及频次分区。中间五项 INFO 展示新发现的商品对出现总次数、独立商品对数、只出现一次或至少两次的商品对数、单对最多出现的篮子数。它们的 **expected=NULL 表示没有预设探索值，不是失败**；请保留这些 NULL。
+九列依次为 min_pair_baskets、retained_pairs、retained_pair_pct、retained_pair_occurrences、median_support_pct、median_directional_confidence_pct、median_lift、max_lift、check_status。
 
-助手预检已通过，用户执行和截图验收仍待完成；见 [验证说明](RETAILROCKET_BASKET_PAIR_COUNTS_VALIDATION.md)。
+五行分别保留 **至少在 1、2、3、5、10 个候选篮子中出现**的商品对。它们逐层包含，**不能相加，也没有 TOTAL 行**。retained_pair_pct 的分母是 **9,688 个独立商品对**，与支持度的 **17,672 个候选篮子**不同。retained_pair_occurrences 是入选商品对的共现次数之和；同一篮子可贡献多对，因此不是覆盖的独立篮子数。本步比较门槛，不宣布哪个门槛最佳。
+
+助手预检已通过，用户执行和截图验收仍待完成；见 [验证说明](RETAILROCKET_BASKET_ASSOCIATION_METRICS_VALIDATION.md)。
 
 ## 验证和解释范围
 
-助手单次解析 **events.csv** 重建六字段商品成员输入，匹配 SQL79 已验收的完整成员流哈希，再独立核对全部商品对聚合计数。此前原始五字段来源验证继续作为证据，本步不重跑该整套排序核验，也不重跑属性历史、UTC、类别层级或旧分析。
+助手单次解析 events.csv 重建六字段商品成员输入，匹配 SQL79 已验收指纹，并独立核对全部未舍入十字段商品对指标；复用此前完整来源证据，不重跑旧 SQL、属性历史、UTC 或层级检查。
 
-这里使用全部 transaction 事件形成的候选篮子，不沿用类别 1613 或 7 天漏斗的限制。候选篮子只是约定的分析单位，未证明真实订单或同时购买；共同出现也不证明推荐效果。公开保存汇总检查，不上传原始编号或商品对明细。RF 分群、共同购买规则及 Power BI 仍未完成。
+分析使用全部候选篮子，不沿用类别 1613 或 7 天漏斗的限制。候选键未证明真实订单或同时购买；这些统计不构成规则排名、推荐效果或最优门槛结论。公开保存汇总结果，不上传商品对编号明细。RF 分群、规则选择与稳定性验证、Power BI 仍未完成。

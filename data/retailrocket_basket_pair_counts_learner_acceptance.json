@@ -1,0 +1,301 @@
+{
+  "observed_date": "2026-11-13",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot for the read-only SQL80 unordered item-pair count audit. All fifteen rows, five column headers and seventy-five result fields are fully visible. Ten PASS controls and five INFO observations match the frozen preflight, including five genuine NULL expectations. No direct learner-database inspection.",
+  "script": "sql/80_analyze_retailrocket_basket_pair_counts.sql",
+  "script_sha256": "f6858e4074798d1786dff4cee147d9049fb901519de1d17c07058afebf49c2f4",
+  "validator": "validation/preflight_retailrocket_basket_pair_counts.py",
+  "validator_sha256": "12b7e52450c483aba2ea6b788f5a1f5c88d62a18f40ad2b43c3da9cb09e1c486",
+  "assistant_preflight": "data/retailrocket_basket_pair_counts_preflight.json",
+  "assistant_preflight_sha256": "92d56bace2392904e7495fd1a7ec1c0cedffb4e66414d415694155c0f0d46a5c",
+  "method_contract": "docs/RETAILROCKET_BASKET_PAIR_COUNTS_VALIDATION.md",
+  "method_contract_prefix_bytes": 7702,
+  "method_contract_prefix_sha256": "069c296001badd3789a4a652e368af6805eaf65b8497932622bcb8be7d8d9b86",
+  "method_before_acceptance_append_bytes": 12906,
+  "method_before_acceptance_append_sha256": "194760b5cfcb86d9f6b6eff1ce31e8fe84fe0dbf8d5bd0cdd5195427bed12509",
+  "source_table": "rr_mart.transaction_basket_items",
+  "readset_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid"
+  ],
+  "required_readset_columns": 3,
+  "learner_action_type": "Read-only unordered item-pair count report from the accepted three-key membership projection; no table creation.",
+  "result_rows": 15,
+  "result_columns": 5,
+  "report_field_positions": 75,
+  "visually_verified_field_values": 75,
+  "visually_verified_integer_values": 40,
+  "visually_verified_integer_count_values": 25,
+  "visually_verified_check_order_values": 15,
+  "visually_verified_actual_integer_values": 15,
+  "visually_verified_expected_integer_values": 10,
+  "visually_verified_null_values": 5,
+  "visually_verified_expected_null_values": 5,
+  "visually_verified_complete_check_names": 15,
+  "visually_verified_status_values": 15,
+  "rows_with_pass_status": 10,
+  "rows_with_info_status": 5,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_75_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_numeric_and_status_values_fully_visible": true,
+  "all_check_names_fully_visible": true,
+  "visibility_caveats": [],
+  "display_normalization": "Remove displayed numeric thousands separators without changing integer values; preserve each of the five displayed [NULL] expected cells as JSON null. No decimal cells, shortened precision, cropped-label resolution or hidden-value inference is present.",
+  "decimal_display_normalizations": [],
+  "visibility_accounting": "Fifteen check_order integers, fifteen actual integers and ten non-NULL expected integers total forty integer fields. Five expected NULL cells, fifteen complete check names and fifteen status labels complete seventy-five visible result fields. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "observed_rows": [
+    [
+      1,
+      "membership_rows",
+      22323,
+      22323,
+      "PASS"
+    ],
+    [
+      2,
+      "required_key_schema_mismatch",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      3,
+      "invalid_key_rows",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      4,
+      "duplicate_membership_keys",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      5,
+      "candidate_baskets",
+      17672,
+      17672,
+      "PASS"
+    ],
+    [
+      6,
+      "single_item_baskets",
+      15029,
+      15029,
+      "PASS"
+    ],
+    [
+      7,
+      "multi_item_baskets",
+      2643,
+      2643,
+      "PASS"
+    ],
+    [
+      8,
+      "max_items_per_basket",
+      31,
+      31,
+      "PASS"
+    ],
+    [
+      9,
+      "pair_occurrences",
+      10757,
+      null,
+      "INFO"
+    ],
+    [
+      10,
+      "distinct_item_pairs",
+      9688,
+      null,
+      "INFO"
+    ],
+    [
+      11,
+      "pairs_seen_once",
+      8785,
+      null,
+      "INFO"
+    ],
+    [
+      12,
+      "pairs_seen_2plus",
+      903,
+      null,
+      "INFO"
+    ],
+    [
+      13,
+      "max_baskets_per_pair",
+      39,
+      null,
+      "INFO"
+    ],
+    [
+      14,
+      "pair_occurrence_reconciliation_difference",
+      0,
+      0,
+      "PASS"
+    ],
+    [
+      15,
+      "pair_frequency_partition_difference",
+      0,
+      0,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "membership_rows",
+      "actual": 22323,
+      "expected": 22323,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "required_key_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "invalid_key_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "duplicate_membership_keys",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "candidate_baskets",
+      "actual": 17672,
+      "expected": 17672,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "single_item_baskets",
+      "actual": 15029,
+      "expected": 15029,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "multi_item_baskets",
+      "actual": 2643,
+      "expected": 2643,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "max_items_per_basket",
+      "actual": 31,
+      "expected": 31,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "pair_occurrences",
+      "actual": 10757,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_item_pairs",
+      "actual": 9688,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "pairs_seen_once",
+      "actual": 8785,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "pairs_seen_2plus",
+      "actual": 903,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "max_baskets_per_pair",
+      "actual": 39,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "pair_occurrence_reconciliation_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "pair_frequency_partition_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "fcf64ac290ecfab36fd5b617de0638f7d08b331a3a084c4f6731fc7b706c4a03",
+  "fingerprint_method": "SHA-256 of fifteen compact normalized JSON row arrays in output_columns order followed by LF. Integer values and five genuine INFO expectation nulls are retained. All screenshot fields are fully visible.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "membership_details_published": false,
+  "pair_details_published": false,
+  "aggregate_pair_count_validation_only": true,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "property_history_not_reverified": true,
+  "UTC_fields_not_reverified": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "source_event_rows_used_as_pair_weight": false,
+  "association_metrics_calculated": false,
+  "candidate_baskets_are_verified_orders": false,
+  "scope": "Accepts all seventy-five visible fields of SQL80 reproduction: ten PASS controls, five INFO observations and five NULL expectations. The accepted population contains 22,323 memberships and 17,672 candidate baskets, including 15,029 singleton and 2,643 multi-item baskets, maximum size 31. The report observes 10,757 unordered basket-pair occurrences and 9,688 distinct item pairs; 8,785 occur once and 903 in at least two baskets, with maximum frequency 39. Both choose-two occurrence reconciliation and pair-frequency partition differences are zero. Each unordered pair is counted once per candidate basket using both basket keys; singletons remain in the population and source-event occurrence counts are not weights. The screenshot reproduces aggregate output without fresh source, membership-input, pair-stream or fixture verification and without independent assistant access to the learner database. Those complete checks remain supported by frozen assistant evidence. It does not establish support/confidence/lift, meaningful complements, actual simultaneous purchases, verified business orders, quantities, recommendation effects, causal uplift or conceptual mastery. No raw identifiers or pair details are published; no new property/UTC/full17/hierarchy proof is claimed. Earlier learner-pending statements remain intact as history; this appendix establishes current acceptance."
+}
