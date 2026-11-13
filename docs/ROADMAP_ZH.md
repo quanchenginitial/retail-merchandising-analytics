@@ -2,7 +2,7 @@
 
 更新日期：2026-11-13（Australia/Sydney）。
 
-**当前状态：SQL77 历史可用性分组已验收，下一步运行 SQL78 交易事件与候选篮子粒度审计。** 45 个字段完整匹配、五行 PASS、三个 NULL 保留；见 [验收记录](../data/retailrocket_category_availability_funnel_learner_acceptance.json)。已定义的 7 天路径及其探索性追查形成 [阶段发现](STAGE07_FUNNEL_FINDINGS.md)，不代表 RF、篮子规则或整个阶段 7 已完成。SQL78 先区分事件行、交易编号、候选篮子和商品成员关系，为共同购买分析定义分母；助手预检通过、用户执行待完成。
+**当前状态：SQL78 交易/篮子粒度审计已验收，下一步运行 SQL79 建立候选篮子商品成员表。** 105 个字段完整匹配，八项 PASS、十三项 INFO、十三个预期 NULL；见 [验收记录](../data/retailrocket_transaction_basket_grain_learner_acceptance.json)。下一步将 22,457 条交易事件表达为 22,323 个候选篮子/商品成员关系，保留出现次数和各成员首末时间，单商品篮子仍包含在内。助手预检通过、用户建表验收待完成。已定义漏斗的 [阶段发现](STAGE07_FUNNEL_FINDINGS.md) 不变，RF、篮子规则及整个阶段 7 尚未完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，完整执行 [SQL78](../sql/78_audit_retailrocket_transaction_basket_grain.sql)。目的：在研究“哪些商品常被一起购买”前，确认 transaction 事件的粒度，保留并区分完全重复记录与同一商品不同时间的重复记录。候选篮子暂以 (visitorid, transactionid) 分组，不能直接认定为真实订单。报告为 21 行、五列，正常有八项 PASS 控制和十三项 INFO 新观测；INFO 的 expected=NULL 表示没有人为预设探索结果。验证仅覆盖 events.csv 原始五字段，不重跑商品属性、十五字段连接、UTC、类别层级或历史整套检查。
+阅读 [当前一步](FIRST_STEP_ZH.md)，首次完整执行 [SQL79](../sql/79_build_retailrocket_transaction_basket_items.sql) 的建表及检查脚本。目的：为共同购买分析固定“同一候选篮子内某商品是否出现”的粒度，同时保留出现次数，不把重复记录当购买件数。新表 rr_mart.transaction_basket_items 为六个 BIGINT 字段，预期 22,323 行、17,672 个候选篮子，21 行检查全部 PASS。候选键仍是分析约定，未证明真实订单；分析使用全部 transaction 事件，不沿用类别 1613 或 7 天漏斗限制。目标表已存在时仅执行 CHECKS 标记以下检查段，不默认删除或覆盖；无须重新导入 CSV。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

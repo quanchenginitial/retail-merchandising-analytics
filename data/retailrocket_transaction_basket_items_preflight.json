@@ -1,0 +1,407 @@
+{
+  "checked_at_utc": "2026-11-13T03:26:17.491759+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/79_build_retailrocket_transaction_basket_items.sql",
+  "script_sha256": "80fb5a9bf484a9b9e313e4421d9420b30051269044afa2335c3cb6c21e531846",
+  "validator": "validation/preflight_retailrocket_transaction_basket_items.py",
+  "validator_sha256": "1a6605b07dd2bcf0719fac0773c739da4bd4a23327b78c4b0f380d32fa605eab",
+  "code_and_dependency_sha256": {
+    "sql/78_audit_retailrocket_transaction_basket_grain.sql": "48523dd99e2d09fc346bad03dd63a24194870c7c8b82eb48499acd8ba6c71a67",
+    "validation/preflight_retailrocket_transaction_basket_grain.py": "304c7fec80cdf1cae98439d9c8f486109716c977a8cb9482db4d1ee8eee865de",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_event_time.py": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+    "validation/preflight_retailrocket_event_overview.py": "c4c86e149f76dacb5e6919f1dbb279cf42407c26de3fcad66002ac1cd074c194",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "data/retailrocket_events_staging_preflight.json": "92c508abcdb12cdff05474dec509c9f0298a7d58c25835f2cd75a97afea63ff7",
+    "data/retailrocket_events_staging_learner_acceptance.json": "e6bcad9ecdf019cd8ce5a9ff21527eeecac002dd43f9c52ea9a1479e11dd07cb",
+    "docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md": "df3b0594345adf6f682941828496c95fc81e70ee4088108596d0a578a818070a",
+    "sql/79_build_retailrocket_transaction_basket_items.sql": "80fb5a9bf484a9b9e313e4421d9420b30051269044afa2335c3cb6c21e531846",
+    "validation/preflight_retailrocket_transaction_basket_items.py": "1a6605b07dd2bcf0719fac0773c739da4bd4a23327b78c4b0f380d32fa605eab",
+    "data/retailrocket_transaction_basket_grain_preflight.json": "b719105accfa5bf9df2a6ee433e9ac9369ca7e3fc1605de09fd5c1fa6161dac2",
+    "data/retailrocket_transaction_basket_grain_learner_acceptance.json": "aa2254dc93c5bee137f5ed9f3264696789b0f815acfa2c3d0d9907a6389fd229",
+    "docs/RETAILROCKET_TRANSACTION_BASKET_GRAIN_VALIDATION.md": "2abd19130a1520673ffccf08046cef6968f6f4d2378ec40f9eec65ad5b7443ae"
+  },
+  "method_contract": "docs/RETAILROCKET_TRANSACTION_BASKET_ITEMS_VALIDATION.md",
+  "method_contract_prefix_bytes": 8503,
+  "method_contract_prefix_sha256": "b5b50226a110b37ab801dc20f8fccfc355c8df11629ac6425fc8401e2067d8dd",
+  "source_files": [
+    "events.csv"
+  ],
+  "source_before": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "source_table": "rr_stg.events",
+  "source_readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "source_readset_columns": 5,
+  "destination_table": "rr_mart.transaction_basket_items",
+  "destination_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid",
+    "first_timestamp_ms",
+    "last_timestamp_ms",
+    "source_event_rows"
+  ],
+  "destination_columns": 6,
+  "destination_types": [
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT",
+    "BIGINT"
+  ],
+  "source_logical_fingerprint_before_build": {
+    "rows": 2756101,
+    "xor64": "17045051582085049015",
+    "sum128": "25419124118937341794271349"
+  },
+  "source_logical_fingerprint_after_build": {
+    "rows": 2756101,
+    "xor64": "17045051582085049015",
+    "sum128": "25419124118937341794271349"
+  },
+  "source_fingerprint_definition": "COUNT plus BIT_XOR and SUM of DuckDB hash(original five fields), with complete independent after-build source occurrence comparison; aggregate fingerprints alone are not exact identity proof.",
+  "source_logical_fingerprint_unchanged": true,
+  "source_complete_after_build_csv_comparison_passed": true,
+  "property_files_read": false,
+  "category_csv_read": false,
+  "UTC_fields_read": false,
+  "full17_not_reverified": true,
+  "property_history_reconstructed": false,
+  "category_hierarchy_reverified": false,
+  "learner_database_opened": false,
+  "source_events_modified": false,
+  "destination_uses_plain_guarded_create": true,
+  "destination_existing_data_overwritten": false,
+  "atomic_invalid_creation_verified": true,
+  "invalid_empty_source_creates_no_table_verified": true,
+  "invalid_no_transaction_source_creates_no_table_verified": true,
+  "existing_destination_preserved_verified": true,
+  "valid_empty_transaction_fixture_verified": true,
+  "additional_unqueried_source_columns_allowed_verified": true,
+  "audit_count_and_first_last_bounds_corruption_detected": true,
+  "audit_only_query_read_only": true,
+  "private_streams_read_only": true,
+  "real_source_attempts": 1,
+  "real_cli_phases": 4,
+  "real_source_reconstruction_executions": 1,
+  "real_membership_build_and_audit_executions": 1,
+  "real_source_stream_executions": 1,
+  "real_membership_stream_executions": 1,
+  "report_rows": 21,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 21,
+  "info_rows": 0,
+  "fail_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "source_event_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "source_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "source_invalid_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "source_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "source_transaction_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "source_contract_violations",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "membership_rows",
+      "actual": 22323,
+      "expected": 22323,
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "column_count",
+      "actual": 6,
+      "expected": 6,
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "missing_or_invalid_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "duplicate_key_surplus",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "candidate_baskets",
+      "actual": 17672,
+      "expected": 17672,
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "source_event_rows_sum",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "repeated_memberships",
+      "actual": 123,
+      "expected": 123,
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "repeat_surplus_rows",
+      "actual": 134,
+      "expected": 134,
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "single_item_baskets",
+      "actual": 15029,
+      "expected": 15029,
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "multi_item_baskets",
+      "actual": 2643,
+      "expected": 2643,
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "max_distinct_items_per_basket",
+      "actual": 31,
+      "expected": 31,
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "source_only_memberships",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "table_only_memberships",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "basket_partition_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "8cb3cf875bc4e83d55c671a84a6fe48fcdf1ef8521461e3be5497028eb0e026a",
+  "report_fingerprint_contract": "SHA-256 of compact JSON arrays in output-column order followed by LF; counts are integers and undefined synthetic maximum is null.",
+  "independent_python_source_counts": {
+    "rows": 2756101,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644
+  },
+  "independent_python_aggregate_counts": {
+    "rows": 2756101,
+    "duplicate_surplus": 460,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644
+  },
+  "independent_python_transaction_diagnostics": {
+    "distinct_transaction_ids": 17672,
+    "visitor_transaction_pairs": 17672,
+    "transaction_ids_multiple_visitors": 0,
+    "transaction_ids_multiple_timestamps": 1788,
+    "visitor_transaction_pairs_multiple_timestamps": 1788,
+    "transaction_exact_duplicate_surplus": 0,
+    "distinct_basket_item_pairs": 22323,
+    "repeated_basket_item_pairs": 123,
+    "repeat_basket_item_surplus_rows": 134,
+    "nonexact_repeat_surplus_rows": 134,
+    "single_item_baskets": 15029,
+    "multi_item_baskets": 2643,
+    "max_distinct_items_per_basket": 31,
+    "basket_partition_difference": 0,
+    "transaction_row_reconciliation_difference": 0,
+    "basket_item_reconciliation_difference": 0
+  },
+  "independent_python_report_matched": true,
+  "independent_source_occurrences_compared": 2756101,
+  "independent_source_fields_compared": 5,
+  "independent_membership_rows_compared": 22323,
+  "independent_membership_fields_compared": 6,
+  "independent_source_stream_sha256": "55746dc647cb43bfca06e71feabac8973c6c655d827abd7092ef65058ccf391b",
+  "independent_membership_stream_sha256": "99c7d679d858b3d1335dfafa22aa48b5e842d03336af5c85330e96853c59fca5",
+  "independent_source_and_membership_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "membership_key": [
+    "visitorid",
+    "transactionid",
+    "itemid"
+  ],
+  "candidate_basket_key": [
+    "visitorid",
+    "transactionid"
+  ],
+  "item_specific_first_last_and_occurrence_count_verified": true,
+  "source_event_rows_sum": 22457,
+  "membership_rows": 22323,
+  "candidate_baskets": 17672,
+  "candidate_key_is_diagnostic_not_verified_business_order": true,
+  "repeated_item_records_treated_as_quantities": false,
+  "association_metrics_calculated": false,
+  "retained_transaction_occurrences": 22457,
+  "transaction_occurrence_retention_cap": 100000,
+  "membership_aggregate_keys_retained": 22323,
+  "private_database_sha256_before_readonly": "905d0e82cfa1e3a139cd567365c49c995e5b1fb32cc01be9e32f83f675a2ca11",
+  "private_database_sha256_after_readonly": "905d0e82cfa1e3a139cd567365c49c995e5b1fb32cc01be9e32f83f675a2ca11",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 5,
+  "fixture_cases": [
+    {
+      "case": "six_field_item_specific_bounds_exact_and_nonexact_repeats_cross_visitor_keys_extra_source_column",
+      "passed": true,
+      "source_rows": 10,
+      "transaction_occurrences": 8,
+      "membership_rows": 6,
+      "source_fields": 5,
+      "membership_fields": 6
+    },
+    {
+      "case": "existing_destination_fails_preserving_source_and_complete_membership_tuples",
+      "passed": true
+    },
+    {
+      "case": "audit_detects_changed_occurrence_count_first_and_last_item_bounds",
+      "passed": true,
+      "subcases": 3
+    },
+    {
+      "case": "empty_no_transaction_invalid_fields_types_or_controls_leave_no_destination",
+      "passed": true,
+      "subcases": 5
+    },
+    {
+      "case": "valid_nonempty_source_with_zero_transactions_creates_empty_six_field_table",
+      "passed": true
+    }
+  ],
+  "invalid_creation_fixture_subcases": 5,
+  "audit_corruption_fixture_subcases": 3,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "transaction_occurrence_retention_cap": 100000,
+    "membership_key_cap": 100000,
+    "minimum_free_bytes": 8589934592,
+    "private_directory_budget_bytes": 7516192768
+  },
+  "private_event_comparison_chunks": 56,
+  "private_event_comparison_chunk_bytes": 96993967,
+  "private_database_bytes_before_cleanup": 65548288,
+  "largest_private_directory_bytes_observed_after_phase": 162542255,
+  "workspace_free_bytes_before": 42181292032,
+  "workspace_free_bytes_after": 42179923968,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "historical_preflight_files_unchanged": 77,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_event_scan_sort_seconds": 36.786,
+  "elapsed_source_reconstruction_seconds": 6.541,
+  "elapsed_membership_build_and_audit_seconds": 1.832,
+  "elapsed_source_stream_seconds": 37.536,
+  "elapsed_membership_stream_seconds": 0.4,
+  "timing_scope": "Four bounded CLI phases: frozen source creation, SQL79 membership creation/audit, read-only full source stream, read-only full membership stream. Source sorting timed separately; hashing/fixtures excluded.",
+  "scope": "Assistant SQL79 preparation passed; learner execution pending. One candidate basket-item membership retains original source occurrence counts and item-specific time bounds. Source events are unchanged; no quantities, verified order semantics, monetary metrics or associations are inferred."
+}

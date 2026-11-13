@@ -101,3 +101,39 @@ The events.csv hash and metadata, pinned dependencies and all 76 historical pref
 The audit supports a subsequent explicit definition of candidate basket membership. It does not establish purchased units, monetary value, meaningful product complements, recommendation uplift or verified order completion. INFO records measurements rather than automatic data failure. Any subsequent basket transformation must preserve the distinction between source occurrences and one membership per candidate basket/item.
 
 Report SHA-256: `a5661f430bd2f8f348a31cc658eb37272f9d0ca77788b2c0c1c262cf96f08301`. Script SHA-256: `48523dd99e2d09fc346bad03dd63a24194870c7c8b82eb48499acd8ba6c71a67`. Validator SHA-256: `304c7fec80cdf1cae98439d9c8f486109716c977a8cb9482db4d1ee8eee865de`. The original 8,477-byte method prefix remains unchanged at `9076cbdb7f345602552be4c30408d59c122c5cd1840ba48d1fbe29889d32d788`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot with all twenty-one rows, five column headers and one hundred five result fields fully visible. This includes the full visitor_transaction_pairs_multiple_timestamps label. Twenty-one check_order integers, twenty-one actual integers and eight non-null expected integers total fifty integer fields; thirteen genuine expected-value NULLs, twenty-one complete check names and twenty-one status labels complete the 105-field accounting. UI row numbers are excluded. Eight controls are PASS and thirteen observations are INFO, with no FAIL or BLOCKED. No label was reconstructed from cropped text.
+
+Numeric thousands separators were removed without changing integer values. All thirteen INFO expectations remain NULL, indicating observations without preassigned expected values rather than failed checks. No decimal precision normalization was needed. The complete ordered report matches the assistant preflight. The assistant did not open the learner database or rerun SQL, source checks or fixtures for this acceptance.
+
+| check_order | check_name | actual | expected | status |
+| --- | --- | --- | --- | --- |
+| 1 | source_event_rows | 2756101 | 2756101 | PASS |
+| 2 | required_schema_mismatch | 0 | 0 | PASS |
+| 3 | invalid_event_rows | 0 | 0 | PASS |
+| 4 | source_duplicate_surplus | 460 | 460 | PASS |
+| 5 | transaction_event_rows | 22457 | 22457 | PASS |
+| 6 | distinct_transaction_ids | 17672 | NULL | INFO |
+| 7 | visitor_transaction_pairs | 17672 | NULL | INFO |
+| 8 | transaction_ids_multiple_visitors | 0 | NULL | INFO |
+| 9 | transaction_ids_multiple_timestamps | 1788 | NULL | INFO |
+| 10 | visitor_transaction_pairs_multiple_timestamps | 1788 | NULL | INFO |
+| 11 | transaction_exact_duplicate_surplus | 0 | NULL | INFO |
+| 12 | distinct_basket_item_pairs | 22323 | NULL | INFO |
+| 13 | repeated_basket_item_pairs | 123 | NULL | INFO |
+| 14 | repeat_basket_item_surplus_rows | 134 | NULL | INFO |
+| 15 | nonexact_repeat_surplus_rows | 134 | NULL | INFO |
+| 16 | single_item_baskets | 15029 | NULL | INFO |
+| 17 | multi_item_baskets | 2643 | NULL | INFO |
+| 18 | max_distinct_items_per_basket | 31 | NULL | INFO |
+| 19 | basket_partition_difference | 0 | 0 | PASS |
+| 20 | transaction_row_reconciliation_difference | 0 | 0 | PASS |
+| 21 | basket_item_reconciliation_difference | 0 | 0 | PASS |
+
+The report distinguishes the full source's 460 exact duplicate surplus occurrences from the transaction subset's zero exact duplicate surplus. Its 22,457 transaction-event rows map to 17,672 diagnostic visitor/transaction candidate groups and 22,323 distinct basket/item memberships. The 134 repeat surplus rows belong to 123 repeated membership keys and are all nonexact repetitions. There are 1,788 candidate groups with multiple timestamps and no transaction IDs spanning multiple visitors in this supplied snapshot. The candidate groups partition into 15,029 single-item and 2,643 multi-item groups; the maximum is 31 distinct observed items. All three reported reconciliation differences are zero.
+
+These are the accepted data-grain findings, not proof of real business order identity, completion, units or monetary value. Multiple timestamps do not automatically identify an error; repeated item records do not automatically represent extra purchased units. No source records were deleted. The population is all recorded transaction events, rather than the previously defined category-1613 seven-day funnel. Basket membership rules and any subsequent co-purchase metrics still require an explicit definition and their own validation.
+
+The [machine-readable learner acceptance](../data/retailrocket_transaction_basket_grain_learner_acceptance.json) records all visible values. Its report SHA-256 is `a5661f430bd2f8f348a31cc658eb37272f9d0ca77788b2c0c1c262cf96f08301`, matching the assistant preflight. The prior 14,068-byte method and executed-results document remains byte-for-byte intact at SHA-256 `90ab6580b4c03682c1cc5a0525886366702a8358c3ee651b04d39f625fee785e`; its frozen 8,477-byte prefix remains `9076cbdb7f345602552be4c30408d59c122c5cd1840ba48d1fbe29889d32d788`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw event records or visitor/item/transaction identifiers are published.
