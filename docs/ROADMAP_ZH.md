@@ -1,8 +1,8 @@
 # 商品分析项目：逐步学习与验收路线
 
-更新日期：2026-11-09（Australia/Sydney）。
+更新日期：2026-11-13（Australia/Sydney）。
 
-**当前状态：SQL76 商品加购集中度已验收，下一步运行 SQL77 首次浏览历史可用性分组路径。** 50 个字段完整匹配、五行 PASS；见 [验收记录](../data/retailrocket_category_item_cart_concentration_learner_acceptance.json)。SQL77 保持类别 1613 与 7 天队列不变，按首次浏览可见的历史 available 记录分组；助手预检通过、用户执行待完成。
+**当前状态：SQL77 历史可用性分组已验收，下一步运行 SQL78 交易事件与候选篮子粒度审计。** 45 个字段完整匹配、五行 PASS、三个 NULL 保留；见 [验收记录](../data/retailrocket_category_availability_funnel_learner_acceptance.json)。已定义的 7 天路径及其探索性追查形成 [阶段发现](STAGE07_FUNNEL_FINDINGS.md)，不代表 RF、篮子规则或整个阶段 7 已完成。SQL78 先区分事件行、交易编号、候选篮子和商品成员关系，为共同购买分析定义分母；助手预检通过、用户执行待完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，完整执行 [SQL77](../sql/77_analyze_retailrocket_category_availability_funnel.sql)。目的：观察同一类别在不同首次浏览历史可用性状态下的路径比率，并保留属性记录不足的组合。四个互斥状态 RECORDED_1、RECORDED_0、BEFORE_FIRST、NO_HISTORY 加 TOTAL，共五行、九列预计全部 PASS；计数还原 25,105 个合格、483 个加购、76 个交易组合。首次浏览归属固定，后续状态变化不重新分组；未知不使用未来记录填补。验证现在覆盖类别和可用性两种历史共十五字段，记录状态不被解释成实时库存或缺货因果证据。
+阅读 [当前一步](FIRST_STEP_ZH.md)，完整执行 [SQL78](../sql/78_audit_retailrocket_transaction_basket_grain.sql)。目的：在研究“哪些商品常被一起购买”前，确认 transaction 事件的粒度，保留并区分完全重复记录与同一商品不同时间的重复记录。候选篮子暂以 (visitorid, transactionid) 分组，不能直接认定为真实订单。报告为 21 行、五列，正常有八项 PASS 控制和十三项 INFO 新观测；INFO 的 expected=NULL 表示没有人为预设探索结果。验证仅覆盖 events.csv 原始五字段，不重跑商品属性、十五字段连接、UTC、类别层级或历史整套检查。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。

@@ -1,0 +1,362 @@
+{
+  "checked_at_utc": "2026-11-13T02:59:28.861730+00:00",
+  "executor": "assistant",
+  "engine": "v1.5.5 (Variegata) d8cdaa33fd",
+  "script": "sql/78_audit_retailrocket_transaction_basket_grain.sql",
+  "script_sha256": "48523dd99e2d09fc346bad03dd63a24194870c7c8b82eb48499acd8ba6c71a67",
+  "validator": "validation/preflight_retailrocket_transaction_basket_grain.py",
+  "validator_sha256": "304c7fec80cdf1cae98439d9c8f486109716c977a8cb9482db4d1ee8eee865de",
+  "code_and_dependency_sha256": {
+    "sql/78_audit_retailrocket_transaction_basket_grain.sql": "48523dd99e2d09fc346bad03dd63a24194870c7c8b82eb48499acd8ba6c71a67",
+    "validation/preflight_retailrocket_transaction_basket_grain.py": "304c7fec80cdf1cae98439d9c8f486109716c977a8cb9482db4d1ee8eee865de",
+    "sql/54_import_retailrocket_events.sql": "09f3f5fe580b2cab3ef04249854875d2c72572f61eacc5c97cc3b09cd8ec8abf",
+    "sql/63_stage_retailrocket_events.sql": "5a2af292656a14b504a15ec0fc5af3e7af100cb4d3767d71a4e3d04981e3f0e1",
+    "validation/preflight_retailrocket_events_import.py": "62b654283d633b5aa75746713066f34388088df5f2d97fad98fafa90fc0fa731",
+    "validation/preflight_retailrocket_events_staging.py": "a61a5caff10889d9d198458cc267e2de49845b1e872b93761c4283e4902c662e",
+    "validation/preflight_retailrocket_event_time.py": "1003c1ba70caf60d8357c672db36b1730bd4c01eb46a51118f6078a39bdcdd22",
+    "validation/preflight_retailrocket_event_overview.py": "c4c86e149f76dacb5e6919f1dbb279cf42407c26de3fcad66002ac1cd074c194",
+    "data/retailrocket_source_audit.json": "232d7424ebf56bbf0a8c02ad91bc87d29e5d011318768a03e024674a9daadb50",
+    "data/retailrocket_event_time_preflight.json": "33dffb742fb6ff318e9f3896fa296669e306ea7258ced6bc94c7856c3dd13abf",
+    "data/retailrocket_events_staging_preflight.json": "92c508abcdb12cdff05474dec509c9f0298a7d58c25835f2cd75a97afea63ff7",
+    "data/retailrocket_events_staging_learner_acceptance.json": "e6bcad9ecdf019cd8ce5a9ff21527eeecac002dd43f9c52ea9a1479e11dd07cb",
+    "docs/RETAILROCKET_EVENTS_STAGING_VALIDATION.md": "df3b0594345adf6f682941828496c95fc81e70ee4088108596d0a578a818070a"
+  },
+  "method_contract": "docs/RETAILROCKET_TRANSACTION_BASKET_GRAIN_VALIDATION.md",
+  "method_contract_prefix_bytes": 8477,
+  "method_contract_prefix_sha256": "9076cbdb7f345602552be4c30408d59c122c5cd1840ba48d1fbe29889d32d788",
+  "source_files": [
+    "events.csv"
+  ],
+  "source_before": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_after": {
+    "events.csv": {
+      "size_bytes": 94237913,
+      "modified_time_ns": 1667883848000000000,
+      "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+    }
+  },
+  "source_hashes_and_metadata_unchanged": true,
+  "reconstruction_prefix_sha256": {
+    "sql/54_import_retailrocket_events.sql": "d3972a0108a6adebff102abed00bf363ded26af98c53876cb4c2189213bc6fbb",
+    "sql/63_stage_retailrocket_events.sql": "755736df981cdba67dc0af8a24f5faf1f159231d161708d1c67904212b3f5d7a"
+  },
+  "projection_scope": "Original five-field rr_stg.events only; no enriched fact, property history, category reference or stored UTC projection.",
+  "source_table": "rr_stg.events",
+  "readset_fields": [
+    "timestamp",
+    "visitorid",
+    "event",
+    "itemid",
+    "transactionid"
+  ],
+  "required_readset_columns": 5,
+  "property_files_read": false,
+  "category_csv_read": false,
+  "UTC_fields_read": false,
+  "full17_not_reverified": true,
+  "property_history_reconstructed": false,
+  "category_hierarchy_reverified": false,
+  "learner_database_opened": false,
+  "query_read_only": true,
+  "private_stream_read_only": true,
+  "real_source_attempts": 1,
+  "real_cli_phases": 3,
+  "real_reconstruction_executions": 1,
+  "real_analysis_script_executions": 1,
+  "real_private_stream_executions": 1,
+  "report_rows": 21,
+  "report_columns": 5,
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "checks_passed": 8,
+  "info_rows": 13,
+  "fail_rows": 0,
+  "blocked_rows": 0,
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "source_event_rows",
+      "actual": 2756101,
+      "expected": 2756101,
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "required_schema_mismatch",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "invalid_event_rows",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "source_duplicate_surplus",
+      "actual": 460,
+      "expected": 460,
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "transaction_event_rows",
+      "actual": 22457,
+      "expected": 22457,
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "distinct_transaction_ids",
+      "actual": 17672,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 7,
+      "check_name": "visitor_transaction_pairs",
+      "actual": 17672,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 8,
+      "check_name": "transaction_ids_multiple_visitors",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 9,
+      "check_name": "transaction_ids_multiple_timestamps",
+      "actual": 1788,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 10,
+      "check_name": "visitor_transaction_pairs_multiple_timestamps",
+      "actual": 1788,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 11,
+      "check_name": "transaction_exact_duplicate_surplus",
+      "actual": 0,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 12,
+      "check_name": "distinct_basket_item_pairs",
+      "actual": 22323,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 13,
+      "check_name": "repeated_basket_item_pairs",
+      "actual": 123,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 14,
+      "check_name": "repeat_basket_item_surplus_rows",
+      "actual": 134,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 15,
+      "check_name": "nonexact_repeat_surplus_rows",
+      "actual": 134,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 16,
+      "check_name": "single_item_baskets",
+      "actual": 15029,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 17,
+      "check_name": "multi_item_baskets",
+      "actual": 2643,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 18,
+      "check_name": "max_distinct_items_per_basket",
+      "actual": 31,
+      "expected": null,
+      "status": "INFO"
+    },
+    {
+      "check_order": 19,
+      "check_name": "basket_partition_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "transaction_row_reconciliation_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    },
+    {
+      "check_order": 21,
+      "check_name": "basket_item_reconciliation_difference",
+      "actual": 0,
+      "expected": 0,
+      "status": "PASS"
+    }
+  ],
+  "report_sha256": "a5661f430bd2f8f348a31cc658eb37272f9d0ca77788b2c0c1c262cf96f08301",
+  "report_fingerprint_contract": "SHA-256 of compact JSON arrays in output-column order followed by LF; counts are integers, missing expectations and undefined maximum are null.",
+  "independent_python_source_counts": {
+    "rows": 2756101,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644
+  },
+  "independent_python_aggregate_counts": {
+    "rows": 2756101,
+    "duplicate_surplus": 460,
+    "view": 2664312,
+    "addtocart": 69332,
+    "transaction": 22457,
+    "null_transaction_ids": 2733644
+  },
+  "independent_python_transaction_diagnostics": {
+    "distinct_transaction_ids": 17672,
+    "visitor_transaction_pairs": 17672,
+    "transaction_ids_multiple_visitors": 0,
+    "transaction_ids_multiple_timestamps": 1788,
+    "visitor_transaction_pairs_multiple_timestamps": 1788,
+    "transaction_exact_duplicate_surplus": 0,
+    "distinct_basket_item_pairs": 22323,
+    "repeated_basket_item_pairs": 123,
+    "repeat_basket_item_surplus_rows": 134,
+    "nonexact_repeat_surplus_rows": 134,
+    "single_item_baskets": 15029,
+    "multi_item_baskets": 2643,
+    "max_distinct_items_per_basket": 31,
+    "basket_partition_difference": 0,
+    "transaction_row_reconciliation_difference": 0,
+    "basket_item_reconciliation_difference": 0
+  },
+  "independent_python_report_matched": true,
+  "independent_stream_occurrences_compared": 2756101,
+  "independent_stream_fields_compared": 5,
+  "independent_stream_all_occurrences_matched": true,
+  "independent_original_event_fields_and_duplicates_preserved": true,
+  "candidate_basket_key": [
+    "visitorid",
+    "transactionid"
+  ],
+  "candidate_key_is_diagnostic_not_verified_business_order": true,
+  "source_duplicate_rows_deleted": false,
+  "repeated_item_records_treated_as_quantities": false,
+  "association_metrics_calculated": false,
+  "retained_transaction_occurrences": 22457,
+  "transaction_occurrence_retention_cap": 100000,
+  "private_database_sha256_before_readonly": "e49718386579e91f0c9807f94e7dd458e3e4da3dfe9d30888e46d4f6e004244e",
+  "private_database_sha256_after_readonly": "e49718386579e91f0c9807f94e7dd458e3e4da3dfe9d30888e46d4f6e004244e",
+  "private_database_bytes_unchanged": true,
+  "fixture_case_count": 5,
+  "fixture_cases": [
+    {
+      "case": "cross_visitor_identifier_multiple_timestamps_exact_and_nonexact_repeats_single_multi_groups",
+      "passed": true,
+      "source_rows": 10,
+      "transaction_rows": 8,
+      "expected_info_values": [
+        3,
+        4,
+        1,
+        1,
+        1,
+        1,
+        6,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "complete_readset_fields": 5
+    },
+    {
+      "case": "additional_unqueried_column_allowed_without_wider_schema_claim",
+      "passed": true
+    },
+    {
+      "case": "invalid_values_types_or_expected_counts_block_all_actuals_keep_static_expectations",
+      "passed": true,
+      "subcases": 7
+    },
+    {
+      "case": "transaction_retention_cap_aborts_without_sampling",
+      "passed": true
+    },
+    {
+      "case": "valid_source_without_transactions_keeps_zero_counts_and_NULL_maximum",
+      "passed": true
+    }
+  ],
+  "invalid_admission_fixture_subcases": 7,
+  "invalid_admission_blocks_all_actuals_verified": true,
+  "static_expectations_preserved_on_blocked_verified": true,
+  "additional_unqueried_columns_allowed_verified": true,
+  "empty_transaction_maximum_NULL_verified": true,
+  "preflight_settings": {
+    "threads": 2,
+    "memory_limit": "1GB",
+    "max_temp_directory_size": "2GB",
+    "timeout_seconds_per_cli_phase": 120,
+    "python_sort_chunk_rows": 50000,
+    "transaction_occurrence_retention_cap": 100000,
+    "minimum_free_bytes": 8589934592,
+    "private_directory_budget_bytes": 7516192768
+  },
+  "private_event_comparison_chunks": 56,
+  "private_event_comparison_chunk_bytes": 96993967,
+  "private_database_bytes_before_cleanup": 65810432,
+  "largest_private_directory_bytes_observed_after_phase": 162804399,
+  "workspace_free_bytes_before": 42211377152,
+  "workspace_free_bytes_after": 42213404672,
+  "temporary_databases_and_spills_removed": true,
+  "private_source_comparison_spools_removed": true,
+  "historical_preflight_files_unchanged": 76,
+  "historical_comparison_or_analysis_suites_rerun": false,
+  "source_records_or_identifiers_uploaded_or_logged": false,
+  "elapsed_python_event_scan_sort_seconds": 24.093,
+  "elapsed_reconstruction_seconds": 4.864,
+  "elapsed_readonly_basket_grain_seconds": 0.763,
+  "elapsed_private_stream_seconds": 14.014,
+  "timing_scope": "Three CLI phases: frozen event import/staging creation prefixes, read-only SQL78, read-only complete five-field stream and independent transaction diagnostics. Source sorting timed separately; hashing and fixtures excluded.",
+  "scope": "Assistant SQL78 preparation passed; learner execution pending. Candidate transaction/basket grain diagnostics only; INFO is measurement rather than data failure. No verified business order semantics, automatic deduplication, quantity, monetary or association-effect claim."
+}

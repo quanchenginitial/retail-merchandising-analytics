@@ -81,3 +81,21 @@ All four source file hashes and metadata, pinned dependencies and 75 historical 
 Recorded 0/1 remains last-recorded historical context under the accepted observation rule, not proof of live stock or an availability-caused change in behavior. The target was chosen after prior results. These grouped counts support exploratory diagnosis; they do not establish inventory truth, significance, causal effects or business uplift.
 
 Report SHA-256: `d42b1832f6a7f49024f41d6fb8ed35895ec518204066e53c055aca6d7f1c552e`. Script SHA-256: `60bda48dea5621a876aa319c378c7600528c9c2950154b51f76d99b21aef7466`. Validator SHA-256: `b1620dfee1606b319d668b5db11bb9558be89d3c9fbd3ec0362d67f8acb9327d`. The original 10,939-byte method prefix remains unchanged at `33311c7d9048a25a0f260b8c1ccef6d91bc8cbcf71d526dfd55dbf585c87f02c`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot with all five rows, nine column headers and forty-five result fields fully visible. All five status values are PASS. Fifteen integer count cells, seventeen non-null percentage cells, three genuine NULL rate cells, five complete availability labels and five statuses were checked; UI row numbers are excluded. No cropped-label resolution or hidden-value inference was needed. The assistant did not open the learner database or rerun SQL, source checks or fixtures for this acceptance.
+
+The screenshot matches the complete ordered assistant-preflight report. Numeric thousands separators were removed, and five shortened percentage displays were normalized without changing value: BEFORE_FIRST transaction_rate_pct and cart_to_transaction_rate_pct display 0; NO_HISTORY eligible_share_pct displays 0; TOTAL eligible_share_pct displays 100; TOTAL cart_to_transaction_rate_pct displays 15.735. Their canonical forms are 0.0000, 0.0000, 0.0000, 100.0000 and 15.7350. The three NO_HISTORY path-rate NULLs remain genuine NULLs.
+
+| availability_status | eligible_pairs | cart_pairs | transaction_pairs | eligible_share_pct | cart_rate_pct | transaction_rate_pct | cart_to_transaction_rate_pct | check_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| RECORDED_1 | 16994 | 419 | 64 | 67.6917 | 2.4656 | 0.3766 | 15.2745 | PASS |
+| RECORDED_0 | 7005 | 56 | 12 | 27.9028 | 0.7994 | 0.1713 | 21.4286 | PASS |
+| BEFORE_FIRST | 1106 | 8 | 0 | 4.4055 | 0.7233 | 0.0000 | 0.0000 | PASS |
+| NO_HISTORY | 0 | 0 | 0 | 0.0000 | NULL | NULL | NULL | PASS |
+| TOTAL | 25105 | 483 | 76 | 100.0000 | 1.9239 | 0.3027 | 15.7350 | PASS |
+
+The four buckets reconcile exactly to the same 25,105 eligible pairs, 483 qualifying cart pairs and 76 qualifying transaction pairs. Recorded-1 has a higher cart/eligible rate but a lower transaction/cart rate than recorded-0. These are different conditional denominators, with only 56 cart pairs and 12 transaction pairs in recorded-0. The result does not establish availability effects, significance, live stock, actual customer exposure or a stockout cause. A transaction may occur after availability changes, while this analysis retains its first-view assignment. The empty NO_HISTORY bucket applies only to this category cohort and does not imply complete availability history across the dataset. Unknown-history groups are retained and zero-denominator rates are not filled with zero. Category 1613 remains a target selected after prior results, so the comparison is exploratory.
+
+The [machine-readable learner acceptance](../data/retailrocket_category_availability_funnel_learner_acceptance.json) preserves the displayed values and five normalizations. Its normalized report SHA-256 is `d42b1832f6a7f49024f41d6fb8ed35895ec518204066e53c055aca6d7f1c552e`, matching the assistant preflight. The original 15,865-byte method and executed-results document remains byte-for-byte intact at SHA-256 `551723041e01cab023bd762706da23a33b75cad828a5cb90b2206526e9073f52`; its frozen 10,939-byte method prefix remains `33311c7d9048a25a0f260b8c1ccef6d91bc8cbcf71d526dfd55dbf585c87f02c`. This UTF-8 appendix records acceptance without rewriting earlier learner-pending statements. No raw source events, history rows or visitor/item/transaction identifiers are published.

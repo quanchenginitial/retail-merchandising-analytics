@@ -1,6 +1,6 @@
 # 商品分析项目进度
 
-更新日期：2026-11-09（Australia/Sydney）。
+更新日期：2026-11-13（Australia/Sydney）。
 
 ## 本次已经发生的工作
 
@@ -192,7 +192,10 @@
 - [x] 7X 助手准备并预检 [SQL76 类别内商品加购集中度](sql/76_analyze_retailrocket_category_item_cart_concentration.sql)：对首次浏览类别 1613 的合格组合，按各商品加购组合量 0、1–4、5–19、20+ 分四档并保留 TOTAL；五行、十列预计全部 PASS，总计还原 25,105 / 483 / 76。对比按加购量加权的交易/加购比率与有加购商品的等权平均比率；见 [验证说明](docs/RETAILROCKET_CATEGORY_ITEM_CART_CONCENTRATION_VALIDATION.md)。该类别因先前低比率而被选中，属于探索性追查，不能称为独立确认或因果结论；不公开商品编号。
 - [x] 7X 用户于 2026-11-09 截图验收 SQL76：50 个字段完整可见并匹配、五行 PASS、四个 NULL 保留；见 [聚合验收](data/retailrocket_category_item_cart_concentration_learner_acceptance.json)。总计 1,161 个商品、25,105 个合格、483 个加购和 76 个交易组合；加权比率 15.7350%，有加购商品等权均值 14.6612%。空的 20+ 档正常保留零计数及 NULL 比率；四个简写小数显示已如实保留并规范化。
 - [x] 7Y 助手准备并预检 [SQL77 首次浏览历史可用性分组路径](sql/77_analyze_retailrocket_category_availability_funnel.sql)：类别 1613 的同一合格队列，按首次浏览时最后已记录的 available 状态分 RECORDED_1、RECORDED_0、BEFORE_FIRST、NO_HISTORY，再加 TOTAL；五行、九列预计全部 PASS，还原 25,105 / 483 / 76。首次浏览类别与可用性均固定，未知不回填；见 [验证说明](docs/RETAILROCKET_CATEGORY_AVAILABILITY_FUNNEL_VALIDATION.md)。验证扩大至十五字段，重建两种命名属性历史，仍不重验事实表 UTC 派生字段、完整十七字段或类别层级。记录状态不等于实时库存、顾客曝光或缺货原因。
-- [ ] 7Y 用户执行 SQL77，提供 5 行、9 列完整结果，预期全部 PASS。保留 NULL 并拉宽字段名；如需横向拆分，两张都保留 availability_status 和全部五行。
+- [x] 7Y 用户于 2026-11-13 截图验收 SQL77：45 个字段完整可见并匹配、五行 PASS、三个 NULL 保留，五处简写百分比显示精确归一化；见 [聚合验收](data/retailrocket_category_availability_funnel_learner_acceptance.json)。同一类别队列还原 25,105 / 483 / 76；首次浏览记录为 1 的加购率较高、加购后交易比例较低，条件分母和历史状态不能解释为库存或因果效果。
+- [x] 7Y 已定义的 7 天路径及类别、时间、商品分档、历史可用性探索里程碑验收完成，整理 [已验收发现与调查边界](docs/STAGE07_FUNNEL_FINDINGS.md)。不代表整个 Retailrocket 阶段或项目完成；RF 分群、购物篮规则及 Power BI 仍为计划。
+- [x] 7Z 助手准备并预检 [SQL78 交易事件与候选篮子粒度审计](sql/78_audit_retailrocket_transaction_basket_grain.sql)：在 rr_stg.events 原始五字段上区分 22,457 条 transaction 事件、交易编号、(visitorid, transactionid) 候选篮子与商品成员关系，分别审视完全重复和同商品不同时间的重复记录；见 [验证说明](docs/RETAILROCKET_TRANSACTION_BASKET_GRAIN_VALIDATION.md)。21 行、五列包含八项 PASS 控制和十三项 INFO 新观测；只验证 events.csv 五字段，不重跑属性、时点连接、UTC、层级或历史整套检查。此步不删除重复、不将行数当数量，也不核实真实订单。
+- [ ] 7Z 用户执行 SQL78，提供完整 21 行 × 5 列结果；正常应有八项 PASS、十三项 INFO，且无 FAIL/BLOCKED。INFO 行 expected 为 NULL 表示未预设该探索值，不是检查失败。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -202,6 +205,6 @@
 
 ## 下一次对话从这里继续
 
-SQL76 已于 2026-11-09 截图验收：50 个字段完整匹配、五行 PASS、四个 NULL 保留。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL77](sql/77_analyze_retailrocket_category_availability_funnel.sql)，对类别 1613 的同一 7 天合格组合，比较首次浏览时不同历史可用性记录下的路径与覆盖。助手预检通过，用户执行待完成；验证范围扩展到两种属性的十五字段，分组差异仍属描述性关联，不证明缺货、网站问题或原因；整体项目未完成。
+SQL77 已于 2026-11-13 截图验收：45 个字段完整匹配、五行 PASS、三个 NULL 保留。已定义的 7 天漏斗探索结论见 [发现与边界](docs/STAGE07_FUNNEL_FINDINGS.md)。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 [SQL78](sql/78_audit_retailrocket_transaction_basket_grain.sql)，在计算共同购买前确认交易事件、候选篮子与商品成员关系的不同粒度。助手预检通过、用户执行待完成；正常为八项 PASS 和十三项 INFO，未知预期值保留 NULL。候选篮子不等于已核实订单，重复不直接代表数量。RF、篮子规则及 Power BI 未完成，整体项目未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
