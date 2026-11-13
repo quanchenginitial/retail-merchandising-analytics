@@ -1,43 +1,29 @@
-# 当前一步：建立最近交易间隔 R 基线
+# 当前一步：组合最近交易间隔与频次
 
 更新日期：2026-11-13（Australia/Sydney）。
 
-**这一步为了什么：补充“最后一次被记录的交易距统一观察终点多久”，建立 R（Recency，最近交易间隔），与已完成的频次 F 形成两个分别核验的维度。**
+**这一步为了什么：将 R（最近交易间隔）与 F（观察期内频次）一起查看，了解不同记录行为的分布，为后续调查和行动假设提供描述性分组。**
 
-## SQL85 已验收
+SQL86 截图的 **35 个字段完整匹配，五项全部 PASS、无 NULL**，见 [验收](../data/retailrocket_visitor_purchase_recency_learner_acceptance.json)。SQL87 沿用同一批 **11,719 个有交易记录编号**、原有区间和参考时点，不包含非交易编号。
 
-截图 **五行 × 七列、35 个字段完整匹配，五项全部 PASS、无 NULL**；见 [验收](../data/retailrocket_visitor_purchase_frequency_learner_acceptance.json)。F 表示每个有交易记录编号的不同候选篮子数。本步仍研究同一批 **11,719 个有交易记录的访客编号**，不含没有交易记录的编号。
+## 如何读这张矩阵
 
-## R 怎样计算
+四个 R 区间仍是小于 7、7 至小于 30、30 至小于 60、至少 60 天。参考时点固定为 **2015-09-18 02:59:47.788 UTC**，减去每编号全部成员中最后交易观测时间；分类按精确毫秒，不使用今天。
 
-参考时点固定为 **2015-09-18 02:59:47.788 UTC**，即已验收数据中全体事件的观察终点。**不是今天，也不是最后一笔交易的时点。**
+四个 F 区间仍是 1、2、3–4、至少 5 个不同候选篮子。R 与 F 组合成 **16 格，即使计数为零也保留，再加一行 TOTAL/TOTAL**；先按 R、再按 F 排序。
 
-先对每个编号的所有商品成员取 last_timestamp_ms 最大值，得到该编号最后被记录的交易时间，再用参考时点减去它。一天按 86,400,000 毫秒计算；间隔越小，只表示最后交易记录越接近这个历史终点。
+每格的 visitor_ids 是编号数；candidate_baskets 是这些编号**整个观察窗口的 F 合计**。例如“小于 7 天 × 至少 5 个篮子”表示最后交易记录接近终点、整个观察期至少出现五个篮子，**不表示最近七天发生了五次交易**。
 
-| recency_band | 精确间隔范围 |
-| --- | --- |
-| R_LT_7D | 小于 7 天 |
-| R_7_TO_LT_30D | 至少 7 天、小于 30 天 |
-| R_30_TO_LT_60D | 至少 30 天、小于 60 天 |
-| R_GE_60D | 至少 60 天 |
-| TOTAL | 全部 11,719 个有交易记录编号 |
+visitor_share_pct 分母是全部 **11,719 个编号**；basket_share_pct 分母是全部 **17,672 个候选篮子**，不是各行或各列的小计。空格保留 0，两个占比显示六位小数。TOTAL 已汇总前 16 格，不要再次相加。
 
-四个区间互斥，按**未舍入的整数毫秒**分类。min_recency_days、median_recency_days、max_recency_days 是该区间的最小、中位、最大间隔，允许小数天，显示保留六位；显示值即使四舍五入后看起来落在边界，也不改变精确分类。
-
-visitor_share_pct 的分母为 11,719。空区间计数和占比为 0，三个间隔统计为 NULL。TOTAL 是合计，不要和前四行再次相加。这些区间用于描述，不是流失、留存、忠诚度或客户价值标签。
-
-## 现在执行 SQL86
+## 现在执行 SQL87
 
 1. 在 DBeaver 选中现有 **retail_merchandising** 连接。
-2. 打开 [86_analyze_retailrocket_visitor_purchase_recency.sql](../sql/86_analyze_retailrocket_visitor_purchase_recency.sql)，完整执行只读查询。无需建表、导入 CSV 或重跑旧 SQL。
-3. 提供 **五行、七列完整结果，正常五行全部 PASS**；确保最右侧 check_status 可见。
+2. 打开 [87_analyze_retailrocket_visitor_rf_segments.sql](../sql/87_analyze_retailrocket_visitor_rf_segments.sql)，完整执行只读查询。无需建表、导入 CSV 或重跑旧 SQL。
+3. 提供 **17 行、七列完整结果，正常 17 行全部 PASS**；确保最右侧 check_status 可见。若需拆图，请保留两个区间标签并让相邻截图有重叠行。
 
-七列依次为 recency_band、visitor_ids、visitor_share_pct、min_recency_days、median_recency_days、max_recency_days、check_status。
+七列依次为 recency_band、frequency_band、visitor_ids、visitor_share_pct、candidate_baskets、basket_share_pct、check_status。
 
-助手预检已通过，用户执行和截图验收仍待完成；见 [验证说明](RETAILROCKET_VISITOR_PURCHASE_RECENCY_VALIDATION.md)。
+助手预检已通过，用户执行和截图验收仍待完成，见 [验证说明](RETAILROCKET_VISITOR_RF_SEGMENTS_VALIDATION.md)。新增独立比较全部 **11,719 行、六字段** RF 记录，并用已验收 SQL85/86 汇总核对边际；不重跑旧查询。
 
-## 验证和解释范围
-
-本步分析读取三个成员键与 last_timestamp_ms，不需要 first_timestamp_ms 或 F。助手核对重建的六字段成员输入，并独立比较 **全部 11,719 行、三字段**的编号/最后交易毫秒/间隔毫秒；展示统计使用精确计算核对，之前的来源和成员证据继续复用。
-
-这是有限观察窗口内的交易记录间隔，不是终身交易历史；编号不是已核实自然人，交易事件也不自动等于核实订单。R 和 F 仍是分开核验的基线，组合 RF 分群、独立时间验证及 Power BI 尚未完成。
+此矩阵是固定区间的描述性 RF 基线，不是经过效果验证的高价值、流失或忠诚标签，也没有金额维度 M。不同编号的观察长度可能不同，编号不是已核实自然人，候选篮子也不是核实订单。独立时间验证、业务效果评估与 Power BI 仍未完成。

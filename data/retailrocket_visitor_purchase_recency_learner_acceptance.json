@@ -1,0 +1,321 @@
+{
+  "observed_date": "2026-11-13",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant independent visual transcription of the learner-supplied DBeaver SQL86 aggregate screenshot. All five rows, seven headers and 35 result fields are fully visible; five PASS statuses and no NULLs. No direct learner-database inspection.",
+  "screenshot_basename": "codex-clipboard-f1038136-7e6a-4f94-b425-c05295aa737c.png",
+  "screenshot_provenance": "The learner attached this DBeaver result screenshot in the current conversation; inspected directly by the assistant, without editing or inferring hidden cells.",
+  "script": "sql/86_analyze_retailrocket_visitor_purchase_recency.sql",
+  "script_sha256": "c152b6af75534dd5078cabe79a8cfd53e4369e12058dd0a36ec78d8e97be122d",
+  "validator": "validation/preflight_retailrocket_visitor_purchase_recency.py",
+  "validator_sha256": "958d9757afc737284514f3660c933826b6410ff7f546621a6e25285dcfd42205",
+  "assistant_preflight": "data/retailrocket_visitor_purchase_recency_preflight.json",
+  "assistant_preflight_sha256": "529934ab6724d07a5f599b6d030f2a5745c435933938f4d3f99af5480066af3a",
+  "method_contract": "docs/RETAILROCKET_VISITOR_PURCHASE_RECENCY_VALIDATION.md",
+  "method_contract_prefix_bytes": 8175,
+  "method_contract_prefix_sha256": "338d01de50fe7c66ef27c4abc4d1b9ced7b194e6abac83d2ff4a0c3593940149",
+  "method_before_acceptance_append_bytes": 13450,
+  "method_before_acceptance_append_sha256": "00e814bdcf7546b0dbf6fb18f05fe5fc642720f8f7e9df9ae6b31cbc64201c15",
+  "source_table": "rr_mart.transaction_basket_items",
+  "readset_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid",
+    "last_timestamp_ms"
+  ],
+  "required_readset_columns": 4,
+  "learner_action_type": "Read-only observed transaction recency distribution for transaction-recorded IDs at the frozen global event endpoint.",
+  "result_rows": 5,
+  "result_columns": 7,
+  "report_field_positions": 35,
+  "visually_verified_field_values": 35,
+  "visually_verified_band_labels": 5,
+  "visually_verified_integer_count_values": 5,
+  "visually_verified_decimal_metric_values": 20,
+  "visually_verified_decimal_percentage_values": 5,
+  "visually_verified_decimal_day_values": 15,
+  "visually_verified_status_values": 5,
+  "integer_count_columns": [
+    "visitor_ids"
+  ],
+  "decimal_metric_columns": [
+    "visitor_share_pct",
+    "min_recency_days",
+    "median_recency_days",
+    "max_recency_days"
+  ],
+  "decimal_percentage_columns": [
+    "visitor_share_pct"
+  ],
+  "decimal_day_columns": [
+    "min_recency_days",
+    "median_recency_days",
+    "max_recency_days"
+  ],
+  "decimal_fields_displayed_without_decimal_point": 1,
+  "decimal_fields_displayed_with_five_decimals": 1,
+  "decimal_fields_displayed_with_six_decimals": 18,
+  "shortened_decimal_metric_displays": 2,
+  "integer_fields_with_thousands_separators": 4,
+  "visually_verified_null_values": 0,
+  "rows_with_pass_status": 5,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_35_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_numeric_and_status_values_fully_visible": true,
+  "all_band_labels_fully_visible": true,
+  "visibility_caveats": [],
+  "display_normalization": "Four visitor counts contain thousands separators, removed without changing values. R_LT_7D visitor_share_pct displays 4.06178, normalized to 4.061780; TOTAL visitor_share_pct displays 100, normalized to 100.000000. The remaining eighteen decimal fields, including all fifteen fractional-day statistics, show six decimal places. The integer-looking TOTAL share remains a percentage. No leading zero, label, hidden precision or NULL is inferred.",
+  "decimal_display_normalizations": [
+    {
+      "recency_band": "R_LT_7D",
+      "field": "visitor_share_pct",
+      "displayed": "4.06178",
+      "normalized_six_decimal": "4.061780"
+    },
+    {
+      "recency_band": "TOTAL",
+      "field": "visitor_share_pct",
+      "displayed": "100",
+      "normalized_six_decimal": "100.000000"
+    }
+  ],
+  "integer_separator_normalizations": [
+    {
+      "recency_band": "R_7_TO_LT_30D",
+      "field": "visitor_ids",
+      "displayed": "1,884",
+      "normalized_integer": 1884
+    },
+    {
+      "recency_band": "R_30_TO_LT_60D",
+      "field": "visitor_ids",
+      "displayed": "2,609",
+      "normalized_integer": 2609
+    },
+    {
+      "recency_band": "R_GE_60D",
+      "field": "visitor_ids",
+      "displayed": "6,750",
+      "normalized_integer": 6750
+    },
+    {
+      "recency_band": "TOTAL",
+      "field": "visitor_ids",
+      "displayed": "11,719",
+      "normalized_integer": 11719
+    }
+  ],
+  "visibility_accounting": "Five band labels plus five integer visitor counts plus twenty decimal metrics (five percentages and fifteen fractional-day statistics) plus five PASS labels equal 35 fields. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "recency_band",
+    "visitor_ids",
+    "visitor_share_pct",
+    "min_recency_days",
+    "median_recency_days",
+    "max_recency_days",
+    "check_status"
+  ],
+  "observed_display_rows": [
+    [
+      "R_LT_7D",
+      "476",
+      "4.06178",
+      "0.011525",
+      "3.485765",
+      "6.989986",
+      "PASS"
+    ],
+    [
+      "R_7_TO_LT_30D",
+      "1,884",
+      "16.076457",
+      "7.026333",
+      "18.295281",
+      "29.984544",
+      "PASS"
+    ],
+    [
+      "R_30_TO_LT_60D",
+      "2,609",
+      "22.262992",
+      "30.003754",
+      "46.491853",
+      "59.965966",
+      "PASS"
+    ],
+    [
+      "R_GE_60D",
+      "6,750",
+      "57.598771",
+      "60.003765",
+      "98.363966",
+      "137.980861",
+      "PASS"
+    ],
+    [
+      "TOTAL",
+      "11,719",
+      "100",
+      "0.011525",
+      "70.897344",
+      "137.980861",
+      "PASS"
+    ]
+  ],
+  "observed_rows": [
+    [
+      "R_LT_7D",
+      476,
+      4.06178,
+      0.011525,
+      3.485765,
+      6.989986,
+      "PASS"
+    ],
+    [
+      "R_7_TO_LT_30D",
+      1884,
+      16.076457,
+      7.026333,
+      18.295281,
+      29.984544,
+      "PASS"
+    ],
+    [
+      "R_30_TO_LT_60D",
+      2609,
+      22.262992,
+      30.003754,
+      46.491853,
+      59.965966,
+      "PASS"
+    ],
+    [
+      "R_GE_60D",
+      6750,
+      57.598771,
+      60.003765,
+      98.363966,
+      137.980861,
+      "PASS"
+    ],
+    [
+      "TOTAL",
+      11719,
+      100.0,
+      0.011525,
+      70.897344,
+      137.980861,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "recency_band",
+    "visitor_ids",
+    "visitor_share_pct",
+    "min_recency_days",
+    "median_recency_days",
+    "max_recency_days",
+    "check_status"
+  ],
+  "results": [
+    {
+      "recency_band": "R_LT_7D",
+      "visitor_ids": 476,
+      "visitor_share_pct": 4.06178,
+      "min_recency_days": 0.011525,
+      "median_recency_days": 3.485765,
+      "max_recency_days": 6.989986,
+      "check_status": "PASS"
+    },
+    {
+      "recency_band": "R_7_TO_LT_30D",
+      "visitor_ids": 1884,
+      "visitor_share_pct": 16.076457,
+      "min_recency_days": 7.026333,
+      "median_recency_days": 18.295281,
+      "max_recency_days": 29.984544,
+      "check_status": "PASS"
+    },
+    {
+      "recency_band": "R_30_TO_LT_60D",
+      "visitor_ids": 2609,
+      "visitor_share_pct": 22.262992,
+      "min_recency_days": 30.003754,
+      "median_recency_days": 46.491853,
+      "max_recency_days": 59.965966,
+      "check_status": "PASS"
+    },
+    {
+      "recency_band": "R_GE_60D",
+      "visitor_ids": 6750,
+      "visitor_share_pct": 57.598771,
+      "min_recency_days": 60.003765,
+      "median_recency_days": 98.363966,
+      "max_recency_days": 137.980861,
+      "check_status": "PASS"
+    },
+    {
+      "recency_band": "TOTAL",
+      "visitor_ids": 11719,
+      "visitor_share_pct": 100.0,
+      "min_recency_days": 0.011525,
+      "median_recency_days": 70.897344,
+      "max_recency_days": 137.980861,
+      "check_status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "a9b438cd1c30b3b9df4d6e3d438f3ae08780fe0e5eec4b4f7daa8b4281fc42ee",
+  "screenshot_rounded_metric_values_match_returned_SQL_report_exactly": true,
+  "screenshot_confirms_unrounded_metric_values": false,
+  "fingerprint_method": "SHA-256 of five compact normalized JSON row arrays plus LF in output-column order, retaining one integer visitor count and four floating metrics per row. Agreement concerns the returned six-decimal report, not direct verification of exact underlying milliseconds.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "membership_details_published": false,
+  "raw_visitor_identifiers_published": false,
+  "snapshot_band_aggregate_report_only": true,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "property_history_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "recency_bands": [
+    "R_LT_7D",
+    "R_7_TO_LT_30D",
+    "R_30_TO_LT_60D",
+    "R_GE_60D",
+    "TOTAL"
+  ],
+  "band_visitor_counts_sum": 11719,
+  "visitor_share_denominator": 11719,
+  "reference_endpoint_ms": 1442545187788,
+  "reference_endpoint_utc": "2015-09-18T02:59:47.788000Z",
+  "reference_is_today": false,
+  "reference_is_latest_transaction_timestamp": false,
+  "recency_definition": "Frozen global observed event endpoint minus MAX(last_timestamp_ms) across all memberships for each transaction-recorded visitor ID.",
+  "raw_ms_boundaries": [
+    604800000,
+    2592000000,
+    5184000000
+  ],
+  "recency_day_ms": 86400000,
+  "band_intervals_half_open": true,
+  "exact_millisecond_classification_not_directly_visible_in_screenshot": true,
+  "population": "The 11,719 transaction-recorded visitor IDs only; no browsing-only or other non-transaction IDs.",
+  "all_event_visitors_in_denominator": false,
+  "nontransaction_visitors_included": false,
+  "frequency_recomputed": false,
+  "combined_RF_scores_or_segments_completed": false,
+  "monetary_analysis_performed": false,
+  "band_cutoffs_optimized": false,
+  "churn_retention_loyalty_or_verified_people_orders_claimed": false,
+  "scope": "Accepts all 35 visible SQL86 fields, five PASS rows and no NULLs. The four disjoint recency bands contain 476, 1,884, 2,609 and 6,750 IDs and reconcile to 11,719. The fixed reference is the accepted global event endpoint, not today or the earlier transaction endpoint. Each ID's latest observed transaction is subtracted in exact milliseconds before half-open interval classification; displayed days are rounded summaries. Two shortened percentages and four comma-formatted counts normalize exactly. These finite-window recencies do not establish churn, retention, lifetime history, verified people or orders. The screenshot does not directly verify exact per-ID millisecond classification, the 11,719-by-three private stream, source reconstruction or fixtures; those remain supported by frozen assistant evidence. No source, learner database, SQL or fixture rerun was performed. Combined RF remains pending. Earlier pending statements remain intact as history; this appendix establishes current learner acceptance."
+}

@@ -81,3 +81,30 @@ The canonical source parse/reconstruction took 31.529 seconds and the independen
 Source identity, pinned dependencies and all 84 historical preflight artifacts remained unchanged. Private database byte hashes matched across both read-only phases. Temporary membership CSV, database and spills were removed. The learner database, properties, category reference and enriched fact were not opened. Public artifacts contain aggregate band results and proof fingerprints, without original source IDs or event records.
 
 Report SHA-256: `a9b438cd1c30b3b9df4d6e3d438f3ae08780fe0e5eec4b4f7daa8b4281fc42ee`. Script SHA-256: `c152b6af75534dd5078cabe79a8cfd53e4369e12058dd0a36ec78d8e97be122d`. Validator SHA-256: `958d9757afc737284514f3660c933826b6410ff7f546621a6e25285dcfd42205`. The frozen 8,175-byte method prefix remains unchanged at `338d01de50fe7c66ef27c4abc4d1b9ced7b194e6abac83d2ff4a0c3593940149`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied the DBeaver screenshot identified as codex-clipboard-f1038136-7e6a-4f94-b425-c05295aa737c.png in this conversation. Direct inspection shows all five rows, seven column headers and 35 result fields of SQL86: five band labels, five integer visitor counts, twenty decimal metrics (five percentages and fifteen fractional-day statistics), and five PASS labels. No INFO, FAIL, BLOCKED or NULL cells appear. UI row numbers are excluded; no image editing or inference of hidden fields was used.
+
+Four comma-formatted visitor counts normalize by removing thousands separators. R_LT_7D visitor_share_pct displays 4.06178, and TOTAL visitor_share_pct displays 100; these two percentages normalize to six decimals without changing values. The other eighteen decimal fields already show six places, including every day statistic. All displayed fractional values below one retain their visible leading zero. Every field and the band order matches the frozen preflight exactly. Acceptance concerns the rounded report rather than direct observation of underlying milliseconds. No learner database, SQL, source parsing, private recency stream or fixture was rerun.
+
+| recency_band | visitor_ids | visitor_share_pct | min_recency_days | median_recency_days | max_recency_days | check_status |
+| --- | --- | --- | --- | --- | --- | --- |
+| R_LT_7D | 476 | 4.061780 | 0.011525 | 3.485765 | 6.989986 | PASS |
+| R_7_TO_LT_30D | 1884 | 16.076457 | 7.026333 | 18.295281 | 29.984544 | PASS |
+| R_30_TO_LT_60D | 2609 | 22.262992 | 30.003754 | 46.491853 | 59.965966 | PASS |
+| R_GE_60D | 6750 | 57.598771 | 60.003765 | 98.363966 | 137.980861 | PASS |
+| TOTAL | 11719 | 100.000000 | 0.011525 | 70.897344 | 137.980861 | PASS |
+
+| recency_band | field | displayed | normalized six-decimal value |
+| --- | --- | --- | --- |
+| R_LT_7D | visitor_share_pct | 4.06178 | 4.061780 |
+| TOTAL | visitor_share_pct | 100 | 100.000000 |
+
+The four disjoint intervals reconcile to 11,719 transaction-recorded IDs. TOTAL is a separate summary, not an additional disjoint interval. The reference remains the accepted global observed event endpoint 1442545187788 ms, or 2015-09-18T02:59:47.788000Z. It is neither today's date nor the earlier latest-transaction endpoint. Recency subtracts the maximum last transaction timestamp across all memberships for each ID. Exact elapsed milliseconds determine the half-open bands; rounded fractional-day summaries do not reclassify an ID.
+
+The population excludes non-transaction visitors. These finite-window observations do not establish churn, retention, loyalty, lifetime history, verified people or paid orders. Combined RF segmentation and monetary analysis remain unfinished. No empty band appears in this screenshot; zero-count bands with three NULL statistics remain supported by the frozen fixtures rather than direct observation here.
+
+The complete exact comparison of 11,719 private ID/latest-transaction/elapsed-ms triples, endpoint provenance, accepted-input fingerprints and fixture behaviour remains supported by frozen assistant evidence. The [machine-readable learner acceptance](../data/retailrocket_visitor_purchase_recency_learner_acceptance.json) records the screenshot provenance, raw display strings, normalized values, two decimal normalizations and four separator normalizations. Its report SHA-256 is `a9b438cd1c30b3b9df4d6e3d438f3ae08780fe0e5eec4b4f7daa8b4281fc42ee`, matching the returned SQL report fingerprint.
+
+The prior 13,450-byte method and executed-results document remains byte-for-byte intact at SHA-256 `00e814bdcf7546b0dbf6fb18f05fe5fc642720f8f7e9df9ae6b31cbc64201c15`; its frozen 8,175-byte prefix remains `338d01de50fe7c66ef27c4abc4d1b9ced7b194e6abac83d2ff4a0c3593940149`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw events, memberships or visitor/item/transaction identifiers are published.
