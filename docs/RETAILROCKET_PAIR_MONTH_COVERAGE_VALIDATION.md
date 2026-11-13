@@ -70,3 +70,47 @@ The canonical source parse/reconstruction took 16.362 seconds and the independen
 Source identity, pinned dependencies and all 82 historical preflight artifacts remained unchanged. Private database byte hashes matched across both read-only phases. Temporary membership CSV, databases and spills were removed, and no persistent identifier map was created. The learner database, property data, category reference and enriched fact were not accessed. Public evidence contains case labels, aggregate month counts and proof fingerprints, without raw item/visitor IDs or individual event rows.
 
 Report SHA-256: `c15fb0f32ba48eea7cfd98da093a14a675d182eaac6a4560c4c66f5bb4d48b55`. Script SHA-256: `fc60d6ec367bdf7090d88e4089f3c8a90ae3a390e0285364d949360e25a00d7c`. Validator SHA-256: `1c3f5aa42f383623eea645cd075bed281039b318835947409adda45c1bc14c7d`. The frozen 7,671-byte method prefix remains unchanged at `183d6844786826de601c5fd5cc86ee23e4870bf256adcb484cf7bfc1a7ebf1f9`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot showing all twelve rows, nine column headers and 108 result fields of SQL84. These comprise twelve case labels, seventy-two integer counts, twelve percentage displays and twelve PASS labels. No INFO, FAIL, BLOCKED or NULL cells appear. All sixty month counts are visible, including twenty-four explicit numeric zeroes. UI row numbers are excluded.
+
+This screenshot contains no thousands separators. Eight percentages display integer-looking values, one displays 37.5 and one displays 89.74359; those ten cells normalize to six-decimal notation without changing values. The other two percentages already display six decimals. Every field and the case order matches the frozen preflight exactly. No label, hidden precision or missing value was inferred. Acceptance concerns the rounded report rather than direct observation of unrounded calculations. No learner database, source parsing, SQL, private proof stream or fixture was rerun.
+
+| case_label | n_ab | may_baskets | jun_baskets | jul_baskets | aug_baskets | sep_baskets | top_month_share_pct | check_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PAIR_01 | 39 | 0 | 0 | 35 | 2 | 2 | 89.743590 | PASS |
+| PAIR_02 | 9 | 0 | 0 | 4 | 3 | 2 | 44.444444 | PASS |
+| PAIR_03 | 8 | 2 | 1 | 2 | 1 | 2 | 25.000000 | PASS |
+| PAIR_04 | 8 | 1 | 2 | 1 | 3 | 1 | 37.500000 | PASS |
+| PAIR_05 | 8 | 0 | 0 | 1 | 4 | 3 | 50.000000 | PASS |
+| PAIR_06 | 7 | 2 | 4 | 0 | 1 | 0 | 57.142857 | PASS |
+| PAIR_07 | 6 | 3 | 0 | 2 | 1 | 0 | 50.000000 | PASS |
+| PAIR_08 | 5 | 0 | 1 | 4 | 0 | 0 | 80.000000 | PASS |
+| PAIR_09 | 5 | 5 | 0 | 0 | 0 | 0 | 100.000000 | PASS |
+| PAIR_10 | 5 | 0 | 0 | 4 | 1 | 0 | 80.000000 | PASS |
+| PAIR_11 | 5 | 2 | 0 | 0 | 1 | 2 | 40.000000 | PASS |
+| PAIR_12 | 5 | 0 | 1 | 0 | 1 | 3 | 60.000000 | PASS |
+
+The current screenshot's shortened top_month_share_pct displays normalize as follows.
+
+| case_label | displayed | normalized six-decimal value |
+| --- | --- | --- |
+| PAIR_01 | 89.74359 | 89.743590 |
+| PAIR_03 | 25 | 25.000000 |
+| PAIR_04 | 37.5 | 37.500000 |
+| PAIR_05 | 50 | 50.000000 |
+| PAIR_07 | 50 | 50.000000 |
+| PAIR_08 | 80 | 80.000000 |
+| PAIR_09 | 100 | 100.000000 |
+| PAIR_10 | 80 | 80.000000 |
+| PAIR_11 | 40 | 40.000000 |
+| PAIR_12 | 60 | 60.000000 |
+
+The same twelve case labels and n_ab values retain the frozen SQL82 order. Each case's five monthly counts reconcile to its n_ab; its maximum-month share divides by that n_ab, not the cross-case sum of 110. PAIR_01 has 35 of its 39 paired baskets in July, whereas PAIR_09 has all five in May. Concentration alone does not fail a check or prove a data problem.
+
+Basket month uses the earliest observed timestamp across all members of the candidate basket, not just the selected pair. This observation is not a confirmed order or payment time. The cases were selected using the same full snapshot, and the overall UTC observation window of 3 May to 18 September 2015 includes incomplete boundary months and unequal exposure. These retrospective counts are not monthly growth, comparable monthly rates or independent temporal validation.
+
+The exact comparison of sixty private case/month/count cells, all 17,672 whole-basket anchors, accepted-input fingerprints and fixture behaviour remains supported by frozen assistant evidence. The screenshot does not independently establish those private calculations. The [machine-readable learner acceptance](../data/retailrocket_pair_month_coverage_learner_acceptance.json) retains raw display strings, normalized values and all ten formatting normalizations. Its report SHA-256 is `c15fb0f32ba48eea7cfd98da093a14a675d182eaac6a4560c4c66f5bb4d48b55`, matching the actual returned SQL report.
+
+The prior 13,055-byte method and executed-results document remains byte-for-byte intact at SHA-256 `40cc5259b82605efd0444c06e8cea7b3d2a50f8840dd9ed7e77c2d6ba361f6de`; its frozen 7,671-byte prefix remains `183d6844786826de601c5fd5cc86ee23e4870bf256adcb484cf7bfc1a7ebf1f9`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw events, memberships or visitor/item/transaction identifiers are published, and no permanent case mapping is created.

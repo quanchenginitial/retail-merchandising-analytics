@@ -207,7 +207,9 @@
 - [x] 7AE 助手准备并预检只读 [SQL83 访客编号贡献集中度](sql/83_analyze_retailrocket_pair_visitor_concentration.sql)：保留 SQL82 十二个案例及顺序，查看共现篮子在访客编号之间的分布；见 [验证说明](docs/RETAILROCKET_PAIR_VISITOR_CONCENTRATION_VALIDATION.md)。十二行八列正常全部 PASS。重复贡献编号指该案例贡献至少两个篮子的编号，其贡献占比纳入这些编号的全部共现篮子；两个占比分母均为当前案例 n_ab。新增独立比较限于选中案例×访客编号分组，最多 110 行五个整数字段，不重验全量或选中指标公式。
 - [x] 7AE 用户于 2026-11-13 截图验收 SQL83：十二行 × 八列、96 个字段完整匹配，含十二个案例标签、48 个整数计数字段、24 个百分比及十二项 PASS，无 NULL；十九处末尾零显示精确归一化，见 [聚合验收](data/retailrocket_pair_visitor_concentration_learner_acceptance.json)。各占比保持本案例 n_ab 分母，重复贡献占比纳入重复编号的全部篮子；编号不等于自然人或独立样本。
 - [x] 7AF 助手准备并预检只读 [SQL84 月份覆盖](sql/84_analyze_retailrocket_pair_month_coverage.sql)：保留十二个案例及顺序，按每个候选篮子所有商品成员 first_timestamp_ms 的最小值确定 UTC 月份，展示五月至九月篮子数及最大月份占比；见 [验证说明](docs/RETAILROCKET_PAIR_MONTH_COVERAGE_VALIDATION.md)。十二行九列正常全部 PASS；每行五个月合计必须还原 n_ab。新增独立比较包含全部六十个案例/月组合和零计数，三字段逐项核对；复用此前证据。最早观测时间不等于核实订单时间，部分月份和不等观察长度限制比较。
-- [ ] 7AF 用户执行 SQL84，提供十二行 × 九列完整结果，正常十二项 PASS。此步是对同一观察期选出案例的回顾性分布描述，不构成月增长率、月度提升度或独立时间验证。
+- [x] 7AF 用户于 2026-11-13 截图验收 SQL84：十二行 × 九列、108 个字段完整匹配，十二项 PASS、无 NULL，保留 24 个明确月份零值，十处百分比显示精确归一化；见 [验收](data/retailrocket_pair_month_coverage_learner_acceptance.json)。已完成 [描述性购物篮发现](docs/STAGE07_BASKET_FINDINGS.md)，独立时间验证与规则效果评估仍未完成。
+- [x] 7AG 助手准备并预检只读 [SQL85 购买记录频次](sql/85_analyze_retailrocket_visitor_purchase_frequency.sql)：每个有交易记录的访客编号按不同候选篮子计数，四个互斥频次区间加 TOTAL；见 [验证说明](docs/RETAILROCKET_VISITOR_PURCHASE_FREQUENCY_VALIDATION.md)。编号占比以 11,719 为分母，篮子占比以 17,672 为分母；不含 F=0 或仅浏览编号。新增逐项比较 11,719 行、两字段的编号/频次，复用此前来源和成员证据。
+- [ ] 7AG 用户执行 SQL85，提供五行 × 七列完整结果，正常五项 PASS。本步只建立已观察交易频次 F，不是忠诚度、价值或 RFM 标签；Recency 和 RF 分群仍待完成。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -217,6 +219,6 @@
 
 ## 下一次对话从这里继续
 
-SQL83 已于 2026-11-13 截图验收：96 个字段完整匹配，十二项 PASS，无 NULL；十九处百分比显示归一化不改变数值。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL84](sql/84_analyze_retailrocket_pair_month_coverage.sql)，查看同一批十二个案例的共现篮子分布在哪些 UTC 月份。助手预检通过、用户执行待完成；十二行九列正常全部 PASS。月份来自整个候选篮子全部商品成员的最早观测时间，每行五月至九月合计还原 n_ab。边界月份不完整且观察长度不同，本步只作回顾性分布说明；RF、规则验证及 Power BI 仍未完成。
+SQL84 已于 2026-11-13 截图验收：108 个字段匹配、十二项 PASS、无 NULL。描述性购物篮里程碑已汇总为 [项目发现](docs/STAGE07_BASKET_FINDINGS.md)，不宣称已通过独立时间验证或实现业务效果。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 SQL85，统计 11,719 个有交易记录编号各自出现多少个不同候选篮子，五行七列正常全部 PASS。助手预检通过、用户执行待完成；编号与篮子占比分母分别为 11,719 与 17,672，F=0/非交易编号不在此总体中。RF、规则验证及 Power BI 仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
