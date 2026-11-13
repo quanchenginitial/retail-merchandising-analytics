@@ -1,0 +1,134 @@
+-- Descriptive UTC month coverage for frozen pair cases; months have unequal observed exposure.
+-- Anchor each whole composite basket at its earliest recorded member timestamp, not a verified order time.
+WITH parameters AS (
+    SELECT 22323::BIGINT AS expected_memberships,17672::BIGINT AS expected_baskets,
+        15029::BIGINT AS expected_single_baskets,2643::BIGINT AS expected_multi_baskets,31::BIGINT AS expected_max_items,
+        10757::BIGINT AS expected_pair_occurrences,9688::BIGINT AS expected_distinct_pairs,
+        8785::BIGINT AS expected_pairs_seen_once,903::BIGINT AS expected_pairs_seen_2plus,39::BIGINT AS expected_max_pair_baskets,
+        5::BIGINT AS min_pair_baskets,12::BIGINT AS expected_selected_pairs,110::BIGINT AS expected_selected_pair_occurrences,
+        1430622004384::BIGINT AS source_min_timestamp_ms,1442545187788::BIGINT AS source_max_timestamp_ms
+), required_schema AS (
+    SELECT CASE WHEN COUNT(*)=4 AND COUNT(*) FILTER (WHERE data_type='BIGINT')=4 THEN 0 ELSE 1 END AS schema_mismatch
+    FROM information_schema.columns WHERE table_catalog=current_database()
+        AND table_schema='rr_mart' AND table_name='transaction_basket_items'
+        AND column_name IN ('visitorid','transactionid','itemid','first_timestamp_ms')
+), source_keys AS MATERIALIZED (
+    SELECT TRY_CAST(visitorid AS BIGINT) AS visitorid,TRY_CAST(transactionid AS BIGINT) AS transactionid,
+        TRY_CAST(itemid AS BIGINT) AS itemid,TRY_CAST(first_timestamp_ms AS BIGINT) AS first_timestamp_ms
+    FROM rr_mart.transaction_basket_items
+), source_health AS (
+    SELECT COUNT(*) AS memberships,COUNT(*)-COUNT(DISTINCT (visitorid,transactionid,itemid)) AS duplicate_keys,
+        COUNT(*) FILTER (WHERE NOT COALESCE(visitorid>=0 AND transactionid>=0 AND itemid>=0,false)) AS invalid_keys,
+        COUNT(*) FILTER (WHERE NOT COALESCE(first_timestamp_ms BETWEEN p.source_min_timestamp_ms AND p.source_max_timestamp_ms,false)) AS invalid_timestamps
+    FROM source_keys CROSS JOIN parameters p
+), basket_sizes AS MATERIALIZED (
+    SELECT visitorid,transactionid,COUNT(*) AS items FROM source_keys GROUP BY visitorid,transactionid
+), basket_health AS (
+    SELECT COUNT(*) AS baskets,COUNT(*) FILTER (WHERE items=1) AS single_baskets,
+        COUNT(*) FILTER (WHERE items>1) AS multi_baskets,MAX(items) AS max_items,
+        COALESCE(SUM(items*(items-1)//2),0)::BIGINT AS combinatorial_pair_occurrences FROM basket_sizes
+), admission AS (
+    SELECT COALESCE(s.schema_mismatch=0 AND h.memberships=p.expected_memberships AND h.memberships>0
+        AND h.invalid_keys=0 AND h.duplicate_keys=0 AND h.invalid_timestamps=0 AND b.baskets=p.expected_baskets
+        AND b.single_baskets=p.expected_single_baskets AND b.multi_baskets=p.expected_multi_baskets
+        AND b.max_items=p.expected_max_items,false) AS valid_input
+    FROM required_schema s CROSS JOIN source_health h CROSS JOIN basket_health b CROSS JOIN parameters p
+), eligible_keys AS MATERIALIZED (
+    SELECT k.* FROM source_keys k CROSS JOIN admission a WHERE a.valid_input
+), item_marginals AS MATERIALIZED (
+    SELECT itemid,COUNT(*)::BIGINT AS item_baskets FROM eligible_keys GROUP BY itemid
+), pair_counts AS MATERIALIZED (
+    SELECT a.itemid AS item_a,b.itemid AS item_b,COUNT(*)::BIGINT AS n_ab
+    FROM eligible_keys a JOIN eligible_keys b ON a.visitorid=b.visitorid AND a.transactionid=b.transactionid AND a.itemid<b.itemid
+    GROUP BY a.itemid,b.itemid
+), pair_summary AS (
+    SELECT COALESCE(SUM(n_ab),0)::BIGINT AS pair_occurrences,COUNT(*) AS distinct_pairs,
+        COUNT(*) FILTER (WHERE n_ab=1) AS seen_once,COUNT(*) FILTER (WHERE n_ab>=2) AS seen_2plus,
+        MAX(n_ab) AS max_pair_baskets FROM pair_counts
+), pair_metrics AS MATERIALIZED (
+    SELECT p.item_a,p.item_b,p.n_ab,a.item_baskets AS n_a,b.item_baskets AS n_b,h.baskets::BIGINT AS n_baskets,
+        p.n_ab::DOUBLE/h.baskets AS support,
+        p.n_ab::DOUBLE/a.item_baskets AS confidence_a_to_b,
+        p.n_ab::DOUBLE/b.item_baskets AS confidence_b_to_a,
+        (p.n_ab::DOUBLE*h.baskets)/(a.item_baskets::DOUBLE*b.item_baskets) AS lift
+    FROM pair_counts p JOIN item_marginals a ON p.item_a=a.itemid JOIN item_marginals b ON p.item_b=b.itemid
+    CROSS JOIN basket_health h
+), metric_health AS (
+    SELECT COUNT(*) AS metric_rows,COUNT(*) FILTER (WHERE NOT COALESCE(
+        item_a<item_b AND n_ab>0 AND n_ab<=n_a AND n_ab<=n_b AND n_a<=n_baskets AND n_b<=n_baskets
+        AND support>0 AND support<=1 AND confidence_a_to_b>0 AND confidence_a_to_b<=1
+        AND confidence_b_to_a>0 AND confidence_b_to_a<=1 AND lift>0 AND isfinite(lift),false)) AS invalid_metric_rows
+    FROM pair_metrics
+), metric_gate AS (
+    SELECT COALESCE(s.pair_occurrences=p.expected_pair_occurrences AND s.distinct_pairs=p.expected_distinct_pairs
+        AND s.seen_once=p.expected_pairs_seen_once AND s.seen_2plus=p.expected_pairs_seen_2plus
+        AND (s.max_pair_baskets IS NOT DISTINCT FROM p.expected_max_pair_baskets)
+        AND s.pair_occurrences=b.combinatorial_pair_occurrences AND s.seen_once+s.seen_2plus=s.distinct_pairs
+        AND m.metric_rows=s.distinct_pairs AND m.invalid_metric_rows=0
+        AND (SELECT COALESCE(SUM(item_baskets),0) FROM item_marginals)=h.memberships,false) AS valid_metrics
+    FROM pair_summary s CROSS JOIN parameters p CROSS JOIN basket_health b CROSS JOIN source_health h CROSS JOIN metric_health m
+), selected_pairs AS MATERIALIZED (
+    -- At equal n_ab and fixed N, smaller n_a*n_b means larger unrounded lift.
+    SELECT ROW_NUMBER() OVER (ORDER BY m.n_ab DESC,m.n_a*m.n_b ASC,m.item_a ASC,m.item_b ASC) AS case_rank,m.*
+    FROM pair_metrics m CROSS JOIN parameters p WHERE m.n_ab>=p.min_pair_baskets
+), selected_health AS (
+    SELECT COUNT(*) AS selected_pairs,COALESCE(SUM(n_ab),0)::BIGINT AS selected_pair_occurrences FROM selected_pairs
+), selected_gate AS (
+    SELECT s.selected_pairs=p.expected_selected_pairs AND s.selected_pair_occurrences=p.expected_selected_pair_occurrences AS valid_selection
+    FROM selected_health s CROSS JOIN parameters p
+), basket_anchors AS MATERIALIZED (
+    -- Every membership contributes to the basket anchor, not only the selected pair items.
+    SELECT visitorid,transactionid,MIN(first_timestamp_ms) AS anchor_ms FROM eligible_keys GROUP BY visitorid,transactionid
+), basket_months AS MATERIALIZED (
+    SELECT visitorid,transactionid,anchor_ms,
+        YEAR(make_timestamp_ms(anchor_ms))::BIGINT AS anchor_year,
+        MONTH(make_timestamp_ms(anchor_ms))::BIGINT AS month_number
+    FROM basket_anchors
+), anchor_health AS (
+    SELECT COUNT(*) AS anchored_baskets,COUNT(*) FILTER (WHERE NOT COALESCE(anchor_year=2015 AND month_number BETWEEN 5 AND 9
+        AND epoch_ms(make_timestamp_ms(anchor_ms))=anchor_ms,false)) AS invalid_anchors FROM basket_months
+), observed_case_months AS MATERIALIZED (
+    SELECT s.case_rank,m.month_number,COUNT(*)::BIGINT AS pair_baskets
+    FROM selected_pairs s JOIN eligible_keys a ON a.itemid=s.item_a
+    JOIN eligible_keys b ON b.itemid=s.item_b AND a.visitorid=b.visitorid AND a.transactionid=b.transactionid
+    JOIN basket_months m ON a.visitorid=m.visitorid AND a.transactionid=m.transactionid
+    GROUP BY s.case_rank,m.month_number
+), months AS (
+    SELECT * FROM (VALUES (5::BIGINT),(6::BIGINT),(7::BIGINT),(8::BIGINT),(9::BIGINT)) t(month_number)
+), case_month_counts AS MATERIALIZED (
+    SELECT s.case_rank,m.month_number,COALESCE(o.pair_baskets,0)::BIGINT AS pair_baskets
+    FROM selected_pairs s CROSS JOIN months m LEFT JOIN observed_case_months o USING (case_rank,month_number)
+), monthly_case_summary AS MATERIALIZED (
+    SELECT case_rank,COUNT(*) AS month_cells,SUM(pair_baskets)::BIGINT AS reconciled_pair_baskets,
+        SUM(pair_baskets) FILTER (WHERE month_number=5)::BIGINT AS may_baskets,
+        SUM(pair_baskets) FILTER (WHERE month_number=6)::BIGINT AS jun_baskets,
+        SUM(pair_baskets) FILTER (WHERE month_number=7)::BIGINT AS jul_baskets,
+        SUM(pair_baskets) FILTER (WHERE month_number=8)::BIGINT AS aug_baskets,
+        SUM(pair_baskets) FILTER (WHERE month_number=9)::BIGINT AS sep_baskets,
+        MAX(pair_baskets)::BIGINT AS max_month_baskets
+    FROM case_month_counts GROUP BY case_rank
+), coverage_health AS (
+    SELECT COUNT(*) AS cases_checked,COALESCE(SUM(m.reconciled_pair_baskets),0)::BIGINT AS reconciled_pair_baskets,
+        COUNT(*) FILTER (WHERE NOT COALESCE(m.month_cells=5 AND m.reconciled_pair_baskets=s.n_ab
+            AND m.may_baskets>=0 AND m.jun_baskets>=0 AND m.jul_baskets>=0 AND m.aug_baskets>=0 AND m.sep_baskets>=0
+            AND m.max_month_baskets>=1 AND m.max_month_baskets<=s.n_ab,false)) AS invalid_cases
+    FROM selected_pairs s LEFT JOIN monthly_case_summary m USING (case_rank)
+), coverage_gate AS (
+    SELECT a.anchored_baskets=p.expected_baskets AND a.invalid_anchors=0 AND h.cases_checked=p.expected_selected_pairs
+        AND h.reconciled_pair_baskets=p.expected_selected_pair_occurrences AND h.invalid_cases=0 AS valid_coverage
+    FROM coverage_health h CROSS JOIN anchor_health a CROSS JOIN parameters p
+), case_slots AS (
+    SELECT UNNEST(range(1,expected_selected_pairs+1)) AS case_rank FROM parameters
+)
+SELECT printf('PAIR_%02d',c.case_rank) AS case_label,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN m.n_ab END AS n_ab,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN v.may_baskets END AS may_baskets,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN v.jun_baskets END AS jun_baskets,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN v.jul_baskets END AS jul_baskets,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN v.aug_baskets END AS aug_baskets,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN v.sep_baskets END AS sep_baskets,
+    CASE WHEN a.valid_input AND g.valid_metrics AND s.valid_selection AND h.valid_coverage THEN ROUND(100.0*v.max_month_baskets/m.n_ab,6) END AS top_month_share_pct,
+    CASE WHEN NOT a.valid_input THEN 'BLOCKED'
+        WHEN NOT g.valid_metrics OR NOT s.valid_selection OR NOT h.valid_coverage THEN 'FAIL' ELSE 'PASS' END AS check_status
+FROM case_slots c LEFT JOIN selected_pairs m USING (case_rank) LEFT JOIN monthly_case_summary v USING (case_rank)
+CROSS JOIN admission a CROSS JOIN metric_gate g CROSS JOIN selected_gate s CROSS JOIN coverage_gate h ORDER BY c.case_rank;

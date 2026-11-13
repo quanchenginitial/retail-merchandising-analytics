@@ -79,3 +79,54 @@ The canonical source parse/reconstruction took 16.249 seconds and the independen
 Source snapshots and pinned dependencies remained unchanged, together with all 81 historical preflight artifacts. Private database hashes matched across the read-only phases. All temporary membership CSV, databases and spills were removed, and no persistent ID map was created. The analytical query did not read stored timestamp fields; source timestamps were processed only in the bounded membership reconstruction. The learner database, property data, category reference and enriched fact were not accessed. Public evidence contains only case labels, aggregate count/share summaries and proof fingerprints, without raw item or visitor IDs or event records.
 
 Report SHA-256: `877cab7cb6760152fb92062a524eccf1d51f188e286f0e7aa67415625ae3e544`. Script SHA-256: `8760fcc7d9ee3797f983444c8c315f7eaf3c7f988c91ebbd00230deb8bd1e022`. Validator SHA-256: `8012ecdde69cbffd052128ce958ab38390462d9e22fe9119de72f5fe445f3df4`. The frozen 7,917-byte method prefix remains unchanged at `360fed85d5889b51e4dfbff841de05e96e5376ad3a7fd66cf6dacb50d139cd94`.
+
+## Learner acceptance — 13 November 2026
+
+The learner supplied a DBeaver screenshot showing all twelve rows, eight column headers and ninety-six result fields of SQL83. The visible fields comprise twelve case labels, forty-eight integer-count values, twenty-four percentage displays and twelve PASS labels. Seventeen percentages display integer-looking values, two display one decimal and five display six decimals; percentage columns retain their metric semantics. UI row numbers are excluded. All twelve statuses are PASS, with no INFO, FAIL, BLOCKED or NULL cells.
+
+This screenshot contains no thousands separators. Nineteen shortened percentage displays were restored to six-decimal notation without changing values; displayed zeroes remain numeric zeroes. Every field and its case order matches the frozen preflight exactly. Acceptance concerns the rounded report, not direct observation or mathematical exactness of unrounded calculations. No label, hidden field or missing precision was inferred. The assistant did not open the learner database or rerun SQL, source parsing, input reconstruction, contributor streams or fixtures for this acceptance.
+
+| case_label | n_ab | distinct_visitor_ids | repeat_visitor_ids | max_baskets_one_visitor | top_visitor_share_pct | repeat_visitor_basket_share_pct | check_status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| PAIR_01 | 39 | 36 | 3 | 2 | 5.128205 | 15.384615 | PASS |
+| PAIR_02 | 9 | 9 | 0 | 1 | 11.111111 | 0.000000 | PASS |
+| PAIR_03 | 8 | 7 | 1 | 2 | 25.000000 | 25.000000 | PASS |
+| PAIR_04 | 8 | 8 | 0 | 1 | 12.500000 | 0.000000 | PASS |
+| PAIR_05 | 8 | 8 | 0 | 1 | 12.500000 | 0.000000 | PASS |
+| PAIR_06 | 7 | 7 | 0 | 1 | 14.285714 | 0.000000 | PASS |
+| PAIR_07 | 6 | 6 | 0 | 1 | 16.666667 | 0.000000 | PASS |
+| PAIR_08 | 5 | 4 | 1 | 2 | 40.000000 | 40.000000 | PASS |
+| PAIR_09 | 5 | 2 | 1 | 4 | 80.000000 | 80.000000 | PASS |
+| PAIR_10 | 5 | 3 | 1 | 3 | 60.000000 | 60.000000 | PASS |
+| PAIR_11 | 5 | 3 | 2 | 2 | 40.000000 | 80.000000 | PASS |
+| PAIR_12 | 5 | 5 | 0 | 1 | 20.000000 | 0.000000 | PASS |
+
+The current screenshot's nineteen shortened displays normalize as follows.
+
+| case_label | field | displayed | normalized six-decimal value |
+| --- | --- | --- | --- |
+| PAIR_02 | repeat_visitor_basket_share_pct | 0 | 0.000000 |
+| PAIR_03 | top_visitor_share_pct | 25 | 25.000000 |
+| PAIR_03 | repeat_visitor_basket_share_pct | 25 | 25.000000 |
+| PAIR_04 | top_visitor_share_pct | 12.5 | 12.500000 |
+| PAIR_04 | repeat_visitor_basket_share_pct | 0 | 0.000000 |
+| PAIR_05 | top_visitor_share_pct | 12.5 | 12.500000 |
+| PAIR_05 | repeat_visitor_basket_share_pct | 0 | 0.000000 |
+| PAIR_06 | repeat_visitor_basket_share_pct | 0 | 0.000000 |
+| PAIR_07 | repeat_visitor_basket_share_pct | 0 | 0.000000 |
+| PAIR_08 | top_visitor_share_pct | 40 | 40.000000 |
+| PAIR_08 | repeat_visitor_basket_share_pct | 40 | 40.000000 |
+| PAIR_09 | top_visitor_share_pct | 80 | 80.000000 |
+| PAIR_09 | repeat_visitor_basket_share_pct | 80 | 80.000000 |
+| PAIR_10 | top_visitor_share_pct | 60 | 60.000000 |
+| PAIR_10 | repeat_visitor_basket_share_pct | 60 | 60.000000 |
+| PAIR_11 | top_visitor_share_pct | 40 | 40.000000 |
+| PAIR_11 | repeat_visitor_basket_share_pct | 80 | 80.000000 |
+| PAIR_12 | top_visitor_share_pct | 20 | 20.000000 |
+| PAIR_12 | repeat_visitor_basket_share_pct | 0 | 0.000000 |
+
+The twelve labels and n_ab values retain the SQL82 case order. Both percentages divide by each case's n_ab, not the cross-case sum of 110. Repeat contributors have at least two paired baskets within the case; repeat-contributor share includes their entire contribution, not only the excess above the first. For example, PAIR_01 records 39 paired baskets across 36 visitor IDs with maximum contribution two, whereas PAIR_09 records five baskets across two IDs with maximum contribution four. These observations describe concentration in recorded identifiers and do not verify distinct people or independent observations. Cross-case ID counts cannot be summed as globally distinct people. High concentration alone neither fails a control nor proves a data error.
+
+The exact comparison of 98 private pair-by-visitor groups across five integer fields, accepted-input fingerprints and fixture behaviour remains supported by frozen assistant evidence rather than new direct checks of the learner environment. No old metric-formula proof or date/time analysis is rerun for acceptance. No persistent mapping is created, and snapshot case labels are not permanent product aliases.
+
+The [machine-readable learner acceptance](../data/retailrocket_pair_visitor_concentration_learner_acceptance.json) records raw displayed strings, normalized values and all nineteen precision normalizations. Its report SHA-256 is `877cab7cb6760152fb92062a524eccf1d51f188e286f0e7aa67415625ae3e544`, matching the actual SQL report fingerprint. The prior 12,939-byte method and executed-results document remains byte-for-byte intact at SHA-256 `d7efad1d15beef0997a7d617752ce1c84c9e01b1a265511298da60a5a881af5e`; its frozen 7,917-byte prefix remains `360fed85d5889b51e4dfbff841de05e96e5376ad3a7fd66cf6dacb50d139cd94`. This UTF-8 appendix records learner acceptance without rewriting earlier pending statements. No raw events, memberships or visitor/item/transaction identifiers are published.

@@ -1,36 +1,33 @@
-# 当前一步：查看访客编号贡献集中度
+# 当前一步：查看十二个案例的月份覆盖
 
 更新日期：2026-11-13（Australia/Sydney）。
 
-**这一步为了什么：检查商品对的共现是否分散在多个访客编号，还是由少数编号反复贡献，为判断这些关联证据的覆盖范围补充信息。**
+**这一步为了什么：看看同一批商品对的共现篮子分布在哪些月份，是否集中在少数月份，为理解此前的关联和编号集中度补充时间分布信息。**
 
-## SQL82 已验收
+## SQL83 已验收
 
-截图 **十二行 × 九列、108 个字段完整匹配，十二项全部 PASS、无 NULL**。六处省略末尾零的指标显示精确归一化。全部十二个案例合计 **110 次商品对出现**，见 [验收记录](../data/retailrocket_basket_pair_cases_learner_acceptance.json)。这不是 110 个独立篮子。
+截图 **十二行 × 八列、96 个字段完整匹配，十二项全部 PASS、无 NULL**。十九处百分比显示精确归一化，见 [验收记录](../data/retailrocket_pair_visitor_concentration_learner_acceptance.json)。各百分比仍用对应案例 n_ab 作分母，访客编号不等于已核实自然人。
 
-SQL83 保留**同一批十二个案例及原顺序**，不重新选择门槛，也不改变 PAIR_01–PAIR_12 的当前快照对应关系。
+SQL84 保留**同一批十二个案例及原顺序**，查看五月至九月的分布，不重新选择案例或门槛。
 
-## SQL83 怎么读
+## 月份如何确定
 
-- **distinct_visitor_ids**：为该商品对贡献过共现篮子的不同访客编号数。
-- **repeat_visitor_ids**：在该案例中贡献**至少两个**共现篮子的编号数。
-- **max_baskets_one_visitor / top_visitor_share_pct**：贡献最多的一个编号提供多少篮子，以及它占本案例 n_ab 的比例。
-- **repeat_visitor_basket_share_pct**：重复贡献编号所提供的**全部共现篮子**占本案例 n_ab 的比例，不只计算超过第一次的部分。
+先对一个候选篮子的**全部商品成员**取 first_timestamp_ms 最小值，再按该时刻的 **UTC 月份**归类。不只看当前商品对；这个时间表示篮子内最早被记录的事件，不是已核实的下单或付款时间。
 
-两个百分比的分母都是**这一行的 n_ab**，不是十二对合计 110。举例说明口径：三个编号分别贡献 3、1、1 个篮子，则不同编号为三个、重复编号为一个，最大编号占比和重复贡献占比均为 60%；后者计算全部三个篮子，而不是超过首次的两个。这只是计算示例，不是本次结果。每行属于不同商品对，跨行编号数不能相加当作独立人数。
+每个案例有 may_baskets 至 sep_baskets 五个月份计数，**包括零值**；五个月合计应等于本行 n_ab。top_month_share_pct = 最大月份计数 ÷ 本行 n_ab × 100%，不是除以十二对合计 110。集中在一个月份也可以是 PASS，检查的是计算和核对是否正确。
 
-## 现在执行 SQL83
+## 现在执行 SQL84
 
 1. 在 DBeaver 选中现有 **retail_merchandising** 连接。
-2. 打开 [83_analyze_retailrocket_pair_visitor_concentration.sql](../sql/83_analyze_retailrocket_pair_visitor_concentration.sql)，完整执行只读查询。无需建表、重新导入 CSV 或重跑 SQL79–82。
-3. 提供 **十二行、八列完整结果，正常十二行全部 PASS**。请确保最右侧 check_status 可见；如需拆图，保留 case_label，并让相邻截图有重叠行或列。
+2. 打开 [84_analyze_retailrocket_pair_month_coverage.sql](../sql/84_analyze_retailrocket_pair_month_coverage.sql)，完整执行只读查询。无需建表、重新导入 CSV 或重跑 SQL79–83。
+3. 提供 **十二行、九列完整结果，正常十二行全部 PASS**。请确保最右侧 check_status 可见；如需拆图，保留 case_label，并让相邻截图有重叠行或列。
 
-八列依次为 case_label、n_ab、distinct_visitor_ids、repeat_visitor_ids、max_baskets_one_visitor、top_visitor_share_pct、repeat_visitor_basket_share_pct、check_status。
+九列依次为 case_label、n_ab、may_baskets、jun_baskets、jul_baskets、aug_baskets、sep_baskets、top_month_share_pct、check_status。
 
-**集中度很高也可以是 PASS**：检查的是分组、数量和公式是否正确，不是要求结果达到某个业务标准。助手预检已通过，用户执行和截图验收仍待完成；见 [验证说明](RETAILROCKET_PAIR_VISITOR_CONCENTRATION_VALIDATION.md)。
+助手预检已通过，用户执行和截图验收仍待完成；见 [验证说明](RETAILROCKET_PAIR_MONTH_COVERAGE_VALIDATION.md)。
 
 ## 验证和解释范围
 
-本步只读取三个成员键，不读取日期或时间字段。助手核对重建的六字段成员输入，并对选中案例×访客编号分组做新的独立比较，最多 110 行 × 五个整数字段；此前全部和选中商品对的指标证据继续复用，不重验这些指标公式。
+本步读取三个成员键及 first_timestamp_ms。助手核对重建的六字段成员输入，并独立比较 **十二个案例 × 五个月 = 六十行、三字段**的完整月份计数，包含零值；此前来源、指标和编号分组证据继续复用。
 
-访客编号不等于已核实自然人；多个不同编号也不证明观测彼此独立。集中度不能单独证明数据错误或推荐效果。案例标签仅在当前快照成立，不公开原访客或商品编号。时间稳定性、规则效果验证、RF 分群及 Power BI 仍未完成。
+整体 UTC 事件观察窗口是 **2015-05-03 至 2015-09-18**，五月和九月不完整，月份长度也不同。案例又是在同一观察期内选出的，因此本步只能描述回顾性分布，不能据此判断月增长率、月度支持度/提升度或独立时间稳定性。RF 分群、独立验证、规则效果评估及 Power BI 仍未完成。

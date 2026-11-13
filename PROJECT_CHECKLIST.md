@@ -205,7 +205,9 @@
 - [x] 7AD 助手准备并预检只读 [SQL82 商品对案例](sql/82_analyze_retailrocket_basket_pair_cases.sql)：展示所有共现至少五个候选篮子的十二对商品，不使用 LIMIT，合计 110 次商品对出现；见 [验证说明](docs/RETAILROCKET_BASKET_PAIR_CASES_VALIDATION.md)。九列分别给出快照案例标签、共现及各商品篮子数、支持度、两个方向置信度、提升度和检查状态，正常十二行全部 PASS。PAIR_01–PAIR_12 不暴露原编号，标签不保证跨快照稳定，A/B 仅是每对内部角色。助手新增验证限于选中的十二行十字段指标及报告，复用 SQL81 全量指标证据。
 - [x] 7AD 用户于 2026-11-13 截图验收 SQL82：十二行 × 九列、108 个字段完整匹配，含十二个案例标签、36 个整数计数字段、48 个指标显示和十二项 PASS，无 NULL；六处省略末尾零的显示精确归一化，见 [聚合验收](data/retailrocket_basket_pair_cases_learner_acceptance.json)。所有十二个 n_ab≥5 案例合计 110 次商品对出现；标签、逐对双向置信度和展示顺序均匹配。
 - [x] 7AE 助手准备并预检只读 [SQL83 访客编号贡献集中度](sql/83_analyze_retailrocket_pair_visitor_concentration.sql)：保留 SQL82 十二个案例及顺序，查看共现篮子在访客编号之间的分布；见 [验证说明](docs/RETAILROCKET_PAIR_VISITOR_CONCENTRATION_VALIDATION.md)。十二行八列正常全部 PASS。重复贡献编号指该案例贡献至少两个篮子的编号，其贡献占比纳入这些编号的全部共现篮子；两个占比分母均为当前案例 n_ab。新增独立比较限于选中案例×访客编号分组，最多 110 行五个整数字段，不重验全量或选中指标公式。
-- [ ] 7AE 用户执行 SQL83，提供十二行 × 八列完整结果，正常十二项 PASS。高集中度是描述性发现，不导致 FAIL；访客编号不等于已核实自然人，也不证明观测独立。
+- [x] 7AE 用户于 2026-11-13 截图验收 SQL83：十二行 × 八列、96 个字段完整匹配，含十二个案例标签、48 个整数计数字段、24 个百分比及十二项 PASS，无 NULL；十九处末尾零显示精确归一化，见 [聚合验收](data/retailrocket_pair_visitor_concentration_learner_acceptance.json)。各占比保持本案例 n_ab 分母，重复贡献占比纳入重复编号的全部篮子；编号不等于自然人或独立样本。
+- [x] 7AF 助手准备并预检只读 [SQL84 月份覆盖](sql/84_analyze_retailrocket_pair_month_coverage.sql)：保留十二个案例及顺序，按每个候选篮子所有商品成员 first_timestamp_ms 的最小值确定 UTC 月份，展示五月至九月篮子数及最大月份占比；见 [验证说明](docs/RETAILROCKET_PAIR_MONTH_COVERAGE_VALIDATION.md)。十二行九列正常全部 PASS；每行五个月合计必须还原 n_ab。新增独立比较包含全部六十个案例/月组合和零计数，三字段逐项核对；复用此前证据。最早观测时间不等于核实订单时间，部分月份和不等观察长度限制比较。
+- [ ] 7AF 用户执行 SQL84，提供十二行 × 九列完整结果，正常十二项 PASS。此步是对同一观察期选出案例的回顾性分布描述，不构成月增长率、月度提升度或独立时间验证。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -215,6 +217,6 @@
 
 ## 下一次对话从这里继续
 
-SQL82 已于 2026-11-13 截图验收：108 个字段完整匹配，十二项 PASS，无 NULL；六处指标显示归一化不改变数值。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL83](sql/83_analyze_retailrocket_pair_visitor_concentration.sql)，检查同一批十二个案例的共现是否由少数访客编号反复贡献。助手预检通过、用户执行待完成；十二行八列正常全部 PASS。各占比用本案例 n_ab 作分母，重复贡献占比纳入重复编号的全部共现篮子。集中度不代表数据错误，编号不等于自然人或独立样本；RF、规则验证及 Power BI 仍未完成。
+SQL83 已于 2026-11-13 截图验收：96 个字段完整匹配，十二项 PASS，无 NULL；十九处百分比显示归一化不改变数值。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL84](sql/84_analyze_retailrocket_pair_month_coverage.sql)，查看同一批十二个案例的共现篮子分布在哪些 UTC 月份。助手预检通过、用户执行待完成；十二行九列正常全部 PASS。月份来自整个候选篮子全部商品成员的最早观测时间，每行五月至九月合计还原 n_ab。边界月份不完整且观察长度不同，本步只作回顾性分布说明；RF、规则验证及 Power BI 仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

@@ -1,0 +1,594 @@
+{
+  "observed_date": "2026-11-13",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant visual transcription of a learner-supplied DBeaver aggregate screenshot for read-only SQL83 visitor-ID concentration. All twelve rows, eight column headers and ninety-six result fields are fully visible. All twelve statuses are PASS; no NULL cells appear. No direct learner-database inspection.",
+  "script": "sql/83_analyze_retailrocket_pair_visitor_concentration.sql",
+  "script_sha256": "8760fcc7d9ee3797f983444c8c315f7eaf3c7f988c91ebbd00230deb8bd1e022",
+  "validator": "validation/preflight_retailrocket_pair_visitor_concentration.py",
+  "validator_sha256": "8012ecdde69cbffd052128ce958ab38390462d9e22fe9119de72f5fe445f3df4",
+  "assistant_preflight": "data/retailrocket_pair_visitor_concentration_preflight.json",
+  "assistant_preflight_sha256": "7d3d1633f733f410ec90f5e819409813b77b3fbeda7181326cf20befbd7a3cba",
+  "method_contract": "docs/RETAILROCKET_PAIR_VISITOR_CONCENTRATION_VALIDATION.md",
+  "method_contract_prefix_bytes": 7917,
+  "method_contract_prefix_sha256": "360fed85d5889b51e4dfbff841de05e96e5376ad3a7fd66cf6dacb50d139cd94",
+  "method_before_acceptance_append_bytes": 12939,
+  "method_before_acceptance_append_sha256": "d7efad1d15beef0997a7d617752ce1c84c9e01b1a265511298da60a5a881af5e",
+  "source_table": "rr_mart.transaction_basket_items",
+  "readset_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid"
+  ],
+  "required_readset_columns": 3,
+  "learner_action_type": "Read-only per-case visitor-ID contribution summary for the twelve frozen SQL82 cases, preserving case order and n_ab.",
+  "result_rows": 12,
+  "result_columns": 8,
+  "report_field_positions": 96,
+  "visually_verified_field_values": 96,
+  "visually_verified_case_labels": 12,
+  "visually_verified_integer_count_values": 48,
+  "visually_verified_decimal_percentage_values": 24,
+  "visually_verified_status_values": 12,
+  "integer_count_columns": [
+    "n_ab",
+    "distinct_visitor_ids",
+    "repeat_visitor_ids",
+    "max_baskets_one_visitor"
+  ],
+  "decimal_percentage_columns": [
+    "top_visitor_share_pct",
+    "repeat_visitor_basket_share_pct"
+  ],
+  "percentage_fields_displayed_without_decimal_point": 17,
+  "percentage_fields_displayed_with_one_decimal": 2,
+  "percentage_fields_displayed_with_six_decimals": 5,
+  "shortened_decimal_percentage_displays": 19,
+  "visually_verified_null_values": 0,
+  "rows_with_pass_status": 12,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_96_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "all_numeric_and_status_values_fully_visible": true,
+  "all_case_labels_fully_visible": true,
+  "visibility_caveats": [],
+  "display_normalization": "No thousands separators occur in this screenshot. Four count columns remain integers and both percentage columns retain six-decimal report semantics. Seventeen percentage cells display integer-looking values and two top-share cells display 12.5; nineteen shortened displays normalize without changing values. Five percentages already show six decimal places. Visible zeroes remain zeroes, not NULLs. No hidden field or precision is inferred.",
+  "decimal_display_normalizations": [
+    {
+      "case_label": "PAIR_02",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "0",
+      "normalized_six_decimal": "0.000000"
+    },
+    {
+      "case_label": "PAIR_03",
+      "field": "top_visitor_share_pct",
+      "displayed": "25",
+      "normalized_six_decimal": "25.000000"
+    },
+    {
+      "case_label": "PAIR_03",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "25",
+      "normalized_six_decimal": "25.000000"
+    },
+    {
+      "case_label": "PAIR_04",
+      "field": "top_visitor_share_pct",
+      "displayed": "12.5",
+      "normalized_six_decimal": "12.500000"
+    },
+    {
+      "case_label": "PAIR_04",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "0",
+      "normalized_six_decimal": "0.000000"
+    },
+    {
+      "case_label": "PAIR_05",
+      "field": "top_visitor_share_pct",
+      "displayed": "12.5",
+      "normalized_six_decimal": "12.500000"
+    },
+    {
+      "case_label": "PAIR_05",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "0",
+      "normalized_six_decimal": "0.000000"
+    },
+    {
+      "case_label": "PAIR_06",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "0",
+      "normalized_six_decimal": "0.000000"
+    },
+    {
+      "case_label": "PAIR_07",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "0",
+      "normalized_six_decimal": "0.000000"
+    },
+    {
+      "case_label": "PAIR_08",
+      "field": "top_visitor_share_pct",
+      "displayed": "40",
+      "normalized_six_decimal": "40.000000"
+    },
+    {
+      "case_label": "PAIR_08",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "40",
+      "normalized_six_decimal": "40.000000"
+    },
+    {
+      "case_label": "PAIR_09",
+      "field": "top_visitor_share_pct",
+      "displayed": "80",
+      "normalized_six_decimal": "80.000000"
+    },
+    {
+      "case_label": "PAIR_09",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "80",
+      "normalized_six_decimal": "80.000000"
+    },
+    {
+      "case_label": "PAIR_10",
+      "field": "top_visitor_share_pct",
+      "displayed": "60",
+      "normalized_six_decimal": "60.000000"
+    },
+    {
+      "case_label": "PAIR_10",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "60",
+      "normalized_six_decimal": "60.000000"
+    },
+    {
+      "case_label": "PAIR_11",
+      "field": "top_visitor_share_pct",
+      "displayed": "40",
+      "normalized_six_decimal": "40.000000"
+    },
+    {
+      "case_label": "PAIR_11",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "80",
+      "normalized_six_decimal": "80.000000"
+    },
+    {
+      "case_label": "PAIR_12",
+      "field": "top_visitor_share_pct",
+      "displayed": "20",
+      "normalized_six_decimal": "20.000000"
+    },
+    {
+      "case_label": "PAIR_12",
+      "field": "repeat_visitor_basket_share_pct",
+      "displayed": "0",
+      "normalized_six_decimal": "0.000000"
+    }
+  ],
+  "visibility_accounting": "Twelve rows each contain one case label, four integer-count fields, two percentage displays and one PASS label: twelve labels plus forty-eight counts plus twenty-four percentages plus twelve statuses equal ninety-six fields. Seventeen percentage displays look like integers but remain percentage fields. DBeaver UI row numbers are excluded.",
+  "observed_output_columns": [
+    "case_label",
+    "n_ab",
+    "distinct_visitor_ids",
+    "repeat_visitor_ids",
+    "max_baskets_one_visitor",
+    "top_visitor_share_pct",
+    "repeat_visitor_basket_share_pct",
+    "check_status"
+  ],
+  "observed_display_rows": [
+    [
+      "PAIR_01",
+      "39",
+      "36",
+      "3",
+      "2",
+      "5.128205",
+      "15.384615",
+      "PASS"
+    ],
+    [
+      "PAIR_02",
+      "9",
+      "9",
+      "0",
+      "1",
+      "11.111111",
+      "0",
+      "PASS"
+    ],
+    [
+      "PAIR_03",
+      "8",
+      "7",
+      "1",
+      "2",
+      "25",
+      "25",
+      "PASS"
+    ],
+    [
+      "PAIR_04",
+      "8",
+      "8",
+      "0",
+      "1",
+      "12.5",
+      "0",
+      "PASS"
+    ],
+    [
+      "PAIR_05",
+      "8",
+      "8",
+      "0",
+      "1",
+      "12.5",
+      "0",
+      "PASS"
+    ],
+    [
+      "PAIR_06",
+      "7",
+      "7",
+      "0",
+      "1",
+      "14.285714",
+      "0",
+      "PASS"
+    ],
+    [
+      "PAIR_07",
+      "6",
+      "6",
+      "0",
+      "1",
+      "16.666667",
+      "0",
+      "PASS"
+    ],
+    [
+      "PAIR_08",
+      "5",
+      "4",
+      "1",
+      "2",
+      "40",
+      "40",
+      "PASS"
+    ],
+    [
+      "PAIR_09",
+      "5",
+      "2",
+      "1",
+      "4",
+      "80",
+      "80",
+      "PASS"
+    ],
+    [
+      "PAIR_10",
+      "5",
+      "3",
+      "1",
+      "3",
+      "60",
+      "60",
+      "PASS"
+    ],
+    [
+      "PAIR_11",
+      "5",
+      "3",
+      "2",
+      "2",
+      "40",
+      "80",
+      "PASS"
+    ],
+    [
+      "PAIR_12",
+      "5",
+      "5",
+      "0",
+      "1",
+      "20",
+      "0",
+      "PASS"
+    ]
+  ],
+  "observed_rows": [
+    [
+      "PAIR_01",
+      39,
+      36,
+      3,
+      2,
+      5.128205,
+      15.384615,
+      "PASS"
+    ],
+    [
+      "PAIR_02",
+      9,
+      9,
+      0,
+      1,
+      11.111111,
+      0.0,
+      "PASS"
+    ],
+    [
+      "PAIR_03",
+      8,
+      7,
+      1,
+      2,
+      25.0,
+      25.0,
+      "PASS"
+    ],
+    [
+      "PAIR_04",
+      8,
+      8,
+      0,
+      1,
+      12.5,
+      0.0,
+      "PASS"
+    ],
+    [
+      "PAIR_05",
+      8,
+      8,
+      0,
+      1,
+      12.5,
+      0.0,
+      "PASS"
+    ],
+    [
+      "PAIR_06",
+      7,
+      7,
+      0,
+      1,
+      14.285714,
+      0.0,
+      "PASS"
+    ],
+    [
+      "PAIR_07",
+      6,
+      6,
+      0,
+      1,
+      16.666667,
+      0.0,
+      "PASS"
+    ],
+    [
+      "PAIR_08",
+      5,
+      4,
+      1,
+      2,
+      40.0,
+      40.0,
+      "PASS"
+    ],
+    [
+      "PAIR_09",
+      5,
+      2,
+      1,
+      4,
+      80.0,
+      80.0,
+      "PASS"
+    ],
+    [
+      "PAIR_10",
+      5,
+      3,
+      1,
+      3,
+      60.0,
+      60.0,
+      "PASS"
+    ],
+    [
+      "PAIR_11",
+      5,
+      3,
+      2,
+      2,
+      40.0,
+      80.0,
+      "PASS"
+    ],
+    [
+      "PAIR_12",
+      5,
+      5,
+      0,
+      1,
+      20.0,
+      0.0,
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "case_label",
+    "n_ab",
+    "distinct_visitor_ids",
+    "repeat_visitor_ids",
+    "max_baskets_one_visitor",
+    "top_visitor_share_pct",
+    "repeat_visitor_basket_share_pct",
+    "check_status"
+  ],
+  "results": [
+    {
+      "case_label": "PAIR_01",
+      "n_ab": 39,
+      "distinct_visitor_ids": 36,
+      "repeat_visitor_ids": 3,
+      "max_baskets_one_visitor": 2,
+      "top_visitor_share_pct": 5.128205,
+      "repeat_visitor_basket_share_pct": 15.384615,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_02",
+      "n_ab": 9,
+      "distinct_visitor_ids": 9,
+      "repeat_visitor_ids": 0,
+      "max_baskets_one_visitor": 1,
+      "top_visitor_share_pct": 11.111111,
+      "repeat_visitor_basket_share_pct": 0.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_03",
+      "n_ab": 8,
+      "distinct_visitor_ids": 7,
+      "repeat_visitor_ids": 1,
+      "max_baskets_one_visitor": 2,
+      "top_visitor_share_pct": 25.0,
+      "repeat_visitor_basket_share_pct": 25.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_04",
+      "n_ab": 8,
+      "distinct_visitor_ids": 8,
+      "repeat_visitor_ids": 0,
+      "max_baskets_one_visitor": 1,
+      "top_visitor_share_pct": 12.5,
+      "repeat_visitor_basket_share_pct": 0.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_05",
+      "n_ab": 8,
+      "distinct_visitor_ids": 8,
+      "repeat_visitor_ids": 0,
+      "max_baskets_one_visitor": 1,
+      "top_visitor_share_pct": 12.5,
+      "repeat_visitor_basket_share_pct": 0.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_06",
+      "n_ab": 7,
+      "distinct_visitor_ids": 7,
+      "repeat_visitor_ids": 0,
+      "max_baskets_one_visitor": 1,
+      "top_visitor_share_pct": 14.285714,
+      "repeat_visitor_basket_share_pct": 0.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_07",
+      "n_ab": 6,
+      "distinct_visitor_ids": 6,
+      "repeat_visitor_ids": 0,
+      "max_baskets_one_visitor": 1,
+      "top_visitor_share_pct": 16.666667,
+      "repeat_visitor_basket_share_pct": 0.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_08",
+      "n_ab": 5,
+      "distinct_visitor_ids": 4,
+      "repeat_visitor_ids": 1,
+      "max_baskets_one_visitor": 2,
+      "top_visitor_share_pct": 40.0,
+      "repeat_visitor_basket_share_pct": 40.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_09",
+      "n_ab": 5,
+      "distinct_visitor_ids": 2,
+      "repeat_visitor_ids": 1,
+      "max_baskets_one_visitor": 4,
+      "top_visitor_share_pct": 80.0,
+      "repeat_visitor_basket_share_pct": 80.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_10",
+      "n_ab": 5,
+      "distinct_visitor_ids": 3,
+      "repeat_visitor_ids": 1,
+      "max_baskets_one_visitor": 3,
+      "top_visitor_share_pct": 60.0,
+      "repeat_visitor_basket_share_pct": 60.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_11",
+      "n_ab": 5,
+      "distinct_visitor_ids": 3,
+      "repeat_visitor_ids": 2,
+      "max_baskets_one_visitor": 2,
+      "top_visitor_share_pct": 40.0,
+      "repeat_visitor_basket_share_pct": 80.0,
+      "check_status": "PASS"
+    },
+    {
+      "case_label": "PAIR_12",
+      "n_ab": 5,
+      "distinct_visitor_ids": 5,
+      "repeat_visitor_ids": 0,
+      "max_baskets_one_visitor": 1,
+      "top_visitor_share_pct": 20.0,
+      "repeat_visitor_basket_share_pct": 0.0,
+      "check_status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "877cab7cb6760152fb92062a524eccf1d51f188e286f0e7aa67415625ae3e544",
+  "screenshot_rounded_percentage_values_match_returned_SQL_report_exactly": true,
+  "screenshot_confirms_unrounded_percentage_values": false,
+  "fingerprint_method": "SHA-256 of twelve normalized compact JSON row arrays in output_columns order followed by LF, preserving case order and returned SQL numeric types: four integer counts and two floating percentages per row. Exact screenshot agreement concerns six-decimal displayed report values rather than mathematical exactness of unrounded calculations.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "membership_details_published": false,
+  "raw_pair_or_visitor_identifiers_published": false,
+  "snapshot_case_aggregate_report_only": true,
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "property_history_not_reverified": true,
+  "UTC_fields_not_reverified": true,
+  "full17_not_reverified": true,
+  "reference_hierarchy_not_reverified": true,
+  "selected_pairs": 12,
+  "selected_pair_occurrences": 110,
+  "frozen_SQL82_case_order_and_n_ab_verified_from_report": true,
+  "percentage_denominator": "Each case n_ab, not the cross-case sum of 110.",
+  "repeat_visitor_definition": "An ID contributes at least two paired baskets within that case.",
+  "repeat_share_numerator": "All paired baskets from repeat-contributing IDs, not only their surplus above one.",
+  "high_concentration_treated_as_failure": false,
+  "visitor_ids_are_verified_people": false,
+  "independence_or_causal_significance_estimated": false,
+  "case_labels_snapshot_specific": true,
+  "persistent_private_identifier_mapping_created": false,
+  "scope": "Accepts all ninety-six visible fields of SQL83 reproduction, with twelve PASS rows and no NULLs. All twelve case labels and n_ab values match the frozen SQL82 order. Both shares use the current case n_ab; repeat share includes every paired basket from IDs contributing at least twice. PAIR_01 records 39 paired baskets across 36 IDs with maximum contribution two, while PAIR_09 records five paired baskets across two IDs with maximum four; these are descriptive ID counts, not verified-person reach or independent observations. Cross-case ID counts cannot be added as globally distinct people. High concentration does not itself fail a check or prove data error. Nineteen current-screenshot shortened percentages normalize exactly to the returned six-decimal report; visible zeroes remain numeric. The screenshot does not directly verify the 98 private five-field contributor groups, source reconstruction or fixtures, which remain supported by frozen assistant evidence. No source, learner database or metric-formula stream is accessed for acceptance. No temporal-stability, verified-order, recommendation, causal-significance or conceptual-mastery claim is made. Earlier learner-pending statements remain intact as history; this appendix establishes current acceptance."
+}
