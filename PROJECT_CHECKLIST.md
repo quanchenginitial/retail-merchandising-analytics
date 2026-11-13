@@ -203,7 +203,9 @@
 - [x] 7AC 助手准备并预检只读 [SQL81 关联指标与数量门槛概览](sql/81_analyze_retailrocket_basket_association_metrics.sql)：按最少共现篮子数 1、2、3、5、10，汇总保留商品对、支持度、双向置信度及提升度；见 [验证说明](docs/RETAILROCKET_BASKET_ASSOCIATION_METRICS_VALIDATION.md)。五行九列正常全部 PASS。支持度及商品边际频率采用全部 17,672 个候选篮子；保留商品对比例采用 9,688 对。每对两方向等权汇总置信度中位数，阈值行重叠，不能相加。独立验证核对重建六字段成员输入及全部未舍入十字段商品对指标，复用已验收来源证据。
 - [x] 7AC 用户于 2026-11-13 截图验收 SQL81：五行 × 九列、45 个字段完整匹配，含 15 个整数计数字段、25 个指标显示和五项 PASS，无 NULL；七处省略末尾零的指标显示精确归一化，见 [聚合验收](data/retailrocket_basket_association_metrics_learner_acceptance.json)。共现门槛 1/2/3/5/10 分别保留 9,688/903/79/12/1 对；门槛逐层包含，不能相加，也不代表最佳门槛。
 - [x] 7AD 助手准备并预检只读 [SQL82 商品对案例](sql/82_analyze_retailrocket_basket_pair_cases.sql)：展示所有共现至少五个候选篮子的十二对商品，不使用 LIMIT，合计 110 次商品对出现；见 [验证说明](docs/RETAILROCKET_BASKET_PAIR_CASES_VALIDATION.md)。九列分别给出快照案例标签、共现及各商品篮子数、支持度、两个方向置信度、提升度和检查状态，正常十二行全部 PASS。PAIR_01–PAIR_12 不暴露原编号，标签不保证跨快照稳定，A/B 仅是每对内部角色。助手新增验证限于选中的十二行十字段指标及报告，复用 SQL81 全量指标证据。
-- [ ] 7AD 用户执行 SQL82，提供十二行 × 九列完整结果，正常十二项 PASS。此步只读、不建表；门槛五为查看 SQL81 后选择的探索性案例范围，不代表最优或十二对均可靠。
+- [x] 7AD 用户于 2026-11-13 截图验收 SQL82：十二行 × 九列、108 个字段完整匹配，含十二个案例标签、36 个整数计数字段、48 个指标显示和十二项 PASS，无 NULL；六处省略末尾零的显示精确归一化，见 [聚合验收](data/retailrocket_basket_pair_cases_learner_acceptance.json)。所有十二个 n_ab≥5 案例合计 110 次商品对出现；标签、逐对双向置信度和展示顺序均匹配。
+- [x] 7AE 助手准备并预检只读 [SQL83 访客编号贡献集中度](sql/83_analyze_retailrocket_pair_visitor_concentration.sql)：保留 SQL82 十二个案例及顺序，查看共现篮子在访客编号之间的分布；见 [验证说明](docs/RETAILROCKET_PAIR_VISITOR_CONCENTRATION_VALIDATION.md)。十二行八列正常全部 PASS。重复贡献编号指该案例贡献至少两个篮子的编号，其贡献占比纳入这些编号的全部共现篮子；两个占比分母均为当前案例 n_ab。新增独立比较限于选中案例×访客编号分组，最多 110 行五个整数字段，不重验全量或选中指标公式。
+- [ ] 7AE 用户执行 SQL83，提供十二行 × 八列完整结果，正常十二项 PASS。高集中度是描述性发现，不导致 FAIL；访客编号不等于已核实自然人，也不证明观测独立。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -213,6 +215,6 @@
 
 ## 下一次对话从这里继续
 
-SQL81 已于 2026-11-13 截图验收：45 个字段完整匹配，五项 PASS，无 NULL，七处指标显示归一化不改变数值。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL82](sql/82_analyze_retailrocket_basket_pair_cases.sql)，逐对查看全部十二个共现至少五次的候选，展示各自两个方向的置信度。助手预检通过、用户执行待完成；十二行九列正常全部 PASS。门槛是事后选择的探索范围，案例标签仅在本快照成立；全部 17,672 个候选篮子仍作支持度与商品边际频率的总体。尚不形成业务推荐，RF、规则验证及 Power BI 仍未完成。
+SQL82 已于 2026-11-13 截图验收：108 个字段完整匹配，十二项 PASS，无 NULL；六处指标显示归一化不改变数值。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行只读 [SQL83](sql/83_analyze_retailrocket_pair_visitor_concentration.sql)，检查同一批十二个案例的共现是否由少数访客编号反复贡献。助手预检通过、用户执行待完成；十二行八列正常全部 PASS。各占比用本案例 n_ab 作分母，重复贡献占比纳入重复编号的全部共现篮子。集中度不代表数据错误，编号不等于自然人或独立样本；RF、规则验证及 Power BI 仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
