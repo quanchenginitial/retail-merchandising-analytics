@@ -45,3 +45,36 @@ python validation/validate_retailrocket_rf_bi_export.py --csv "D:/database/retai
 ```
 
 Use the actual new filename if a different name was chosen. This command reads the supplied CSV, prints PASS/FAIL plus byte and semantic fingerprints, and does not modify it. It has not been run against a learner export in this preparation step. No actual learner CSV byte hash exists in the evidence yet: learner_export_received=false and learner_export_validated=false. SQL90 is ready for the learner's export; CSV validation and subsequent Power BI work remain pending.
+
+## Learner query-result screenshot acceptance - 15 November 2026
+
+The learner supplied the SQL90 DBeaver result grid on 2026-11-15 (Australia/Sydney). All sixteen rows, all seven complete headers and all 112 data fields are visible. This result contains sixteen reference timestamps, thirty-two ordering integers, thirty-two count integers and thirty-two band labels. There is no status/PASS column, NULL or TOTAL row. DBeaver UI row numbers and headers are excluded from the 112-field count. See [query-result acceptance](../data/retailrocket_rf_bi_export_query_learner_acceptance.json).
+
+| reference_timestamp_ms | recency_order | recency_band | frequency_order | frequency_band | visitor_ids | candidate_baskets |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1442545187788 | 1 | R_LT_7D | 1 | F_1 | 413 | 413 |
+| 1442545187788 | 1 | R_LT_7D | 2 | F_2 | 29 | 58 |
+| 1442545187788 | 1 | R_LT_7D | 3 | F_3_4 | 15 | 48 |
+| 1442545187788 | 1 | R_LT_7D | 4 | F_5_PLUS | 19 | 1517 |
+| 1442545187788 | 2 | R_7_TO_LT_30D | 1 | F_1 | 1711 | 1711 |
+| 1442545187788 | 2 | R_7_TO_LT_30D | 2 | F_2 | 119 | 238 |
+| 1442545187788 | 2 | R_7_TO_LT_30D | 3 | F_3_4 | 30 | 99 |
+| 1442545187788 | 2 | R_7_TO_LT_30D | 4 | F_5_PLUS | 24 | 402 |
+| 1442545187788 | 3 | R_30_TO_LT_60D | 1 | F_1 | 2366 | 2366 |
+| 1442545187788 | 3 | R_30_TO_LT_60D | 2 | F_2 | 176 | 352 |
+| 1442545187788 | 3 | R_30_TO_LT_60D | 3 | F_3_4 | 42 | 136 |
+| 1442545187788 | 3 | R_30_TO_LT_60D | 4 | F_5_PLUS | 25 | 916 |
+| 1442545187788 | 4 | R_GE_60D | 1 | F_1 | 6166 | 6166 |
+| 1442545187788 | 4 | R_GE_60D | 2 | F_2 | 424 | 848 |
+| 1442545187788 | 4 | R_GE_60D | 3 | F_3_4 | 90 | 292 |
+| 1442545187788 | 4 | R_GE_60D | 4 | F_5_PLUS | 70 | 2110 |
+
+Exactly twenty-four integer cells contain thousands separators: all sixteen reference timestamps; visitor_ids at result rows 5, 9 and 13; and candidate_baskets at rows 4, 5, 9, 13 and 16. This is sixteen timestamp cells plus eight count cells, containing seventy-two commas in total. The remaining fifty-six integer-valued cells use plain integer text. Normalization removes these separators only, without rounding or value estimation. Grid display formatting does not establish later CSV serialization settings.
+
+All 112 normalized values and their order match the accepted SQL89 sixteen-row target proof. Rows are ordered by recency_order and then frequency_order, all reference values are 1442545187788, and counts sum to 11,719 visitor IDs and 17,672 full-window candidate baskets. The query-result semantic SHA-256 is `cbcc0bc2cb3daf2ee510ae138b8091e3fd29277a34ea34ef25b348fcff0ff33e`, identical to the accepted aggregate proof. This hash describes the screenshot's transcribed typed values; it is not a byte hash or a measured semantic hash of an actual learner CSV.
+
+Only the query result is accepted here. The screenshot does not establish whether a CSV exists or was exported, its path, encoding, delimiter, plain-integer serialization or bytes. It also does not verify Power BI import, types, sorting, model or dashboard work. The learner has not supplied confirmed CSV export evidence in this screenshot; actual file export and validation remain pending. No CSV was created from the accepted proof or passed off as a learner export.
+
+The assistant inspected the screenshot and existing evidence artifacts only: no source data, learner database, SQL execution, CSV verifier, file-existence probe or fixtures were used for this acceptance. The complete executed SQL text and exact database types are not independently established by the grid; frozen assistant evidence retains that preparation scope. Earlier statements remain byte-for-byte as historical context; this appendix records later query-result acceptance without promoting CSV export to complete.
+
+The entire prior 6,773-byte method/results document is preserved at `f4a1dd163205a52057bcc8e6caeba4d7baa8eca90f061b2f2e1d5098b76c0d42`. Its frozen 4,193-byte method prefix remains `c42bda0113fa06c10fd24e5c13678d22e9bcd6a6a017c14389fa74d75ce170d7`.

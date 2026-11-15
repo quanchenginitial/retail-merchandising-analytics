@@ -1,12 +1,12 @@
 # Retailrocket：独立来源接收与核验
 
-核对日期：2026-11-02（Australia/Sydney）。 本页进度更新：2026-11-15（Australia/Sydney）。本页衔接 [数据集选择](DATASET_SELECTION_ZH.md) 与 [学习路线](ROADMAP_ZH.md)。用户已提供 D:/database/retailrocket 中四份 CSV，助手已完成全量只读结构审计，38/38 检查通过，见 [实测审计](RETAILROCKET_SOURCE_AUDIT.md)。文件均未修改；截至 2026-11-15，来源与模型、事件事实表、SQL70–77 漏斗探索及 SQL78–84 描述性商品关联、SQL85–88 描述性 RF 基线及 SQL89 BI 汇总来源均已由用户截图验收，下一步为 SQL90 CSV 导出。
+核对日期：2026-11-02（Australia/Sydney）。 本页进度更新：2026-11-15（Australia/Sydney）。本页衔接 [数据集选择](DATASET_SELECTION_ZH.md) 与 [学习路线](ROADMAP_ZH.md)。用户已提供 D:/database/retailrocket 中四份 CSV，助手已完成全量只读结构审计，38/38 检查通过，见 [实测审计](RETAILROCKET_SOURCE_AUDIT.md)。文件均未修改；截至 2026-11-15，来源与模型、事件事实表、SQL70–77 漏斗探索及 SQL78–84 描述性商品关联、SQL85–88 描述性 RF 基线及 SQL89 BI 汇总来源均已由用户截图验收，SQL90 查询结果亦已验收，下一步直接导出当前结果表格为 CSV。
 
-## BI 汇总来源已验收，下一步导出 CSV
+## SQL90 查询结果已验收，下一步导出当前表格
 
 用户已取得四份已解压文件。本次核验确认文件大小与此前官方版本 2 清单一致，实际行数与发布总数一致，扫描前后本地 SHA-256 未变。没有官方校验和对照，也未核验原压缩包或具体下载过程。[官方来源页面](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset) 保留用于来源追溯。
 
-SQL89 已于 2026-11-15 截图验收，见 [BI 汇总验收](../data/retailrocket_rf_bi_summary_learner_acceptance.json)：五个完整表头及 100 个数据字段匹配、20 项 PASS、无 NULL。[RF 阶段发现](STAGE07_RF_FINDINGS.md) 保持已验收口径。下一步按 [当前一步](FIRST_STEP_ZH.md) 执行只读 SQL90，并在 DBeaver 将全部 16 行七字段导出为 CSV；助手预检通过，用户导出及实际文件核验待完成。Power BI 导入、类型、排序、模型和页面尚未完成。
+SQL89 已于 2026-11-15 截图验收，见 [BI 汇总验收](../data/retailrocket_rf_bi_summary_learner_acceptance.json)：五个完整表头及 100 个数据字段匹配、20 项 PASS、无 NULL。[RF 阶段发现](STAGE07_RF_FINDINGS.md) 保持已验收口径。[SQL90 查询截图](../data/retailrocket_rf_bi_export_query_learner_acceptance.json) 的七个完整表头与 112 个数据值也已验收。下一步按 [当前一步](FIRST_STEP_ZH.md) 直接在当前 DBeaver 结果表格导出全部 16 行七字段，无需重跑查询；实际 CSV 尚未收到或核验。Power BI 导入、类型、排序、模型和页面尚未完成。
 
 ## 本次核对到的版本与清单
 
@@ -39,7 +39,7 @@ SQL89 已于 2026-11-15 截图验收，见 [BI 汇总验收](../data/retailrocke
 
 `categoryid` 和 `available` 有发布方解释；其他属性经过匿名编码，不能擅自认定某列是价格或成本。`available` 表示发布方记录的可用性，不能解释为精确库存数量，未知也不等于不可售。[来源：属性说明](https://www.kaggle.com/api/v1/datasets/view/retailrocket/ecommerce-dataset)
 
-行为模块已完成描述性 **RF 基线**：总体为 11,719 个有 transaction 记录的访客编号；F 为整个观察窗口内不同 (visitorid, transactionid) 候选篮子数，R 为固定全局事件终点 2015-09-18 02:59:47.788 UTC 减去每编号最后交易记录时间。区间和粒度已通过 SQL85–88 验收，不使用事件行数或活跃日替代篮子频次。没有经核实交易金额，因此不称为货币 RFM。漏斗、描述性购物篮、RF 基线及同一快照的 BI 汇总来源已验收；下一步通过 SQL90 导出 CSV，助手预检通过，用户导出和实际文件核验待完成。会话划分、RF 时间稳定性和业务影响验证、组合规则效果及 Power BI 仍待后续实施与验收。
+行为模块已完成描述性 **RF 基线**：总体为 11,719 个有 transaction 记录的访客编号；F 为整个观察窗口内不同 (visitorid, transactionid) 候选篮子数，R 为固定全局事件终点 2015-09-18 02:59:47.788 UTC 减去每编号最后交易记录时间。区间和粒度已通过 SQL85–88 验收，不使用事件行数或活跃日替代篮子频次。没有经核实交易金额，因此不称为货币 RFM。漏斗、描述性购物篮、RF 基线及同一快照的 BI 汇总来源已验收；SQL90 查询结果亦已验收，下一步直接导出当前表格为 CSV，实际文件尚未收到或核验。会话划分、RF 时间稳定性和业务影响验证、组合规则效果及 Power BI 仍待后续实施与验收。
 
 M5 与 Retailrocket 是独立来源：M5 分析商品×门店×日期的销量；Retailrocket 分析匿名访客×商品×时间的行为。二者不共享业务主键，不连接商品或访客编号，也不汇总成同一家公司的销售结果。原有 M5 预测、价格及异常候选证据保持原口径。
 
