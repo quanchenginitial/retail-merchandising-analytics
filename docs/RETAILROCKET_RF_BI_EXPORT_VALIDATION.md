@@ -78,3 +78,31 @@ Only the query result is accepted here. The screenshot does not establish whethe
 The assistant inspected the screenshot and existing evidence artifacts only: no source data, learner database, SQL execution, CSV verifier, file-existence probe or fixtures were used for this acceptance. The complete executed SQL text and exact database types are not independently established by the grid; frozen assistant evidence retains that preparation scope. Earlier statements remain byte-for-byte as historical context; this appendix records later query-result acceptance without promoting CSV export to complete.
 
 The entire prior 6,773-byte method/results document is preserved at `f4a1dd163205a52057bcc8e6caeba4d7baa8eca90f061b2f2e1d5098b76c0d42`. Its frozen 4,193-byte method prefix remains `c42bda0113fa06c10fd24e5c13678d22e9bcd6a6a017c14389fa74d75ce170d7`.
+
+## Actual learner CSV acceptance - 15 November 2026
+
+The learner confirmed export and provided D:/database/retailrocket/rf_segment_summary.csv. The assistant ran the existing frozen [CSV validator](../validation/validate_retailrocket_rf_bi_export.py) once against that actual file and received PASS. This is separate from the earlier query-result screenshot: the file itself has now been read and validated. See [actual-file acceptance](../data/retailrocket_rf_bi_export_file_acceptance.json). The successful structured validator result was captured as normalized UTF-8/LF JSON and compared exactly with the acceptance record; this is not a claim about raw process-stdout bytes.
+
+| Verified property | Actual result |
+| --- | --- |
+| File size | 830 bytes |
+| Encoding | UTF-8, no BOM |
+| Delimiter and header | Comma; exact seven field names in order |
+| Data shape | 16 rows by 7 fields; all 112 values match |
+| Numeric serialization | 80 plain nonnegative integer fields, without thousands separators or decimal notation |
+| Label fields | 32 exact R/F labels |
+| Row order | recency_order, then frequency_order, ascending |
+| Reference timestamp | 1442545187788 |
+| Visitor-ID count sum | 11,719 |
+| Candidate-basket count sum | 17,672 |
+| NULL values / TOTAL rows / status column | None |
+
+Physical file SHA-256: `4498338acc50a4aa01362aaf34859d53657dc3a285d1cdb38a8a59f3a9a7559f`.
+
+Typed-content semantic SHA-256: `cbcc0bc2cb3daf2ee510ae138b8091e3fd29277a34ea34ef25b348fcff0ff33e`. This equals the accepted SQL89 aggregate proof and SQL90 query-result semantic hash. It is computed over compact JSON arrays of the seven typed fields in file order, each followed by LF, excluding the header. The byte hash identifies this exact CSV serialization; the semantic hash identifies its ordered typed data. The validator's PASS is a check result, not an added CSV column.
+
+The verifier also confirmed that file size and modification time were unchanged while it read the file. Acceptance recording independently observed the same 830-byte size, modification time and byte hash before and after its read-only identity checks; it did not rerun the verifier. The file was not modified, recreated from proof data, copied into the public repository or uploaded. No original source files, learner database, SQL, historical analyses or fixtures were rerun. The earlier screenshot's thousands separators require no normalization in this actual CSV, whose integer fields already have the required plain format.
+
+Actual CSV export and file validation are now accepted. The learner has confirmed that Power BI Desktop is installed and opens; that confirms application availability only. Power BI import, column types, label sorting, model, measures, relationships, dashboard and interaction validation remain pending. Earlier preparation and query-only pending statements remain unchanged as historical records; this appendix records the later file-level acceptance.
+
+The entire prior 10,796-byte method/results document is preserved at `c16eb94687c9ef9799c9e5f7d6397a97f570615a8385bf5aa436695675fa0821`. Its frozen 4,193-byte method prefix remains `c42bda0113fa06c10fd24e5c13678d22e9bcd6a6a017c14389fa74d75ce170d7`.
