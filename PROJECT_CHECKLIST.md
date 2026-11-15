@@ -213,7 +213,9 @@
 - [x] 7AH 助手准备并预检只读 [SQL86 最近交易间隔](sql/86_analyze_retailrocket_visitor_purchase_recency.sql)：以已冻结全体事件终点 2015-09-18 02:59:47.788 UTC 减去每编号最后交易观测时间，按精确毫秒分入小于 7、7 至小于 30、30 至小于 60、至少 60 天区间；见 [验证说明](docs/RETAILROCKET_VISITOR_PURCHASE_RECENCY_VALIDATION.md)。总体仍为 11,719 个有交易记录编号，新增全量两时间整数及编号共三字段比较，展示时才将天数保留六位小数。
 - [x] 7AH 用户于 2026-11-13 截图验收 SQL86：35 个字段完整匹配、五项 PASS、无 NULL；两处百分比及四处千位分隔计数精确归一化，见 [验收](data/retailrocket_visitor_purchase_recency_learner_acceptance.json)。参考时点与精确毫秒区间保持冻结。
 - [x] 7AI 助手准备并预检只读 [SQL87 RF 交叉矩阵](sql/87_analyze_retailrocket_visitor_rf_segments.sql)：沿用四个 R 和四个 F 区间，保留 16 个组合（即使计数为零也保留）及 TOTAL，见 [验证说明](docs/RETAILROCKET_VISITOR_RF_SEGMENTS_VALIDATION.md)。两个占比分母分别为全部 11,719 个有交易记录编号与 17,672 个候选篮子；格内篮子为这些编号整个观察窗口的 F 合计。新增全量 11,719 行六字段 RF 明细独立比较，复用已验收边际证据。
-- [ ] 7AI 用户执行 SQL87，提供 17 行 × 七列完整结果，正常 17 项 PASS。矩阵是固定区间的描述性 RF 基线，不是经过效果验证的客户价值、流失或忠诚标签。
+- [x] 7AI 用户于 2026-11-15 截图验收 SQL87：119 个字段完整匹配、17 项 PASS、无 NULL；四处百分比与十处千位分隔计数精确归一化，见 [验收](data/retailrocket_visitor_rf_segments_learner_acceptance.json)。16 个互斥组合合计 11,719 个交易记录编号与 17,672 个全观察期候选篮子。
+- [x] 7AJ 助手准备并预检只读 [SQL88 RF 组内篮子集中度](sql/88_analyze_retailrocket_rf_basket_concentration.sql)：按 F 降序、编号升序确定各组前一名与前五名的全窗口篮子贡献，见 [验证说明](docs/RETAILROCKET_RF_BASKET_CONCENTRATION_VALIDATION.md)。占比分母为当前组篮子数；TOTAL 从全部编号重新排名，不能相加各组顶部贡献。新增完整 11,719 行八字段排名比较，复用 SQL87 RF 指纹。
+- [ ] 7AJ 用户执行 SQL88，提供 17 行 × 九列完整结果，正常 17 项 PASS。空组计数为零、两个占比为 NULL；若非空组少于五个编号，前五名覆盖全部成员。集中度只提供核查线索，不判定欺诈、高价值或忠诚。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -223,6 +225,6 @@
 
 ## 下一次对话从这里继续
 
-SQL86 已于 2026-11-13 截图验收，35 个字段匹配、五项 PASS、无 NULL。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 运行只读 SQL87，组合已验收的 R 与 F，查看 16 格与 TOTAL 的编号数和全观察窗口篮子数。助手预检通过、用户执行待完成；17 行七列正常全部 PASS。不把格内篮子解释为最近 7/30/60 天的交易，也不把描述性区间解释为价值或流失评分。独立时间验证及 Power BI 仍未完成。
+SQL87 已于 2026-11-15 截图验收，119 个字段匹配、17 项 PASS、无 NULL。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 运行只读 SQL88，检查每个 RF 组的篮子是否集中于少数编号。助手预检通过、用户执行待完成；17 行九列正常全部 PASS。分母改为本组篮子总数，TOTAL 顶部贡献在全体编号中重新计算；全窗口口径不变。独立时间验证及 Power BI 仍未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

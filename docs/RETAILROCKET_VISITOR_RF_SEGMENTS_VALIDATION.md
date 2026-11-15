@@ -81,3 +81,35 @@ The canonical source parse/reconstruction took 16.866 seconds and the independen
 Source identity, pinned dependencies and all 85 historical preflight artifacts remained unchanged. Private database byte hashes matched across read-only phases; temporary CSV, database and spills were removed. The learner database, properties, category reference and enriched fact were not opened. The result is a descriptive R/F cross-tabulation of transaction-recorded identifiers with finite-window and unequal-exposure limitations. It does not establish monetary RFM, lifetime value, churn, retention, loyalty, verified people/orders or validated customer-response segments.
 
 Report SHA-256: `390d6ae85a24500168443d351f1b1f12fec4a8a090b1176126b58567c63537c4`. Script SHA-256: `59ef1d7dfd6140fcae4b8bd98347d2f9e3d12f94b863698c1b7847130fa0a68f`. Validator SHA-256: `54e07f76b204cd6e3af31994c09d6708255b0ae6ed8dbf7a475915bcd504c287`. The frozen 7,441-byte method prefix remains unchanged at `383cdaf6ed6e0555445eff9e65a53db334933022de4b8500c8ab0293d0f7f350`.
+
+## Learner screenshot acceptance — 15 November 2026
+
+The learner supplied a complete DBeaver SQL87 screenshot on 2026-11-15 (Australia/Sydney). All seventeen rows and seven headers are visible. The 119 visible fields comprise 34 band labels, 34 integer counts, 34 percentage values and 17 PASS labels; no field is NULL or hidden. Every normalized value matches the frozen assistant report. DBeaver UI row numbers are not data fields. See [machine-readable acceptance](../data/retailrocket_visitor_rf_segments_learner_acceptance.json).
+
+| recency_band | frequency_band | visitor_ids | visitor_share_pct | candidate_baskets | basket_share_pct | check_status |
+| --- | --- | --- | --- | --- | --- | --- |
+| R_LT_7D | F_1 | 413 | 3.524191 | 413 | 2.337030 | PASS |
+| R_LT_7D | F_2 | 29 | 0.247461 | 58 | 0.328203 | PASS |
+| R_LT_7D | F_3_4 | 15 | 0.127997 | 48 | 0.271616 | PASS |
+| R_LT_7D | F_5_PLUS | 19 | 0.162130 | 1517 | 8.584201 | PASS |
+| R_7_TO_LT_30D | F_1 | 1711 | 14.600222 | 1711 | 9.681983 | PASS |
+| R_7_TO_LT_30D | F_2 | 119 | 1.015445 | 238 | 1.346763 | PASS |
+| R_7_TO_LT_30D | F_3_4 | 30 | 0.255995 | 99 | 0.560208 | PASS |
+| R_7_TO_LT_30D | F_5_PLUS | 24 | 0.204796 | 402 | 2.274785 | PASS |
+| R_30_TO_LT_60D | F_1 | 2366 | 20.189436 | 2366 | 13.388411 | PASS |
+| R_30_TO_LT_60D | F_2 | 176 | 1.501835 | 352 | 1.991852 | PASS |
+| R_30_TO_LT_60D | F_3_4 | 42 | 0.358392 | 136 | 0.769579 | PASS |
+| R_30_TO_LT_60D | F_5_PLUS | 25 | 0.213329 | 916 | 5.183341 | PASS |
+| R_GE_60D | F_1 | 6166 | 52.615411 | 6166 | 34.891354 | PASS |
+| R_GE_60D | F_2 | 424 | 3.618056 | 848 | 4.798551 | PASS |
+| R_GE_60D | F_3_4 | 90 | 0.767984 | 292 | 1.652331 | PASS |
+| R_GE_60D | F_5_PLUS | 70 | 0.597321 | 2110 | 11.939792 | PASS |
+| TOTAL | TOTAL | 11719 | 100.000000 | 17672 | 100.000000 | PASS |
+
+Four percentage displays are shorter than six decimals: 2.33703 and 0.16213 gain only a trailing zero, and both TOTAL values display 100 rather than 100.000000. Thirty percentage cells already show six decimal places. Ten integer fields contain thousands separators. These are display-only normalizations; no unrounded precision is asserted. All sixteen observed cells are nonempty and partition 11,719 visitor IDs and 17,672 candidate baskets. TOTAL summarizes the sixteen cells and must not be added again.
+
+The matrix uses the same exact elapsed-time R boundaries, full composite-basket F and frozen 2015-09-18T02:59:47.788000Z reference. Each cell's basket total is the full-window frequency of its assigned IDs, not only baskets during the R interval. For example, R_LT_7D/F_5_PLUS contains 19 IDs and 1,517 full-window candidate baskets (8.584201% of all baskets); this does not mean five or more baskets occurred within seven days. No amount, verified identity/order, churn, loyalty or business-response meaning is added.
+
+The screenshot verifies the returned aggregate report, not the hidden 11,719-by-six visitor assignments, exact underlying millisecond comparisons, source reconstruction or synthetic cases. Those remain backed by frozen assistant evidence. No source file, learner database, SQL or fixture was reopened or rerun for acceptance. No screenshot, original IDs or member-level records are committed. Earlier pending statements above are preserved as historical execution context; this appendix records learner acceptance of the descriptive RF matrix. Independent temporal validation and response-effect evaluation remain separate work.
+
+Accepted report SHA-256: `390d6ae85a24500168443d351f1b1f12fec4a8a090b1176126b58567c63537c4`. The full prior 13,137-byte method/results document remains unchanged at `0b02f8b3e319b85bb0bb45ab6bd7475ef51ac486287a88d81ec6c30d38c28839`; its frozen 7,441-byte method prefix remains `383cdaf6ed6e0555445eff9e65a53db334933022de4b8500c8ab0293d0f7f350`. The acceptance JSON's snapshot is derived from the visible screenshot rather than a new data query.
