@@ -215,7 +215,10 @@
 - [x] 7AI 助手准备并预检只读 [SQL87 RF 交叉矩阵](sql/87_analyze_retailrocket_visitor_rf_segments.sql)：沿用四个 R 和四个 F 区间，保留 16 个组合（即使计数为零也保留）及 TOTAL，见 [验证说明](docs/RETAILROCKET_VISITOR_RF_SEGMENTS_VALIDATION.md)。两个占比分母分别为全部 11,719 个有交易记录编号与 17,672 个候选篮子；格内篮子为这些编号整个观察窗口的 F 合计。新增全量 11,719 行六字段 RF 明细独立比较，复用已验收边际证据。
 - [x] 7AI 用户于 2026-11-15 截图验收 SQL87：119 个字段完整匹配、17 项 PASS、无 NULL；四处百分比与十处千位分隔计数精确归一化，见 [验收](data/retailrocket_visitor_rf_segments_learner_acceptance.json)。16 个互斥组合合计 11,719 个交易记录编号与 17,672 个全观察期候选篮子。
 - [x] 7AJ 助手准备并预检只读 [SQL88 RF 组内篮子集中度](sql/88_analyze_retailrocket_rf_basket_concentration.sql)：按 F 降序、编号升序确定各组前一名与前五名的全窗口篮子贡献，见 [验证说明](docs/RETAILROCKET_RF_BASKET_CONCENTRATION_VALIDATION.md)。占比分母为当前组篮子数；TOTAL 从全部编号重新排名，不能相加各组顶部贡献。新增完整 11,719 行八字段排名比较，复用 SQL87 RF 指纹。
-- [ ] 7AJ 用户执行 SQL88，提供 17 行 × 九列完整结果，正常 17 项 PASS。空组计数为零、两个占比为 NULL；若非空组少于五个编号，前五名覆盖全部成员。集中度只提供核查线索，不判定欺诈、高价值或忠诚。
+- [x] 7AJ 用户于 2026-11-15 截图验收 SQL88：153 个数据字段匹配、17 项 PASS、无 NULL；末列状态表头被裁切，以冻结 SQL 合同识别，完整 PASS 值均可见。五处百分比和十二处千位分隔计数精确归一化，见 [验收](data/retailrocket_rf_basket_concentration_learner_acceptance.json)。
+- [x] 7AJ 描述性 RF 基线里程碑通过 SQL85–88 验收，整理 [RF 发现、业务含义与限制](docs/STAGE07_RF_FINDINGS.md)。涵盖频次、最近交易间隔、交叉分组及组内篮子集中度；独立时间验证、业务影响与金额 RFM 未实现。
+- [x] 7AK 助手准备并预检 [SQL89 RF BI 汇总表](sql/89_build_retailrocket_rf_bi_summary.sql)：一次性创建 rr_bi.rf_segment_summary，16 个互斥 RF 组合、七个有类型字段，见 [验证说明](docs/RETAILROCKET_RF_BI_SUMMARY_VALIDATION.md)。只存参考时点、排序、标签及可加总编号/篮子数，不存 TOTAL、百分比或非可加总的 top-k。新增完整 16 行七字段物化表比较，复用已验收 RF 证据。
+- [ ] 7AK 用户执行 SQL89，提供 20 行 × 五列检查结果，正常 20 项 PASS。目标已存在时停止创建并先核对现有对象，不删除或替换。此步只准备 BI 数据源，Power BI 导入、模型、指标与图表仍待实施。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -225,6 +228,6 @@
 
 ## 下一次对话从这里继续
 
-SQL87 已于 2026-11-15 截图验收，119 个字段匹配、17 项 PASS、无 NULL。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 运行只读 SQL88，检查每个 RF 组的篮子是否集中于少数编号。助手预检通过、用户执行待完成；17 行九列正常全部 PASS。分母改为本组篮子总数，TOTAL 顶部贡献在全体编号中重新计算；全窗口口径不变。独立时间验证及 Power BI 仍未完成。
+SQL88 的 153 个数据字段已验收，17 项 PASS；状态表头裁切情况已记录。SQL85–88 的描述性 RF 基线已整理为 [阶段发现](docs/STAGE07_RF_FINDINGS.md)。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 SQL89，一次性创建 16 行七字段的 BI 汇总表，保留可加总计数并排除 TOTAL，避免后续重复汇总。助手预检通过，用户建表与 20 项检查待验收；Power BI 页面和业务效果验证尚未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。
