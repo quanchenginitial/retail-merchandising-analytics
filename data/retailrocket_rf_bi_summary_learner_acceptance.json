@@ -1,0 +1,552 @@
+{
+  "observed_date": "2026-11-15",
+  "timezone": "Australia/Sydney",
+  "executor": "learner",
+  "acceptance_status": "accepted",
+  "evidence_type": "Assistant independent visual transcription of the learner-supplied DBeaver SQL89 build/audit screenshot. All twenty rows, all five column headers and all 100 returned data fields are fully visible, with twenty PASS values and no NULLs. No direct learner-database inspection.",
+  "screenshot_basename": "codex-clipboard-25e89e3f-e852-4936-9dee-372535ecf318.png",
+  "screenshot_provenance": "The learner supplied this DBeaver result screenshot in the current conversation. The assistant inspected the original local image without editing it. No hidden header or data value was inferred.",
+  "script": "sql/89_build_retailrocket_rf_bi_summary.sql",
+  "script_sha256": "df40c28e490128b7305266c933c15b6831e2ed4e865abcb01ecc4e09a2d20190",
+  "validator": "validation/preflight_retailrocket_rf_bi_summary.py",
+  "validator_sha256": "28dbd5356176fbcb4caab93f1aac0dfc6edb09e27d4979edc612d5c4865f04f0",
+  "assistant_preflight": "data/retailrocket_rf_bi_summary_preflight.json",
+  "assistant_preflight_sha256": "25f93a5e4d96a89a5b3686680cfacb33c3626d1321247f3c53cc8739587fb573",
+  "method_contract": "docs/RETAILROCKET_RF_BI_SUMMARY_VALIDATION.md",
+  "method_contract_prefix_bytes": 8109,
+  "method_contract_prefix_sha256": "ddc3ba182a31aa544ddfe9f344240eefa380ea26fc31df94231274afdbf18451",
+  "method_before_acceptance_append_bytes": 13026,
+  "method_before_acceptance_append_sha256": "226ba1958e62f352667412c739a3f1e527bdc754a5ad84256413795e5ba38a20",
+  "source_table": "rr_mart.transaction_basket_items",
+  "readset_fields": [
+    "visitorid",
+    "transactionid",
+    "itemid",
+    "last_timestamp_ms"
+  ],
+  "required_readset_columns": 4,
+  "target_table": "rr_bi.rf_segment_summary",
+  "target_rows": 16,
+  "target_columns": 7,
+  "target_column_names": [
+    "reference_timestamp_ms",
+    "recency_order",
+    "recency_band",
+    "frequency_order",
+    "frequency_band",
+    "visitor_ids",
+    "candidate_baskets"
+  ],
+  "target_column_types": [
+    "BIGINT",
+    "BIGINT",
+    "VARCHAR",
+    "BIGINT",
+    "VARCHAR",
+    "BIGINT",
+    "BIGINT"
+  ],
+  "learner_action_type": "One-time RF aggregate table construction and the returned twenty-row audit; existing-target audit may also be run separately. Screenshot acceptance concerns the returned checks, not direct assistant inspection of the learner database.",
+  "result_rows": 20,
+  "result_columns": 5,
+  "report_field_positions": 100,
+  "visually_verified_field_values": 100,
+  "visually_verified_check_order_values": 20,
+  "visually_verified_check_names": 20,
+  "visually_verified_actual_integer_text_values": 20,
+  "visually_verified_expected_integer_text_values": 20,
+  "visually_verified_integer_valued_fields": 60,
+  "visually_verified_status_values": 20,
+  "integer_fields_with_thousands_separators": 0,
+  "decimal_percentage_fields": 0,
+  "display_normalization_count": 0,
+  "visually_verified_null_values": 0,
+  "rows_with_pass_status": 20,
+  "rows_with_info_status": 0,
+  "rows_with_fail_status": 0,
+  "rows_with_blocked_status": 0,
+  "all_100_report_fields_fully_visible": true,
+  "all_column_headers_fully_visible": true,
+  "fully_visible_column_header_count": 5,
+  "partially_visible_column_header_count": 0,
+  "clipped_column_headers": [],
+  "visibility_caveats": [],
+  "display_normalization": "None. All sixty integer-valued fields use canonical integer text without commas, decimal points or leading zeros. check_order is encoded as an integer and actual/expected remain strings to match the frozen returned audit schema. No rounding or numeric value transformation is required.",
+  "visibility_accounting": "Twenty check-order values plus twenty check names plus forty actual/expected integer-text values plus twenty PASS labels equal 100 visible data fields. DBeaver UI row numbers and column headers are excluded.",
+  "observed_output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "output_column_name_source": "All five complete header names are directly visible in the screenshot.",
+  "observed_display_rows": [
+    [
+      "1",
+      "summary_rows",
+      "16",
+      "16",
+      "PASS"
+    ],
+    [
+      "2",
+      "column_count",
+      "7",
+      "7",
+      "PASS"
+    ],
+    [
+      "3",
+      "schema_mismatch",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "4",
+      "distinct_rf_keys",
+      "16",
+      "16",
+      "PASS"
+    ],
+    [
+      "5",
+      "missing_required_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "6",
+      "negative_count_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "7",
+      "invalid_band_order_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "8",
+      "reference_mismatch_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "9",
+      "distinct_recency_orders",
+      "4",
+      "4",
+      "PASS"
+    ],
+    [
+      "10",
+      "distinct_frequency_orders",
+      "4",
+      "4",
+      "PASS"
+    ],
+    [
+      "11",
+      "visitor_ids_total",
+      "11719",
+      "11719",
+      "PASS"
+    ],
+    [
+      "12",
+      "candidate_baskets_total",
+      "17672",
+      "17672",
+      "PASS"
+    ],
+    [
+      "13",
+      "total_label_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "14",
+      "duplicate_key_surplus",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "15",
+      "source_membership_rows",
+      "22323",
+      "22323",
+      "PASS"
+    ],
+    [
+      "16",
+      "source_contract_violations",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "17",
+      "source_rf_contract_violations",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "18",
+      "expected_only_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "19",
+      "summary_only_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      "20",
+      "cell_count_inconsistency_rows",
+      "0",
+      "0",
+      "PASS"
+    ]
+  ],
+  "observed_rows": [
+    [
+      1,
+      "summary_rows",
+      "16",
+      "16",
+      "PASS"
+    ],
+    [
+      2,
+      "column_count",
+      "7",
+      "7",
+      "PASS"
+    ],
+    [
+      3,
+      "schema_mismatch",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      4,
+      "distinct_rf_keys",
+      "16",
+      "16",
+      "PASS"
+    ],
+    [
+      5,
+      "missing_required_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      6,
+      "negative_count_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      7,
+      "invalid_band_order_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      8,
+      "reference_mismatch_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      9,
+      "distinct_recency_orders",
+      "4",
+      "4",
+      "PASS"
+    ],
+    [
+      10,
+      "distinct_frequency_orders",
+      "4",
+      "4",
+      "PASS"
+    ],
+    [
+      11,
+      "visitor_ids_total",
+      "11719",
+      "11719",
+      "PASS"
+    ],
+    [
+      12,
+      "candidate_baskets_total",
+      "17672",
+      "17672",
+      "PASS"
+    ],
+    [
+      13,
+      "total_label_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      14,
+      "duplicate_key_surplus",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      15,
+      "source_membership_rows",
+      "22323",
+      "22323",
+      "PASS"
+    ],
+    [
+      16,
+      "source_contract_violations",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      17,
+      "source_rf_contract_violations",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      18,
+      "expected_only_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      19,
+      "summary_only_rows",
+      "0",
+      "0",
+      "PASS"
+    ],
+    [
+      20,
+      "cell_count_inconsistency_rows",
+      "0",
+      "0",
+      "PASS"
+    ]
+  ],
+  "output_columns": [
+    "check_order",
+    "check_name",
+    "actual",
+    "expected",
+    "status"
+  ],
+  "results": [
+    {
+      "check_order": 1,
+      "check_name": "summary_rows",
+      "actual": "16",
+      "expected": "16",
+      "status": "PASS"
+    },
+    {
+      "check_order": 2,
+      "check_name": "column_count",
+      "actual": "7",
+      "expected": "7",
+      "status": "PASS"
+    },
+    {
+      "check_order": 3,
+      "check_name": "schema_mismatch",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 4,
+      "check_name": "distinct_rf_keys",
+      "actual": "16",
+      "expected": "16",
+      "status": "PASS"
+    },
+    {
+      "check_order": 5,
+      "check_name": "missing_required_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 6,
+      "check_name": "negative_count_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 7,
+      "check_name": "invalid_band_order_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 8,
+      "check_name": "reference_mismatch_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 9,
+      "check_name": "distinct_recency_orders",
+      "actual": "4",
+      "expected": "4",
+      "status": "PASS"
+    },
+    {
+      "check_order": 10,
+      "check_name": "distinct_frequency_orders",
+      "actual": "4",
+      "expected": "4",
+      "status": "PASS"
+    },
+    {
+      "check_order": 11,
+      "check_name": "visitor_ids_total",
+      "actual": "11719",
+      "expected": "11719",
+      "status": "PASS"
+    },
+    {
+      "check_order": 12,
+      "check_name": "candidate_baskets_total",
+      "actual": "17672",
+      "expected": "17672",
+      "status": "PASS"
+    },
+    {
+      "check_order": 13,
+      "check_name": "total_label_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 14,
+      "check_name": "duplicate_key_surplus",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 15,
+      "check_name": "source_membership_rows",
+      "actual": "22323",
+      "expected": "22323",
+      "status": "PASS"
+    },
+    {
+      "check_order": 16,
+      "check_name": "source_contract_violations",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 17,
+      "check_name": "source_rf_contract_violations",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 18,
+      "check_name": "expected_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 19,
+      "check_name": "summary_only_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    },
+    {
+      "check_order": 20,
+      "check_name": "cell_count_inconsistency_rows",
+      "actual": "0",
+      "expected": "0",
+      "status": "PASS"
+    }
+  ],
+  "complete_ordered_report_matches_assistant_preflight": true,
+  "result_field_mismatches": 0,
+  "report_sha256": "589bab3d4d6a36eb2a799e30a377c615e247aaab1f3e6be217ff6f14d0d64a0a",
+  "fingerprint_method": "SHA-256 of twenty compact JSON row arrays plus LF in output-column order; check_order is an integer while actual and expected retain canonical integer strings. The fingerprint concerns the returned audit, not a fresh source or target read.",
+  "learner_database_opened_by_assistant": false,
+  "sql_or_source_preflight_or_fixtures_rerun_for_acceptance": false,
+  "screenshot_saved_to_repository": false,
+  "raw_source_records_or_visitor_item_transaction_identifiers_published": false,
+  "aggregate_audit_report_only": true,
+  "direct_target_table_data_cells_visible": false,
+  "target_16_by_7_independent_comparison_reperformed_for_acceptance": false,
+  "target_16_by_7_proof_basis": "Frozen assistant preflight independently compared the complete materialized target. The learner screenshot displays its audit checks, not all sixteen target rows.",
+  "frozen_script_validator_preflight_and_dependencies_unchanged": true,
+  "method_contract_and_existing_executed_results_preserved_byte_for_byte": true,
+  "explicit_UTF8_append_only": true,
+  "source_records_and_historical_analysis_not_reverified": true,
+  "reference_endpoint_ms": 1442545187788,
+  "reference_endpoint_utc": "2015-09-18T02:59:47.788000Z",
+  "reference_is_today": false,
+  "target_visitor_ids_total": 11719,
+  "target_candidate_baskets_total": 17672,
+  "target_source_membership_rows": 22323,
+  "target_TOTAL_rows": 0,
+  "target_contains_percentages": false,
+  "target_contains_top_k": false,
+  "target_contains_original_identifiers": false,
+  "additivity_scope": "Counts are additive across disjoint RF cells within this one fixed snapshot only; visitor IDs are not verified people, and additivity across future snapshots is not established.",
+  "learner_SQL89_build_audit_accepted": true,
+  "BI_source_preparation_learner_accepted": true,
+  "power_bi_import_completed": false,
+  "power_bi_model_completed": false,
+  "power_bi_dashboard_completed": false,
+  "power_bi_measure_and_interaction_validation_completed": false,
+  "RF_temporal_or_business_effect_validation_completed": false,
+  "scope": "Accepts the fully visible SQL89 returned audit: all twenty rows and 100 fields match the frozen report exactly, with all five headers visible and twenty PASS. The audit reports sixteen summary rows, seven columns, sixteen distinct RF keys, four recency orders, four frequency orders, totals of 11,719 transaction-recorded visitor IDs and 17,672 full-window candidate baskets, and 22,323 source memberships. All remaining actual values equal their expected zero. The screenshot supports learner acceptance of the created BI source and its audit, but does not directly display the complete sixteen-by-seven target table, verify the SQL text actually executed, or independently replay source reconstruction, safety fixtures or table contents. Those implementation proofs remain in the frozen assistant evidence. No source, learner database, SQL or fixture rerun occurred for acceptance. No Power BI import, model, measures, dashboard or interaction testing is claimed. Earlier pending statements remain intact as history; this appendix records learner acceptance."
+}

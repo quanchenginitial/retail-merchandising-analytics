@@ -93,3 +93,40 @@ The materialized table sums to 11,719 transaction-recorded IDs and 17,672 candid
 - Frozen method prefix: 8109 bytes, SHA-256 ddc3ba182a31aa544ddfe9f344240eefa380ea26fc31df94231274afdbf18451; unchanged before this append.
 
 The proof computes only the new aggregate table and its build/audit behavior. It does not rerun old SQL, RF/rank result streams, boundary/concentration suites or business drilldowns. Ratios, nonadditive concentration measures, relationships and visual interaction validation remain separate BI work.
+
+## Learner screenshot acceptance - 15 November 2026
+
+The learner supplied the SQL89 DBeaver audit on 2026-11-15 (Australia/Sydney). All twenty rows, all five complete headers and all 100 data fields are visible. The report contains twenty PASS values, no NULLs and no clipped header or data cell. Its fields comprise twenty check-order values, twenty check names, forty actual/expected integer-text values and twenty status labels. DBeaver UI row numbers are excluded. See [machine-readable acceptance](../data/retailrocket_rf_bi_summary_learner_acceptance.json).
+
+| check_order | check_name | actual | expected | status |
+| --- | --- | --- | --- | --- |
+| 1 | summary_rows | 16 | 16 | PASS |
+| 2 | column_count | 7 | 7 | PASS |
+| 3 | schema_mismatch | 0 | 0 | PASS |
+| 4 | distinct_rf_keys | 16 | 16 | PASS |
+| 5 | missing_required_rows | 0 | 0 | PASS |
+| 6 | negative_count_rows | 0 | 0 | PASS |
+| 7 | invalid_band_order_rows | 0 | 0 | PASS |
+| 8 | reference_mismatch_rows | 0 | 0 | PASS |
+| 9 | distinct_recency_orders | 4 | 4 | PASS |
+| 10 | distinct_frequency_orders | 4 | 4 | PASS |
+| 11 | visitor_ids_total | 11719 | 11719 | PASS |
+| 12 | candidate_baskets_total | 17672 | 17672 | PASS |
+| 13 | total_label_rows | 0 | 0 | PASS |
+| 14 | duplicate_key_surplus | 0 | 0 | PASS |
+| 15 | source_membership_rows | 22323 | 22323 | PASS |
+| 16 | source_contract_violations | 0 | 0 | PASS |
+| 17 | source_rf_contract_violations | 0 | 0 | PASS |
+| 18 | expected_only_rows | 0 | 0 | PASS |
+| 19 | summary_only_rows | 0 | 0 | PASS |
+| 20 | cell_count_inconsistency_rows | 0 | 0 | PASS |
+
+Every integer-valued cell uses canonical integer text without thousands separators, decimal points or leading zeros. No display normalization or rounding is needed. For comparison with the frozen returned report, check_order is represented as an integer while actual and expected remain strings. All 100 data fields match exactly.
+
+The returned checks report sixteen rows and seven columns in rr_bi.rf_segment_summary, sixteen distinct RF keys, four recency orders and four frequency orders. Counts reconcile to 11,719 transaction-recorded visitor IDs, 17,672 full-window candidate baskets and 22,323 source memberships. No TOTAL label, duplicate key, missing required value, schema mismatch, reference mismatch, source-contract violation or source/target discrepancy is reported. Counts remain additive across mutually exclusive cells of this one fixed snapshot; this is not a verified-person count or an assertion of additivity across future snapshots.
+
+This accepts the learner's SQL89 BI source build/audit. The screenshot shows the twenty-row audit rather than the full sixteen-by-seven target table or the complete executed SQL text. The independent target comparison, typed schema, guarded creation and synthetic safety cases remain supported by the frozen assistant evidence above; they were not rerun for acceptance. The assistant did not open the learner database or reparse source files, execute SQL, repeat historical analyses or run fixtures. No screenshot or original identifiers are published.
+
+The BI source preparation is accepted. Power BI import, model, measures, dashboard and interaction validation remain subsequent work, as do independent RF temporal and business-effect validation. Earlier pending statements above are retained as historical context; this appendix records the later learner acceptance.
+
+Accepted audit SHA-256: `589bab3d4d6a36eb2a799e30a377c615e247aaab1f3e6be217ff6f14d0d64a0a`. The entire prior 13,026-byte method/results document is preserved at `226ba1958e62f352667412c739a3f1e527bdc754a5ad84256413795e5ba38a20`. Its frozen 8,109-byte method prefix remains `ddc3ba182a31aa544ddfe9f344240eefa380ea26fc31df94231274afdbf18451`.

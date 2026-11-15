@@ -218,7 +218,9 @@
 - [x] 7AJ 用户于 2026-11-15 截图验收 SQL88：153 个数据字段匹配、17 项 PASS、无 NULL；末列状态表头被裁切，以冻结 SQL 合同识别，完整 PASS 值均可见。五处百分比和十二处千位分隔计数精确归一化，见 [验收](data/retailrocket_rf_basket_concentration_learner_acceptance.json)。
 - [x] 7AJ 描述性 RF 基线里程碑通过 SQL85–88 验收，整理 [RF 发现、业务含义与限制](docs/STAGE07_RF_FINDINGS.md)。涵盖频次、最近交易间隔、交叉分组及组内篮子集中度；独立时间验证、业务影响与金额 RFM 未实现。
 - [x] 7AK 助手准备并预检 [SQL89 RF BI 汇总表](sql/89_build_retailrocket_rf_bi_summary.sql)：一次性创建 rr_bi.rf_segment_summary，16 个互斥 RF 组合、七个有类型字段，见 [验证说明](docs/RETAILROCKET_RF_BI_SUMMARY_VALIDATION.md)。只存参考时点、排序、标签及可加总编号/篮子数，不存 TOTAL、百分比或非可加总的 top-k。新增完整 16 行七字段物化表比较，复用已验收 RF 证据。
-- [ ] 7AK 用户执行 SQL89，提供 20 行 × 五列检查结果，正常 20 项 PASS。目标已存在时停止创建并先核对现有对象，不删除或替换。此步只准备 BI 数据源，Power BI 导入、模型、指标与图表仍待实施。
+- [x] 7AK 用户于 2026-11-15 截图验收 SQL89：五个表头及 100 个数据字段完整可见并匹配，20 项 PASS、无 NULL、无需数值格式归一化，见 [验收](data/retailrocket_rf_bi_summary_learner_acceptance.json)。16 行七字段 BI 来源合计 11,719 个访客编号和 17,672 个候选篮子。
+- [x] 7AL 助手准备并预检 [SQL90 RF CSV 导出查询](sql/90_select_retailrocket_rf_bi_export.sql) 及实际文件校验程序，见 [验证说明](docs/RETAILROCKET_RF_BI_EXPORT_VALIDATION.md)。只读选择已验收表的全部 16 行七字段，按 R/F 排序，保留原字段名与整数值。
+- [ ] 7AL 用户在 DBeaver 导出实际结果到 D:/database/retailrocket/rf_segment_summary.csv，完成后提供“已导出”和路径；若文件名已存在则使用新名称，不覆盖。随后核验实际 CSV 的表头、16 行七字段、排序和全部值，记录文件及语义校验值。Power BI 导入、类型、排序、模型和页面仍待后续实施。
 - [ ] 7 Retailrocket 数据审计、时点属性连接、分群、购物篮和漏斗分析完成。
 - [ ] 8 Power BI 页面、指标和筛选行为逐页核对完成。
 - [ ] 可选 A：Criteo 修订版实验模块访问确认、数据审核、估计与区间验证完成。
@@ -228,6 +230,6 @@
 
 ## 下一次对话从这里继续
 
-SQL88 的 153 个数据字段已验收，17 项 PASS；状态表头裁切情况已记录。SQL85–88 的描述性 RF 基线已整理为 [阶段发现](docs/STAGE07_RF_FINDINGS.md)。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 执行 SQL89，一次性创建 16 行七字段的 BI 汇总表，保留可加总计数并排除 TOTAL，避免后续重复汇总。助手预检通过，用户建表与 20 项检查待验收；Power BI 页面和业务效果验证尚未完成。
+SQL89 的五个表头与 100 个数据字段已验收，20 项 PASS；16 行七字段 BI 来源已就绪。[RF 阶段发现](docs/STAGE07_RF_FINDINGS.md) 保持已验收口径。下一步按 [当前一步](docs/FIRST_STEP_ZH.md) 运行只读 SQL90，并用 DBeaver 将其完整结果导出为 CSV。助手预检通过，用户实际导出和文件核验待完成；Power BI 页面及业务效果验证尚未完成。
 
 GitHub 仓库：<https://github.com/quanchenginitial/retail-merchandising-analytics>。

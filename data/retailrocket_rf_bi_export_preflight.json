@@ -1,0 +1,90 @@
+{
+  "task": "SQL90 ordered RF aggregate export preparation",
+  "prepared_on": "2026-11-15",
+  "timezone": "Australia/Sydney",
+  "status": "PASS",
+  "scope": "Assistant preparation from accepted SQL89 sixteen-row aggregate proof; actual learner CSV export is pending.",
+  "learner_export_received": false,
+  "learner_export_validated": false,
+  "learner_database_opened": false,
+  "original_source_files_read": false,
+  "old_analytical_sql_executed": false,
+  "rf_or_rank_streams_rebuilt": false,
+  "historical_suites_run": false,
+  "csv_file_created": false,
+  "assistant_fixture_is_learner_export": false,
+  "accepted_parent_preflight_sha256": "25f93a5e4d96a89a5b3686680cfacb33c3626d1321247f3c53cc8739587fb573",
+  "accepted_parent_learner_acceptance_sha256": "a12cea17f13ff407edf138eadfc4a83e938ef166ec9e287fe40ea41d59439a46",
+  "dependency_sha256": {
+    "sql/90_select_retailrocket_rf_bi_export.sql": "574d22d8964782ff0c543b485e77b5060c88d4560a546cb2e9d113068c98bd77",
+    "validation/validate_retailrocket_rf_bi_export.py": "cdb99483b08c3683d23756452db780d0199df33041dc65a4f7678ffa3df58dc7",
+    "docs/RETAILROCKET_RF_BI_EXPORT_VALIDATION.md": "c42bda0113fa06c10fd24e5c13678d22e9bcd6a6a017c14389fa74d75ce170d7",
+    "data/retailrocket_rf_bi_summary_preflight.json": "25f93a5e4d96a89a5b3686680cfacb33c3626d1321247f3c53cc8739587fb573",
+    "data/retailrocket_rf_bi_summary_learner_acceptance.json": "a12cea17f13ff407edf138eadfc4a83e938ef166ec9e287fe40ea41d59439a46"
+  },
+  "dependencies_unchanged": true,
+  "frozen_method_prefix_bytes": 4193,
+  "frozen_method_prefix_sha256": "c42bda0113fa06c10fd24e5c13678d22e9bcd6a6a017c14389fa74d75ce170d7",
+  "preparation_harness_sha256": "c1be050f64839f7b11c060b09f3591d3acbebe404cd19524c9b48360acf6f1b4",
+  "input_aggregate_rows": 16,
+  "output_rows": 16,
+  "output_columns": 7,
+  "column_names": [
+    "reference_timestamp_ms",
+    "recency_order",
+    "recency_band",
+    "frequency_order",
+    "frequency_band",
+    "visitor_ids",
+    "candidate_baskets"
+  ],
+  "column_types": [
+    "BIGINT",
+    "BIGINT",
+    "VARCHAR",
+    "BIGINT",
+    "VARCHAR",
+    "BIGINT",
+    "BIGINT"
+  ],
+  "all_112_data_values_and_order_matched": true,
+  "reference_timestamp_ms": 1442545187788,
+  "visitor_ids_sum": 11719,
+  "candidate_baskets_sum": 17672,
+  "semantic_sha256": "cbcc0bc2cb3daf2ee510ae138b8091e3fd29277a34ea34ef25b348fcff0ff33e",
+  "semantic_hash_contract": "Compact JSON arrays of typed seven-field rows in query/file order, each followed by LF; header excluded.",
+  "sql90_readonly_executions": 1,
+  "duckdb_cli_phases": 2,
+  "threads": 2,
+  "memory_limit": "128MB",
+  "phase_timeout_seconds": 30,
+  "database_sha256_before_readonly": "7c755e99dbbc54efc8f6dc73c5156496574125e5297f5522b51e1af55cf71c5b",
+  "database_sha256_after_readonly": "7c755e99dbbc54efc8f6dc73c5156496574125e5297f5522b51e1af55cf71c5b",
+  "readonly_database_unchanged": true,
+  "serialization_cases": [
+    {
+      "case": "plain_utf8",
+      "status": "PASS"
+    },
+    {
+      "case": "utf8_bom_same_semantics_different_bytes",
+      "status": "PASS"
+    },
+    {
+      "case": "formatted_integer_rejected",
+      "status": "PASS"
+    },
+    {
+      "case": "extra_total_row_rejected",
+      "status": "PASS"
+    }
+  ],
+  "serialization_cases_passed": 4,
+  "serialization_fixture_storage": "Memory only; no CSV file was created.",
+  "load_seconds": 0.485,
+  "readonly_select_seconds": 0.125,
+  "total_seconds": 0.625,
+  "temporary_database_removed": true,
+  "temporary_files_removed": true,
+  "publication_limit": "Preparation only. No learner CSV contents have been received or verified; no Power BI model or dashboard is claimed."
+}

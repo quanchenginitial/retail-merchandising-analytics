@@ -2,7 +2,7 @@
 
 更新日期：2026-11-15（Australia/Sydney）。
 
-**当前状态：SQL88 已验收，描述性 RF 基线里程碑完成，下一步创建 SQL89 BI 汇总表。** 153 个数据字段匹配、17 项 PASS，裁切状态表头的证据范围见 [验收](../data/retailrocket_rf_basket_concentration_learner_acceptance.json)。[RF 阶段发现](STAGE07_RF_FINDINGS.md) 汇总 SQL85–88；SQL89 助手预检通过、用户建表待完成。16 行七字段汇总是 Power BI 数据准备，独立时间验证、业务影响及 Power BI 页面仍未完成。
+**当前状态：SQL89 BI 来源已验收，下一步导出 CSV。** 五个表头和 100 个数据字段匹配、20 项 PASS，见 [验收](../data/retailrocket_rf_bi_summary_learner_acceptance.json)。16 行七字段合计 11,719 个访客编号和 17,672 个候选篮子。[RF 阶段发现](STAGE07_RF_FINDINGS.md) 已验收；SQL90 助手预检通过，用户实际导出与文件核验待完成。Power BI 导入、类型、排序、模型、页面和业务效果验证仍未完成。
 
 ## 项目目标
 
@@ -62,6 +62,6 @@
 
 ## 当前第一步
 
-阅读 [当前一步](FIRST_STEP_ZH.md)，执行 [SQL89](../sql/89_build_retailrocket_rf_bi_summary.sql)，一次性创建 rr_bi.rf_segment_summary。目的：将已验收 RF 分布整理成轻量、稳定、可加总的 BI 来源。16 行只保留互斥组合，不存 TOTAL、百分比或 top-k 指标，合计仍是 11,719 个编号和 17,672 个候选篮子。预期返回 20 行五列检查表，正常全部 PASS。目标已存在时先核对对象；本步不表示 Power BI 模型或图表已经完成。
+阅读 [当前一步](FIRST_STEP_ZH.md)，运行只读 [SQL90](../sql/90_select_retailrocket_rf_bi_export.sql)，并用 DBeaver 导出全部 16 行七字段至 D:/database/retailrocket/rf_segment_summary.csv。目的：把已验收 RF 汇总保存为后续 Power BI 可读取的 CSV。保留字段名、顺序和整数值；已有同名文件时使用其他文件名。完成后发送“已导出”和实际路径，下一步再核验实际文件内容。此步不包含 Power BI 导入或建模。
 
 阶段 5 仅完成两种已实现基线，WEEKDAY4 的最终结果没有改变此前全局选择。树模型若需新的最终测试，必须使用真正未使用的评估数据，或明确标记为探索性回顾分析；本期不能重新称为未暴露留出期。本价格模块不改变预测，也不从价格缺失推断缺货。每步先说明目的，再执行一个小操作、检查结果并更新 GitHub。
